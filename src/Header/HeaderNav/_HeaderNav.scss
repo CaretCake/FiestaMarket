@@ -1,0 +1,44 @@
+.header-container {
+  height: 110px;
+  width: 100%;
+  width: 100vw;
+  max-width: 100%;
+  display: flex;
+  flex-direction: row;
+  padding: 5px;
+  align-items: center;
+
+  .logo {
+    padding: 0 0 10px 10px;
+
+
+    img {
+      max-height: 100%;
+      max-width: 300px;
+    }
+  }
+
+  ul {
+    padding: 0 10px 0 0;
+    list-style-type: none;
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    justify-content: flex-end;
+
+    li {
+      margin: 0px 5px 0px 5px;
+
+      button {
+        color: $grey-dark;
+        background-color: Transparent;
+        border: none;
+        cursor: pointer;
+        font-size: 1em;
+        &:hover {
+          color: $navy;
+        }
+      }
+    }
+  }
+}
