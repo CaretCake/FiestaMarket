@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import logo from './logo.svg';
 import './assets/styles/App.scss';
 import HeaderNav from './Header/HeaderNav/HeaderNav'
+import PageFooter from './Footer/PageFooter'
 
 class App extends Component {
   render() {
@@ -22,6 +23,7 @@ class App extends Component {
             Learn React
           </a>
         </header>
+        <PageFooter />
       </div>
     );
   }
