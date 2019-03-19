@@ -10,6 +10,7 @@
   position: -webkit-sticky;
   position: sticky;
   top: 0;
+  z-index: 1;
 
   .background {
     display: block;
@@ -19,12 +20,12 @@
     position: absolute;
     top: 0;
     left: 0;
-    z-index: -1;
+    z-index: 1;
   }
 
   .logo {
     padding: 0 0 10px 10px;
-
+    z-index: 2;
 
     img {
       max-height: 100%;
@@ -39,6 +40,7 @@
     flex-direction: row;
     width: 100%;
     justify-content: flex-end;
+    z-index: 2;
 
     li {
       margin: 0px 5px 0px 5px;
