@@ -7,6 +7,20 @@
   flex-direction: row;
   padding: 5px;
   align-items: center;
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
+
+  .background {
+    display: block;
+    background-color: #fff;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -1;
+  }
 
   .logo {
     padding: 0 0 10px 10px;

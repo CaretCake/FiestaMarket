@@ -10,6 +10,7 @@ class HeaderNav extends React.Component {
     render() {
         return (
             <div class="header-container">
+                <div class="background"></div>
                 <a href='/' class="logo"><img src={fiestaMarketLogo} alt="Logo"/></a>
                 <ul class="nav-list">
                     <li><button onClick={this.displayStatusOptions} class="nav">Status: Online</button></li>
