@@ -5,6 +5,8 @@ import HeaderNav from './Header/HeaderNav/HeaderNav'
 import PageFooter from './Footer/PageFooter'
 
 class App extends Component {
+
+
   render() {
     return (
       <div className="App">
