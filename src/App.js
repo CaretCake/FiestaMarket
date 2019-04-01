@@ -11,20 +11,16 @@ class App extends Component {
     return (
       <div className="App">
         <HeaderNav />
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
+        <div class="main">
+          <div class="hero">
+
+          </div>
+          <div class="container">
+            <div class="search">
+
+            </div>
+          </div>
+        </div>
         <PageFooter />
       </div>
     );
