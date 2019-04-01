@@ -1,17 +1,5 @@
 import React from 'react';
-
-class Modal extends React.Component {
-  render() {
-    return (
-      <div className='modal'>
-        <div className='modal_inner'>
-          <h1>{this.props.text}</h1>
-          <button onClick={this.props.closeModal}>close me</button>
-        </div>
-      </div>
-    );
-  }
-}
+import Modal from '../Modals/Modal'
 
 class PageFooter extends React.Component {
 
@@ -28,11 +16,30 @@ class PageFooter extends React.Component {
   }
 
   render() {
+    const contactForm = (
+      <form onSubmit={this.handleSubmit}>
+        <label>
+          Select why you are contacting us:
+          <select onChange={this.handleChange}>
+            <option value="feedback">General Feedback</option>
+            <option value="bug">Report a Bug</option>
+            <option value="question">Ask a Question</option>
+          </select>
+        </label>
+        <label>
+          Message:
+          <textarea onChange={this.handleChange} />
+        </label>
+        <input type="submit" value="Submit" />
+      </form>
+    );
+
     return (
       <div>
         {this.state.showContactForm ?
           <Modal
-            text='Contact Us'
+            title='Contact Us'
+            content={contactForm}
             closeModal={this.toggleContactForm.bind(this)}
           />
           : null
