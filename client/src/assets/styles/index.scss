@@ -1,0 +1,29 @@
+@import 'colors';
+@import 'globals';
+@import 'modal';
+@import 'helpers/mixins';
+@import '../../Header/HeaderNav/HeaderNav';
+@import '../../Footer/Footer';
+
+body {
+  margin: 0;
+  padding: 0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+  *, *::before,*::after { box-sizing: border-box; }
+  *{ font-family: Roboto; }
+
+  h1, h2, h3, h4, h5, h6, p {
+    color: $grey-dark;
+  }
+
+  #root {
+    min-width: 100%;
+  }
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+    monospace;
+}
