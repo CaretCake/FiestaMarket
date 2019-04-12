@@ -2,88 +2,97 @@ const Sequelize = require('sequelize');
 const db = require('../config/database');
 
 
-const BuyOrder = db.define('buyOrder', {
-  buyOrderId: {
+const BuyOrder = db.define('BuyOrders', {
+  BuyOrderId: {
     type: Sequelize.INTEGER,
+    allowNull: false,
+    primaryKey: true,
+    autoIncrement: true,
+    unique: true
+  },
+  UserId: {
+    type: Sequelize.INTEGER,
+    allowNull: false,
+    references: 'Users', // <<< Note, its table's name, not object name
+    referencesKey: 'UserId', // <<< Note, its a column name
     allowNull: false
   },
-  userId: {
+  ItemId: {
     type: Sequelize.INTEGER,
+    allowNull: false,
+    references: 'Items', // <<< Note, its table's name, not object name
+    referencesKey: 'ItemId', // <<< Note, its a column name
     allowNull: false
   },
-  itemId: {
-    type: Sequelize.INTEGER,
-    allowNull: false
-  },
-  priceMin: {
+  PriceMin: {
     type: Sequelize.DECIMAL(18,0),
     allowNull: false
   },
-  priceMax: {
+  PriceMax: {
     type: Sequelize.DECIMAL(18,0),
     allowNull: false
   },
-  orderStatus: {
+  OrderStatus: {
     type: Sequelize.ENUM('active', 'bought', 'expired'),
     allowNull: false
   },
-  desiredEnhancement: {
+  DesiredEnhancement: {
     type: Sequelize.ENUM('+12', '+11', '+10', '+9', 'N/A'),
     allowNull: false
   },
-  desiredEnd: {
+  DesiredEnd: {
     type: Sequelize.ENUM('godly', 'high', 'medium', 'N/A'),
     allowNull: false
   },
-  desiredDex: {
+  DesiredDex: {
     type: Sequelize.ENUM('godly', 'high', 'medium', 'N/A'),
     allowNull: false
   },
-  desiredInt: {
+  DesiredInt: {
     type: Sequelize.ENUM('godly', 'high', 'medium', 'N/A'),
     allowNull: false
   },
-  desiredStr: {
+  DesiredStr: {
     type: Sequelize.ENUM('godly', 'high', 'medium', 'N/A'),
     allowNull: false
   },
-  desiredSpr: {
+  DesiredSpr: {
     type: Sequelize.ENUM('godly', 'high', 'medium', 'N/A'),
     allowNull: false
   },
-  desiredHp: {
+  DesiredHp: {
     type: Sequelize.ENUM('godly', 'high', 'medium', 'N/A'),
     allowNull: false
   },
-  desiredSp: {
+  DesiredSp: {
     type: Sequelize.ENUM('godly', 'high', 'medium', 'N/A'),
     allowNull: false
   },
-  desiredDmg: {
+  DesiredDmg: {
     type: Sequelize.ENUM('godly', 'high', 'medium', 'N/A'),
     allowNull: false
   },
-  desiredMdmg: {
+  DesiredMdmg: {
     type: Sequelize.ENUM('godly', 'high', 'medium', 'N/A'),
     allowNull: false
   },
-  desiredDef: {
+  DesiredDef: {
     type: Sequelize.ENUM('godly', 'high', 'medium', 'N/A'),
     allowNull: false
   },
-  desiredMdef: {
+  DesiredMdef: {
     type: Sequelize.ENUM('godly', 'high', 'medium', 'N/A'),
     allowNull: false
   },
-  desiredAim: {
+  DesiredAim: {
     type: Sequelize.ENUM('godly', 'high', 'medium', 'N/A'),
     allowNull: false
   },
-  desiredEva: {
+  DesiredEva: {
     type: Sequelize.ENUM('godly', 'high', 'medium', 'N/A'),
     allowNull: false
   },
-  lastUpdated: {
+  LastUpdated: {
     type: Sequelize.DATE,
     allowNull: false
   }

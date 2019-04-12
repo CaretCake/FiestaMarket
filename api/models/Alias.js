@@ -2,26 +2,29 @@ const Sequelize = require('sequelize');
 const db = require('../config/database');
 
 
-const Alias = db.define('alias', {
-  userId: {
+const Alias = db.define('Aliases', {
+  UserId: {
     type: Sequelize.INTEGER,
+    references: 'Users', // <<< Note, its table's name, not object name
+    referencesKey: 'UserId', // <<< Note, its a column name
     allowNull: false
   },
-  aliasName: {
+  AliasName: {
     type: Sequelize.STRING,
     allowNull: false
   },
-  type: {
+  Type: {
     type: Sequelize.ENUM('discord', 'in-game'),
     allowNull: false
   },
-  server: {
+  Server: {
     type: Sequelize.ENUM('Isya', 'Pagel', 'Jenira', 'Enid'),
   },
-  preferred: {
+  Preferred: {
     type: Sequelize.BOOLEAN,
     allowNull: false
   }
 });
+
 
 module.exports = Alias;

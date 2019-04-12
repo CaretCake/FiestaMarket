@@ -2,43 +2,47 @@ const Sequelize = require('sequelize');
 const db = require('../config/database');
 
 
-const Item = db.define('item', {
-  itemId: {
+const Item = db.define('Items', {
+  ItemId: {
     type: Sequelize.INTEGER,
-    allowNull: false
+    allowNull: false,
+    primaryKey: true,
+    autoIncrement: true,
+    unique: true
   },
-  type: {
+  Type: {
     type: Sequelize.ENUM('earrings', 'necklace', 'ring', 'top', 'chest', 'pants', 'boots', 'bracelet', 'mace', 'hammer', '1-hand sword', '2-hand sword', 'axe', 'bow', 'crossbow', 'staff', 'wand', 'dual claws', 'dual swords', 'blade'),
     allowNull: false
   },
-  class: {
+  Class: {
     type: Sequelize.ENUM('fighter', 'knight', 'gladiator', 'cleric', 'holy knight', 'guardian', 'mage', 'wizard', 'warlock', 'archer', 'ranger', 'sharpshooter', 'trickster', 'reaper', 'spectre', 'crusader', 'templar'),
     allowNull: false
   },
-  level: {
+  Level: {
     type: Sequelize.INTEGER,
     allowNull: false
   },
-  twoSetEffect: {
+  TwoSetEffect: {
     type: Sequelize.STRING(300),
     allowNull: false
   },
-  threeSetEffect: {
+  ThreeSetEffect: {
     type: Sequelize.STRING(300),
     allowNull: false
   },
-  fourSetEffect: {
+  FourSetEffect: {
     type: Sequelize.STRING(300),
     allowNull: false
   },
-  fiveSetEffect: {
+  FiveSetEffect: {
     type: Sequelize.STRING(300),
     allowNull: false
   },
-  statType: {
+  StatType: {
     type: Sequelize.ENUM('normal', 'prestige'),
     allowNull: false
   }
 });
+
 
 module.exports = Item;

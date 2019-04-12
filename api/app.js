@@ -16,7 +16,8 @@ db.authenticate().then(() => {
   });
 
 const indexRouter = require('./routes/index');
-const testAPIRouter = require("./routes/testAPI");
+const testAPIRouter = require('./routes/testAPI');
+const userRouter = require('./routes/users')
 
 const app = express();
 
@@ -32,7 +33,8 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
-app.use("/testAPI", testAPIRouter);
+app.use('/testAPI', testAPIRouter);
+app.use('/users', userRouter);
 
 
 // catch 404 and forward to error handler

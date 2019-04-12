@@ -2,16 +2,22 @@ const Sequelize = require('sequelize');
 const db = require('../config/database');
 
 
-const UserReview = db.define('userReview', {
-  reviewedUserId: {
+const UserReview = db.define('UserReviews', {
+  ReviewedUserId: {
     type: Sequelize.INTEGER,
+    allowNull: false,
+    references: 'Users',
+    referencesKey: 'UserId',
     allowNull: false
   },
-  reviewingUserId: {
+  ReviewingUserId: {
     type: Sequelize.INTEGER,
+    allowNull: false,
+    references: 'Users',
+    referencesKey: 'UserId',
     allowNull: false
   },
-  reviewText: {
+  ReviewText: {
     type: Sequelize.STRING(300),
     allowNull: false
   }

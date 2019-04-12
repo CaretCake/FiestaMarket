@@ -2,88 +2,97 @@ const Sequelize = require('sequelize');
 const db = require('../config/database');
 
 
-const SellOrder = db.define('sellOrder', {
-  sellOrderId: {
+const SellOrder = db.define('SellOrders', {
+  SellOrderId: {
     type: Sequelize.INTEGER,
+    allowNull: false,
+    primaryKey: true,
+    autoIncrement: true,
+    unique: true
+  },
+  UserId: {
+    type: Sequelize.INTEGER,
+    allowNull: false,
+    references: 'Users',
+    referencesKey: 'UserId',
     allowNull: false
   },
-  userId: {
+  ItemId: {
     type: Sequelize.INTEGER,
+    allowNull: false,
+    references: 'Items',
+    referencesKey: 'ItemId',
     allowNull: false
   },
-  itemId: {
-    type: Sequelize.INTEGER,
-    allowNull: false
-  },
-  price: {
+  Price: {
     type: Sequelize.DECIMAL(18,0),
     allowNull: false
   },
-  openToOffers: {
+  OpenToOffers: {
     type: Sequelize.BOOLEAN,
     allowNull: false,
   },
-  saleStatus: {
+  SaleStatus: {
     type: Sequelize.ENUM('active', 'pending', 'sold', 'expired'),
     allowNull: false
   },
-  enhancement: {
+  Enhancement: {
     type: Sequelize.INTEGER,
     allowNull: false
   },
-  end: {
+  End: {
     type: Sequelize.INTEGER,
       allowNull: false
   },
-  dex: {
+  Dex: {
     type: Sequelize.INTEGER,
       allowNull: false
   },
-  int: {
+  Int: {
     type: Sequelize.INTEGER,
       allowNull: false
   },
-  str: {
+  Str: {
     type: Sequelize.INTEGER,
       allowNull: false
   },
-  spr: {
+  Spr: {
     type: Sequelize.INTEGER,
       allowNull: false
   },
-  hp: {
+  Hp: {
     type: Sequelize.INTEGER,
       allowNull: false
   },
-  sp: {
+  Sp: {
     type: Sequelize.INTEGER,
       allowNull: false
   },
-  dmg: {
+  Dmg: {
     type: Sequelize.INTEGER,
       allowNull: false
   },
-  mdmg: {
+  Mdmg: {
     type: Sequelize.INTEGER,
       allowNull: false
   },
-  def: {
+  Def: {
     type: Sequelize.INTEGER,
       allowNull: false
   },
-  mdef: {
+  Mdef: {
     type: Sequelize.INTEGER,
       allowNull: false
   },
-  aim: {
+  Aim: {
     type: Sequelize.INTEGER,
       allowNull: false
   },
-  eva: {
+  Eva: {
     type: Sequelize.INTEGER,
       allowNull: false
   },
-  lastUpdated: {
+  LastUpdated: {
     type: Sequelize.DATE,
       allowNull: false
   }
