@@ -13,7 +13,7 @@ module.exports = (sequelize, type) => {
       unique: true
     },
     ItemRarity: {
-      type: type.ENUM('white', 'green', 'blue', 'yellow', 'orange', 'purple'),
+      type: type.ENUM('white', 'green', 'blue', 'setblue', 'yellow', 'orange', 'purple'),
       allowNull: false
     },
     Type: {
