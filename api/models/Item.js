@@ -12,6 +12,10 @@ module.exports = (sequelize, type) => {
       allowNull: false,
       unique: true
     },
+    ItemRarity: {
+      type: type.ENUM('white', 'green', 'blue', 'yellow', 'orange', 'purple'),
+      allowNull: false
+    },
     Type: {
       type: type.ENUM('earrings', 'necklace', 'ring', 'top', 'chest', 'pants', 'boots', 'bracelet', 'mace', 'hammer', '1-hand sword', '2-hand sword', 'axe', 'bow', 'crossbow', 'staff', 'wand', 'dual claws', 'dual swords', 'blade'),
       allowNull: false
