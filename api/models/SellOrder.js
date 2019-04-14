@@ -1,101 +1,87 @@
-const Sequelize = require('sequelize');
-const db = require('../config/database');
-
-
-const SellOrder = db.define('SellOrders', {
-  SellOrderId: {
-    type: Sequelize.INTEGER,
-    allowNull: false,
-    primaryKey: true,
-    autoIncrement: true,
-    unique: true
-  },
-  UserId: {
-    type: Sequelize.INTEGER,
-    allowNull: false,
-    references: 'Users',
-    referencesKey: 'UserId',
-    allowNull: false
-  },
-  ItemId: {
-    type: Sequelize.INTEGER,
-    allowNull: false,
-    references: 'Items',
-    referencesKey: 'ItemId',
-    allowNull: false
-  },
-  Price: {
-    type: Sequelize.DECIMAL(18,0),
-    allowNull: false
-  },
-  OpenToOffers: {
-    type: Sequelize.BOOLEAN,
-    allowNull: false,
-  },
-  SaleStatus: {
-    type: Sequelize.ENUM('active', 'pending', 'sold', 'expired'),
-    allowNull: false
-  },
-  Enhancement: {
-    type: Sequelize.INTEGER,
-    allowNull: false
-  },
-  End: {
-    type: Sequelize.INTEGER,
+module.exports = (sequelize, type) => {
+  return sequelize.define('SellOrders', {
+    SellOrderId: {
+      type: type.INTEGER,
+      allowNull: false,
+      primaryKey: true,
+      autoIncrement: true,
+      unique: true
+    },
+    Price: {
+      type: type.DECIMAL(18, 0),
       allowNull: false
-  },
-  Dex: {
-    type: Sequelize.INTEGER,
+    },
+    OpenToOffers: {
+      type: type.BOOLEAN,
+      allowNull: false,
+    },
+    SaleStatus: {
+      type: type.ENUM('active', 'pending', 'sold', 'expired'),
       allowNull: false
-  },
-  Int: {
-    type: Sequelize.INTEGER,
+    },
+    Server: {
+      type: type.ENUM('Isya', 'Pagel', 'Jenira', 'Enid'),
       allowNull: false
-  },
-  Str: {
-    type: Sequelize.INTEGER,
+    },
+    Enhancement: {
+      type: type.INTEGER,
       allowNull: false
-  },
-  Spr: {
-    type: Sequelize.INTEGER,
+    },
+    End: {
+      type: type.INTEGER,
       allowNull: false
-  },
-  Hp: {
-    type: Sequelize.INTEGER,
+    },
+    Dex: {
+      type: type.INTEGER,
       allowNull: false
-  },
-  Sp: {
-    type: Sequelize.INTEGER,
+    },
+    Int: {
+      type: type.INTEGER,
       allowNull: false
-  },
-  Dmg: {
-    type: Sequelize.INTEGER,
+    },
+    Str: {
+      type: type.INTEGER,
       allowNull: false
-  },
-  Mdmg: {
-    type: Sequelize.INTEGER,
+    },
+    Spr: {
+      type: type.INTEGER,
       allowNull: false
-  },
-  Def: {
-    type: Sequelize.INTEGER,
+    },
+    Hp: {
+      type: type.INTEGER,
       allowNull: false
-  },
-  Mdef: {
-    type: Sequelize.INTEGER,
+    },
+    Sp: {
+      type: type.INTEGER,
       allowNull: false
-  },
-  Aim: {
-    type: Sequelize.INTEGER,
+    },
+    Dmg: {
+      type: type.INTEGER,
       allowNull: false
-  },
-  Eva: {
-    type: Sequelize.INTEGER,
+    },
+    Mdmg: {
+      type: type.INTEGER,
       allowNull: false
-  },
-  LastUpdated: {
-    type: Sequelize.DATE,
+    },
+    Def: {
+      type: type.INTEGER,
       allowNull: false
-  }
-});
-
-module.exports = SellOrder;
+    },
+    Mdef: {
+      type: type.INTEGER,
+      allowNull: false
+    },
+    Aim: {
+      type: type.INTEGER,
+      allowNull: false
+    },
+    Eva: {
+      type: type.INTEGER,
+      allowNull: false
+    },
+    LastUpdated: {
+      type: type.DATE,
+      allowNull: false
+    }
+  })
+}

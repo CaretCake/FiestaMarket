@@ -1,13 +1,10 @@
 var express = require('express');
 var router = express.Router();
-const db = require('../config/database');
-const User = require('../models/User');
+const { User } = require('../config/database')
 
 //Get user list
 router.get('/', (req, res) =>
-  User.findAll({
-    attributes: { exclude: ['Salt'] }
-  })
+  User.findAll()
     .then(users => {
       console.log(users);
       res.sendStatus(200);
@@ -17,21 +14,21 @@ router.get('/', (req, res) =>
 //Add a gig
 router.get('/add', (req, res) => {
   const data = {
-    UserName: 'TestUser',
-    Email: 'email@me.com',
-    Pass: 'password',
-    Salt: '234',
-    Status: 'online'
+    userName: 'TestUser4',
+    email: 'email4@me.com',
+    pass: 'password',
+    salt: '23456',
+    status: 'in-game'
   }
 
-  let { username, email, pass, salt, status } = data;
+  let { userName, email, pass, salt, status } = data;
 
   User.create({
-    UserName,
-    Email,
-    Pass,
-    Salt,
-    Status
+    userName,
+    email,
+    pass,
+    salt,
+    status
   })
     .then(user => res.redirect('/users'))
     .catch(err => console.log(err));

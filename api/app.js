@@ -5,21 +5,19 @@ const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const cors = require("cors");
 
-//Database
+const app = express();
+
+/*//Database
 const db = require('./config/database');
 
-//Test DB
+// Test DB
 db.authenticate().then(() => {
     console.log('Connection has been established successfully.');
   }).catch(err => {
     console.error('Unable to connect to the database:', err);
-  });
+  });*/
 
-const indexRouter = require('./routes/index');
-const testAPIRouter = require('./routes/testAPI');
-const userRouter = require('./routes/users')
-
-const app = express();
+const { User, BuyOrder, Item, ItemOffer, SellOrder, UserReview, Alias } = require('./config/database');
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -31,6 +29,11 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+
+// Routes
+const indexRouter = require('./routes/index');
+const testAPIRouter = require('./routes/testAPI');
+const userRouter = require('./routes/users')
 
 app.use('/', indexRouter);
 app.use('/testAPI', testAPIRouter);
