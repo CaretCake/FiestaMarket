@@ -7,6 +7,11 @@ module.exports = (sequelize, type) => {
       autoIncrement: true,
       unique: true
     },
+    ItemName: {
+      type: type.STRING(45),
+      allowNull: false,
+      unique: true
+    },
     Type: {
       type: type.ENUM('earrings', 'necklace', 'ring', 'top', 'chest', 'pants', 'boots', 'bracelet', 'mace', 'hammer', '1-hand sword', '2-hand sword', 'axe', 'bow', 'crossbow', 'staff', 'wand', 'dual claws', 'dual swords', 'blade'),
       allowNull: false
