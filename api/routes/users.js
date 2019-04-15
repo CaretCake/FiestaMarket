@@ -2,6 +2,10 @@ var express = require('express');
 var router = express.Router();
 const { User } = require('../config/database');
 const { Alias } = require('../config/database');
+const { UserReview } = require('../config/database');
+const { BuyOrder } = require('../config/database');
+const { SellOrder } = require('../config/database');
+const { ItemOffer } = require('../config/database');
 
 //Get user list
 router.get('/', (req, res) => {
@@ -47,10 +51,49 @@ router.get('/:userId?/aliases', (req, res) => {
 });
 
 //Get user's received reviews
-router.get('/:userId?/', (req, res) => {});
+router.get('/:userId?/receivedreviews', (req, res) => {
+  User.findAll({
+    attributes: { exclude: ['pass', 'salt', 'status', 'createdAt', 'updatedAt'] },
+    where: { userId: req.params.userId },
+    include: [ { model: UserReview, as: 'ReceivedReviews' } ] })
+    .then(user => res.json(user));
+});
 
 //Get user's written reviews
-router.get('/', (req, res) => {});
+router.get('/:userId?/writtenreviews', (req, res) => {
+  User.findAll({
+    attributes: { exclude: ['pass', 'salt', 'status', 'createdAt', 'updatedAt'] },
+    where: { userId: req.params.userId },
+    include: [ { model: UserReview, as: 'WrittenReviews' } ] })
+    .then(user => res.json(user));
+});
+
+//Get user's sell orders
+router.get('/:userId?/sellorders', (req, res) => {
+  User.findAll({
+    attributes: { exclude: ['pass', 'salt', 'status', 'createdAt', 'updatedAt'] },
+    where: { userId: req.params.userId },
+    include: [ { model: SellOrder, as: 'SellOrders' } ] })
+    .then(user => res.json(user));
+});
+
+//Get user's buy orders
+router.get('/:userId?/buyorders', (req, res) => {
+  User.findAll({
+    attributes: { exclude: ['pass', 'salt', 'status', 'createdAt', 'updatedAt'] },
+    where: { userId: req.params.userId },
+    include: [ { model: BuyOrder, as: 'BuyOrders' } ] })
+    .then(user => res.json(user));
+});
+
+//Get user's item offers
+router.get('/:userId?/itemoffers', (req, res) => {
+  User.findAll({
+    attributes: { exclude: ['pass', 'salt', 'status', 'createdAt', 'updatedAt'] },
+    where: { userId: req.params.userId },
+    include: [ { model: ItemOffer, as: 'Offers' } ] })
+    .then(user => res.json(user));
+});
 
 //Get user by id
 router.get('/:userId?', (req, res) => {
