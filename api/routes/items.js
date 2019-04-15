@@ -17,7 +17,6 @@ router.get('/', (req, res) =>
 //Search for items
 router.get('/search', (req, res) => {
   const term  = req.query.term;
-  console.log(req.query);
   Item.findAll({
     where: { ItemName: { [Op.like]: '%' + term + '%' } },
     order: [

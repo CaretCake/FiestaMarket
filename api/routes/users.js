@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 const { User } = require('../config/database');
+const { Alias } = require('../config/database');
 
 //Get user list
 router.get('/', (req, res) => {
@@ -34,6 +35,22 @@ router.get('/add', (req, res) => {
     .then(user => res.redirect('/users'))
     .catch(err => console.log(err));
 });
+
+
+//Get user's aliases
+router.get('/:userId?/aliases', (req, res) => {
+  User.findAll({
+    attributes: { exclude: ['pass', 'salt', 'status', 'createdAt', 'updatedAt'] },
+    where: { userId: req.params.userId },
+    include: [ { model: Alias, as: 'Aliases' } ] })
+    .then(user => res.json(user));
+});
+
+//Get user's received reviews
+router.get('/:userId?/', (req, res) => {});
+
+//Get user's written reviews
+router.get('/', (req, res) => {});
 
 //Get user by id
 router.get('/:userId?', (req, res) => {
