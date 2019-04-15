@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './assets/styles/App.scss';
 import HeaderNav from './Header/HeaderNav/HeaderNav'
+import MainApp from './Main/MainApp'
 import PageFooter from './Footer/PageFooter'
+
+
 
 class App extends Component {
   constructor(props) {
@@ -30,7 +32,7 @@ class App extends Component {
           </div>
           <div class="container">
             <div class="search">
-              <p className="App-intro">{this.state.apiResponse}</p>
+              <MainApp />
             </div>
           </div>
         </div>

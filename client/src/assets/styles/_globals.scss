@@ -5,9 +5,14 @@ button {
   border-radius: 3px;
   padding: 8px 8px 8px 8px;
   text-transform: lowercase;
+  &:focus {outline:0;}
 }
 
 form {
   display: flex;
   flex-direction: column;
+}
+
+input {
+  &:focus {outline:0;}
 }
