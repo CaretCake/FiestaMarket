@@ -18,7 +18,11 @@ router.get('/', (req, res) =>
 router.get('/search', (req, res) => {
   const term  = req.query.term;
   console.log(req.query);
-  Item.findAll({ where: { ItemName: { [Op.like]: '%' + term + '%' } } })
+  Item.findAll({
+    where: { ItemName: { [Op.like]: '%' + term + '%' } },
+    order: [
+      ['ItemName', 'ASC']
+    ]})
     .then(items => res.json(items))
     .catch(err => console.log(err));
 });

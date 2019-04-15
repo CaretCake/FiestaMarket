@@ -16,12 +16,8 @@ class MainApp extends React.Component {
       query: this.search.value
     }, () => {
       if (this.state.query && this.state.query.length > 1) {
-        if (this.state.query.length % 2 === 0) {
-          console.log('yep')
           this.getInfo()
-        }
-      } else if (!this.state.query) {
-      }
+      } else if (!this.state.query) {}
     });
   }
 

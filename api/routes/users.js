@@ -44,7 +44,7 @@ router.get('/:userId?', (req, res) => {
   } else {
     query = User.findAll({ include: [ User ]})
   }
-  return query.then(blogs => res.json(blogs))
+  return query.then(users => res.json(users))
 });
 
 module.exports = router;

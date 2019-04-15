@@ -16,3 +16,13 @@ form {
 input {
   &:focus {outline:0;}
 }
+
+ul {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+
+  li {
+
+  }
+}
