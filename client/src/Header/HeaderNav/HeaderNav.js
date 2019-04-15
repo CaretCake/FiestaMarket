@@ -16,10 +16,10 @@ class HeaderNav extends React.Component {
                 <a href='/' class="logo"><img src={fiestaMarketLogo} alt="Logo"/></a>
                 <ul class="nav-list">
                     <li><button onClick={this.displayStatusOptions} class="nav">Status: Online</button></li>
-                    <li><button className="nav"><FontAwesomeIcon icon={faEnvelope}/> Messages</button></li>
-                    <li><button className="nav">Notifications</button></li>
-                    <li><button className="nav">Account</button></li>
-                    <li><button className="nav"><FontAwesomeIcon icon={faSignOutAlt} /> Sign Out</button></li>
+                    <li><button class="nav"><FontAwesomeIcon icon={faEnvelope}/> Messages</button></li>
+                    <li><button class="nav">Notifications</button></li>
+                    <li><button class="nav">Account</button></li>
+                    <li><button class="nav"><FontAwesomeIcon icon={faSignOutAlt} /> Sign Out</button></li>
                 </ul>
             </div>
         );

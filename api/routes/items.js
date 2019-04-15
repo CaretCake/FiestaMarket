@@ -1,6 +1,8 @@
 var express = require('express');
 var router = express.Router();
-const { Item } = require('../config/database')
+const { Item } = require('../config/database');
+const Sequelize = require('sequelize');
+const Op = Sequelize.Op;
 
 //Get item list
 router.get('/', (req, res) =>
@@ -10,6 +12,16 @@ router.get('/', (req, res) =>
       res.sendStatus(200);
     })
     .catch(err => console.log(err)));
+
+
+//Search for items
+router.get('/search', (req, res) => {
+  const term  = req.query.term;
+  console.log(req.query);
+  Item.findAll({ where: { ItemName: { [Op.like]: '%' + term + '%' } } })
+    .then(items => res.json(items))
+    .catch(err => console.log(err));
+});
 
 //Get item by id
 router.get('/:itemId?', (req, res) => {

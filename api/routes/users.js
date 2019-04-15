@@ -1,6 +1,6 @@
 var express = require('express');
 var router = express.Router();
-const { User } = require('../config/database')
+const { User } = require('../config/database');
 
 //Get user list
 router.get('/', (req, res) => {
