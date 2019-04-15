@@ -3,15 +3,16 @@ var router = express.Router();
 const { User } = require('../config/database')
 
 //Get user list
-router.get('/', (req, res) =>
+router.get('/', (req, res) => {
   User.findAll()
     .then(users => {
       console.log(users);
       res.sendStatus(200);
     })
-    .catch(err => console.log(err)));
+    .catch(err => console.log(err));
+});
 
-//Add a gig
+//Add a user
 router.get('/add', (req, res) => {
   const data = {
     userName: 'TestUser4',
@@ -32,6 +33,18 @@ router.get('/add', (req, res) => {
   })
     .then(user => res.redirect('/users'))
     .catch(err => console.log(err));
+});
+
+//Get user by id
+router.get('/:userId?', (req, res) => {
+  let query;
+  if(req.params.userId) {
+    query = User.findAll(
+      { where: { userId: req.params.userId }})
+  } else {
+    query = User.findAll({ include: [ User ]})
+  }
+  return query.then(blogs => res.json(blogs))
 });
 
 module.exports = router;

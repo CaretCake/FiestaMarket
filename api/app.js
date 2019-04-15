@@ -33,11 +33,13 @@ app.use(express.static(path.join(__dirname, 'public')));
 // Routes
 const indexRouter = require('./routes/index');
 const testAPIRouter = require('./routes/testAPI');
-const userRouter = require('./routes/users')
+const userRouter = require('./routes/users');
+const itemRouter = require('./routes/items');
 
 app.use('/', indexRouter);
 app.use('/testAPI', testAPIRouter);
 app.use('/users', userRouter);
+app.use('/items', itemRouter);
 
 
 // catch 404 and forward to error handler
