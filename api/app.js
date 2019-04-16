@@ -31,15 +31,20 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 // Routes
-const indexRouter = require('./routes/index');
-const testAPIRouter = require('./routes/testAPI');
-const userRouter = require('./routes/users');
+const aliasRouter = require('./routes/aliases');
+const buyOrderRouter = require('./routes/buyOrders');
 const itemRouter = require('./routes/items');
+const sellOrderRouter = require('./routes/sellOrders');
+const userRouter = require('./routes/users');
 
-app.use('/', indexRouter);
+const testAPIRouter = require('./routes/testAPI');
+
 app.use('/testAPI', testAPIRouter);
-app.use('/users', userRouter);
+app.use('/aliases', aliasRouter);
+app.use('/buyorders', buyOrderRouter);
 app.use('/items', itemRouter);
+app.use('/sellorders', sellOrderRouter);
+app.use('/users', userRouter);
 
 
 // catch 404 and forward to error handler

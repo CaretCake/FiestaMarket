@@ -21,11 +21,6 @@ module.exports = (sequelize, type) => {
       type: type.STRING,
       allowNull: false
     },
-    salt: {
-      type: type.STRING,
-      allowNull: false,
-      unique: true
-    },
     status: {
       type: type.ENUM('online', 'in-game', 'offline'),
       allowNull: false

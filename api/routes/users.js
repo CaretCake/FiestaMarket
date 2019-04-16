@@ -1,5 +1,8 @@
-var express = require('express');
-var router = express.Router();
+const express = require('express');
+const router = express.Router();
+const bcrypt = require('bcrypt');
+const saltRounds = 15;
+
 const { User } = require('../config/database');
 const { Alias } = require('../config/database');
 const { UserReview } = require('../config/database');
@@ -18,13 +21,27 @@ router.get('/', (req, res) => {
 });
 
 //Add a user
-router.get('/add', (req, res) => {
-  const data = {
+router.post('/add', (req, res) => {
+  console.log(req.body);
+  bcrypt.hash(req.body.pass, saltRounds, function (err, hash){
+    User.create({
+      userName: req.body.username.toLowerCase(),
+      email: req.body.email.toLowerCase(),
+      pass: hash,
+      status: 'offline'
+    }).then(function(data) {
+      if (data) {
+        res.redirect('/');
+      }
+    });
+  });
+
+  /*const data = {
     userName: 'TestUser4',
     email: 'email4@me.com',
     pass: 'password',
     salt: '23456',
-    status: 'in-game'
+    status: 'offline'
   }
 
   let { userName, email, pass, salt, status } = data;
@@ -37,62 +54,72 @@ router.get('/add', (req, res) => {
     status
   })
     .then(user => res.redirect('/users'))
-    .catch(err => console.log(err));
+    .catch(err => console.log(err));*/
+});
+
+//Sign in user
+router.post('/signin', (req, res) => {
+  User.findOne({
+    raw: true,
+    where: { username: req.body.username.toLowerCase() } })
+    .then((function (user) {
+      if (!user) {
+        res.redirect('/');
+      } else {
+        bcrypt.compare(req.body.pass, user.pass, function (err, result) {
+          if (result == true) {
+            console.log('login success for user ' + req.body.username.toLowerCase());
+            res.redirect('/home');
+          } else {
+            console.log('login failed for user ' + req.body.username.toLowerCase());
+            res.send('Incorrect password');
+          }
+        })
+      }
+    }));
 });
 
 
 //Get user's aliases
 router.get('/:userId?/aliases', (req, res) => {
-  User.findAll({
-    attributes: { exclude: ['pass', 'salt', 'status', 'createdAt', 'updatedAt'] },
-    where: { userId: req.params.userId },
-    include: [ { model: Alias, as: 'Aliases' } ] })
-    .then(user => res.json(user));
+  Alias.findAll({
+    where: { UserUserId: req.params.userId } })
+    .then(alias => res.json(alias));
 });
 
 //Get user's received reviews
 router.get('/:userId?/receivedreviews', (req, res) => {
-  User.findAll({
-    attributes: { exclude: ['pass', 'salt', 'status', 'createdAt', 'updatedAt'] },
-    where: { userId: req.params.userId },
-    include: [ { model: UserReview, as: 'ReceivedReviews' } ] })
-    .then(user => res.json(user));
+  UserReview.findAll({
+    where: { reviewedUserId: req.params.userId } })
+    .then(userReview => res.json(userReview));
 });
 
 //Get user's written reviews
 router.get('/:userId?/writtenreviews', (req, res) => {
-  User.findAll({
-    attributes: { exclude: ['pass', 'salt', 'status', 'createdAt', 'updatedAt'] },
-    where: { userId: req.params.userId },
-    include: [ { model: UserReview, as: 'WrittenReviews' } ] })
-    .then(user => res.json(user));
+  UserReview.findAll({
+    where: { reviewingUserId: req.params.userId } })
+    .then(userReview => res.json(userReview));
 });
 
 //Get user's sell orders
 router.get('/:userId?/sellorders', (req, res) => {
-  User.findAll({
-    attributes: { exclude: ['pass', 'salt', 'status', 'createdAt', 'updatedAt'] },
-    where: { userId: req.params.userId },
-    include: [ { model: SellOrder, as: 'SellOrders' } ] })
-    .then(user => res.json(user));
+  SellOrder.findAll({
+    where: { PostingUserUserId: req.params.userId } })
+    .then(sellOrder => res.json(sellOrder));
 });
 
 //Get user's buy orders
 router.get('/:userId?/buyorders', (req, res) => {
-  User.findAll({
-    attributes: { exclude: ['pass', 'salt', 'status', 'createdAt', 'updatedAt'] },
-    where: { userId: req.params.userId },
-    include: [ { model: BuyOrder, as: 'BuyOrders' } ] })
-    .then(user => res.json(user));
+  BuyOrder.findAll({
+    where: { PostingUserUserId: req.params.userId } })
+    .then(buyOrder => res.json(buyOrder));
 });
 
 //Get user's item offers
 router.get('/:userId?/itemoffers', (req, res) => {
-  User.findAll({
-    attributes: { exclude: ['pass', 'salt', 'status', 'createdAt', 'updatedAt'] },
-    where: { userId: req.params.userId },
-    include: [ { model: ItemOffer, as: 'Offers' } ] })
-    .then(user => res.json(user));
+  ItemOffer.findAll({
+    where: { OfferingUserUserId: req.params.userId } })
+    .then(itemOffer => res.json(itemOffer));
 });
 
 //Get user by id
