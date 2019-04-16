@@ -11,12 +11,13 @@ class HeaderNav extends React.Component {
 
   constructor(props) {
     super(props);
-    this.state = {
+    /*this.state = {
       showSignInForm: false
-    };
+    };*/
+    this.routeChange = this.routeChange.bind(this);
   }
 
-  toggleSignInForm = (e) => {
+  /*toggleSignInForm = (e) => {
     this.setState({
       showSignInForm: !this.state.showSignInForm
     });
@@ -41,10 +42,15 @@ class HeaderNav extends React.Component {
     })
       .then(user => console.log('created!'))
       .catch(err => console.log(err));
+  }*/
+
+  routeChange() {
+    let path = `login`;
+    this.props.history.push(path);
   }
 
   render() {
-    const signInForm = (
+    /*const signInForm = (
       <Tabs>
         <TabList>
           <Tab>Sign In</Tab>
@@ -82,14 +88,14 @@ class HeaderNav extends React.Component {
           </form>
         </TabPanel>
       </Tabs>
-    );
+    );*/
 
     return (
       <div class="header-container">
         <div class="background"/>
         <a href='/' class="logo"><img src={fiestaMarketLogo} alt="Logo"/></a>
         <ul class="nav-list">
-          <li><button onClick={this.toggleSignInForm} className="nav">Sign In</button></li>
+          <li><button onClick={this.routeChange} className="nav">Sign In</button></li>
           <li><button onClick={this.displayStatusOptions} class="nav">Status: Online</button></li>
           <li><button class="nav"><FontAwesomeIcon icon={faEnvelope}/> Messages</button></li>
           <li><button class="nav">Notifications</button></li>
@@ -97,14 +103,6 @@ class HeaderNav extends React.Component {
           <li><button class="nav"><FontAwesomeIcon icon={faSignOutAlt} /> Sign Out</button></li>
         </ul>
 
-        {this.state.showSignInForm ?
-          <Modal
-            title='Sign In'
-            content={signInForm}
-            closeModal={this.toggleSignInForm.bind(this)}
-          />
-          : null
-        }
       </div>
     );
   }
