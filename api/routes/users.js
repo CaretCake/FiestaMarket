@@ -70,9 +70,6 @@ router.post('/login', function(req,res,next) {
       }
       if (!user) {
         console.log("Error2");
-        return res.json(401, {
-          error: 'Auth Error!'
-        });
       }
       console.log("Error3");
       let userInfo = {
