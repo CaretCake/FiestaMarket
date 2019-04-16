@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import './assets/styles/App.scss';
-import HeaderNav from './Header/HeaderNav/HeaderNav';
 import MainApp from './Main/MainApp';
-import PageFooter from './Footer/PageFooter';
 
 
 

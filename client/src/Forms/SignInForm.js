@@ -1,10 +1,9 @@
 import React from 'react';
-import Modal from '../Modals/Modal';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import "react-tabs/style/react-tabs.css";
 import axios from 'axios';
 
-class HeaderNav extends React.Component {
+class SignInForm extends React.Component {
 
   constructor(props) {
     super(props);
@@ -74,4 +73,4 @@ class HeaderNav extends React.Component {
   }
 }
 
-export default HeaderNav;
+export default SignInForm;

@@ -44,8 +44,7 @@ class HeaderNav extends React.Component {
       .catch(err => console.log(err));
   }*/
 
-  routeChange() {
-    let path = `login`;
+  routeChange(path) {
     this.props.history.push(path);
   }
 
@@ -95,7 +94,7 @@ class HeaderNav extends React.Component {
         <div class="background"/>
         <a href='/' class="logo"><img src={fiestaMarketLogo} alt="Logo"/></a>
         <ul class="nav-list">
-          <li><button onClick={this.routeChange} className="nav">Sign In</button></li>
+          <li><button onClick={() => this.routeChange('login')} className="nav">Sign In</button></li>
           <li><button onClick={this.displayStatusOptions} class="nav">Status: Online</button></li>
           <li><button class="nav"><FontAwesomeIcon icon={faEnvelope}/> Messages</button></li>
           <li><button class="nav">Notifications</button></li>
