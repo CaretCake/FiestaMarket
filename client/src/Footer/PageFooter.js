@@ -3,8 +3,9 @@ import Modal from '../Modals/Modal'
 
 class PageFooter extends React.Component {
 
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
+
     this.state = {
       showContactForm: false
     };
