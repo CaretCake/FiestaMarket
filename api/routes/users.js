@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const bcrypt = require('bcrypt');
 const saltRounds = 15;
+const passport = require("../config/passport");
 
 const { User } = require('../config/database');
 const { Alias } = require('../config/database');
@@ -58,26 +59,47 @@ router.post('/add', (req, res) => {
 });
 
 //Sign in user
-router.post('/signin', (req, res) => {
-  User.findOne({
-    raw: true,
-    where: { username: req.body.username.toLowerCase() } })
-    .then((function (user) {
-      if (!user) {
-        res.redirect('/');
-      } else {
-        bcrypt.compare(req.body.pass, user.pass, function (err, result) {
-          if (result == true) {
-            console.log('login success for user ' + req.body.username.toLowerCase());
-            res.redirect('/home');
-          } else {
-            console.log('login failed for user ' + req.body.username.toLowerCase());
-            res.send('Incorrect password');
-          }
-        })
+router.post('/login', function(req,res,next) {
+    console.log("reached auth endpoint");
+    console.log(req.body);
+    passport.authenticate("local", function(err, user, info) {
+      console.log("Test:" + user);
+      if (err) {
+        console.log("Error1" + err);
+        return next(err);
       }
-    }));
-});
+      if (!user) {
+        console.log("Error2");
+        return res.json(401, {
+          error: 'Auth Error!'
+        });
+      }
+      console.log("Error3");
+      let userInfo = {
+        username: user.username
+      };
+      res.json(userInfo);
+    })(req,res,next);
+  }
+    /*User.findOne({
+      raw: true,
+      where: { username: req.body.username.toLowerCase() } })
+      .then((function (user) {
+        if (!user) {
+          res.redirect('/');
+        } else {
+          bcrypt.compare(req.body.pass, user.pass, function (err, result) {
+            if (result == true) {
+              console.log('login success for user ' + req.body.username.toLowerCase());
+              res.redirect('/home');
+            } else {
+              console.log('login failed for user ' + req.body.username.toLowerCase());
+              res.send('Incorrect password');
+            }
+          })
+        }
+      }));*/
+);
 
 
 //Get user's aliases

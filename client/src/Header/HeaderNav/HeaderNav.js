@@ -24,9 +24,9 @@ class HeaderNav extends React.Component {
 
   handleSignInSubmit = (e) => {
     e.preventDefault();
-    axios.post('http://localhost:9000/users/signin', {
+    axios.post('http://localhost:9000/users/login', {
       username: e.target.username.value,
-      pass: e.target.pass.value
+      password: e.target.pass.value
     })
       .then(user => console.log('signed in!'))
       .catch(err => console.log(err));
@@ -52,7 +52,7 @@ class HeaderNav extends React.Component {
         </TabList>
 
         <TabPanel>
-          <form onSubmit={this.handleSignInSubmit} method="POST">
+          <form onSubmit={this.handleSignInSubmit} method="POST" multipart='urlencoded'>
             <label>
               Username:
               <input type="text" name="username" />

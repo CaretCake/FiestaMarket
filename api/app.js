@@ -4,18 +4,10 @@ const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const cors = require("cors");
+const session = require("express-session");
+const passport = require("./config/passport");
 
 const app = express();
-
-/*//Database
-const db = require('./config/database');
-
-// Test DB
-db.authenticate().then(() => {
-    console.log('Connection has been established successfully.');
-  }).catch(err => {
-    console.error('Unable to connect to the database:', err);
-  });*/
 
 const { User, BuyOrder, Item, ItemOffer, SellOrder, UserReview, Alias } = require('./config/database');
 
@@ -26,9 +18,12 @@ app.set('view engine', 'jade');
 app.use(cors());
 app.use(logger('dev'));
 app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
+app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(session({ secret: "keyboard cat", resave: true, saveUninitialized: true }));
+app.use(passport.initialize());
+app.use(passport.session());
 
 // Routes
 const aliasRouter = require('./routes/aliases');
