@@ -28,55 +28,55 @@ module.exports = (sequelize, type) => {
         allowNull: false
       },
       DesiredEnd: {
-        type: type.ENUM('godly', 'high', 'medium', 'N/A'),
+        type: type.ENUM('N/A', 'godly', 'high', 'medium'),
         allowNull: false
       },
       DesiredDex: {
-        type: type.ENUM('godly', 'high', 'medium', 'N/A'),
+        type: type.ENUM('N/A', 'godly', 'high', 'medium'),
         allowNull: false
       },
       DesiredInt: {
-        type: type.ENUM('godly', 'high', 'medium', 'N/A'),
+        type: type.ENUM('N/A', 'godly', 'high', 'medium'),
         allowNull: false
       },
       DesiredStr: {
-        type: type.ENUM('godly', 'high', 'medium', 'N/A'),
+        type: type.ENUM('N/A', 'godly', 'high', 'medium'),
         allowNull: false
       },
       DesiredSpr: {
-        type: type.ENUM('godly', 'high', 'medium', 'N/A'),
+        type: type.ENUM('N/A', 'godly', 'high', 'medium'),
         allowNull: false
       },
       DesiredHp: {
-        type: type.ENUM('godly', 'high', 'medium', 'N/A'),
+        type: type.ENUM('N/A', 'godly', 'high', 'medium'),
         allowNull: false
       },
       DesiredSp: {
-        type: type.ENUM('godly', 'high', 'medium', 'N/A'),
+        type: type.ENUM('N/A', 'godly', 'high', 'medium'),
         allowNull: false
       },
       DesiredDmg: {
-        type: type.ENUM('godly', 'high', 'medium', 'N/A'),
+        type: type.ENUM('N/A', 'godly', 'high', 'medium'),
         allowNull: false
       },
       DesiredMdmg: {
-        type: type.ENUM('godly', 'high', 'medium', 'N/A'),
+        type: type.ENUM('N/A', 'godly', 'high', 'medium'),
         allowNull: false
       },
       DesiredDef: {
-        type: type.ENUM('godly', 'high', 'medium', 'N/A'),
+        type: type.ENUM('N/A', 'godly', 'high', 'medium'),
         allowNull: false
       },
       DesiredMdef: {
-        type: type.ENUM('godly', 'high', 'medium', 'N/A'),
+        type: type.ENUM('N/A', 'godly', 'high', 'medium'),
         allowNull: false
       },
       DesiredAim: {
-        type: type.ENUM('godly', 'high', 'medium', 'N/A'),
+        type: type.ENUM('N/A', 'godly', 'high', 'medium'),
         allowNull: false
       },
       DesiredEva: {
-        type: type.ENUM('godly', 'high', 'medium', 'N/A'),
+        type: type.ENUM('N/A', 'godly', 'high', 'medium'),
         allowNull: false
       },
       LastUpdated: {
