@@ -21,6 +21,11 @@ module.exports = (sequelize, type) => {
       type: type.STRING,
       allowNull: false
     },
+    role: {
+      type: type.ENUM('user', 'admin'),
+      allowNull: false,
+      defaultValue: 'user'
+    },
     status: {
       type: type.ENUM('online', 'in-game', 'offline'),
       allowNull: false
