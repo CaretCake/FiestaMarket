@@ -10,16 +10,7 @@ const { UserReview } = require('../config/database');
 const { BuyOrder } = require('../config/database');
 const { SellOrder } = require('../config/database');
 const { ItemOffer } = require('../config/database');
-
-//Get user list
-router.get('/', (req, res) => {
-  User.findAll()
-    .then(users => {
-      console.log(users);
-      res.sendStatus(200);
-    })
-    .catch(err => console.log(err));
-});
+const { Item } = require('../config/database');
 
 //Add a user
 router.post('/add', (req, res) => {
@@ -98,7 +89,6 @@ router.post('/login', function(req,res,next) {
       }));*/
 );
 
-
 //Get user's aliases
 router.get('/:userId?/aliases', (req, res) => {
   Alias.findAll({
@@ -143,14 +133,57 @@ router.get('/:userId?/itemoffers', (req, res) => {
 
 //Get user by id
 router.get('/:userId?', (req, res) => {
-  let query;
-  if(req.params.userId) {
-    query = User.findAll(
-      { where: { userId: req.params.userId }})
-  } else {
-    query = User.findAll({ include: [ User ]})
+  if(req.query.userId) {
+    User.findOne(
+      { where: { userId: req.query.userId },
+        attributes: { exclude: ['pass'] },
+        include: [
+          { model: Alias,
+            as: 'Aliases',
+            attributes: { exclude: ['createdAt', 'updatedAt'] }
+          },
+          { model: BuyOrder,
+            as: 'BuyOrders',
+            attributes: { exclude: ['createdAt'] },
+            include: [
+              {
+                model: Item,
+                as: 'PostedItem',
+                attributes: { exclude: ['createdAt', 'updatedAt'] }
+              }]
+          },
+          { model: SellOrder,
+            as: 'SellOrders',
+            attributes: { exclude: ['createdAt'] },
+            include: [
+              {
+                model: Item,
+                as: 'PostedItem',
+                attributes: { exclude: ['createdAt', 'updatedAt'] }
+              }]
+          }
+        ],
+        order: [
+          [ { model: Alias, as: 'Aliases' }, 'Preferred', 'DESC'],
+          [ { model: SellOrder, as: 'SellOrders' }, 'updatedAt', 'DESC'],
+          [ { model: BuyOrder, as: 'BuyOrders' }, 'updatedAt', 'DESC']
+        ]
+      })
+      .then(user => res.json(user))
+      .catch(err => res.status(500).send({ error: "No user found" }));
   }
-  return query.then(users => res.json(users))
+});
+
+//Get user list
+router.get('/', (req, res) => {
+  User.findAll(
+    { attributes: { exclude: ['pass'] }
+    })
+    .then(users => {
+      console.log(users);
+      res.sendStatus(200);
+    })
+    .catch(err => console.log(err));
 });
 
 module.exports = router;

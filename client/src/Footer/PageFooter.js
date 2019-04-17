@@ -1,5 +1,4 @@
 import React from 'react';
-import Modal from '../Modals/Modal'
 
 class PageFooter extends React.Component {
 

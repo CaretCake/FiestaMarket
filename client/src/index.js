@@ -13,6 +13,7 @@ import PageFooter from './Footer/PageFooter';
 import NotFound from './Error404/NotFound';
 import SignInForm from './Forms/SignInForm';
 import ContactForm from './Forms/ContactForm';
+import UserProfile from './Profile/UserProfile';
 import * as serviceWorker from './serviceWorker';
 
 const routing = (
@@ -22,6 +23,7 @@ const routing = (
 
       <Switch>
         <Route exact path="/" component={App} />
+        <Route path="/profile/:userId" component={UserProfile} />
         <Route path="/login" component={SignInForm} />
         <Route path="/contact" component={ContactForm} />
         <Route path='*' exact={true} component={NotFound} />

@@ -2,10 +2,7 @@ import React from 'react';
 import fiestaMarketLogo from './fiesta-market-logo.png';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSignOutAlt, faEnvelope } from '@fortawesome/free-solid-svg-icons';
-import Modal from '../../Modals/Modal';
-import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import "react-tabs/style/react-tabs.css";
-import axios from 'axios';
 
 class HeaderNav extends React.Component {
 
@@ -94,11 +91,11 @@ class HeaderNav extends React.Component {
         <div class="background"/>
         <a href='/' class="logo"><img src={fiestaMarketLogo} alt="Logo"/></a>
         <ul class="nav-list">
-          <li><button onClick={() => this.routeChange('login')} className="nav">Sign In</button></li>
+          <li><button onClick={() => this.routeChange('login')} class="nav">Sign In</button></li>
           <li><button onClick={this.displayStatusOptions} class="nav">Status: Online</button></li>
           <li><button class="nav"><FontAwesomeIcon icon={faEnvelope}/> Messages</button></li>
           <li><button class="nav">Notifications</button></li>
-          <li><button class="nav">Account</button></li>
+          <li><button onClick={() => this.routeChange('profile')} class="nav">Profile</button></li>
           <li><button class="nav"><FontAwesomeIcon icon={faSignOutAlt} /> Sign Out</button></li>
         </ul>
 
