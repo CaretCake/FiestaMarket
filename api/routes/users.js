@@ -3,6 +3,7 @@ const router = express.Router();
 const bcrypt = require('bcrypt');
 const saltRounds = 15;
 const passport = require("../config/passport");
+const isAuthenticated = require("../config/middleware/isAuthenticated");
 
 const { User } = require('../config/database');
 const { Alias } = require('../config/database');
@@ -27,26 +28,6 @@ router.post('/add', (req, res) => {
       }
     });
   });
-
-  /*const data = {
-    userName: 'TestUser4',
-    email: 'email4@me.com',
-    pass: 'password',
-    salt: '23456',
-    status: 'offline'
-  }
-
-  let { userName, email, pass, salt, status } = data;
-
-  User.create({
-    userName,
-    email,
-    pass,
-    salt,
-    status
-  })
-    .then(user => res.redirect('/users'))
-    .catch(err => console.log(err));*/
 });
 
 //Sign in user
@@ -56,38 +37,30 @@ router.post('/login', function(req,res,next) {
     passport.authenticate("local", function(err, user, info) {
       console.log("Test:" + user);
       if (err) {
-        console.log("Error1" + err);
+        console.log("Error: " + err);
         return next(err);
       }
       if (!user) {
-        console.log("Error2");
+        console.log("No user");
       }
-      console.log("Error3");
+      req.logIn(user, function(err) {
+        if (err) { return next(err); }
+        console.log('logged in user: ' + JSON.stringify(user));
+        return res.redirect('/profile/' + user.userId);
+      });
       let userInfo = {
         username: user.username
       };
-      res.json(userInfo);
+      //res.json(userInfo);
     })(req,res,next);
   }
-    /*User.findOne({
-      raw: true,
-      where: { username: req.body.username.toLowerCase() } })
-      .then((function (user) {
-        if (!user) {
-          res.redirect('/');
-        } else {
-          bcrypt.compare(req.body.pass, user.pass, function (err, result) {
-            if (result == true) {
-              console.log('login success for user ' + req.body.username.toLowerCase());
-              res.redirect('/home');
-            } else {
-              console.log('login failed for user ' + req.body.username.toLowerCase());
-              res.send('Incorrect password');
-            }
-          })
-        }
-      }));*/
 );
+
+//Sign out user
+router.get("/logout", function(req, res) {
+  req.logout();
+  res.redirect("/");
+});
 
 //Get user's aliases
 router.get('/:userId?/aliases', (req, res) => {
@@ -132,7 +105,7 @@ router.get('/:userId?/itemoffers', (req, res) => {
 });
 
 //Get user by id
-router.get('/:userId?', (req, res) => {
+router.get('/:userId?', isAuthenticated, (req, res) => {
   if(req.query.userId) {
     User.findOne(
       { where: { userId: req.query.userId },

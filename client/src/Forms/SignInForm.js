@@ -3,6 +3,7 @@ import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import "react-tabs/style/react-tabs.css";
 import axios from 'axios';
 
+
 class SignInForm extends React.Component {
 
   constructor(props) {
@@ -15,7 +16,10 @@ class SignInForm extends React.Component {
       username: e.target.username.value,
       password: e.target.pass.value
     })
-      .then(user => console.log('signed in!'))
+      .then(user => {
+        console.log('signed in!');
+
+      })
       .catch(err => console.log(err));
   }
 

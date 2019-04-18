@@ -15,13 +15,13 @@ const { User, BuyOrder, Item, ItemOffer, SellOrder, UserReview, Alias } = requir
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 
-app.use(cors());
+app.use(cors({credentials: true, origin: 'http://localhost:3000'}));
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
-app.use(session({ secret: "keyboard cat", resave: true, saveUninitialized: true }));
+app.use(session({ secret: "keyboard kitteh kit kat", resave: true, saveUninitialized: true }));
 app.use(passport.initialize());
 app.use(passport.session());
 
@@ -33,6 +33,7 @@ const sellOrderRouter = require('./routes/sellOrders');
 const userRouter = require('./routes/users');
 
 const testAPIRouter = require('./routes/testAPI');
+
 
 app.use('/testAPI', testAPIRouter);
 app.use('/aliases', aliasRouter);

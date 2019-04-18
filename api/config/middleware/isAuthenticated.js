@@ -8,5 +8,5 @@ module.exports = function(req, res, next) {
   }
   // If the user isn't' logged in, redirect them to the login page
   console.log('not logged in ' + req.user);
-  return res.redirect("/login");
+  return res.redirect('/login');
 };

@@ -13,10 +13,10 @@ const sequelize = new Sequelize('fiestadb', 'dbmasteruser', ',h$<K7NRZ39:4]:D<81
   port      : '3306',
   dialect   : 'mysql',
   pool      : {
-      max: 5,
-      min: 0,
-      acquire: 30000,
-      idle: 10000
+    max: 5,
+    min: 0,
+    acquire: 30000,
+    idle: 10000
   }
 });
 

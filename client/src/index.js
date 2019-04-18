@@ -15,6 +15,9 @@ import SignInForm from './Forms/SignInForm';
 import ContactForm from './Forms/ContactForm';
 import UserProfile from './Profile/UserProfile';
 import * as serviceWorker from './serviceWorker';
+import axios from 'axios';
+
+axios.defaults.withCredentials = true
 
 const routing = (
   <Router>
