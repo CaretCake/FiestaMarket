@@ -8,12 +8,8 @@ import {
 } from 'react-router-dom';
 import './assets/styles/index.scss';
 import App from './App';
-import HeaderNav from './Header/HeaderNav/HeaderNav';
-import PageFooter from './Footer/PageFooter';
-import NotFound from './Error404/NotFound';
-import SignInForm from './Forms/SignInForm';
-import ContactForm from './Forms/ContactForm';
-import UserProfile from './Profile/UserProfile';
+import { Header, Footer } from './components';
+import { NotFoundError, SignInForm, ContactForm, UserProfile } from './scenes';
 import * as serviceWorker from './serviceWorker';
 import axios from 'axios';
 
@@ -22,17 +18,17 @@ axios.defaults.withCredentials = true
 const routing = (
   <Router>
     <div>
-      <Route path="/" component={HeaderNav} />
+      <Route path="/" component={Header} />
 
       <Switch>
         <Route exact path="/" component={App} />
         <Route path="/profile/:userId" component={UserProfile} />
         <Route path="/login" component={SignInForm} />
         <Route path="/contact" component={ContactForm} />
-        <Route path='*' exact={true} component={NotFound} />
+        <Route path='*' exact={true} component={NotFoundError} />
       </Switch>
 
-      <Route path="/" component={PageFooter} />
+      <Route path="/" component={Footer} />
     </div>
   </Router>
 )

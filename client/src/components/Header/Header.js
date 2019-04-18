@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 import "react-tabs/style/react-tabs.css";
 import axios from 'axios';
 
-class HeaderNav extends React.Component {
+export class Header extends React.Component {
 
   constructor(props) {
     super(props);
@@ -47,5 +47,3 @@ class HeaderNav extends React.Component {
 
   }
 }
-
-export default HeaderNav;

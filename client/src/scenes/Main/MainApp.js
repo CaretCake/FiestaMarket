@@ -1,7 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 
-class MainApp extends React.Component {
+export class MainApp extends React.Component {
 
   constructor() {
     super();
@@ -59,5 +59,3 @@ class MainApp extends React.Component {
   }
 
 }
-
-export default MainApp;

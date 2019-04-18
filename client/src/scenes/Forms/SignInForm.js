@@ -4,7 +4,7 @@ import "react-tabs/style/react-tabs.css";
 import axios from 'axios';
 
 
-class SignInForm extends React.Component {
+export class SignInForm extends React.Component {
 
   constructor(props) {
     super(props);
@@ -76,5 +76,3 @@ class SignInForm extends React.Component {
     )
   }
 }
-
-export default SignInForm;

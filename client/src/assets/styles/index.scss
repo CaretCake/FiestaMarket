@@ -1,10 +1,10 @@
 @import 'colors';
 @import 'globals';
-@import 'modal';
+@import '../../components/Modals/modal';
 @import 'helpers/mixins';
-@import '../../Header/HeaderNav/HeaderNav';
-@import '../../Footer/Footer';
-@import '../../Main/HeroSearch';
+@import '../../components/Header/Header';
+@import '../../components/Footer/Footer';
+@import '../../scenes/Main/HeroSearch';
 
 body {
   margin: 0;
