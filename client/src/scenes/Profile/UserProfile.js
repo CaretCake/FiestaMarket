@@ -14,13 +14,17 @@ export class UserProfile extends Component {
   }
 
   getUserInfo() {
-    console.log('get info!');
     axios.get(`http://localhost:9000/users?userId=${this.props.match.params.userId}`)
       .then(userInfo => {
         this.setState({ user: userInfo.data });
         console.log('info: ' + JSON.stringify(this.state.user));
       })
-      .catch(err => console.log('error: ' + err));
+      .catch(error => {
+        console.log('error: ' + error);
+        if (error.response.status === 401) {
+          this.props.history.push('/');
+        }
+      });
   }
 
   render() {

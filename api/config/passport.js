@@ -43,7 +43,7 @@ passport.use('local', new LocalStrategy(
 // In order to help keep authentication state across HTTP requests,
 // Sequelize needs to serialize and deserialize the user
 passport.serializeUser(function(user, done) {
-  console.log('serializeUser called on: ' + user);
+  console.log('serializeUser called on: ' + JSON.stringify(user));
   done(null, user.userId);
 });
 
@@ -51,7 +51,10 @@ passport.deserializeUser(function(id, done) {
   console.log('deserializeUser called on: ' + id);
 
   User.findByPk(id)
-    .then(user => done(null, user))
+    .then(user => {
+      console.log('deserializing ' + user);
+      done(null, user);
+    })
     .catch(err => console.log('error deserializing user'));
 });
 

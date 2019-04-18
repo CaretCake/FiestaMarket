@@ -35,7 +35,6 @@ router.post('/login', function(req,res,next) {
     console.log("reached auth endpoint");
     console.log(req.body);
     passport.authenticate("local", function(err, user, info) {
-      console.log("Test:" + user);
       if (err) {
         console.log("Error: " + err);
         return next(err);
@@ -46,7 +45,10 @@ router.post('/login', function(req,res,next) {
       req.logIn(user, function(err) {
         if (err) { return next(err); }
         console.log('logged in user: ' + JSON.stringify(user));
-        return res.json({message:"Success", UserId: req.user.UserId});;
+        /*delete user.pass;
+        delete user.createdAt;
+        delete user.updatedAt;*/
+        return res.json({message: 'success', user });;
       });
       let userInfo = {
         username: user.username
@@ -61,7 +63,7 @@ router.get("/logout", function(req, res) {
   console.log(req.sessionID);
   req.logout();
   req.session.destroy((err) => {
-    res.clearCookie('connect.sid');
+    res.status(200).clearCookie('connect.sid');
     // Don't redirect, just print text
     res.send('Logged out');
   });

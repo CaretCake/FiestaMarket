@@ -1,6 +1,7 @@
 import React from 'react';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import "react-tabs/style/react-tabs.css";
+import { authenticationService } from '../../services/export';
 import axios from 'axios';
 
 
@@ -8,19 +9,34 @@ export class SignInForm extends React.Component {
 
   constructor(props) {
     super(props);
+
+    if (authenticationService.currentUserValue) {
+      this.props.history.push('/');
+    }
   }
 
   handleSignInSubmit = (e) => {
     e.preventDefault();
-    axios.post('http://localhost:9000/users/login', {
+  /*  axios.post('http://localhost:9000/users/login', {
       username: e.target.username.value,
       password: e.target.pass.value
     })
       .then(user => {
         console.log('signed in!');
-
       })
-      .catch(err => console.log(err));
+      .catch(err => console.log(err));*/
+
+
+    authenticationService.login(e.target.username.value, e.target.pass.value)
+      .then(
+        user => {
+          const { from } = this.props.location.state || { from: { pathname: "/" } };
+          this.props.history.push(from);
+        },
+        error => {
+          console.log(error);
+        }
+      );
   }
 
   handleRegisterSubmit = (e) => {
