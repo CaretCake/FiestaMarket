@@ -4,17 +4,27 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSignOutAlt, faEnvelope } from '@fortawesome/free-solid-svg-icons';
 import { Link } from 'react-router-dom';
 import "react-tabs/style/react-tabs.css";
+import axios from 'axios';
 
 class HeaderNav extends React.Component {
 
   constructor(props) {
     super(props);
     this.routeChange = this.routeChange.bind(this);
+    this.logoutUser = this.logoutUser.bind(this);
   }
-
 
   routeChange(path) {
     this.props.history.push(path);
+  }
+
+  logoutUser() {
+    axios.get('http://localhost:9000/users/logout')
+      .then(user => {
+        console.log('signed out ' + user);
+
+      })
+      .catch(err => console.log(err));
   }
 
   render() {
@@ -29,7 +39,7 @@ class HeaderNav extends React.Component {
           <li><button class="nav"><FontAwesomeIcon icon={faEnvelope}/> Messages</button></li>
           <li><button class="nav">Notifications</button></li>
           <li><button onClick={() => this.routeChange('profile')} class="nav">Profile</button></li>
-          <li><button class="nav"><FontAwesomeIcon icon={faSignOutAlt} /> Sign Out</button></li>
+          <li><button onClick={() => this.logoutUser()} class="nav"><FontAwesomeIcon icon={faSignOutAlt} /> Sign Out</button></li>
         </ul>
 
       </div>

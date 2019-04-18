@@ -6,6 +6,8 @@ const logger = require('morgan');
 const cors = require("cors");
 const session = require("express-session");
 const passport = require("./config/passport");
+const SequelizeStore = require('connect-session-sequelize')(session.Store);
+const { sequelize } = require('./config/database');
 
 const app = express();
 
@@ -19,11 +21,27 @@ app.use(cors({credentials: true, origin: 'http://localhost:3000'}));
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
-app.use(session({ secret: "keyboard kitteh kit kat", resave: true, saveUninitialized: true }));
+app.use(cookieParser('keyboard kitteh kit kat'));
+app.use(session({
+  secret: "keyboard kitteh kit kat",
+  store: new SequelizeStore({
+    db: sequelize
+  }),
+  cookie: { maxAge: 3600000 },
+  resave: true,
+  saveUninitialized: true
+}));
 app.use(passport.initialize());
 app.use(passport.session());
+app.use(express.static(path.join(__dirname, 'public')));
+
+app.use(function(req, res, next) {
+  res.header('Access-Control-Allow-Credentials', true);
+  res.header('Access-Control-Allow-Origin', 'http://localhost:3000');
+  res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
+  res.header('Access-Control-Allow-Headers', 'X-Requested-With, X-HTTP-Method-Override, Content-Type, Accept');
+  next();
+});
 
 // Routes
 const aliasRouter = require('./routes/aliases');

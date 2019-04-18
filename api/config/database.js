@@ -53,6 +53,7 @@ sequelize.sync({ })
   })
 
 module.exports = {
+  sequelize,
   User,
   BuyOrder,
   Item,

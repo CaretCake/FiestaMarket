@@ -46,7 +46,7 @@ router.post('/login', function(req,res,next) {
       req.logIn(user, function(err) {
         if (err) { return next(err); }
         console.log('logged in user: ' + JSON.stringify(user));
-        return res.redirect('/profile/' + user.userId);
+        return res.json({message:"Success", UserId: req.user.UserId});;
       });
       let userInfo = {
         username: user.username
@@ -58,8 +58,13 @@ router.post('/login', function(req,res,next) {
 
 //Sign out user
 router.get("/logout", function(req, res) {
+  console.log(req.sessionID);
   req.logout();
-  res.redirect("/");
+  req.session.destroy((err) => {
+    res.clearCookie('connect.sid');
+    // Don't redirect, just print text
+    res.send('Logged out');
+  });
 });
 
 //Get user's aliases
@@ -106,6 +111,7 @@ router.get('/:userId?/itemoffers', (req, res) => {
 
 //Get user by id
 router.get('/:userId?', isAuthenticated, (req, res) => {
+  console.log('made it here');
   if(req.query.userId) {
     User.findOne(
       { where: { userId: req.query.userId },
@@ -143,7 +149,7 @@ router.get('/:userId?', isAuthenticated, (req, res) => {
         ]
       })
       .then(user => res.json(user))
-      .catch(err => res.status(500).send({ error: "No user found" }));
+      .catch(err => res.status(500).send({ error: "Error searching for user" }));
   }
 });
 

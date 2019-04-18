@@ -5,24 +5,22 @@ const bcrypt = require('bcrypt');
 //We will need the models folder to check passport against
 const { User } = require('../config/database');
 
-// Telling passport we want to use a Local Strategy. In other words,
-// we want login with a username/email and password
+// Telling passport we want to use a Local Strategy
 passport.use('local', new LocalStrategy(
-  // Our user will sign in using an email, rather than a "username"
   function(username, password, done) {
     // When a user tries to sign in this code runs
     User.findOne({
       raw: true,
       where: { username: username.toLowerCase() }
     }).then(function(dbUser) {
-      // If there's no user with the given email
+      // If there's no user with the given username
       if (!dbUser) {
         console.log('login failed for user ' + username.toLowerCase());
         return done(null, false, {
           message: "Incorrect username or username."
         });
       }
-      // If there is a user with the given email, but the password the user gives us is incorrect
+      // If there is a user with the given username, but the password is incorrect
       else {
         bcrypt.compare(password, dbUser.pass, function (err, result) {
           if (result == true) {
@@ -50,11 +48,11 @@ passport.serializeUser(function(user, done) {
 });
 
 passport.deserializeUser(function(id, done) {
-  User.findOne({
-      where: {userId: req.query.userId}
-    })
-    .then(user => done(null, user.userId))
-    .catch(err => done(null, null));
+  console.log('deserializeUser called on: ' + id);
+
+  User.findByPk(id)
+    .then(user => done(null, user))
+    .catch(err => console.log('error deserializing user'));
 });
 
 module.exports = passport;
