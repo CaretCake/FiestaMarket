@@ -5,31 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="8fe3e80f-7773-4ab2-b7d2-884ce849483a" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/client/src/components/index.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/src/scenes/Error404/NotFoundError.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/src/scenes/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/App.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/Error404/NotFound.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/Footer/Footer.test.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/Footer/Footer.test.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/Footer/PageFooter.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/Footer/Footer.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/Footer/_Footer.scss" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/Footer/_Footer.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/Forms/ContactForm.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/scenes/Forms/ContactForm.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/Forms/SignInForm.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/scenes/Forms/SignInForm.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/Header/HeaderNav/HeaderNav.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/Header/Header.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/Header/HeaderNav/HeaderNav.test.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/Header/Header.test.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/Header/HeaderNav/_HeaderNav.scss" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/Header/_Header.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/Header/HeaderNav/fiesta-market-logo.png" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/Header/fiesta-market-logo.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/Main/MainApp.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/scenes/Main/MainApp.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/Main/_HeroSearch.scss" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/scenes/Main/_HeroSearch.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/Modals/Modal.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/Modals/Modal.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/Profile/UserProfile.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/scenes/Profile/UserProfile.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/assets/images/Urg.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/assets/images/Urg3.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/assets/styles/_modal.scss" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/Modals/_modal.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/assets/styles/index.scss" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/assets/styles/index.scss" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/scenes/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/scenes/export.js" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -42,20 +20,14 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/client/src/index.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="153">
-              <caret line="9" column="24" lean-forward="true" selection-start-line="9" selection-start-column="24" selection-end-line="9" selection-end-column="24" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/.gitignore">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="85">
-              <caret line="5" column="13" lean-forward="true" selection-start-line="5" selection-start-column="13" selection-end-line="5" selection-end-column="13" />
+            <state relative-caret-position="323">
+              <caret line="19" column="9" lean-forward="true" selection-start-line="19" selection-start-column="9" selection-end-line="19" selection-end-column="9" />
+              <folding>
+                <element signature="e#0#26#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -139,13 +111,13 @@
         <option value="$PROJECT_DIR$/client/src/scenes/Error404/NotFound.js" />
         <option value="$PROJECT_DIR$/client/src/App.js" />
         <option value="$PROJECT_DIR$/client/src/components/index.js" />
-        <option value="$PROJECT_DIR$/client/src/index.js" />
         <option value="$PROJECT_DIR$/client/src/components/Footer/Footer.js" />
         <option value="$PROJECT_DIR$/client/src/components/Header/HeaderNav.js" />
         <option value="$PROJECT_DIR$/client/src/assets/styles/index.scss" />
         <option value="$PROJECT_DIR$/client/src/components/Header/Header.js" />
         <option value="$PROJECT_DIR$/client/src/scenes/Error404/NotFoundError.js" />
         <option value="$PROJECT_DIR$/.gitignore" />
+        <option value="$PROJECT_DIR$/client/src/index.js" />
       </list>
     </option>
   </component>
@@ -172,6 +144,33 @@
               <item name="fiesta-market" type="b2602c69:ProjectViewProjectNode" />
               <item name="fiesta-market" type="462c0819:PsiDirectoryNode" />
               <item name="client" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="fiesta-market" type="b2602c69:ProjectViewProjectNode" />
+              <item name="fiesta-market" type="462c0819:PsiDirectoryNode" />
+              <item name="client" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="fiesta-market" type="b2602c69:ProjectViewProjectNode" />
+              <item name="fiesta-market" type="462c0819:PsiDirectoryNode" />
+              <item name="client" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="assets" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="fiesta-market" type="b2602c69:ProjectViewProjectNode" />
+              <item name="fiesta-market" type="462c0819:PsiDirectoryNode" />
+              <item name="client" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="components" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="fiesta-market" type="b2602c69:ProjectViewProjectNode" />
+              <item name="fiesta-market" type="462c0819:PsiDirectoryNode" />
+              <item name="client" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="scenes" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -254,11 +253,10 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="124511000" />
+    <option name="totallyTimeSpent" value="124775000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.19072708" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
@@ -597,7 +595,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/client/src/scenes/index.js">
+    <entry file="file://$PROJECT_DIR$/client/src/scenes/export.js">
       <provider selected="true" editor-type-id="text-editor">
         <state>
           <caret selection-end-line="5" />
@@ -644,17 +642,20 @@
     <entry file="file://$PROJECT_DIR$/client/package.json">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/client/src/index.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="9" column="24" lean-forward="true" selection-start-line="9" selection-start-column="24" selection-end-line="9" selection-end-column="24" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/.gitignore">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="85">
           <caret line="5" column="13" lean-forward="true" selection-start-line="5" selection-start-column="13" selection-end-line="5" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/client/src/index.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="323">
+          <caret line="19" column="9" lean-forward="true" selection-start-line="19" selection-start-column="9" selection-end-line="19" selection-end-column="9" />
+          <folding>
+            <element signature="e#0#26#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './assets/styles/App.scss';
-import { MainApp } from './scenes';
+import { MainApp } from './scenes/export';
 
 
 

@@ -8,8 +8,8 @@ import {
 } from 'react-router-dom';
 import './assets/styles/index.scss';
 import App from './App';
-import { Header, Footer } from './components';
-import { NotFoundError, SignInForm, ContactForm, UserProfile } from './scenes';
+import { Header, Footer } from './components/export';
+import { NotFoundError, SignInForm, ContactForm, UserProfile } from './scenes/export';
 import * as serviceWorker from './serviceWorker';
 import axios from 'axios';
 
