@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom';
 import "react-tabs/style/react-tabs.css";
 import axios from 'axios';
 import { authenticationService } from '../../services/export';
+import {Role} from "../../helpers/role";
 
 export class Header extends React.Component {
 
@@ -13,6 +14,25 @@ export class Header extends React.Component {
     super(props);
     this.routeChange = this.routeChange.bind(this);
     this.logoutUser = this.logoutUser.bind(this);
+
+
+    this.state = {
+      currentUser: null,
+      isAdmin: false
+    };
+  }
+
+  componentDidMount() {
+    authenticationService.currentUser.subscribe(x => {
+      console.log('x: ' + JSON.stringify(x));
+      this.setState({
+        currentUser: x,
+        isAdmin: x && x.role === Role.Admin
+      })});
+  }
+
+  componentWillUnmount() {
+    authenticationService.currentUser.unsubscribe();
   }
 
   routeChange(path) {
@@ -25,11 +45,13 @@ export class Header extends React.Component {
   }
 
   render() {
+    const { currentUser, isAdmin } = this.state;
 
     return (
       <div class="header-container">
+        { currentUser && <p>logged in!</p>}
         <div class="background"/>
-        <Link to='/' class="logo"><img src={fiestaMarketLogo} alt="Logo"/></Link>
+        <Link to='/' className="logo"><img src={fiestaMarketLogo} alt="Logo"/></Link>
         <ul class="nav-list">
           <li><button onClick={() => this.routeChange('login')} className="nav">Sign In</button></li>
           <li><button onClick={this.displayStatusOptions} className="nav">Status: Online</button></li>
