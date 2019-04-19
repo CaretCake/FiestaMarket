@@ -44,8 +44,25 @@ export class Header extends React.Component {
     this.routeChange('/');
   }
 
+  isLoggedIn() {
+    return this.state.currentUser !== null;
+  }
+
   render() {
     const { currentUser, isAdmin } = this.state;
+
+    const loggedInNav = () => {
+      return <React.Fragment>
+        <li><button onClick={this.displayStatusOptions} className="nav">{ currentUser !== null ? currentUser.status : 'Status'}</button></li>
+        <li><button className="nav"><FontAwesomeIcon icon={faEnvelope}/>Messages</button></li>
+        <li><button className="nav">Notifications</button></li>
+        <li><button onClick={() => this.routeChange('profile/' + (currentUser !== null ? currentUser.userId : ''))} className="nav">{ currentUser !== null ? currentUser.userName : 'Profile'}</button></li>
+        <li><button onClick={() => this.logoutUser()} className="nav"><FontAwesomeIcon icon={faSignOutAlt} /> Sign Out</button></li>
+      </React.Fragment>
+    }
+    const loggedOutNav = () => {
+      return <li><button onClick={() => this.routeChange('login')} className="nav">Sign In</button></li>;
+    }
 
     return (
       <div class="header-container">
@@ -53,12 +70,7 @@ export class Header extends React.Component {
         <div class="background"/>
         <Link to='/' className="logo"><img src={fiestaMarketLogo} alt="Logo"/></Link>
         <ul class="nav-list">
-          <li><button onClick={() => this.routeChange('login')} className="nav">Sign In</button></li>
-          <li><button onClick={this.displayStatusOptions} className="nav">Status: Online</button></li>
-          <li><button className="nav"><FontAwesomeIcon icon={faEnvelope}/> Messages</button></li>
-          <li><button className="nav">Notifications</button></li>
-          <li><button onClick={() => this.routeChange('profile')} className="nav">Profile</button></li>
-          <li><button onClick={() => this.logoutUser()} className="nav"><FontAwesomeIcon icon={faSignOutAlt} /> Sign Out</button></li>
+          { this.isLoggedIn() ? loggedInNav() : loggedOutNav() }
         </ul>
 
       </div>
