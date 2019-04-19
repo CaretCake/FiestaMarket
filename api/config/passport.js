@@ -11,13 +11,13 @@ passport.use('local', new LocalStrategy(
     // When a user tries to sign in this code runs
     User.findOne({
       raw: true,
-      where: { username: username.toLowerCase() }
+      where: { email: username.toLowerCase() }
     }).then(function(dbUser) {
       // If there's no user with the given username
       if (!dbUser) {
         console.log('login failed for user ' + username.toLowerCase());
         return done(null, false, {
-          message: "Incorrect username or username."
+          message: "Incorrect username or password."
         });
       }
       // If there is a user with the given username, but the password is incorrect

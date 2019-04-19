@@ -17,17 +17,7 @@ export class SignInForm extends React.Component {
 
   handleSignInSubmit = (e) => {
     e.preventDefault();
-  /*  axios.post('http://localhost:9000/users/login', {
-      username: e.target.username.value,
-      password: e.target.pass.value
-    })
-      .then(user => {
-        console.log('signed in!');
-      })
-      .catch(err => console.log(err));*/
-
-
-    authenticationService.login(e.target.username.value, e.target.pass.value)
+    authenticationService.login(e.target.email.value, e.target.pass.value)
       .then(
         user => {
           const { from } = this.props.location.state || { from: { pathname: "/" } };
@@ -61,8 +51,8 @@ export class SignInForm extends React.Component {
         <TabPanel>
           <form onSubmit={this.handleSignInSubmit} method="POST" multipart='urlencoded'>
             <label>
-              Username:
-              <input type="text" name="username" />
+              Email:
+              <input type="text" name="email" />
             </label>
             <label>
               Password:

@@ -18,7 +18,7 @@ router.post('/add', (req, res) => {
   console.log(req.body);
   bcrypt.hash(req.body.pass, saltRounds, function (err, hash){
     User.create({
-      userName: req.body.username.toLowerCase(),
+      userName: req.body.username,
       email: req.body.email.toLowerCase(),
       pass: hash,
       status: 'offline'
@@ -45,15 +45,11 @@ router.post('/login', function(req,res,next) {
       req.logIn(user, function(err) {
         if (err) { return next(err); }
         console.log('logged in user: ' + JSON.stringify(user));
-        /*delete user.pass;
+        delete user.pass;
         delete user.createdAt;
-        delete user.updatedAt;*/
+        delete user.updatedAt;
         return res.json({message: 'success', user });;
       });
-      let userInfo = {
-        username: user.username
-      };
-      //res.json(userInfo);
     })(req,res,next);
   }
 );
