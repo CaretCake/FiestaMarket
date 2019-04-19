@@ -6,6 +6,7 @@ button, input[type=submit] {
   padding: 8px 8px 8px 8px;
   text-transform: lowercase;
   &:focus {outline:0;}
+  letter-spacing: 1px;
 }
 
 form {
@@ -13,7 +14,7 @@ form {
   flex-direction: column;
 }
 
-input {
+input, textarea, select {
   &:focus {outline:0;}
 }
 
