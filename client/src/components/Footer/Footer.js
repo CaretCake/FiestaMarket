@@ -21,23 +21,6 @@ export class Footer extends React.Component {
   }
 
   render() {
-    /*const contactForm = (
-      <form onSubmit={this.handleSubmit}>
-        <label>
-          Select why you are contacting us:
-          <select onChange={this.handleChange}>
-            <option value="feedback">General Feedback</option>
-            <option value="bug">Report a Bug</option>
-            <option value="question">Ask a Question</option>
-          </select>
-        </label>
-        <label>
-          Message:
-          <textarea onChange={this.handleChange} />
-        </label>
-        <input type="submit" value="Submit" />
-      </form>
-    );*/
 
     return (
       <div>
@@ -45,7 +28,7 @@ export class Footer extends React.Component {
           <div class="footer-left">
             <div class="footer-links">
               <h3>Links</h3>
-              <button onClick={() => this.routeChange('contact')}>Contact Us/Report a Bug</button>
+              <button onClick={() => this.routeChange('/contact')}>Contact Us/Report a Bug</button>
             </div>
           </div>
           <div class="footer-right">

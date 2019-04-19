@@ -56,6 +56,7 @@ export class Header extends React.Component {
         <li><button className="nav"><FontAwesomeIcon icon={faEnvelope}/>Messages</button></li>
         <li><button className="nav">Notifications</button></li>
         <li><button onClick={() => this.routeChange('/profile/' + (currentUser !== null ? currentUser.userId : ''))} className="nav">{ currentUser !== null ? currentUser.userName : 'Profile'}</button></li>
+        { isAdmin && <li><button onClick={() => this.routeChange('/admin')} className="nav">Admin</button></li> }
         <li><button onClick={() => this.logoutUser()} className="nav"><FontAwesomeIcon icon={faSignOutAlt} /> Sign Out</button></li>
       </React.Fragment>
     }

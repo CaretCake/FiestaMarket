@@ -8,8 +8,9 @@ import {
 } from 'react-router-dom';
 import './assets/styles/index.scss';
 import App from './App';
-import { Header, Footer } from './components/export';
-import { NotFoundError, SignInForm, ContactForm, UserProfile } from './scenes/export';
+import { Role } from './helpers/export';
+import { Header, Footer, PrivateRoute } from './components/export';
+import { NotFoundError, SignInForm, ContactForm, UserProfile, AdminPage } from './scenes/export';
 import * as serviceWorker from './serviceWorker';
 import axios from 'axios';
 
@@ -25,6 +26,7 @@ const routing = (
         <Route path="/profile/:userId" component={UserProfile} />
         <Route path="/login" component={SignInForm} />
         <Route path="/contact" component={ContactForm} />
+        <PrivateRoute path="/admin" roles={[Role.Admin]} component={AdminPage} />
         <Route path='*' exact={true} component={NotFoundError} />
       </Switch>
 
