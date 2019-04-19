@@ -10,7 +10,7 @@ export class ContactForm extends React.Component {
     }) => {
 
     //process form submission here
-
+    console.log("ho");
 
     //done submitting, set submitting to false
     setSubmitting(false);
@@ -36,9 +36,8 @@ export class ContactForm extends React.Component {
       <div class='form-container'>
         <Formik
           initialValues={{
-            first_name: '',
             email: '',
-            gender: ''
+            message: ''
           }}
           validationSchema={contactSchema}
           onSubmit={this.handleSubmit}

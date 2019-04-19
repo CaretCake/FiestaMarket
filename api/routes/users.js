@@ -24,7 +24,7 @@ router.post('/add', (req, res) => {
       status: 'offline'
     }).then(function(data) {
       if (data) {
-        res.redirect('/');
+        return res.json({message: 'success'});;
       }
     });
   });

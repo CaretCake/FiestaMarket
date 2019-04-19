@@ -6,33 +6,18 @@ import axios from 'axios';
 const currentUserSubject = new BehaviorSubject(JSON.parse(localStorage.getItem('currentUser')));
 
 export const registrationService = {
-  login,
-  logout,
-  currentUser: currentUserSubject.asObservable(),
-  get currentUserValue () { return currentUserSubject.value }
+  register
 };
 
-function login(username, password) {
-  return axios.post('http://localhost:9000/users/login', {
+function register(username, email, password) {
+
+  console.log('submitting: ' + username + ', ' + email + ', ' + password);
+  return axios.post('http://localhost:9000/users/add', {
     username: username,
-    password: password
+    email: email,
+    pass: password
   })
     .then(user => {
-      // store user details and token in local storage to keep user logged in between page refreshes
-      console.log(user);
-      localStorage.setItem('currentUser', JSON.stringify(user));
-      currentUserSubject.next(user);
-      return user;
+      return 'Registered';
     }).catch(error => handleResponse(error.response));
-}
-
-function logout() {
-  // remove user from local storage to log user out
-  axios.get('http://localhost:9000/users/logout')
-    .then(user => {
-    })
-    .catch(err => console.log(err));
-  localStorage.removeItem('currentUser');
-  currentUserSubject.next(null);
-
 }

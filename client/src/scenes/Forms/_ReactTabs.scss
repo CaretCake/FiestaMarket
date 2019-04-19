@@ -1,0 +1,19 @@
+.react-tabs {
+ .react-tabs__tab-list {
+   border: 0 ;
+
+   .react-tabs__tab {
+     border-radius: 3px;
+     letter-spacing: 1px;
+   }
+
+   .react-tabs__tab--selected {
+     box-shadow: none;
+     background-color: $navy;
+     color: $white;
+   }
+
+   .react-tabs__tab-panel--selected {
+   }
+ }
+}
