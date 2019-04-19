@@ -14,6 +14,10 @@ form {
   flex-direction: column;
 }
 
+input {
+  letter-spacing: 1px;
+}
+
 input, textarea, select {
   &:focus {outline:0;}
 }
