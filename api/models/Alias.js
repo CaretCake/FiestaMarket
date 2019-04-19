@@ -4,7 +4,7 @@ module.exports = (sequelize, type) => {
       type: type.STRING,
       allowNull: false,
       validate: {
-        max: 20,
+        len: [2, 40],
         notNull: true,
         notEmpty: true,
         is: /^.[a-zA-Z0-9_]+$/

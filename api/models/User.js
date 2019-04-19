@@ -17,8 +17,7 @@ module.exports = (sequelize, type) => {
       allowNull: false,
       unique: true,
       validate: {
-        min: 5,
-        max: 12,
+        len: [5, 16],
         notNull: true,
         notEmpty: true,
         is: /^.[a-zA-Z0-9_]+$/
@@ -41,8 +40,7 @@ module.exports = (sequelize, type) => {
       validate: {
         notNull: true,
         notEmpty: true,
-        min: 6,
-        max: 200
+        len: [6, 200],
       }
     },
     role: {

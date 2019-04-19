@@ -17,6 +17,7 @@ module.exports = (sequelize, type) => {
       allowNull: false,
       unique: true,
       validate: {
+        len: [2, 150],
         notNull: true,
         notEmpty: true,
         isDate: true,
@@ -49,6 +50,8 @@ module.exports = (sequelize, type) => {
       type: type.INTEGER,
       allowNull: false,
       validate: {
+        min: 1,
+        max: 200,
         notNull: true,
         notEmpty: true,
         isInt: true
