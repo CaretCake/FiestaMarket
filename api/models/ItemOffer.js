@@ -5,11 +5,21 @@ module.exports = (sequelize, type) => {
       allowNull: false,
       primaryKey: true,
       autoIncrement: true,
-      unique: true
+      unique: true,
+      validate: {
+        notNull: true,
+        notEmpty: true,
+        isInt: true
+      }
     },
     OfferAmount: {
       type: type.DECIMAL(18, 0),
-      allowNull: false
+      allowNull: false,
+      validate: {
+        notNull: true,
+        notEmpty: true,
+        isDecimal: true
+      }
     }
   })
 }
