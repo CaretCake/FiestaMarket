@@ -1,7 +1,5 @@
 import React from 'react';
-import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import "react-tabs/style/react-tabs.css";
-import axios from 'axios';
 
 export class ContactForm extends React.Component {
 

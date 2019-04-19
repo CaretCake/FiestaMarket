@@ -4,9 +4,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSignOutAlt, faEnvelope } from '@fortawesome/free-solid-svg-icons';
 import { Link } from 'react-router-dom';
 import "react-tabs/style/react-tabs.css";
-import axios from 'axios';
 import { authenticationService } from '../../services/export';
-import {Role} from "../../helpers/role";
+import { Role } from "../../helpers/export";
 
 export class Header extends React.Component {
 
@@ -56,7 +55,7 @@ export class Header extends React.Component {
         <li><button onClick={this.displayStatusOptions} className="nav">{ currentUser !== null ? currentUser.status : 'Status'}</button></li>
         <li><button className="nav"><FontAwesomeIcon icon={faEnvelope}/>Messages</button></li>
         <li><button className="nav">Notifications</button></li>
-        <li><button onClick={() => this.routeChange('profile/' + (currentUser !== null ? currentUser.userId : ''))} className="nav">{ currentUser !== null ? currentUser.userName : 'Profile'}</button></li>
+        <li><button onClick={() => this.routeChange('/profile/' + (currentUser !== null ? currentUser.userId : ''))} className="nav">{ currentUser !== null ? currentUser.userName : 'Profile'}</button></li>
         <li><button onClick={() => this.logoutUser()} className="nav"><FontAwesomeIcon icon={faSignOutAlt} /> Sign Out</button></li>
       </React.Fragment>
     }

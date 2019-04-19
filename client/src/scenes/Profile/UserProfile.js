@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import axios from 'axios';
+import { userService } from '../../services/export';
 
 export class UserProfile extends Component {
   constructor(props) {
@@ -10,21 +10,8 @@ export class UserProfile extends Component {
   }
 
   componentWillMount() {
-    this.getUserInfo();
-  }
-
-  getUserInfo() {
-    axios.get(`http://localhost:9000/users?userId=${this.props.match.params.userId}`)
-      .then(userInfo => {
-        this.setState({ user: userInfo.data });
-        console.log('info: ' + JSON.stringify(this.state.user));
-      })
-      .catch(error => {
-        console.log('error: ' + error);
-        if (error.response.status === 401) {
-          this.props.history.push('/');
-        }
-      });
+    userService.getById(this.props.match.params.userId)
+      .then(userInfoFromApi => this.setState({ user: userInfoFromApi }));
   }
 
   render() {
