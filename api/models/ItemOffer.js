@@ -18,7 +18,13 @@ module.exports = (sequelize, type) => {
       validate: {
         notNull: true,
         notEmpty: true,
-        isDecimal: true
+        isDecimal: {
+          msg: 'Must be decimal value'
+        },
+        min: {
+          args: 0,
+          msg: 'Offer amount must be greater than 0'
+        }
       }
     }
   })

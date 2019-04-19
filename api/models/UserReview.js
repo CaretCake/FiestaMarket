@@ -4,7 +4,10 @@ module.exports = (sequelize, type) => {
       type: type.STRING(300),
       allowNull: false,
       validate: {
-        len: [0, 300],
+        len: {
+          args: [5, 300],
+          msg: 'Review message must be between 5 and 300 characters'
+        },
         notNull: true,
         notEmpty: true
       }

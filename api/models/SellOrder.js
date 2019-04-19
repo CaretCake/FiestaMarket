@@ -18,7 +18,13 @@ module.exports = (sequelize, type) => {
       validate: {
         notNull: true,
         notEmpty: true,
-        isDecimal: true
+        isDecimal: {
+          msg: 'Must be decimal value'
+        },
+        min: {
+          args: 0,
+          msg: 'Price must be greater than 0'
+        }
       }
     },
     OpenToOffers: {
@@ -35,7 +41,10 @@ module.exports = (sequelize, type) => {
       validate: {
         notNull: true,
         notEmpty: true,
-        isIn: [['active', 'pending', 'sold', 'expired']]
+        isIn: {
+          args: [['active', 'pending', 'sold', 'expired']],
+          msg: 'Order status must be active, pending, sold, or expired'
+        }
       }
     },
     Server: {
@@ -44,7 +53,10 @@ module.exports = (sequelize, type) => {
       validate: {
         notNull: true,
         notEmpty: true,
-        isIn: [['Isya', 'Pagel', 'Jenira', 'Enid']]
+        isIn: {
+          args: [['Isya', 'Pagel', 'Jenira', 'Enid']],
+          msg: 'Server must be Isya, Pagel, Jenira, or Enid'
+        }
       }
     },
     Enhancement: {
@@ -53,7 +65,17 @@ module.exports = (sequelize, type) => {
       validate: {
         notNull: true,
         notEmpty: true,
-        isInt: true
+        isInt: {
+          msg: 'Enhancement must be greater than integer value'
+        },
+        min: {
+          args: 0,
+          msg: 'Enhancement must be at least 0'
+        },
+        max: {
+          args: 12,
+          msg: 'Enhancement must be at most 12'
+        }
       }
     },
     End: {
@@ -62,7 +84,13 @@ module.exports = (sequelize, type) => {
       validate: {
         notNull: true,
         notEmpty: true,
-        isInt: true
+        isInt: {
+          msg: 'Stat must be integer value'
+        },
+        min: {
+          args: 0,
+          msg: 'Stat must be at least 0'
+        }
       }
     },
     Dex: {
@@ -71,7 +99,13 @@ module.exports = (sequelize, type) => {
       validate: {
         notNull: true,
         notEmpty: true,
-        isInt: true
+        isInt: {
+          msg: 'Stat must be integer value'
+        },
+        min: {
+          args: 0,
+          msg: 'Stat must be at least 0'
+        }
       }
     },
     Int: {
@@ -89,7 +123,13 @@ module.exports = (sequelize, type) => {
       validate: {
         notNull: true,
         notEmpty: true,
-        isInt: true
+        isInt: {
+          msg: 'Stat must be integer value'
+        },
+        min: {
+          args: 0,
+          msg: 'Stat must be at least 0'
+        }
       }
     },
     Spr: {
@@ -98,7 +138,13 @@ module.exports = (sequelize, type) => {
       validate: {
         notNull: true,
         notEmpty: true,
-        isInt: true
+        isInt: {
+          msg: 'Stat must be integer value'
+        },
+        min: {
+          args: 0,
+          msg: 'Stat must be at least 0'
+        }
       }
     },
     Hp: {
@@ -107,7 +153,13 @@ module.exports = (sequelize, type) => {
       validate: {
         notNull: true,
         notEmpty: true,
-        isInt: true
+        isInt: {
+          msg: 'Stat must be integer value'
+        },
+        min: {
+          args: 0,
+          msg: 'Stat must be at least 0'
+        }
       }
     },
     Sp: {
@@ -116,7 +168,13 @@ module.exports = (sequelize, type) => {
       validate: {
         notNull: true,
         notEmpty: true,
-        isInt: true
+        isInt: {
+          msg: 'Stat must be integer value'
+        },
+        min: {
+          args: 0,
+          msg: 'Stat must be at least 0'
+        }
       }
     },
     Dmg: {
@@ -125,7 +183,13 @@ module.exports = (sequelize, type) => {
       validate: {
         notNull: true,
         notEmpty: true,
-        isInt: true
+        isInt: {
+          msg: 'Stat must be integer value'
+        },
+        min: {
+          args: 0,
+          msg: 'Stat must be at least 0'
+        }
       }
     },
     Mdmg: {
@@ -134,7 +198,13 @@ module.exports = (sequelize, type) => {
       validate: {
         notNull: true,
         notEmpty: true,
-        isInt: true
+        isInt: {
+          msg: 'Stat must be integer value'
+        },
+        min: {
+          args: 0,
+          msg: 'Stat must be at least 0'
+        }
       }
     },
     Def: {
@@ -143,7 +213,13 @@ module.exports = (sequelize, type) => {
       validate: {
         notNull: true,
         notEmpty: true,
-        isInt: true
+        isInt: {
+          msg: 'Stat must be integer value'
+        },
+        min: {
+          args: 0,
+          msg: 'Stat must be at least 0'
+        }
       }
     },
     Mdef: {
@@ -152,7 +228,13 @@ module.exports = (sequelize, type) => {
       validate: {
         notNull: true,
         notEmpty: true,
-        isInt: true
+        isInt: {
+          msg: 'Stat must be integer value'
+        },
+        min: {
+          args: 0,
+          msg: 'Stat must be at least 0'
+        }
       }
     },
     Aim: {
@@ -161,7 +243,13 @@ module.exports = (sequelize, type) => {
       validate: {
         notNull: true,
         notEmpty: true,
-        isInt: true
+        isInt: {
+          msg: 'Stat must be integer value'
+        },
+        min: {
+          args: 0,
+          msg: 'Stat must be at least 0'
+        }
       }
     },
     Eva: {
@@ -170,7 +258,13 @@ module.exports = (sequelize, type) => {
       validate: {
         notNull: true,
         notEmpty: true,
-        isInt: true
+        isInt: {
+          msg: 'Stat must be integer value'
+        },
+        min: {
+          args: 0,
+          msg: 'Stat must be at least 0'
+        }
       }
     },
     LastUpdated: {

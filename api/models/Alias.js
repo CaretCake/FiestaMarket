@@ -4,10 +4,16 @@ module.exports = (sequelize, type) => {
       type: type.STRING,
       allowNull: false,
       validate: {
-        len: [2, 40],
+        len: {
+          args: [2, 40],
+          msg: "Alias name must be between 2 and 40 characters"
+        },
         notNull: true,
         notEmpty: true,
-        is: /^.[a-zA-Z0-9_]+$/
+        is: {
+          args: /^.[a-zA-Z0-9_.#]+$/,
+          msg: "Alias name must be only alphanumeric"
+        }
       }
     },
     Type: {
@@ -16,13 +22,19 @@ module.exports = (sequelize, type) => {
       validate: {
         notNull: true,
         notEmpty: true,
-        isIn: [['discord', 'in-game']]
+        isIn: {
+          args: [['discord', 'in-game']],
+          msg: "Alias must be of type discord or in-game"
+        }
       }
     },
     Server: {
       type: type.ENUM('Isya', 'Pagel', 'Jenira', 'Enid'),
       validate: {
-        isIn: [['Isya', 'Pagel', 'Jenira', 'Enid']]
+        isIn: {
+          args: [['Isya', 'Pagel', 'Jenira', 'Enid']],
+          msg: "Server must be Isya, Pagel, Jenira, or Enid"
+        }
       }
     },
     Preferred: {

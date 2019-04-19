@@ -17,10 +17,16 @@ module.exports = (sequelize, type) => {
       allowNull: false,
       unique: true,
       validate: {
-        len: [5, 16],
+        len: {
+          args: [5, 16],
+          msg: 'Username must be between 5 and 16 characters'
+        },
         notNull: true,
         notEmpty: true,
-        is: /^.[a-zA-Z0-9_]+$/
+        is: {
+          args: /^.[a-zA-Z0-9_]+$/,
+          msg: 'Username must be only alphanumeric'
+        }
       }
     },
     email: {
@@ -28,7 +34,9 @@ module.exports = (sequelize, type) => {
       allowNull: false,
       unique: true,
       validate: {
-        isEmail: true,
+        isEmail: {
+          msg: 'Email must be a valid email'
+        },
         isLowercase: true,
         notNull: true,
         notEmpty: true
@@ -40,7 +48,10 @@ module.exports = (sequelize, type) => {
       validate: {
         notNull: true,
         notEmpty: true,
-        len: [6, 200],
+        len: {
+          args: [6, 200],
+          msg: 'Password must be between 6 and 200 characters'
+        }
       }
     },
     role: {
@@ -50,7 +61,10 @@ module.exports = (sequelize, type) => {
       validate: {
         notNull: true,
         notEmpty: true,
-        isIn: [['user', 'admin']]
+        isIn: {
+          args: [['user', 'admin']],
+          msg: 'Role must be either user or admin'
+        }
       }
     },
     status: {
@@ -59,7 +73,10 @@ module.exports = (sequelize, type) => {
       validate: {
         notNull: true,
         notEmpty: true,
-        isIn: [['online', 'in-game', 'offline']]
+        isIn: {
+          args: [['online', 'in-game', 'offline']],
+          msg: 'Status must be either online, in-game, or offline'
+        }
       }
     }
   })

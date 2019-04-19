@@ -18,7 +18,13 @@ module.exports = (sequelize, type) => {
         validate: {
           notNull: true,
           notEmpty: true,
-          isDecimal: true
+          isDecimal: {
+            msg: 'Must be decimal value'
+          },
+          min: {
+            args: 0,
+            msg: 'Min price must be greater than 0'
+          }
         }
       },
       PriceMax: {
@@ -27,7 +33,18 @@ module.exports = (sequelize, type) => {
         validate: {
           notNull: true,
           notEmpty: true,
-          isDecimal: true
+          isDecimal: {
+            msg: 'Must be decimal value'
+          },
+          min: {
+            args: 0,
+            msg: 'Max price must be greater than 0'
+          },
+          isGreaterThanOtherField(value) {
+            if (parseFloat(value) <= parseFloat(this.PriceMin)) {
+              throw new Error('Max price must be greater than min price');
+            }
+          }
         }
       },
       OrderStatus: {
@@ -36,7 +53,10 @@ module.exports = (sequelize, type) => {
         validate: {
           notNull: true,
           notEmpty: true,
-          isIn: [['active', 'bought', 'expired']]
+          isIn: {
+            args: [['active', 'bought', 'expired']],
+            msg: 'Order status must be active, bought, or expired'
+          }
         }
       },
       Server: {
@@ -45,7 +65,10 @@ module.exports = (sequelize, type) => {
         validate: {
           notNull: true,
           notEmpty: true,
-          isIn: [['Isya', 'Pagel', 'Jenira', 'Enid']]
+          isIn: {
+            args: [['Isya', 'Pagel', 'Jenira', 'Enid']],
+            msg: 'Server must be Isya, Pagel, Jenira, or Enid'
+          }
         }
       },
       DesiredEnhancement: {
@@ -54,7 +77,10 @@ module.exports = (sequelize, type) => {
         validate: {
           notNull: true,
           notEmpty: true,
-          isIn: [['N/A', '+12', '+11', '+10', '+9']]
+          isIn: {
+            args: [['N/A', '+12', '+11', '+10', '+9']],
+            msg: 'Desired enhancement must be N/A or +9-12'
+          }
         }
       },
       DesiredEnd: {
@@ -63,7 +89,10 @@ module.exports = (sequelize, type) => {
         validate: {
           notNull: true,
           notEmpty: true,
-          isIn: [['N/A', 'godly', 'high', 'medium']]
+          isIn: {
+            args: [['N/A', 'godly', 'high', 'medium']],
+            msg: 'Desired stat must be N/A, godly, high, or medium'
+          }
         }
       },
       DesiredDex: {
@@ -72,7 +101,10 @@ module.exports = (sequelize, type) => {
         validate: {
           notNull: true,
           notEmpty: true,
-          isIn: [['N/A', 'godly', 'high', 'medium']]
+          isIn: {
+            args: [['N/A', 'godly', 'high', 'medium']],
+            msg: 'Desired stat must be N/A, godly, high, or medium'
+          }
         }
       },
       DesiredInt: {
@@ -81,7 +113,10 @@ module.exports = (sequelize, type) => {
         validate: {
           notNull: true,
           notEmpty: true,
-          isIn: [['N/A', 'godly', 'high', 'medium']]
+          isIn: {
+            args: [['N/A', 'godly', 'high', 'medium']],
+            msg: 'Desired stat must be N/A, godly, high, or medium'
+          }
         }
       },
       DesiredStr: {
@@ -90,7 +125,10 @@ module.exports = (sequelize, type) => {
         validate: {
           notNull: true,
           notEmpty: true,
-          isIn: [['N/A', 'godly', 'high', 'medium']]
+          isIn: {
+            args: [['N/A', 'godly', 'high', 'medium']],
+            msg: 'Desired stat must be N/A, godly, high, or medium'
+          }
         }
       },
       DesiredSpr: {
@@ -99,7 +137,10 @@ module.exports = (sequelize, type) => {
         validate: {
           notNull: true,
           notEmpty: true,
-          isIn: [['N/A', 'godly', 'high', 'medium']]
+          isIn: {
+            args: [['N/A', 'godly', 'high', 'medium']],
+            msg: 'Desired stat must be N/A, godly, high, or medium'
+          }
         }
       },
       DesiredHp: {
@@ -108,7 +149,10 @@ module.exports = (sequelize, type) => {
         validate: {
           notNull: true,
           notEmpty: true,
-          isIn: [['N/A', 'godly', 'high', 'medium']]
+          isIn: {
+            args: [['N/A', 'godly', 'high', 'medium']],
+            msg: 'Desired stat must be N/A, godly, high, or medium'
+          }
         }
       },
       DesiredSp: {
@@ -117,7 +161,10 @@ module.exports = (sequelize, type) => {
         validate: {
           notNull: true,
           notEmpty: true,
-          isIn: [['N/A', 'godly', 'high', 'medium']]
+          isIn: {
+            args: [['N/A', 'godly', 'high', 'medium']],
+            msg: 'Desired stat must be N/A, godly, high, or medium'
+          }
         }
       },
       DesiredDmg: {
@@ -126,7 +173,10 @@ module.exports = (sequelize, type) => {
         validate: {
           notNull: true,
           notEmpty: true,
-          isIn: [['N/A', 'godly', 'high', 'medium']]
+          isIn: {
+            args: [['N/A', 'godly', 'high', 'medium']],
+            msg: 'Desired stat must be N/A, godly, high, or medium'
+          }
         }
       },
       DesiredMdmg: {
@@ -135,7 +185,10 @@ module.exports = (sequelize, type) => {
         validate: {
           notNull: true,
           notEmpty: true,
-          isIn: [['N/A', 'godly', 'high', 'medium']]
+          isIn: {
+            args: [['N/A', 'godly', 'high', 'medium']],
+            msg: 'Desired stat must be N/A, godly, high, or medium'
+          }
         }
       },
       DesiredDef: {
@@ -144,7 +197,10 @@ module.exports = (sequelize, type) => {
         validate: {
           notNull: true,
           notEmpty: true,
-          isIn: [['N/A', 'godly', 'high', 'medium']]
+          isIn: {
+            args: [['N/A', 'godly', 'high', 'medium']],
+            msg: 'Desired stat must be N/A, godly, high, or medium'
+          }
         }
       },
       DesiredMdef: {
@@ -153,7 +209,10 @@ module.exports = (sequelize, type) => {
         validate: {
           notNull: true,
           notEmpty: true,
-          isIn: [['N/A', 'godly', 'high', 'medium']]
+          isIn: {
+            args: [['N/A', 'godly', 'high', 'medium']],
+            msg: 'Desired stat must be N/A, godly, high, or medium'
+          }
         }
       },
       DesiredAim: {
@@ -162,7 +221,10 @@ module.exports = (sequelize, type) => {
         validate: {
           notNull: true,
           notEmpty: true,
-          isIn: [['N/A', 'godly', 'high', 'medium']]
+          isIn: {
+            args: [['N/A', 'godly', 'high', 'medium']],
+            msg: 'Desired stat must be N/A, godly, high, or medium'
+          }
         }
       },
       DesiredEva: {
@@ -171,7 +233,10 @@ module.exports = (sequelize, type) => {
         validate: {
           notNull: true,
           notEmpty: true,
-          isIn: [['N/A', 'godly', 'high', 'medium']]
+          isIn: {
+            args: [['N/A', 'godly', 'high', 'medium']],
+            msg: 'Desired stat must be N/A, godly, high, or medium'
+          }
         }
       },
       LastUpdated: {
