@@ -11,7 +11,13 @@ export class UserProfile extends Component {
 
   componentWillMount() {
     userService.getById(this.props.match.params.userId)
-      .then(userInfoFromApi => this.setState({ user: userInfoFromApi }));
+      .then(userInfoFromApi => {
+        if (!userInfoFromApi) {
+          console.log('no info' + userInfoFromApi);
+          this.props.history.push('/NotFound');
+        }
+        this.setState({user: userInfoFromApi});
+      })
   }
 
   render() {

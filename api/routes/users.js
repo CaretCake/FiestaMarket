@@ -146,7 +146,12 @@ router.get('/:userId?', isAuthenticated, (req, res) => {
           [ { model: BuyOrder, as: 'BuyOrders' }, 'updatedAt', 'DESC']
         ]
       })
-      .then(user => res.json(user))
+      .then(user => {
+        if (user === null) {
+          res.status(404);
+        }
+        res.json(user);
+      })
       .catch(err => res.status(500).send({ error: "Error searching for user" }));
   }
 });

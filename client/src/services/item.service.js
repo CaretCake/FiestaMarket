@@ -1,7 +1,7 @@
 import { authHeader, handleResponse } from '../helpers/export';
 import axios from "axios";
 
-export const userService = {
+export const itemService = {
   getAll,
   getById
 };
@@ -15,14 +15,15 @@ function getById(id) {
   return axios.get(`http://localhost:9000/users?userId=${id}`)
     .then(handleResponse)
     .then(userInfo => {
-      if (userInfo.status === 404) {
-        return null;
-      }
+      //this.setState({ user: userInfo.data });
       console.log('info: ' + JSON.stringify(userInfo.data));
       return userInfo.data;
     })
     .catch(error => {
       console.log('error: ' + error);
+      /*if (error.response.status === 401) {
+        this.props.history.push('/');
+      }*/
     });
 
 
