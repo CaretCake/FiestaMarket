@@ -1,6 +1,6 @@
 import React from 'react';
-import { Formik, FormikProps, Form, Field, ErrorMessage } from 'formik';
-import * as Yup from 'yup';
+import { Formik, Form, Field, ErrorMessage } from 'formik';
+import { contactSchema } from "./formSchema";
 
 export class ContactForm extends React.Component {
 
@@ -9,29 +9,12 @@ export class ContactForm extends React.Component {
       setSubmitting
     }) => {
 
-    //process form submission here
-    console.log("ho");
+    //TODO: process form submission here
 
-    //done submitting, set submitting to false
     setSubmitting(false);
-    return;
-  }
-
-  handleChange = (e) => {
-
-  }
+  };
 
   render() {
-    const contactSchema = Yup.object().shape({
-      email: Yup.string()
-        .email('Invalid email')
-        .required('*'),
-      message: Yup.string()
-        .min(2, '')
-        .max(250, '250 character limit hit')
-        .required('*')
-    });
-
     return (
       <div class='form-container'>
         <Formik

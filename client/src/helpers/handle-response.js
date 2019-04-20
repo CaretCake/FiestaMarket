@@ -13,6 +13,5 @@ export function handleResponse(response) {
     return Promise.reject(error);
   }
 
-  console.log('returning: ' + response);
   return response;
 }

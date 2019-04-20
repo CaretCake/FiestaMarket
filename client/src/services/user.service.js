@@ -24,8 +24,4 @@ function getById(id) {
     .catch(error => {
       console.log('error: ' + error);
     });
-
-
-
-  //fetch(`/users/${id}`, requestOptions).then(handleResponse);
 }

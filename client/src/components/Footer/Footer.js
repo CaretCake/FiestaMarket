@@ -4,17 +4,9 @@ export class Footer extends React.Component {
 
   constructor(props) {
     super(props);
-    this.routeChange = this.routeChange.bind(this);
-    /*this.state = {
-      showContactForm: false
-    };*/
-  }
 
-  /*toggleContactForm() {
-    this.setState({
-      showContactForm: !this.state.showContactForm
-    });
-  }*/
+    this.routeChange = this.routeChange.bind(this);
+  }
 
   routeChange(path) {
     this.props.history.push(path);

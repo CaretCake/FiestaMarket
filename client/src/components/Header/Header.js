@@ -1,8 +1,8 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import fiestaMarketLogo from './fiesta-market-logo.png';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSignOutAlt, faEnvelope } from '@fortawesome/free-solid-svg-icons';
-import { Link } from 'react-router-dom';
 import "react-tabs/style/react-tabs.css";
 import { authenticationService } from '../../services/export';
 import { Role } from "../../helpers/export";
@@ -23,7 +23,6 @@ export class Header extends React.Component {
 
   componentDidMount() {
     authenticationService.currentUser.subscribe(x => {
-      console.log('x: ' + JSON.stringify(x));
       this.setState({
         currentUser: x,
         isAdmin: x && x.role === Role.Admin
@@ -59,10 +58,10 @@ export class Header extends React.Component {
         { isAdmin && <li><button onClick={() => this.routeChange('/admin')} className="nav">Admin</button></li> }
         <li><button onClick={() => this.logoutUser()} className="nav"><FontAwesomeIcon icon={faSignOutAlt} /> Sign Out</button></li>
       </React.Fragment>
-    }
+    };
     const loggedOutNav = () => {
       return <li><button onClick={() => this.routeChange('login')} className="nav">Sign In</button></li>;
-    }
+    };
 
     return (
       <div class="header-container">

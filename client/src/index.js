@@ -3,7 +3,6 @@ import ReactDOM from 'react-dom';
 import {
   BrowserRouter as Router,
   Route,
-  browserHistory,
   Switch
 } from 'react-router-dom';
 import './assets/styles/index.scss';
