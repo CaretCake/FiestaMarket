@@ -6,6 +6,7 @@ export  class MainApp extends React.Component {
   constructor(props) {
     super(props);
     this.routeChange = this.routeChange.bind(this);
+    this.validResult = this.validResult.bind(this);
 
     this.state = {
       query: '',
@@ -33,6 +34,10 @@ export  class MainApp extends React.Component {
     this.props.history.push(path);
   }
 
+  validResult() {
+    return (this.state.results[0] !== null && this.state.results[0] !== [] && this.state.results[0] !== undefined && (this.state.results[0]).ItemId !== '');
+  }
+
   render() {
     return (
       <div class='main-app-container'>
@@ -40,9 +45,9 @@ export  class MainApp extends React.Component {
           <div class='flex-left'/>
           <div class='flex-center'>
             <div class='search-container'>
-              <form>
-                <input placeholder='Search...' name='term' ref={input => this.search = input} onChange={this.handleInputChange} autoComplete="off" />
-                <button onClick={() => this.routeChange( '/items/' + (this.state.results[0] !== null ? ((this.state.results[0]).ItemId) : ''))} className='search-button' type="button">Search</button>
+              <form onSubmit={e => { e.preventDefault(); if (this.validResult()) { this.routeChange( '/items/' + (this.state.results[0]).ItemId); }}} >
+                <input placeholder='Search...' name='term' ref={input => this.search = input} onChange={this.handleInputChange} autoComplete="off"/>
+                <button onClick={() => { if (this.validResult()) { this.routeChange( '/items/' + (this.state.results[0]).ItemId); }}} className='search-button' type="button">Search</button>
               </form>
               <div className='search-dropdown'>
                 <ul>
