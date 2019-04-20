@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import './assets/styles/App.scss';
 import { MainApp } from './scenes/export';
 
 
@@ -8,7 +7,7 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <MainApp />
+        <MainApp history={this.props.history} />
       </div>
     );
   }

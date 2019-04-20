@@ -1,3 +1,6 @@
+.content {
+  height: 700px;
+}
 .hero-search-section {
   background-image: url('../images/Urg2.png');
   background-clip: border-box;
@@ -17,6 +20,11 @@
     align-items: center;
 
     .search-container {
+      position: sticky;
+      top: 95px;
+      z-index: 10;
+      margin: 15px;
+
       form {
         width: 400px;
         height: 50px;
@@ -35,6 +43,60 @@
           border-radius: 0;
           height: 100%;
           width: 20%;
+          background-color: $grey-dark;
+          color: $grey-light;
+
+          &:hover {
+            background-color: $grey-extradark;
+          }
+
+          &:active {
+            box-shadow:0 5px 15px 0px $navy;
+            background-color: $navy;
+          }
+        }
+
+        &:focus-within {
+          & ~ .search-dropdown {
+            visibility: visible;
+          }
+        }
+      }
+
+      .search-dropdown {
+        position: absolute;
+        top: 100%;
+        background: $white;
+        left: 0;
+        width: 100%;
+        box-shadow:0 5px 15px -5px $grey-extralight;
+        -moz-box-sizing:content-box;
+        box-sizing:content-box;
+        z-index:1000;
+        visibility: hidden;
+
+        li {
+          padding: 10px;
+          cursor: pointer;
+          text-align: left;
+          color: $grey-dark;
+          letter-spacing: 0.4px;
+          text-transform: uppercase;
+          font-size: 0.95em;
+
+          &:hover {
+            background-color: $grey-light;
+            color: $navy;
+            box-shadow: 0 0px 15px 0 $grey-extralight;
+          }
+
+          &:active {
+            box-shadow: none;
+          }
+        }
+
+        &:focus-within, &:hover {
+          visibility: visible;
         }
       }
     }
