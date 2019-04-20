@@ -65,7 +65,6 @@ export class Header extends React.Component {
 
     return (
       <div class="header-container">
-        { currentUser && <p>logged in!</p>}
         <div class="background"/>
         <Link to='/' className="logo"><img src={fiestaMarketLogo} alt="Logo"/></Link>
         <ul class="nav-list">

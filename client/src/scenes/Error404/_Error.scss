@@ -1,0 +1,22 @@
+.error-page-container {
+  box-sizing: border-box;
+  height: calc(100vh - 385px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  .content-container {
+    width: 60%;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+
+    h1 {
+      font-size: 6em;
+    }
+
+    h1, h2 {
+      margin: 0;
+    }
+  }
+}

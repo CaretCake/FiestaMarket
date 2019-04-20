@@ -32,6 +32,10 @@ ul {
   }
 }
 
+body #root > div{
+  padding-top: 80px;
+}
+
 .unselectable {
   -webkit-touch-callout: none; /* iOS Safari */
   -webkit-user-select: none; /* Safari */
