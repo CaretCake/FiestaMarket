@@ -1,5 +1,6 @@
 import React from 'react';
 import axios from 'axios';
+import { itemService } from "../../services/item.service";
 
 export class MainApp extends React.Component {
 
@@ -15,9 +16,12 @@ export class MainApp extends React.Component {
     this.setState({
       query: this.search.value
     }, () => {
-      if (this.state.query && this.state.query.length > 1) {
-          this.getInfo()
-      } else if (!this.state.query) {}
+      if (this.state.query && this.state.query.length > 0) {
+        itemService.getByFilters(this.state.query)
+          .then(results => {
+            this.setState({results: results.data});
+          });
+      }
     });
   }
 

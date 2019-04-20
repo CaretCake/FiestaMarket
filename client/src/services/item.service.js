@@ -3,7 +3,7 @@ import axios from "axios";
 
 export const itemService = {
   getAll,
-  getById
+  getByFilters
 };
 
 function getAll() {
@@ -11,22 +11,14 @@ function getAll() {
   return fetch(`/users`, requestOptions).then(handleResponse);
 }
 
-function getById(id) {
-  return axios.get(`http://localhost:9000/users?userId=${id}`)
+function getByFilters(query) {
+  return axios.get(`http://localhost:9000/items/search?&term=${query}`)
     .then(handleResponse)
-    .then(userInfo => {
-      //this.setState({ user: userInfo.data });
-      console.log('info: ' + JSON.stringify(userInfo.data));
-      return userInfo.data;
+    .then(data => {
+      console.log('data:' + data);
+      return data;
     })
     .catch(error => {
       console.log('error: ' + error);
-      /*if (error.response.status === 401) {
-        this.props.history.push('/');
-      }*/
     });
-
-
-
-  //fetch(`/users/${id}`, requestOptions).then(handleResponse);
 }
