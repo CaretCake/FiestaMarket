@@ -1,4 +1,4 @@
-import { authHeader, handleResponse } from '../helpers/export';
+import { handleResponse } from '../helpers/export';
 import axios from "axios";
 
 export const userService = {
@@ -7,13 +7,19 @@ export const userService = {
 };
 
 function getAll() {
-  const requestOptions = { method: 'GET', headers: authHeader() };
-  return fetch(`/users`, requestOptions).then(handleResponse);
+  return axios.get(`http://localhost:9000/users`)
+    .then(users => {
+      if (users.status === 404) {
+        return null;
+      }
+      console.log('info: ' + JSON.stringify(users.data));
+      return users.data;
+    })
+    .catch(error => handleResponse(error.response));
 }
 
 function getById(id) {
-  return axios.get(`http://localhost:9000/users?userId=${id}`)
-    .then(handleResponse)
+  return axios.get(`http://localhost:9000/users/${id}`)
     .then(userInfo => {
       if (userInfo.status === 404) {
         return null;
@@ -21,7 +27,5 @@ function getById(id) {
       console.log('info: ' + JSON.stringify(userInfo.data));
       return userInfo.data;
     })
-    .catch(error => {
-      console.log('error: ' + error);
-    });
+    .catch(error => handleResponse(error.response));
 }

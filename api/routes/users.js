@@ -2,8 +2,9 @@ const express = require('express');
 const router = express.Router();
 const bcrypt = require('bcrypt');
 const saltRounds = 15;
-const passport = require("../config/passport");
-const isAuthenticated = require("../config/middleware/isAuthenticated");
+const passport = require('../config/passport');
+const isAuthenticated = require('../config/middleware/isAuthenticated');
+const isAdmin = require('../config/middleware/isAdmin');
 const Sequelize = require('sequelize');
 
 const { User } = require('../config/database');
@@ -13,6 +14,18 @@ const { BuyOrder } = require('../config/database');
 const { SellOrder } = require('../config/database');
 const { ItemOffer } = require('../config/database');
 const { Item } = require('../config/database');
+
+//Get user list
+router.get('', isAuthenticated, isAdmin, (req, res) => {
+  User.findAll(
+    { attributes: { exclude: ['pass'] }
+    })
+    .then(users => {
+      console.log(users);
+      res.status(200).json(users);;
+    })
+    .catch(err => console.log(err));
+});
 
 //Add a user
 router.post('/add', (req, res) => {
@@ -72,6 +85,57 @@ router.get("/logout", function(req, res) {
     res.status(204).clearCookie('connect.sid');
     res.send('Logged out');
   });
+});
+
+//Get user by id
+router.get('/:userId?', isAuthenticated, (req, res) => {
+  console.log('made it here');
+  if(req.params.userId) {
+    User.findOne(
+      { where: { userId: req.params.userId },
+        attributes: { exclude: ['pass'] },
+        include: [
+          { model: Alias,
+            as: 'Aliases',
+            attributes: { exclude: ['createdAt', 'updatedAt'] }
+          },
+          { model: BuyOrder,
+            as: 'BuyOrders',
+            attributes: { exclude: ['createdAt'] },
+            include: [
+              {
+                model: Item,
+                as: 'PostedItem',
+                attributes: { exclude: ['createdAt', 'updatedAt'] }
+              }]
+          },
+          { model: SellOrder,
+            as: 'SellOrders',
+            attributes: { exclude: ['createdAt'] },
+            include: [
+              {
+                model: Item,
+                as: 'PostedItem',
+                attributes: { exclude: ['createdAt', 'updatedAt'] }
+              }]
+          }
+        ],
+        order: [
+          [ { model: Alias, as: 'Aliases' }, 'Preferred', 'DESC'],
+          [ { model: SellOrder, as: 'SellOrders' }, 'updatedAt', 'DESC'],
+          [ { model: BuyOrder, as: 'BuyOrders' }, 'updatedAt', 'DESC']
+        ]
+      })
+      .then(user => {
+        if (user === null) {
+          res.status(404);
+        }
+        res.json(user);
+      })
+      .catch(err => res.status(500).send({ error: "Error searching for user" }));
+  } else {
+    res.status(400).send({ error: 'no user provided' });
+  }
 });
 
 //Get user's aliases
@@ -140,65 +204,6 @@ router.get('/:userId?/itemoffers', (req, res) => {
     });
 });
 
-//Get user by id
-router.get('/:userId?', isAuthenticated, (req, res) => {
-  console.log('made it here');
-  if(req.query.userId) {
-    User.findOne(
-      { where: { userId: req.query.userId },
-        attributes: { exclude: ['pass'] },
-        include: [
-          { model: Alias,
-            as: 'Aliases',
-            attributes: { exclude: ['createdAt', 'updatedAt'] }
-          },
-          { model: BuyOrder,
-            as: 'BuyOrders',
-            attributes: { exclude: ['createdAt'] },
-            include: [
-              {
-                model: Item,
-                as: 'PostedItem',
-                attributes: { exclude: ['createdAt', 'updatedAt'] }
-              }]
-          },
-          { model: SellOrder,
-            as: 'SellOrders',
-            attributes: { exclude: ['createdAt'] },
-            include: [
-              {
-                model: Item,
-                as: 'PostedItem',
-                attributes: { exclude: ['createdAt', 'updatedAt'] }
-              }]
-          }
-        ],
-        order: [
-          [ { model: Alias, as: 'Aliases' }, 'Preferred', 'DESC'],
-          [ { model: SellOrder, as: 'SellOrders' }, 'updatedAt', 'DESC'],
-          [ { model: BuyOrder, as: 'BuyOrders' }, 'updatedAt', 'DESC']
-        ]
-      })
-      .then(user => {
-        if (user === null) {
-          res.status(404);
-        }
-        res.json(user);
-      })
-      .catch(err => res.status(500).send({ error: "Error searching for user" }));
-  }
-});
 
-//Get user list
-router.get('/', (req, res) => {
-  User.findAll(
-    { attributes: { exclude: ['pass'] }
-    })
-    .then(users => {
-      console.log(users);
-      res.sendStatus(200);
-    })
-    .catch(err => console.log(err));
-});
 
 module.exports = router;

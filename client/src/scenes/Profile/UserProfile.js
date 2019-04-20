@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { userService } from '../../services/export';
+import { handleResponse } from "../../helpers/handle-response";
 
 export class UserProfile extends Component {
   constructor(props) {
@@ -11,13 +12,15 @@ export class UserProfile extends Component {
 
   componentWillMount() {
     userService.getById(this.props.match.params.userId)
+      .then(handleResponse())
       .then(userInfoFromApi => {
         if (!userInfoFromApi) {
-          console.log('no info' + userInfoFromApi);
+          console.log('no info: ' + userInfoFromApi);
           this.props.history.push('/NotFound');
         }
         this.setState({user: userInfoFromApi});
       })
+      .catch(err => console.log('profile err: ' + JSON.stringify(err)));
   }
 
   render() {
