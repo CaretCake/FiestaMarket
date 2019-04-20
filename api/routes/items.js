@@ -21,7 +21,9 @@ router.get('/search', (req, res) => {
     where: { ItemName: { [Op.like]: '%' + term + '%' } },
     order: [
       ['ItemName', 'ASC']
-    ]})
+    ],
+    limit: 8
+  })
     .then(items => res.json(items))
     .catch(err => console.log(err));
 });
