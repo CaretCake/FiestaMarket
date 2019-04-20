@@ -4,6 +4,7 @@ const bcrypt = require('bcrypt');
 const saltRounds = 15;
 const passport = require("../config/passport");
 const isAuthenticated = require("../config/middleware/isAuthenticated");
+const Sequelize = require('sequelize');
 
 const { User } = require('../config/database');
 const { Alias } = require('../config/database');
@@ -22,9 +23,18 @@ router.post('/add', (req, res) => {
       email: req.body.email.toLowerCase(),
       pass: hash,
       status: 'offline'
-    }).then(function(data) {
+    })
+    .then(function(data) {
       if (data) {
-        return res.json({message: 'success'});;
+        return res.status(204).json({ message: 'success' });
+      }
+    })
+    .catch(function (error) {
+      // print the error details
+      console.log('message: ' + JSON.stringify(error.errors));
+      console.log('type: ' + JSON.stringify(error.errors[0].type));
+      if (error.errors[0].type === 'unique violation') {
+        res.status(409).json({ message: error.errors[0].message, field: error.errors[0].path });
       }
     });
   });
@@ -48,7 +58,7 @@ router.post('/login', function(req,res,next) {
         delete user.pass;
         delete user.createdAt;
         delete user.updatedAt;
-        return res.json({message: 'success', user });;
+        return res.status(200).json({message: 'success', user });;
       });
     })(req,res,next);
   }
@@ -59,8 +69,7 @@ router.get("/logout", function(req, res) {
   console.log(req.sessionID);
   req.logout();
   req.session.destroy((err) => {
-    res.status(200).clearCookie('connect.sid');
-    // Don't redirect, just print text
+    res.status(204).clearCookie('connect.sid');
     res.send('Logged out');
   });
 });
@@ -69,42 +78,66 @@ router.get("/logout", function(req, res) {
 router.get('/:userId?/aliases', (req, res) => {
   Alias.findAll({
     where: { UserUserId: req.params.userId } })
-    .then(alias => res.json(alias));
+    .then(alias => {
+      let resStatus;
+      alias !== null ? resStatus = 200 : resStatus = 404;
+      res.status(resStatus).json(alias);
+    });
 });
 
 //Get user's received reviews
 router.get('/:userId?/receivedreviews', (req, res) => {
   UserReview.findAll({
     where: { reviewedUserId: req.params.userId } })
-    .then(userReview => res.json(userReview));
+    .then(userReview => {
+      let resStatus;
+      userReview !== null ? resStatus = 200 : resStatus = 404;
+      res.status(resStatus).json(userReview);
+    });
 });
 
 //Get user's written reviews
 router.get('/:userId?/writtenreviews', (req, res) => {
   UserReview.findAll({
     where: { reviewingUserId: req.params.userId } })
-    .then(userReview => res.json(userReview));
+    .then(userReview => {
+      let resStatus;
+      userReview !== null ? resStatus = 200 : resStatus = 404;
+      res.status(resStatus).json(userReview);
+    });
 });
 
 //Get user's sell orders
 router.get('/:userId?/sellorders', (req, res) => {
   SellOrder.findAll({
     where: { PostingUserUserId: req.params.userId } })
-    .then(sellOrder => res.json(sellOrder));
+    .then(sellOrder => {
+      let resStatus;
+      sellOrder !== null ? resStatus = 200 : resStatus = 404;
+      res.status(resStatus).json(sellOrder);
+    });
 });
 
 //Get user's buy orders
 router.get('/:userId?/buyorders', (req, res) => {
   BuyOrder.findAll({
     where: { PostingUserUserId: req.params.userId } })
-    .then(buyOrder => res.json(buyOrder));
+    .then(buyOrder => {
+      let resStatus;
+      buyOrder !== null ? resStatus = 200 : resStatus = 404;
+      res.status(resStatus).json(buyOrder);
+    });
 });
 
 //Get user's item offers
 router.get('/:userId?/itemoffers', (req, res) => {
   ItemOffer.findAll({
     where: { OfferingUserUserId: req.params.userId } })
-    .then(itemOffer => res.json(itemOffer));
+    .then(itemOffer => {
+      let resStatus;
+      itemOffer !== null ? resStatus = 200 : resStatus = 404;
+      res.status(resStatus).json(itemOffer);
+    });
 });
 
 //Get user by id

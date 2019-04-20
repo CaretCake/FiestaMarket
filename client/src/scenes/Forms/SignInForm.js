@@ -12,6 +12,10 @@ export class SignInForm extends React.Component {
   constructor(props) {
     super(props);
 
+    this.state = {
+      serverValidationErrorMessage: null
+    }
+
     if (authenticationService.currentUserValue) {
       this.props.history.push('/');
     }
@@ -41,7 +45,8 @@ export class SignInForm extends React.Component {
 
   handleRegisterSubmit = (values, {
       props = this.props,
-      setSubmitting
+      setSubmitting,
+      setFieldError
     }) => {
 
     registrationService.register(values.username, values.email, values.password)
@@ -51,6 +56,7 @@ export class SignInForm extends React.Component {
           this.props.history.push('/');
         },
         error => {
+          setFieldError(error.field.toLowerCase(), error.message);
           console.log(error);
         }
       )
@@ -76,7 +82,7 @@ export class SignInForm extends React.Component {
       username: Yup.string()
         .matches(/^.[a-zA-Z0-9_]+$/, 'Only alphanumeric & underscores allowed')
         .min(5, 'Must be > 4 characters long')
-        .max(12, 'Must be < 13 characters long')
+        .max(16, 'Must be < 16 characters long')
         .lowercase()
         .required('*'),
       email: Yup.string()
@@ -85,6 +91,7 @@ export class SignInForm extends React.Component {
         .required('*'),
       password: Yup.string()
         .min(6, 'Must be > 6 characters long')
+        .max(200, 'Must be < 200 characters long')
         .required('*'),
       confirmPassword: Yup.string()
         .required('*')
@@ -157,6 +164,7 @@ export class SignInForm extends React.Component {
               render={formProps => {
                 return(
                   <Form>
+                    { this.state.serverValidationErrorMessage  && <ErrorMessage name='server'></ErrorMessage>}
                     <div class='field-container'>
                       <div className='field-label-container'>
                         <label>Username</label>
@@ -208,7 +216,7 @@ export class SignInForm extends React.Component {
                     <button
                       type='submit'
                       disabled={formProps.isSubmitting}>
-                      Sign In
+                      Register
                     </button>
                   </Form>
                 );
