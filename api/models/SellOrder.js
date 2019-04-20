@@ -73,8 +73,8 @@ module.exports = (sequelize, type) => {
           msg: 'Enhancement must be at least 0'
         },
         max: {
-          args: 12,
-          msg: 'Enhancement must be at most 12'
+          args: 20,
+          msg: 'Enhancement must be at most 20'
         }
       }
     },

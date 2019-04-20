@@ -72,14 +72,21 @@ module.exports = (sequelize, type) => {
         }
       },
       DesiredEnhancement: {
-        type: type.ENUM('N/A', '+12', '+11', '+10', '+9'),
+        type: type.INTEGER,
         allowNull: false,
         validate: {
           notNull: true,
           notEmpty: true,
-          isIn: {
-            args: [['N/A', '+12', '+11', '+10', '+9']],
-            msg: 'Desired enhancement must be N/A or +9-12'
+          isInt: {
+            msg: 'Enhancement must be greater than integer value'
+          },
+          min: {
+            args: 0,
+            msg: 'Enhancement must be at least 0'
+          },
+          max: {
+            args: 20,
+            msg: 'Enhancement must be at most 20'
           }
         }
       },
