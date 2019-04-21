@@ -63,10 +63,10 @@ export class Header extends React.Component {
     };
 
     return (
-      <div class="header-container">
-        <div class="background"/>
+      <div className="header-container">
+        <div className="background"/>
         <Link to='/' className="logo"><img src={fiestaMarketLogo} alt="Logo"/></Link>
-        <ul class="nav-list">
+        <ul className="nav-list">
           { this.isLoggedIn() ? loggedInNav() : loggedOutNav() }
         </ul>
 

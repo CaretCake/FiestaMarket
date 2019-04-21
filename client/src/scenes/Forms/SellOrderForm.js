@@ -12,7 +12,7 @@ export class SellOrderForm extends React.Component {
 
     this.state = {
       serverValidationErrorMessage: null
-    }
+    };
 
     if (!authenticationService.currentUserValue) {
       this.props.history.push('/');
@@ -130,7 +130,7 @@ export class SellOrderForm extends React.Component {
 
                     <div class='stat-field-container'>
                       {stats.map((statName) => {
-                        return <div className='field-container'>
+                        return <div className='field-container' key={statName}>
                           <div className='field-label-container'>
                             <label>{statName}</label>
                             <span><ErrorMessage name={statName}/></span>

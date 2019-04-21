@@ -40,11 +40,11 @@ export  class MainApp extends React.Component {
 
   render() {
     return (
-      <div class='main-app-container'>
-        <div class='hero-search-section flex-row-container'>
-          <div class='flex-left'/>
-          <div class='flex-center'>
-            <div class='search-container'>
+      <div className='main-app-container'>
+        <div className='hero-search-section flex-row-container'>
+          <div className='flex-left'/>
+          <div className='flex-center'>
+            <div className='search-container'>
               <form onSubmit={e => { e.preventDefault(); if (this.validResult()) { this.routeChange( '/items/' + (this.state.results[0]).ItemId); }}} >
                 <input placeholder='Search...' name='term' ref={input => this.search = input} onChange={this.handleInputChange} autoComplete="off"/>
                 <button onClick={() => { if (this.validResult()) { this.routeChange( '/items/' + (this.state.results[0]).ItemId); }}} className='search-button' type="button">Search</button>
@@ -58,7 +58,7 @@ export  class MainApp extends React.Component {
               </div>
             </div>
           </div>
-          <div class='flex-right'/>
+          <div className='flex-right'/>
         </div>
       </div>
     );

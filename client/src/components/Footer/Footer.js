@@ -16,15 +16,15 @@ export class Footer extends React.Component {
 
     return (
       <div>
-        <div class="footer-container">
-          <div class="footer-left">
-            <div class="footer-links">
+        <div className='footer-container'>
+          <div className='footer-left'>
+            <div className='footer-links'>
               <h3>Links</h3>
               <button onClick={() => this.routeChange('/contact')}>Contact Us/Report a Bug</button>
             </div>
           </div>
-          <div class="footer-right">
-            <div class="footer-disclaimer">
+          <div className='footer-right'>
+            <div className='footer-disclaimer'>
               <h4>Disclaimer</h4>
               <p>Gamigo, Fiesta Online and the logo Fiesta Online are registered trademarks. All rights are reserved
                 worldwide. This site has no official link with Gamigo or Fiesta Online. All artwork, screenshots,
