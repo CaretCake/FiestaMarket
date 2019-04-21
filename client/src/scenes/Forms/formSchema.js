@@ -61,8 +61,7 @@ export const sellOrderSchema = Yup.object().shape({
     .integer('Enhancement must be an integer value')
     .required('*'),
   end: Yup.number()
-    .min(0, 'Stat value must be at least 0')
-    .required('*'),
+    .min(0, 'Stat value must be at least 0'),
   dex: Yup.number()
     .min(0, 'Stat value must be > 0'),
   int: Yup.number()
