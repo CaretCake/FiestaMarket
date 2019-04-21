@@ -1,6 +1,6 @@
 var express = require('express');
 var router = express.Router();
-const { Item, SellOrder, BuyOrder, User } = require('../config/database');
+const { Item, ItemOffer, SellOrder, BuyOrder, User } = require('../config/database');
 const Sequelize = require('sequelize');
 const Op = Sequelize.Op;
 
@@ -36,6 +36,8 @@ router.get('/:itemId?', (req, res) => {
         include: [
           { model: BuyOrder,
             as: 'BuyOrders',
+            where: { OrderStatus: { [Op.notIn]: ['bought', 'expired'] }},
+            required: false,
             attributes: { exclude: ['createdAt'] },
             include: [
               {
@@ -46,12 +48,18 @@ router.get('/:itemId?', (req, res) => {
           },
           { model: SellOrder,
             as: 'SellOrders',
+            where: { SaleStatus: { [Op.notIn]: ['sold', 'expired'] }},
+            required: false,
             attributes: { exclude: ['createdAt'] },
             include: [
               {
                 model: User,
                 as: 'PostingUser',
                 attributes: { exclude: ['pass', 'email', 'role', 'createdAt', 'updatedAt'] }
+              },
+              {
+                model: ItemOffer,
+                as: 'Offers'
               }]
           }
         ],

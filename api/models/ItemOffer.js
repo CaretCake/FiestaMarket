@@ -22,7 +22,7 @@ module.exports = (sequelize, type) => {
           msg: 'Must be decimal value'
         },
         min: {
-          args: 0,
+          args: [0],
           msg: 'Offer amount must be greater than 0'
         }
       }

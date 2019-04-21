@@ -25,16 +25,21 @@ export class SellOrderForm extends React.Component {
     setSubmitting
   }) => {
 
-    /*orderService.postSellOrder(values.email, values.password)
+    console.log(values);
+    console.log(this.props);
+
+    let price = parseFloat(values.gemPrice + '.' + values.goldPrice);
+
+    orderService.postSellOrder(price, values.openOffers, values.server, values.enhancement, values.end, values.dex, values.int, values.str, values.spr, values.hp, values.sp, values.dmg, values.mdmg, values.def, values.mdef, values.aim, values.eva, this.props.item.ItemId, authenticationService.currentUserValue.userId)
       .then(
-        user => {
-          const { from } = this.props.location.state || { from: { pathname: "/" } };
-          this.props.history.push(from);
+        order => {
+          console.log(order);
+          history.push('/items/' + this.props.item.ItemId);
         },
         error => {
           console.log(error);
         }
-      );*/
+      );
 
     setSubmitting(false);
   };
@@ -45,7 +50,26 @@ export class SellOrderForm extends React.Component {
     return (
       <div className='form-container order-form'>
             <Formik
-              initialValues={{}}
+              initialValues={{
+                server: 'Isya',
+                openOffers: false,
+                gemPrice: 0,
+                goldPrice: 0,
+                enhancement: 0,
+                end: 0,
+                dex: 0,
+                int: 0,
+                str: 0,
+                spr: 0,
+                hp: 0,
+                sp: 0,
+                dmg: 0,
+                mdmg: 0,
+                def: 0,
+                mdef: 0,
+                aim: 0,
+                eva: 0
+              }}
               validationSchema={sellOrderSchema}
               onSubmit={this.handleSellOrderSubmit}
               render={formProps => {
@@ -79,19 +103,19 @@ export class SellOrderForm extends React.Component {
                         />
                       </div>
                     </div>
-                    <div class='price-field-container'>
+                    <div className='price-field-container'>
                       <div className='field-container'>
                         <div className='field-label-container'>
                           <label>Gems</label>
                           <span><ErrorMessage name='gemPrice'/></span>
                         </div>
-                        <div class='icon-field-container'>
+                        <div className='icon-field-container'>
                           <Field
                             type='number'
                             name='gemPrice'
                             className='number-field'
                           />
-                          <span class='gem-icon'/>
+                          <span className='gem-icon'/>
                         </div>
                       </div>
                       <div className='field-container'>
@@ -105,7 +129,7 @@ export class SellOrderForm extends React.Component {
                             name='goldPrice'
                             className='number-field'
                           />
-                          <span class='gold-icon'/>
+                          <span className='gold-icon'/>
                         </div>
                       </div>
                     </div>
@@ -129,7 +153,7 @@ export class SellOrderForm extends React.Component {
                       </div>
                     </div>
 
-                    <div class='stat-field-container'>
+                    <div className='stat-field-container'>
                       {stats.map((statName) => {
                         return <div className='field-container' key={statName}>
                           <div className='field-label-container'>

@@ -5,7 +5,6 @@ const saltRounds = 15;
 const passport = require('../config/passport');
 const isAuthenticated = require('../config/middleware/isAuthenticated');
 const isAdmin = require('../config/middleware/isAdmin');
-const Sequelize = require('sequelize');
 
 const { User } = require('../config/database');
 const { Alias } = require('../config/database');
@@ -39,7 +38,7 @@ router.post('/add', (req, res) => {
     })
     .then(function(data) {
       if (data) {
-        return res.status(204).json({ message: 'success' });
+        return res.status(201).json({ message: 'success' });
       }
     })
     .catch(function (error) {

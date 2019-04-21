@@ -1,93 +1,49 @@
-var express = require('express');
-var router = express.Router();
+const express = require('express');
+const router = express.Router();
 const { SellOrder } = require('../config/database');
+const isAuthenticated = require('../config/middleware/isAuthenticated');
 
-//Get SellOrder list
-router.get('/', (req, res) => {
-  SellOrder.findAll()
-    .then(sellOrders => {
-      console.log(sellOrders);
-      res.sendStatus(200);
-    })
-    .catch(err => console.log(err));
-});
 
 //Add a SellOrder
-router.get('/add', (req, res) => {
-  const data = {
-    Price: '',
-    OpenToOffers: '',
-    SaleStatus: '',
-    Server: '',
-    Enhancement: '',
-    End: '',
-    Dex: '',
-    Int: '',
-    Str: '',
-    Spr: '',
-    Hp: '',
-    Sp: '',
-    Dmg: '',
-    Mdmg: '',
-    Def: '',
-    Mdef: '',
-    Aim: '',
-    Eva: '',
-    ItemItemId: '',
-    UserUserId: '',
-    PostingUserUserId: '',
-    PostedItemItemId: ''
-  }
-
-  let { PriceMin,
-    PriceMax,
-    OrderStatus,
-    Server,
-    Enhancement,
-    End,
-    Dex,
-    Int,
-    Str,
-    Spr,
-    Hp,
-    Sp,
-    Dmg,
-    Mdmg,
-    Def,
-    Mdef,
-    Aim,
-    Eva,
-    ItemItemId,
-    UserUserId,
-    PostingUserUserId,
-    PostedItemItemId } = data;
+router.post('/add', isAuthenticated, (req, res) => {
 
   SellOrder.create({
-    PriceMin,
-    PriceMax,
-    OrderStatus,
-    Server,
-    Enhancement,
-    End,
-    Dex,
-    Int,
-    Str,
-    Spr,
-    Hp,
-    Sp,
-    Dmg,
-    Mdmg,
-    Def,
-    Mdef,
-    Aim,
-    Eva,
-    ItemItemId,
-    UserUserId,
-    PostingUserUserId,
-    PostedItemItemId
+    Price: req.body.price,
+    OpenToOffers: req.body.openToOffers,
+    SaleStatus: 'active',
+    Server: req.body.server,
+    Enhancement: req.body.enhancement,
+    End: req.body.end,
+    Dex: req.body.dex,
+    Int: req.body.int,
+    Str: req.body.str,
+    Spr: req.body.spr,
+    Hp: req.body.hp,
+    Sp: req.body.sp,
+    Dmg: req.body.dmg,
+    Mdmg: req.body.mdmg,
+    Def: req.body.def,
+    Mdef: req.body.mdef,
+    Aim: req.body.aim,
+    Eva: req.body.eva,
+    ItemItemId: req.body.itemId,
+    UserUserId: req.body.userId,
+    PostingUserUserId: req.body.userId,
+    PostedItemItemId: req.body.itemId
   })
-    .then(sellOrder => res.redirect('/'))
-    .catch(err => console.log(err));
+    .then(sellOrder => {
+      if (sellOrder) {
+        return res.status(201).json({ message: 'success' });
+      }
+    })
+    .catch(function (error) {
+      // print the error details
+      console.log('message: ' + JSON.stringify(error.errors));
+      console.log('type: ' + JSON.stringify(error.errors[0].type));
+      if (error.errors[0].type === 'unique violation') {
+        res.status(409).json({ message: error.errors[0].message, field: error.errors[0].path });
+      }
+    });
 });
 
 

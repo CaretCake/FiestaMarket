@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import { itemService } from '../../services/export';
+import {authenticationService, itemService} from '../../services/export';
 import { handleResponse } from "../../helpers/handle-response";
 import {SellOrderForm} from "../Forms/SellOrderForm";
 

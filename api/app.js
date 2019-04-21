@@ -50,10 +50,7 @@ const itemRouter = require('./routes/items');
 const sellOrderRouter = require('./routes/sellOrders');
 const userRouter = require('./routes/users');
 
-const testAPIRouter = require('./routes/testAPI');
 
-
-app.use('/testAPI', testAPIRouter);
 app.use('/aliases', aliasRouter);
 app.use('/buyorders', buyOrderRouter);
 app.use('/items', itemRouter);

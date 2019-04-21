@@ -22,7 +22,7 @@ module.exports = (sequelize, type) => {
           msg: 'Must be decimal value'
         },
         min: {
-          args: 0,
+          args: [0],
           msg: 'Price must be greater than 0'
         }
       }
@@ -69,11 +69,11 @@ module.exports = (sequelize, type) => {
           msg: 'Enhancement must be greater than integer value'
         },
         min: {
-          args: 0,
+          args: [0],
           msg: 'Enhancement must be at least 0'
         },
         max: {
-          args: 20,
+          args: [20],
           msg: 'Enhancement must be at most 20'
         }
       }
@@ -88,7 +88,7 @@ module.exports = (sequelize, type) => {
           msg: 'Stat must be integer value'
         },
         min: {
-          args: 0,
+          args: [0],
           msg: 'Stat must be at least 0'
         }
       }
@@ -103,7 +103,7 @@ module.exports = (sequelize, type) => {
           msg: 'Stat must be integer value'
         },
         min: {
-          args: 0,
+          args: [0],
           msg: 'Stat must be at least 0'
         }
       }
@@ -127,7 +127,7 @@ module.exports = (sequelize, type) => {
           msg: 'Stat must be integer value'
         },
         min: {
-          args: 0,
+          args: [0],
           msg: 'Stat must be at least 0'
         }
       }
@@ -142,7 +142,7 @@ module.exports = (sequelize, type) => {
           msg: 'Stat must be integer value'
         },
         min: {
-          args: 0,
+          args: [0],
           msg: 'Stat must be at least 0'
         }
       }
@@ -157,7 +157,7 @@ module.exports = (sequelize, type) => {
           msg: 'Stat must be integer value'
         },
         min: {
-          args: 0,
+          args: [0],
           msg: 'Stat must be at least 0'
         }
       }
@@ -172,7 +172,7 @@ module.exports = (sequelize, type) => {
           msg: 'Stat must be integer value'
         },
         min: {
-          args: 0,
+          args: [0],
           msg: 'Stat must be at least 0'
         }
       }
@@ -187,7 +187,7 @@ module.exports = (sequelize, type) => {
           msg: 'Stat must be integer value'
         },
         min: {
-          args: 0,
+          args: [0],
           msg: 'Stat must be at least 0'
         }
       }
@@ -202,7 +202,7 @@ module.exports = (sequelize, type) => {
           msg: 'Stat must be integer value'
         },
         min: {
-          args: 0,
+          args: [0],
           msg: 'Stat must be at least 0'
         }
       }
@@ -217,7 +217,7 @@ module.exports = (sequelize, type) => {
           msg: 'Stat must be integer value'
         },
         min: {
-          args: 0,
+          args: [0],
           msg: 'Stat must be at least 0'
         }
       }
@@ -232,7 +232,7 @@ module.exports = (sequelize, type) => {
           msg: 'Stat must be integer value'
         },
         min: {
-          args: 0,
+          args: [0],
           msg: 'Stat must be at least 0'
         }
       }
@@ -247,7 +247,7 @@ module.exports = (sequelize, type) => {
           msg: 'Stat must be integer value'
         },
         min: {
-          args: 0,
+          args: [0],
           msg: 'Stat must be at least 0'
         }
       }
@@ -262,19 +262,10 @@ module.exports = (sequelize, type) => {
           msg: 'Stat must be integer value'
         },
         min: {
-          args: 0,
+          args: [0],
           msg: 'Stat must be at least 0'
         }
       }
-    },
-    LastUpdated: {
-      type: type.DATE,
-      allowNull: false,
-      validate: {
-        notNull: true,
-        notEmpty: true,
-        isDate: true
-      }
     }
   })
-}
+};

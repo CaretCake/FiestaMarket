@@ -46,12 +46,12 @@ export const buyOrderSchema = Yup.object().shape({
 
 export const sellOrderSchema = Yup.object().shape({
   gemPrice: Yup.number()
-    .min(1, 'Price must be at least 1')
+    .min(0, '*')
     .positive('Price must be > 0')
     .integer('Price must be an integer value')
     .required('*'),
   goldPrice: Yup.number()
-    .min(1, 'Price must be at least 1')
+    .min(0, '*')
     .positive('Price must be > 0')
     .integer('Price must be an integer value')
     .required('*'),

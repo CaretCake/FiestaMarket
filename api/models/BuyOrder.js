@@ -22,7 +22,7 @@ module.exports = (sequelize, type) => {
             msg: 'Must be decimal value'
           },
           min: {
-            args: 0,
+            args: [0],
             msg: 'Min price must be greater than 0'
           }
         }
@@ -37,7 +37,7 @@ module.exports = (sequelize, type) => {
             msg: 'Must be decimal value'
           },
           min: {
-            args: 0,
+            args: [0],
             msg: 'Max price must be greater than 0'
           },
           isGreaterThanOtherField(value) {
@@ -81,11 +81,11 @@ module.exports = (sequelize, type) => {
             msg: 'Enhancement must be greater than integer value'
           },
           min: {
-            args: 0,
+            args: [0],
             msg: 'Enhancement must be at least 0'
           },
           max: {
-            args: 20,
+            args: [20],
             msg: 'Enhancement must be at most 20'
           }
         }
@@ -244,15 +244,6 @@ module.exports = (sequelize, type) => {
             args: [['N/A', 'godly', 'high', 'medium']],
             msg: 'Desired stat must be N/A, godly, high, or medium'
           }
-        }
-      },
-      LastUpdated: {
-        type: type.DATE,
-        allowNull: false,
-        validate: {
-          notNull: true,
-          notEmpty: true,
-          isDate: true
         }
       }
     })
