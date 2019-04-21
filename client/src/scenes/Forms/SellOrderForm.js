@@ -3,6 +3,7 @@ import { ErrorMessage, Field, Form, Formik } from "formik";
 import { orderService, authenticationService } from '../../services/export';
 import { sellOrderSchema } from "./formSchema";
 import { Stats} from "../../helpers/export";
+import history from "../../helpers/history";
 
 
 export class SellOrderForm extends React.Component {
@@ -15,7 +16,7 @@ export class SellOrderForm extends React.Component {
     };
 
     if (!authenticationService.currentUserValue) {
-      this.props.history.push('/');
+      history.push('/login');
     }
   }
 

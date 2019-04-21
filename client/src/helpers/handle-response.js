@@ -1,5 +1,5 @@
 import { authenticationService } from '../services/export';
-import history from './history'
+import history from './history';
 
 export function handleResponse(response) {
   console.log('res in handle: ' + JSON.stringify(response));

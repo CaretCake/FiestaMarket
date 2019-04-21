@@ -27,6 +27,11 @@ export  class MainApp extends React.Component {
         this.setState({results: []});
       }
     });
+  };
+
+  handleItemClick(itemId, itemName) {
+    this.setState({query: itemName});
+    this.routeChange( '/items/' + itemId);
   }
 
   routeChange(path) {
@@ -46,13 +51,13 @@ export  class MainApp extends React.Component {
           <div className='flex-center'>
             <div className='search-container'>
               <form onSubmit={e => { e.preventDefault(); if (this.validResult()) { this.routeChange( '/items/' + (this.state.results[0]).ItemId); }}} >
-                <input placeholder='Search...' name='term' ref={input => this.search = input} onChange={this.handleInputChange} autoComplete="off"/>
+                <input value={this.state.query} placeholder='Search...' name='term' ref={input => this.search = input} onChange={this.handleInputChange} autoComplete="off"/>
                 <button onClick={() => { if (this.validResult()) { this.routeChange( '/items/' + (this.state.results[0]).ItemId); }}} className='search-button' type="button">Search</button>
               </form>
               <div className='search-dropdown'>
                 <ul>
                   {this.state.results.map(item => (
-                    <li key={item.ItemId} unselectable="on" class="unselectable">{item.ItemName}</li>
+                    <li key={item.ItemId} unselectable="on" class="unselectable" onClick={() => { this.handleItemClick(item.ItemId, item.ItemName)}}>{item.ItemName}</li>
                   ))}
                 </ul>
               </div>

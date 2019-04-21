@@ -85,14 +85,18 @@ export class Item extends Component {
             { this.state.orderFormVisibility && < SellOrderForm item={this.state.item} /> }
           </div>
           <div className='orders-section'>
-            <h3>Want to Buy</h3>
-            <ul>
-              { buyOrderArray }
-            </ul>
-            <h3>Want to Sell</h3>
-            <ul>
-              { sellOrderArray }
-            </ul>
+            <div>
+              <h3>Want to Buy</h3>
+              <ul>
+                { buyOrderArray }
+              </ul>
+            </div>
+            <div>
+              <h3>Want to Sell</h3>
+              <ul>
+                { sellOrderArray }
+              </ul>
+            </div>
           </div>
         </div>
         <div className='flex-right'/>
