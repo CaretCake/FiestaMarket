@@ -8,7 +8,7 @@ export class Item extends Component {
     super(props);
     this.state = {
       item: {},
-      orderFormVisbility: false
+      orderFormVisibility: false
     };
   }
 
@@ -35,7 +35,7 @@ export class Item extends Component {
 
   toggleOrderForm() {
     this.setState({
-      orderFormVisbility: !this.state.orderFormVisbility
+      orderFormVisibility: !this.state.orderFormVisibility
     })
   }
 
@@ -50,11 +50,11 @@ export class Item extends Component {
     });*/
 
     return (
-      <div class='item-view flex-row-container'>
-        <div class='flex-left'/>
-        <div calss='flex-center'>
-          <div class='item-info-section'>
-            <h1 class={ this.state.item.ItemRarity + '-item-rarity' }>{ this.state.item.ItemName }</h1>
+      <div className='item-view flex-row-container'>
+        <div className='flex-left'/>
+        <div className='flex-center'>
+          <div className='item-info-section'>
+            <h1 className={ this.state.item.ItemRarity + '-item-rarity' }>{ this.state.item.ItemName }</h1>
             <h4>Level { this.state.item.Level }</h4>
             { this.state.item.TwoSetEffect && <ul>
               { this.state.item.TwoSetEffect && <li><span>Two Set Effect</span> { this.state.item.TwoSetEffect }</li> }
@@ -64,12 +64,12 @@ export class Item extends Component {
             </ul> }
             <p>Type: { this.state.item.Type }</p>
             <p>Class: { this.state.item.Class }</p>
-          </div>
-          <div class='form-section'>
             <button onClick={this.toggleOrderForm.bind(this)}>Sell Item</button>
-            { this.state.orderFormVisbility && < SellOrderForm item={this.state.item} /> }
           </div>
-          <div class='orders-section'>
+          <div className='form-section'>
+            { this.state.orderFormVisibility && < SellOrderForm item={this.state.item} /> }
+          </div>
+          <div className='orders-section'>
 
           </div>
         </div>
