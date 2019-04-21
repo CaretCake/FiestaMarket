@@ -13,7 +13,7 @@ export class SignInForm extends React.Component {
 
     this.state = {
       serverValidationErrorMessage: null
-    }
+    };
 
     if (authenticationService.currentUserValue) {
       this.props.history.push('/');

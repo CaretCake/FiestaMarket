@@ -16,7 +16,7 @@ export class UserProfile extends Component {
       .then(userInfoFromApi => {
         if (!userInfoFromApi) {
           console.log('no info: ' + userInfoFromApi);
-          this.props.history.push('/NotFound');
+          this.props.history.push('/404/Error');
         }
         this.setState({user: userInfoFromApi});
       })
@@ -29,19 +29,17 @@ export class UserProfile extends Component {
 
     let aliasesArray = this.state.user.Aliases.map((alias) => {
       return (
-        <li> { alias.AliasName } </li>
+        <li key={ alias.id }> { alias.AliasName } </li>
       );
     });
-
     let buyOrderArray = this.state.user.BuyOrders.map((buyOrder) => {
       return (
-        <li> { buyOrder.PostedItem.ItemName } </li>
+        <li key={ buyOrder.BuyOrderId }> { buyOrder.PostedItem.ItemName } </li>
       );
     });
-
     let sellOrderArray = this.state.user.SellOrders.map((sellOrder) => {
       return (
-        <li> { sellOrder.PostedItem.ItemName } </li>
+        <li key={ sellOrder.SellOrderId }> { sellOrder.PostedItem.ItemName } </li>
       );
     });
 

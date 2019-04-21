@@ -1,35 +1,39 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import {
-  BrowserRouter as Router,
+  Router,
   Route,
   Switch
 } from 'react-router-dom';
-import './assets/styles/index.scss';
-import App from './App';
+import axios from 'axios';
+import * as serviceWorker from './serviceWorker';
+import history from './helpers/history';
 import { Role } from './helpers/export';
 import { Header, Footer, PrivateRoute } from './components/export';
-import { NotFoundError, SignInForm, ContactForm, UserProfile, AdminPage } from './scenes/export';
-import * as serviceWorker from './serviceWorker';
-import axios from 'axios';
+import {NotFoundError, MainApp, SignInForm, ContactForm, UserProfile, AdminPage, SellOrderForm, Item } from './scenes/export';
+import './assets/styles/index.scss';
 
-axios.defaults.withCredentials = true
+axios.defaults.withCredentials = true;
 
 const routing = (
-  <Router>
+  <Router history={history}>
     <div>
-      <Route path="/" component={Header} />
+      <Route path='/' component={Header} />
 
       <Switch>
-        <Route exact path="/" component={App} />
-        <Route path="/profile/:userId" component={UserProfile} />
-        <Route path="/login" component={SignInForm} />
-        <Route path="/contact" component={ContactForm} />
-        <PrivateRoute path="/admin" roles={[Role.Admin]} component={AdminPage} />
+
+        <Route exact path={['/', '/items/:itemId']} component={MainApp} />
+        <PrivateRoute path='/admin' roles={[Role.Admin]} component={AdminPage} />
+        <Route path='/contact' component={ContactForm} />
+        <Route path='/login' component={SignInForm} />
+        <Route path='/order' component={SellOrderForm} />
+        <Route path='/profile/:userId' component={UserProfile} />
         <Route path='*' exact={true} component={NotFoundError} />
       </Switch>
 
-      <Route path="/" component={Footer} />
+      <Route path='/items/:itemId' component={Item} />
+
+      <Route path='/' component={Footer} />
     </div>
   </Router>
 )

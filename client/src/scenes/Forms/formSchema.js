@@ -39,3 +39,52 @@ export const contactSchema = Yup.object().shape({
     .max(250, '250 character limit hit')
     .required('*')
 });
+
+export const buyOrderSchema = Yup.object().shape({
+
+});
+
+export const sellOrderSchema = Yup.object().shape({
+  gemPrice: Yup.number()
+    .min(1, 'Price must be at least 1')
+    .positive('Price must be > 0')
+    .integer('Price must be an integer value')
+    .required('*'),
+  goldPrice: Yup.number()
+    .min(1, 'Price must be at least 1')
+    .positive('Price must be > 0')
+    .integer('Price must be an integer value')
+    .required('*'),
+  enhancement: Yup.number()
+    .min(0, 'Enhancement must be > 0')
+    .max(20, 'Enhancement can be <= 20')
+    .integer('Enhancement must be an integer value')
+    .required('*'),
+  end: Yup.number()
+    .min(0, 'Stat value must be at least 0')
+    .required('*'),
+  dex: Yup.number()
+    .min(0, 'Stat value must be > 0'),
+  int: Yup.number()
+    .min(0, 'Stat value must be > 0'),
+  str: Yup.number()
+    .min(0, 'Stat value must be > 0'),
+  spr: Yup.number()
+    .min(0, 'Stat value must be > 0'),
+  hp: Yup.number()
+    .min(0, 'Stat value must be > 0'),
+  sp: Yup.number()
+    .min(0, 'Stat value must be > 0'),
+  dmg: Yup.number()
+    .min(0, 'Stat value must be > 0'),
+  mdmg: Yup.number()
+    .min(0, 'Stat value must be > 0'),
+  def: Yup.number()
+    .min(0, 'Stat value must be > 0'),
+  mdef: Yup.number()
+    .min(0, 'Stat value must be > 0'),
+  aim: Yup.number()
+    .min(0, 'Stat value must be > 0'),
+  eva: Yup.number()
+    .min(0, 'Stat value must be > 0'),
+});

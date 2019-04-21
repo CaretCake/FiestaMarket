@@ -1,6 +1,3 @@
-.content {
-  height: 700px;
-}
 .hero-search-section {
   background-image: url('../images/Urg2.png');
   background-clip: border-box;
@@ -10,10 +7,6 @@
   background-blend-mode: multiply;
   background-size: cover;
   height: 550px;
-
-  display: flex;
-  flex-direction: row;
-  justify-content: space-evenly;
 
   .flex-center {
     display: flex;

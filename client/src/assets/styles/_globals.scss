@@ -44,3 +44,31 @@ body #root > div{
   -ms-user-select: none; /* Internet Explorer/Edge */
   user-select: none; /* Non-prefixed version, currently supported by Chrome and Opera */
 }
+
+.white-item-rarity {
+  color: $white-itemrarity;
+}
+.green-item-rarity {
+  color: $green-itemrarity;
+}
+.blue-item-rarity {
+  color: $blue-itemrarity;
+}
+.setblue-item-rarity {
+  color: $setblue-itemrarity;
+}
+.yellow-item-rarity {
+  color: $yellow-itemrarity;
+}
+.orange-item-rarity {
+  color: $orange-itemrarity;
+}
+.pink-item-rarity {
+  color: $pink-itemrarity;
+}
+
+.flex-row-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+}

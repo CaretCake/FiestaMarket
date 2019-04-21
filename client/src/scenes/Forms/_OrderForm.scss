@@ -1,0 +1,72 @@
+.order-form {
+  padding: 50px 0;
+
+  .checkbox-field-container {
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: flex-end;
+    align-items: center;
+    width: 100%;
+
+    .checkbox {
+      width: 20px;
+      height: 20px;
+    }
+
+    .field-label-container {
+      margin: 0;
+    }
+  }
+
+  .field-container {
+    .icon-field-container {
+      display: flex;
+      flex-direction: row-reverse;
+      justify-content: flex-end;
+
+      span  {
+        display: flex;
+        align-self: center;
+        width: 18px;
+        height: 18px;
+        background-repeat: no-repeat;
+        background-size: cover;
+        margin: 0 5px 0 0;
+      }
+
+      .gem-icon {
+        background-image: url('../images/Gem.png');
+      }
+      .gold-icon {
+        background-image: url('../images/Gold.png');
+      }
+    }
+
+    .number-field {
+      width: 80px;
+    }
+  }
+
+  .price-field-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+
+    :first-child {
+      margin-right: 15px;
+    }
+  }
+
+  .stat-field-container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    max-width: 250px;
+    & > div {
+      flex: 0 50%;
+    }
+    .field-label-container {
+      font-size:smaller;
+    }
+  }
+}

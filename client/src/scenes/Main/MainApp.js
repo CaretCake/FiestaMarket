@@ -41,7 +41,7 @@ export  class MainApp extends React.Component {
   render() {
     return (
       <div class='main-app-container'>
-        <div class='hero-search-section'>
+        <div class='hero-search-section flex-row-container'>
           <div class='flex-left'/>
           <div class='flex-center'>
             <div class='search-container'>
@@ -59,11 +59,6 @@ export  class MainApp extends React.Component {
             </div>
           </div>
           <div class='flex-right'/>
-        </div>
-        <div class='content'>
-          <ul>
-
-          </ul>
         </div>
       </div>
     );

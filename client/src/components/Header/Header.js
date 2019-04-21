@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 import fiestaMarketLogo from './fiesta-market-logo.png';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSignOutAlt, faEnvelope } from '@fortawesome/free-solid-svg-icons';
-import "react-tabs/style/react-tabs.css";
 import { authenticationService } from '../../services/export';
 import { Role } from "../../helpers/export";
 
