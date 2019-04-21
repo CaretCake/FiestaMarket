@@ -16,11 +16,11 @@ export class AdminPage extends React.Component {
       .then(handleResponse())
       .then(userListFromApi => {
         if (!userListFromApi) {
-          console.log('that is a problem');
+          //console.log('that is a problem');
         }
         this.setState({userList: userListFromApi});
       })
-      .catch(err => console.log('profile err: ' + JSON.stringify(err)));
+      .catch(err => {}/*console.log('profile err: ' + JSON.stringify(err))*/);
   }
 
   render() {

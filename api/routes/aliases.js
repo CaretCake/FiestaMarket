@@ -22,7 +22,7 @@ router.get('/add', (req, res) => {
     UserUserId
   })
     .then(alias => res.redirect('/'))
-    .catch(err => console.log(err));
+    .catch(err => {});
 });
 
 module.exports = router;

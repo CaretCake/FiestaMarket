@@ -38,8 +38,8 @@ router.post('/add', isAuthenticated, (req, res) => {
     })
     .catch(function (error) {
       // print the error details
-      console.log('message: ' + JSON.stringify(error.errors));
-      console.log('type: ' + JSON.stringify(error.errors[0].type));
+      //console.log('message: ' + JSON.stringify(error.errors));
+      //console.log('type: ' + JSON.stringify(error.errors[0].type));
       if (error.errors[0].type === 'unique violation') {
         res.status(409).json({ message: error.errors[0].message, field: error.errors[0].path });
       }

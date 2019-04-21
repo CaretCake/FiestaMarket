@@ -32,7 +32,7 @@ export class SignInForm extends React.Component {
           this.props.history.push(from);
         },
         error => {
-          console.log(error);
+          //console.log(error);
         }
       );
 
@@ -52,7 +52,7 @@ export class SignInForm extends React.Component {
         },
         error => {
           setFieldError(error.field.toLowerCase(), error.message);
-          console.log(error);
+          //console.log(error);
         }
       );
 

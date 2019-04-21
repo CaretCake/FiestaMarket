@@ -12,7 +12,7 @@ function getAll() {
       if (users.status === 404) {
         return null;
       }
-      console.log('info: ' + JSON.stringify(users.data));
+      //console.log('info: ' + JSON.stringify(users.data));
       return users.data;
     })
     .catch(error => handleResponse(error.response));
@@ -24,7 +24,7 @@ function getById(id) {
       if (userInfo.status === 404) {
         return null;
       }
-      console.log('info: ' + JSON.stringify(userInfo.data));
+      //console.log('info: ' + JSON.stringify(userInfo.data));
       return userInfo.data;
     })
     .catch(error => handleResponse(error.response));

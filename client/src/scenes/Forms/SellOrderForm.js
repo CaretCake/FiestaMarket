@@ -25,19 +25,16 @@ export class SellOrderForm extends React.Component {
     setSubmitting
   }) => {
 
-    console.log(values);
-    console.log(this.props);
-
     let price = parseFloat(values.gemPrice + '.' + values.goldPrice);
 
     orderService.postSellOrder(price, values.openOffers, values.server, values.enhancement, values.end, values.dex, values.int, values.str, values.spr, values.hp, values.sp, values.dmg, values.mdmg, values.def, values.mdef, values.aim, values.eva, this.props.item.ItemId, authenticationService.currentUserValue.userId)
       .then(
         order => {
-          console.log(order);
+          //console.log(order);
           history.push('/items/' + this.props.item.ItemId);
         },
         error => {
-          console.log(error);
+          //console.log(error);
         }
       );
 

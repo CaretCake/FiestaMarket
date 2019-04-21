@@ -12,11 +12,11 @@ function getByFilters(query) {
   return axios.get(`http://localhost:9000/items/search?&term=${query}`)
     .then(handleResponse)
     .then(data => {
-      console.log('data:' + data);
+      //console.log('data:' + data);
       return data;
     })
     .catch(error => {
-      console.log('error: ' + error);
+      //console.log('error: ' + error);
     });
 }
 
@@ -27,7 +27,7 @@ function getById(query) {
       return data;
     })
     .catch(error => {
-      console.log('error: ' + error);
+      //console.log('error: ' + error);
     });
 }
 
@@ -38,7 +38,7 @@ function getSellOrders(query) {
       return data;
     })
     .catch(error => {
-      console.log('error: ' + error);
+      //console.log('error: ' + error);
     });
 }
 

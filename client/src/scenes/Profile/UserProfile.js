@@ -15,12 +15,11 @@ export class UserProfile extends Component {
       .then(handleResponse())
       .then(userInfoFromApi => {
         if (!userInfoFromApi) {
-          console.log('no info: ' + userInfoFromApi);
           this.props.history.push('/404/Error');
         }
         this.setState({user: userInfoFromApi});
       })
-      .catch(err => console.log('profile err: ' + JSON.stringify(err)));
+      .catch(err => {}/*console.log('profile err: ' + JSON.stringify(err))*/);
   }
 
   render() {

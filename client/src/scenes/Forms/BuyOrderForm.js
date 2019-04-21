@@ -33,7 +33,7 @@ export class BuyOrderForm extends React.Component {
         },
         error => {
           setFieldError(error.field.toLowerCase(), error.message);
-          console.log(error);
+          //console.log(error);
         }
       );
 

@@ -18,7 +18,7 @@ router.get('/add', (req, res) => {
     reviewingUserId
   })
     .then(userReview => res.redirect('/'))
-    .catch(err => console.log(err));
+    .catch(err => {});
 });
 
 

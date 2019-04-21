@@ -2,7 +2,7 @@ import { authenticationService } from '../services/export';
 import history from './history';
 
 export function handleResponse(response) {
-  console.log('res in handle: ' + JSON.stringify(response));
+  //console.log('res in handle: ' + JSON.stringify(response));
   if (response) {
     if (response.statusText !== 'OK') {
       if (response.status === 401 || response.status === 403) {
@@ -15,7 +15,6 @@ export function handleResponse(response) {
       return Promise.reject(error);
     }
 
-    console.log("returning response");
     return response;
   }
 }

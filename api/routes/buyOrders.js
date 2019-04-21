@@ -6,10 +6,9 @@ const { BuyOrder } = require('../config/database');
 router.get('/', (req, res) => {
   BuyOrder.findAll()
     .then(buyOrders => {
-      console.log(buyOrders);
       res.sendStatus(200);
     })
-    .catch(err => console.log(err));
+    .catch(err => {});
 });
 
 //Add a BuyOrder
@@ -87,7 +86,7 @@ router.get('/add', (req, res) => {
     UserUserId
   })
     .then(buyOrder => res.redirect('/'))
-    .catch(err => console.log(err));
+    .catch(err => {});
 });
 
 

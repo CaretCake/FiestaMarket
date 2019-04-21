@@ -15,7 +15,7 @@ passport.use('local', new LocalStrategy(
     }).then(function(dbUser) {
       // If there's no user with the given username
       if (!dbUser) {
-        console.log('login failed for user ' + username.toLowerCase());
+        //console.log('login failed for user ' + username.toLowerCase());
         return done(null, false, {
           message: "Incorrect username or password."
         });
@@ -24,11 +24,11 @@ passport.use('local', new LocalStrategy(
       else {
         bcrypt.compare(password, dbUser.pass, function (err, result) {
           if (result == true) {
-            console.log('login success for user ' + username.toLowerCase());
+            //console.log('login success for user ' + username.toLowerCase());
             // If none of the above, return the user
             return done(null, dbUser);
           } else {
-            console.log('login failed for user ' + username.toLowerCase());
+            //console.log('login failed for user ' + username.toLowerCase());
             return done(null, false, {
               message: "Incorrect username or password."
             });
@@ -43,19 +43,19 @@ passport.use('local', new LocalStrategy(
 // In order to help keep authentication state across HTTP requests,
 // Sequelize needs to serialize and deserialize the user
 passport.serializeUser(function(user, done) {
-  console.log('serializeUser called on: ' + JSON.stringify(user));
+  //console.log('serializeUser called on: ' + JSON.stringify(user));
   done(null, user.userId);
 });
 
 passport.deserializeUser(function(id, done) {
-  console.log('deserializeUser called on: ' + id);
+  //console.log('deserializeUser called on: ' + id);
 
   User.findByPk(id)
     .then(user => {
-      console.log('deserializing ' + user);
+      //console.log('deserializing ' + user);
       done(null, user);
     })
-    .catch(err => console.log('error deserializing user'));
+    .catch(err => {}/*console.log('error deserializing user')*/);
 });
 
 module.exports = passport;

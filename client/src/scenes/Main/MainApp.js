@@ -35,7 +35,6 @@ export  class MainApp extends React.Component {
   }
 
   routeChange(path) {
-    console.log(JSON.stringify(path));
     this.props.history.push(path);
   }
 
