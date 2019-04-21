@@ -40,7 +40,7 @@ export class SellOrderForm extends React.Component {
 
   render() {
     let stats = this.props.item.StatType === 'normal' ? Stats.normalStats : Stats.prestigeStats;
-    console.log('stats: ' + stats);
+
     return (
       <div className='form-container order-form'>
             <Formik

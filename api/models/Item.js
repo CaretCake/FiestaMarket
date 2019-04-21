@@ -38,7 +38,7 @@ module.exports = (sequelize, type) => {
       }
     },
     Class: {
-      type: ENUM('fighter', 'knight', 'gladiator', 'cleric', 'holyknight', 'guardian', 'mage', 'wizard', 'warlock', 'archer', 'ranger', 'sharpshooter', 'trickster', 'reaper', 'spectre', 'crusader', 'templar', 'fighter and cleric', 'guardian and holyknight', 'gladiator and knight', 'all')
+      type: type.ENUM('fighter', 'knight', 'gladiator', 'cleric', 'holyknight', 'guardian', 'mage', 'wizard', 'warlock', 'archer', 'ranger', 'sharpshooter', 'trickster', 'reaper', 'spectre', 'crusader', 'templar', 'fighter and cleric', 'guardian and holyknight', 'gladiator and knight', 'all'),
       allowNull: false,
       validate: {
         notNull: true,

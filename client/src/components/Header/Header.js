@@ -59,7 +59,7 @@ export class Header extends React.Component {
       </React.Fragment>
     };
     const loggedOutNav = () => {
-      return <li><button onClick={() => this.routeChange('login')} className="nav">Sign In</button></li>;
+      return <li><button onClick={() => this.routeChange('/login')} className="nav">Sign In</button></li>;
     };
 
     return (

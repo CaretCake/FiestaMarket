@@ -52,7 +52,7 @@ export  class MainApp extends React.Component {
               <div className='search-dropdown'>
                 <ul>
                   {this.state.results.map(item => (
-                    <li key={item.itemId} unselectable="on" class="unselectable">{item.ItemName}</li>
+                    <li key={item.ItemId} unselectable="on" class="unselectable">{item.ItemName}</li>
                   ))}
                 </ul>
               </div>

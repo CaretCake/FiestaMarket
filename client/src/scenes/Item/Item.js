@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import { itemService } from '../../services/export';
 import { handleResponse } from "../../helpers/handle-response";
 import {SellOrderForm} from "../Forms/SellOrderForm";
@@ -40,14 +41,28 @@ export class Item extends Component {
   }
 
   render() {
-    if(this.state.item === {})
+    if(this.state.item === {}) {
       return null;
+    }
 
-    /*let aliasesArray = this.state.item.Aliases.map((alias) => {
-      return (
-        <li key={  }> { alias.AliasName } </li>
-      );
-    });*/
+    console.log(JSON.stringify(this.state.item));
+
+    let buyOrderArray = [];
+    let sellOrderArray = [];
+    if (this.state.item.BuyOrders) {
+      buyOrderArray = this.state.item.BuyOrders.map((buyOrder) => {
+        return (
+          <li key={buyOrder.BuyOrderId}> {this.state.item.ItemName} from {buyOrder.PostingUser.userName} </li>
+        );
+      });
+    }
+    if (this.state.item.SellOrders) {
+      sellOrderArray = this.state.item.SellOrders.map((sellOrder) => {
+        return (
+          <li key={sellOrder.SellOrderId}> {this.state.item.ItemName} - <Link to={'/profile/' + sellOrder.PostingUser.userId}>{sellOrder.PostingUser.userName}</Link> </li>
+        );
+      });
+    }
 
     return (
       <div className='item-view flex-row-container'>
@@ -70,7 +85,14 @@ export class Item extends Component {
             { this.state.orderFormVisibility && < SellOrderForm item={this.state.item} /> }
           </div>
           <div className='orders-section'>
-
+            <h3>Want to Buy</h3>
+            <ul>
+              { buyOrderArray }
+            </ul>
+            <h3>Want to Sell</h3>
+            <ul>
+              { sellOrderArray }
+            </ul>
           </div>
         </div>
         <div className='flex-right'/>

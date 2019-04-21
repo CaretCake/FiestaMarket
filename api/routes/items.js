@@ -1,6 +1,6 @@
 var express = require('express');
 var router = express.Router();
-const { Item, SellOrder } = require('../config/database');
+const { Item, SellOrder, BuyOrder, User } = require('../config/database');
 const Sequelize = require('sequelize');
 const Op = Sequelize.Op;
 
@@ -32,7 +32,33 @@ router.get('/search', (req, res) => {
 router.get('/:itemId?', (req, res) => {
   if(req.params.itemId) {
     Item.findOne(
-      { where: { itemId: req.params.itemId }
+      { where: { ItemId: req.params.itemId },
+        include: [
+          { model: BuyOrder,
+            as: 'BuyOrders',
+            attributes: { exclude: ['createdAt'] },
+            include: [
+              {
+                model: User,
+                as: 'PostingUser',
+                attributes: { exclude: ['createdAt', 'updatedAt'] }
+              }]
+          },
+          { model: SellOrder,
+            as: 'SellOrders',
+            attributes: { exclude: ['createdAt'] },
+            include: [
+              {
+                model: User,
+                as: 'PostingUser',
+                attributes: { exclude: ['pass', 'email', 'role', 'createdAt', 'updatedAt'] }
+              }]
+          }
+        ],
+        order: [
+          [ { model: SellOrder, as: 'SellOrders' }, 'updatedAt', 'DESC'],
+          [ { model: BuyOrder, as: 'BuyOrders' }, 'updatedAt', 'DESC']
+        ]
     }).then(item => {
       let resStatus;
       console.log(item);

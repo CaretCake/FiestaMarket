@@ -1,4 +1,4 @@
-import { authHeader, handleResponse } from '../helpers/export';
+import { handleResponse } from '../helpers/export';
 import axios from "axios";
 
 export const itemService = {
@@ -43,12 +43,12 @@ function getSellOrders(query) {
 }
 
 function getBuyOrders(query) {
-  /*return axios.get(`http://localhost:9000/items/${query}/buyOrders`)
+  return axios.get(`http://localhost:9000/items/${query}/buyOrders`)
     .then(handleResponse)
     .then(data => {
       return data;
     })
     .catch(error => {
       console.log('error: ' + error);
-    });*/
+    });
 }
