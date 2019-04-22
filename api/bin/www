@@ -4,22 +4,34 @@
  * Module dependencies.
  */
 
-var app = require('../app');
-var debug = require('debug')('api:server');
-var http = require('http');
+const app = require('../app');
+const debug = require('debug')('api:server');
+const fs = require('fs');
+const http = require('http');
+const https = require('https');
+const express = require('express');
 
 /**
  * Get port from environment and store in Express.
  */
 
-var port = normalizePort(process.env.PORT || '9000');
+let port = normalizePort(process.env.PORT || '9000');
 app.set('port', port);
 
+// Certificate
+//const privateKey = fs.readFileSync('/etc/lego/certificates/api.fiestamarket.app.key', 'utf8');
+//const certificate = fs.readFileSync('/etc/lego/certificates/api.fiestamarket.app.crt', 'utf8');
+
+/*const credentials = {
+  key: privateKey,
+  cert: certificate
+};*/
+//const server = https.createServer(credentials, app);
 /**
  * Create HTTP server.
  */
 
-var server = http.createServer(app);
+let server = http.createServer(app);
 
 /**
  * Listen on provided port, on all network interfaces.

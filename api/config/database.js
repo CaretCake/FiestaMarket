@@ -1,12 +1,12 @@
 const Sequelize = require('sequelize');
 
-const aliasModel = require('../models/alias');
-const buyOrderModel = require('../models/buyOrder');
-const itemModel = require('../models/item');
-const itemOfferModel = require('../models/itemOffer');
-const sellOrderModel = require('../models/sellOrder');
-const userModel = require('../models/user');
-const userReviewModel = require('../models/userReview');
+const aliasModel = require('../models/Alias.js');
+const buyOrderModel = require('../models/BuyOrder.js');
+const itemModel = require('../models/Item.js');
+const itemOfferModel = require('../models/ItemOffer.js');
+const sellOrderModel = require('../models/SellOrder.js');
+const userModel = require('../models/User.js');
+const userReviewModel = require('../models/UserReview.js');
 
 const sequelize = new Sequelize('fiestadb', 'dbmasteruser', ',h$<K7NRZ39:4]:D<81jer6Wq8NU<i-3', {
   host      : 'ls-b06b26de74c4aac85f292fdb2330847cf1f525d0.cmzli6sne7su.us-east-1.rds.amazonaws.com',
