@@ -21,7 +21,6 @@ const routing = (
       <Route path='/' component={Header} />
 
       <Switch>
-
         <Route exact path={['/', '/items/:itemId']} component={MainApp} />
         <PrivateRoute path='/admin' roles={[Role.Admin]} component={AdminPage} />
         <Route path='/contact' component={ContactForm} />

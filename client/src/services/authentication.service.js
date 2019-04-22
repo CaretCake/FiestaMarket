@@ -13,7 +13,7 @@ export const authenticationService = {
 };
 
 function login(username, password) {
-  return axios.post('http://localhost:9000/users/login', {
+  return axios.post(process.env.REACT_APP_API_URL + '/users/login', {
     username: username,
     password: password
   })
@@ -30,7 +30,7 @@ function login(username, password) {
 
 function logout() {
   // remove user from local storage to log user out
-  axios.get('http://localhost:9000/users/logout')
+  axios.get(process.env.REACT_APP_API_URL + '/users/logout')
     .then(user => {
     })
     .catch(err => {}/*console.log(err)*/);

@@ -7,7 +7,7 @@ export const userService = {
 };
 
 function getAll() {
-  return axios.get(`http://localhost:9000/users`)
+  return axios.get(process.env.REACT_APP_API_URL + '/users')
     .then(users => {
       if (users.status === 404) {
         return null;
@@ -19,7 +19,7 @@ function getAll() {
 }
 
 function getById(id) {
-  return axios.get(`http://localhost:9000/users/${id}`)
+  return axios.get(process.env.REACT_APP_API_URL + `/users/${id}`)
     .then(userInfo => {
       if (userInfo.status === 404) {
         return null;

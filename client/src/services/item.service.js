@@ -9,7 +9,7 @@ export const itemService = {
 };
 
 function getByFilters(query) {
-  return axios.get(`http://localhost:9000/items/search?&term=${query}`)
+  return axios.get(process.env.REACT_APP_API_URL + `/items/search?&term=${query}`)
     .then(handleResponse)
     .then(data => {
       //console.log('data:' + data);
@@ -21,7 +21,7 @@ function getByFilters(query) {
 }
 
 function getById(query) {
-  return axios.get(`http://localhost:9000/items/${query}`)
+  return axios.get(process.env.REACT_APP_API_URL + `/items/${query}`)
     .then(handleResponse)
     .then(data => {
       return data;
@@ -32,7 +32,7 @@ function getById(query) {
 }
 
 function getSellOrders(query) {
-  return axios.get(`http://localhost:9000/items/${query}/sellOrders`)
+  return axios.get(process.env.REACT_APP_API_URL + `/items/${query}/sellOrders`)
     .then(handleResponse)
     .then(data => {
       return data;
@@ -43,7 +43,7 @@ function getSellOrders(query) {
 }
 
 function getBuyOrders(query) {
-  return axios.get(`http://localhost:9000/items/${query}/buyOrders`)
+  return axios.get(process.env.REACT_APP_API_URL + `/items/${query}/buyOrders`)
     .then(handleResponse)
     .then(data => {
       return data;

@@ -6,7 +6,7 @@ export const orderService = {
 };
 
 function postSellOrder(price, openToOffers, server, enhancement, end, dex, int, str, spr, hp, sp, dmg, mdmg, def, mdef, aim, eva, itemId, userId) {
-  return axios.post('http://localhost:9000/sellorders/add', {
+  return axios.post(process.env.REACT_APP_API_URL + '/sellorders/add', {
     price: price,
     openToOffers: openToOffers,
     server: server,
