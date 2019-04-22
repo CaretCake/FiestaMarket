@@ -13,7 +13,7 @@ module.exports = (sequelize, type) => {
         }
       },
       PriceMin: {
-        type: type.DECIMAL(18,0),
+        type: type.DECIMAL(10, 2),
         allowNull: false,
         validate: {
           notNull: true,
@@ -28,7 +28,7 @@ module.exports = (sequelize, type) => {
         }
       },
       PriceMax: {
-        type: type.DECIMAL(18,0),
+        type: type.DECIMAL(10, 2),
         allowNull: false,
         validate: {
           notNull: true,
