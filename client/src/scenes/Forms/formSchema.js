@@ -47,12 +47,15 @@ export const buyOrderSchema = Yup.object().shape({
 export const sellOrderSchema = Yup.object().shape({
   gemPrice: Yup.number()
     .min(0, '*')
-    .positive('Price must be > 0')
     .integer('Price must be an integer value')
-    .required('*'),
+    .required('*')
+    .test('nonzero',
+      'Price must be > than 0',
+      function(gemPrice) {
+        return (gemPrice + this.parent.goldPrice) > 0;
+    }),
   goldPrice: Yup.number()
     .min(0, '*')
-    .positive('Price must be > 0')
     .integer('Price must be an integer value')
     .required('*'),
   enhancement: Yup.number()
