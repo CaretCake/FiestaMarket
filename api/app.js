@@ -8,6 +8,7 @@ const session = require("express-session");
 const passport = require("./config/passport");
 const SequelizeStore = require('connect-session-sequelize')(session.Store);
 const { sequelize } = require('./config/database');
+require('dotenv').config();
 
 const app = express();
 
@@ -16,13 +17,13 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 
 app.use(express.static(path.join(__dirname, 'public')));
-app.use(cors({credentials: true, origin: 'http://localhost:3000'}));
+app.use(cors({credentials: true, origin: process.env.ORIGIN}));
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(cookieParser('keyboard kitteh kit kat'));
+app.use(cookieParser(process.env.SESS_SECRET));
 app.use(session({
-  secret: "keyboard kitteh kit kat",
+  secret: process.env.SESS_SECRET,
   name: 'fmid',
   store: new SequelizeStore({
     db: sequelize
@@ -39,8 +40,8 @@ app.use(passport.session());
 
 app.use(function(req, res, next) {
   res.header('Access-Control-Allow-Credentials', true);
-  res.header('Access-Control-Allow-Origin', 'http://localhost:3000');
-  res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,PATCH,DELETE');
+  res.header('Access-Control-Allow-Origin', process.env.ORIGIN);
+  res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
   res.header('Access-Control-Allow-Headers', 'X-Requested-With, X-HTTP-Method-Override, Content-Type, Accept');
   next();
 });

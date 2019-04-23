@@ -7,10 +7,11 @@ const itemOfferModel = require('../models/ItemOffer.js');
 const sellOrderModel = require('../models/SellOrder.js');
 const userModel = require('../models/User.js');
 const userReviewModel = require('../models/UserReview.js');
+require('dotenv').config();
 
-const sequelize = new Sequelize('fiestadb', 'dbmasteruser', ',h$<K7NRZ39:4]:D<81jer6Wq8NU<i-3', {
-  host      : 'ls-b06b26de74c4aac85f292fdb2330847cf1f525d0.cmzli6sne7su.us-east-1.rds.amazonaws.com',
-  port      : '3306',
+const sequelize = new Sequelize(process.env.DB_NAME, process.env.DB_USER, process.env.DB_PASS, {
+  host      : process.env.DB_CONN,
+  port      : process.env.DB_PORT,
   dialect   : 'mysql',
   pool      : {
     max: 5,
