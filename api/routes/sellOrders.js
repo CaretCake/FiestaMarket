@@ -2,7 +2,22 @@ const express = require('express');
 const router = express.Router();
 const { SellOrder } = require('../config/database');
 const isAuthenticated = require('../config/middleware/isAuthenticated');
+const Sequelize = require('sequelize');
+const Op = Sequelize.Op;
 
+//Get sell order list
+router.get('/', (req, res) => {
+  SellOrder.findAll({
+    where: { SaleStatus: { [Op.notIn]: ['sold', 'expired'] } },
+    order: [ ['updatedAt', 'DESC'] ]
+  })
+    .then(orders => {
+      let resStatus;
+      orders !== null ? resStatus = 200 : resStatus = 404;
+      res.status(resStatus).json(orders);
+    })
+    .catch(err => console.log(err));
+});
 
 //Add a SellOrder
 router.post('/add', isAuthenticated, (req, res) => {
@@ -44,7 +59,6 @@ router.post('/add', isAuthenticated, (req, res) => {
       res.status(409).json({ error });
     });
 });
-
 
 //Get SellOrder by id
 router.get('/:sellOrderId?', (req, res) => {
