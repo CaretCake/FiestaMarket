@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { itemService } from '../../services/export';
-import { handleResponse } from "../../helpers/handle-response";
+import { handleResponse } from '../../helpers/export';
 import { SellOrderForm, BuyOrderForm } from "../export";
 
 export class Item extends Component {

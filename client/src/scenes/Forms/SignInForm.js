@@ -1,9 +1,8 @@
 import React from 'react';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import { ErrorMessage, Field, Form, Formik } from "formik";
-import "react-tabs/style/react-tabs.css";
 import { authenticationService, registrationService } from '../../services/export';
-import { signInSchema, registerSchema } from "./_FormSchema";
+import { signInSchema, registerSchema } from './_FormSchema';
 
 
 export class SignInForm extends React.Component {

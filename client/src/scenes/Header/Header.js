@@ -5,7 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSignOutAlt, faEnvelope } from '@fortawesome/free-solid-svg-icons';
 import { authenticationService } from '../../services/export';
 import { Role } from "../../helpers/export";
-import { Status } from "../../components/export"
+import { Status } from "../../components/export";
 
 export class Header extends React.Component {
 

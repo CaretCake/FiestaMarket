@@ -2,16 +2,25 @@ import { handleResponse } from '../helpers/export';
 import axios from "axios";
 
 export const orderService = {
+  getAll,
   postSellOrder,
   postBuyOrder
 };
 
-// noinspection SpellCheckingInspection
-// noinspection SpellCheckingInspection
+// Get all orders
+function getAll() {
+  return Promise.all([
+    axios.get(process.env.REACT_APP_API_URL + '/sellorders'),
+    axios.get(process.env.REACT_APP_API_URL + '/buyorders')
+  ])
+    .then(values => {
+      //console.log('data: ' + JSON.stringify(values[0]));
+      return values;
+    })
+    .catch(error => handleResponse(error.response));
+}
+
 function postSellOrder(price, openToOffers, server, enhancement, end, dex, int, str, spr, hp, sp, dmg, mdmg, def, mdef, aim, eva, itemId, userId) {
-  // noinspection SpellCheckingInspection
-  // noinspection SpellCheckingInspection
-  // noinspection SpellCheckingInspection
   return axios.post(process.env.REACT_APP_API_URL + '/sellorders/add', {
     price: price,
     openToOffers: openToOffers,
@@ -38,12 +47,7 @@ function postSellOrder(price, openToOffers, server, enhancement, end, dex, int, 
     }).catch(error => handleResponse(error.response));
 }
 
-// noinspection SpellCheckingInspection
-// noinspection SpellCheckingInspection
 function postBuyOrder(priceMin, priceMax, server, enhancement, end, dex, int, str, spr, hp, sp, dmg, mdmg, def, mdef, aim, eva, itemId, userId) {
-  // noinspection SpellCheckingInspection
-  // noinspection SpellCheckingInspection
-  // noinspection SpellCheckingInspection
   return axios.post(process.env.REACT_APP_API_URL + '/buyorders/add', {
     priceMin: priceMin,
     priceMax: priceMax,

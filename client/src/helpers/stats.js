@@ -5,9 +5,9 @@ export const Stats = {
 
 export function getStatArray(statType) {
   if (statType === 'normal') {
-    return this.normalStats;
+    return Stats.normalStats;
   } else if (statType === 'prestige') {
-    return this.prestigeStats;
+    return Stats.prestigeStats;
   } else {
     return [];
   }

@@ -5,13 +5,13 @@ const Sequelize = require('sequelize');
 const Op = Sequelize.Op;
 
 //Get item list
-router.get('/', (req, res) =>
+router.get('/', (req, res) => {
   Item.findAll()
     .then(items => {
-      console.log(items);
-      res.sendStatus(200);
+      res.sendStatus(200).json(items);
     })
-    .catch(err => console.log(err)));
+    .catch(err => console.log(err));
+});
 
 
 //Search for items
@@ -33,7 +33,7 @@ router.get('/:itemId?', (req, res) => {
         include: [
           { model: BuyOrder,
             as: 'BuyOrders',
-            where: { OrderStatus: { [Op.notIn]: ['bought', 'expired'] }},
+            where: { OrderStatus: { [Op.notIn]: ['bought', 'expired'] } },
             required: false,
             attributes: { exclude: ['createdAt'] },
             include: [
