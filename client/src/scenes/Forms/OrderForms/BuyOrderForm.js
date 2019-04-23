@@ -1,9 +1,9 @@
 import React from 'react';
 import { ErrorMessage, Field, Form, Formik } from "formik";
-import { orderService, authenticationService } from '../../services/export';
-import { buyOrderSchema } from "./_FormSchema";
-import { getStatArray } from "../../helpers/stats";
-import history from "../../helpers/history";
+import { orderService, authenticationService } from '../../../services/export';
+import { buyOrderSchema } from "../_FormSchema";
+import { getStatArray } from "../../../helpers/stats";
+import history from "../../../helpers/history";
 
 
 export class BuyOrderForm extends React.Component {
@@ -166,33 +166,35 @@ export class BuyOrderForm extends React.Component {
                         <span className='plus-icon'>+</span>
                       </div>
                     </div>
-                    <div className='field-container'>
-                      <div className='field-label-container'>
-                        <label>Stats</label>
+                    { this.props.item.StatType !== 'none' &&
+                      <div className='field-container'>
+                        <div className='field-label-container'>
+                          <label>Stats</label>
+                        </div>
+
+
+                        <div className='stat-field-container'>
+                          {stats.map((statName) => {
+                            return <div className='field-container' key={statName}>
+                              <div className='field-label-container'>
+                                <label>{statName}</label>
+                                <span><ErrorMessage name={statName}/></span>
+                              </div>
+                              <Field
+                                component='select'
+                                name={statName}
+                                className='selection'
+                              >
+                                <option value='N/A'>N/A</option>
+                                <option value='medium'>Medium</option>
+                                <option value='high'>High</option>
+                                <option value='godly'>Godly</option>
+                              </Field>
+                            </div>;
+                          })}
+                        </div>
                       </div>
-                    </div>
-
-                    <div className='stat-field-container'>
-                      {stats.map((statName) => {
-                        return <div className='field-container' key={statName}>
-                          <div className='field-label-container'>
-                            <label>{statName}</label>
-                            <span><ErrorMessage name={statName}/></span>
-                          </div>
-                          <Field
-                            component='select'
-                            name={statName}
-                            className='selection'
-                          >
-                            <option value='N/A'>N/A</option>
-                            <option value='medium'>Medium</option>
-                            <option value='high'>High</option>
-                            <option value='godly'>Godly</option>
-                          </Field>
-                        </div>;
-                      })}
-                    </div>
-
+                    }
                     <button
                       type='submit'
                       disabled={formProps.isSubmitting}>

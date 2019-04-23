@@ -1,9 +1,9 @@
 import React from 'react';
 import { ErrorMessage, Field, Form, Formik } from "formik";
-import { orderService, authenticationService } from '../../services/export';
-import { sellOrderSchema } from "./_FormSchema";
-import { Stats} from "../../helpers/export";
-import history from "../../helpers/history";
+import { orderService, authenticationService } from '../../../services/export';
+import { sellOrderSchema } from "../_FormSchema";
+import { Stats} from "../../../helpers/export";
+import history from "../../../helpers/history";
 
 
 export class SellOrderForm extends React.Component {
@@ -145,27 +145,29 @@ export class SellOrderForm extends React.Component {
                         <span className='plus-icon'>+</span>
                       </div>
                     </div>
-                    <div className='field-container'>
-                      <div className='field-label-container'>
-                        <label>Stats</label>
-                      </div>
-                    </div>
+                    { this.props.item.StatType !== 'none' &&
+                      <div className='field-container'>
+                        <div className='field-label-container'>
+                          <label>Stats</label>
+                        </div>
 
-                    <div className='stat-field-container'>
-                      {stats.map((statName) => {
-                        return <div className='field-container' key={statName}>
-                          <div className='field-label-container'>
-                            <label>{statName}</label>
-                            <span><ErrorMessage name={statName}/></span>
-                          </div>
-                          <Field
-                            type='number'
-                            name={statName}
-                            className='number-field'
-                          />
-                        </div>;
-                      })}
-                    </div>
+                        <div className='stat-field-container'>
+                          {stats.map((statName) => {
+                            return <div className='field-container' key={statName}>
+                              <div className='field-label-container'>
+                                <label>{statName}</label>
+                                <span><ErrorMessage name={statName}/></span>
+                              </div>
+                              <Field
+                                type='number'
+                                name={statName}
+                                className='number-field'
+                              />
+                            </div>;
+                          })}
+                        </div>
+                      </div>
+                    }
                     <button
                       type='submit'
                       disabled={formProps.isSubmitting}>
