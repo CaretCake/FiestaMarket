@@ -147,7 +147,7 @@ router.get('/:userId?', isAuthenticated, (req, res) => {
 });
 
 //Patch user by id
-router.put('/:userId?/update', isAuthenticated, (req, res) => {
+router.put('/:userId?/update/status', isAuthenticated, (req, res) => {
   //setUserStatus(req.body.status, req.user.userId);
   //console.log(JSON.stringify(req.status));
   //console.log(JSON.stringify(req.fields));
@@ -163,7 +163,7 @@ router.put('/:userId?/update', isAuthenticated, (req, res) => {
         { userId: req.user.userId }
     }
   ).then(function(rowsUpdated) {
-    return rowsUpdated;
+    return res.status(204).send({ message: 'success' });
   }).catch( err => res.status(400).send({ error: 'err' }) );
 });
 
