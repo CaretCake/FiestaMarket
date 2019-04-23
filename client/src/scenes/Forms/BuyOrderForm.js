@@ -22,8 +22,7 @@ export class BuyOrderForm extends React.Component {
 
   handleBuyOrderSubmit = (values, {
     props = this.props,
-    setSubmitting,
-    setFieldError
+    setSubmitting
   }) => {
 
     let priceMin = parseFloat(values.gemPriceMin + '.' + values.goldPriceMin);
@@ -190,7 +189,7 @@ export class BuyOrderForm extends React.Component {
                             <option value='high'>High</option>
                             <option value='godly'>Godly</option>
                           </Field>
-                        </div>
+                        </div>;
                       })}
                     </div>
 
@@ -204,6 +203,6 @@ export class BuyOrderForm extends React.Component {
               }}
             />
       </div>
-    )
+    );
   }
 }

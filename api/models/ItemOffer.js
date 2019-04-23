@@ -1,4 +1,5 @@
 module.exports = (sequelize, type) => {
+  // noinspection JSUnresolvedVariable
   return sequelize.define('ItemOffers', {
     OfferId: {
       type: type.INTEGER,
@@ -27,5 +28,5 @@ module.exports = (sequelize, type) => {
         }
       }
     }
-  })
-}
+  });
+};

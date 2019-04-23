@@ -50,7 +50,7 @@ export class ContactForm extends React.Component {
                     type='text'
                     name='email'
                     placeholder='Email Address'
-                    className='textbox'
+                    className='text-box'
                     />
                 </div>
                 <div className='field-container'>
@@ -75,6 +75,6 @@ export class ContactForm extends React.Component {
           }}
         />
       </div>
-    )
+    );
   }
 }

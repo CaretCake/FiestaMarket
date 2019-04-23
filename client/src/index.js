@@ -35,7 +35,7 @@ const routing = (
       <Route path='/' component={Footer} />
     </div>
   </Router>
-)
+);
 
 ReactDOM.render(routing, document.getElementById('root'));
 

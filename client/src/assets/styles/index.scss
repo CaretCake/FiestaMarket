@@ -18,7 +18,7 @@ body {
   -moz-osx-font-smoothing: grayscale;
 
   *, *::before,*::after { box-sizing: border-box; }
-  *{ font-family: Roboto; }
+  *{ font-family: Roboto, sans-serif; }
 
   h1, h2, h3, h4, h5, h6, p {
     color: $grey-dark;

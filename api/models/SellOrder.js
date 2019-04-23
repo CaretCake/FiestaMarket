@@ -267,5 +267,5 @@ module.exports = (sequelize, type) => {
         }
       }
     }
-  })
+  });
 };

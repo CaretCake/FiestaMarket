@@ -88,7 +88,7 @@ export class SignInForm extends React.Component {
                         type='text'
                         name='email'
                         placeholder='Email Address'
-                        className='textbox'
+                        className='text-box'
                       />
                     </div>
                     <div className='field-container'>
@@ -100,7 +100,7 @@ export class SignInForm extends React.Component {
                         type='password'
                         name='password'
                         placeholder='Password'
-                        className='textbox'
+                        className='text-box'
                       />
                     </div>
                     <button
@@ -126,7 +126,7 @@ export class SignInForm extends React.Component {
               render={formProps => {
                 return(
                   <Form>
-                    { this.state.serverValidationErrorMessage  && <ErrorMessage name='server'></ErrorMessage>}
+                    { this.state.serverValidationErrorMessage  && <ErrorMessage name='server'/>}
                     <div className='field-container'>
                       <div className='field-label-container'>
                         <label>Username</label>
@@ -136,7 +136,7 @@ export class SignInForm extends React.Component {
                         type='text'
                         name='username'
                         placeholder='Username'
-                        className='textbox'
+                        className='text-box'
                       />
                     </div>
                     <div className='field-container'>
@@ -148,7 +148,7 @@ export class SignInForm extends React.Component {
                         type='text'
                         name='email'
                         placeholder='Email Address'
-                        className='textbox'
+                        className='text-box'
                       />
                     </div>
                     <div className='field-container'>
@@ -160,7 +160,7 @@ export class SignInForm extends React.Component {
                         type='password'
                         name='password'
                         placeholder='Password'
-                        className='textbox'
+                        className='text-box'
                       />
                     </div>
                     <div className='field-container'>
@@ -172,7 +172,7 @@ export class SignInForm extends React.Component {
                         type='password'
                         name='confirmPassword'
                         placeholder='Password'
-                        className='textbox'
+                        className='text-box'
                       />
                     </div>
                     <button
@@ -187,6 +187,6 @@ export class SignInForm extends React.Component {
           </TabPanel>
         </Tabs>
       </div>
-    )
+    );
   }
 }

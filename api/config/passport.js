@@ -33,7 +33,7 @@ passport.use('local', new LocalStrategy(
               message: "Incorrect username or password."
             });
           }
-        })
+        });
       }
 
     });
@@ -52,10 +52,10 @@ passport.deserializeUser(function(id, done) {
 
   User.findByPk(id)
     .then(user => {
-      //console.log('deserializing ' + user);
+      //console.log('deserialize ' + user);
       done(null, user);
     })
-    .catch(err => {}/*console.log('error deserializing user')*/);
+    .catch(err => {}/*console.log('error deserialize user')*/);
 });
 
 module.exports = passport;

@@ -12,5 +12,5 @@ module.exports = (sequelize, type) => {
         notEmpty: true
       }
     }
-  })
-}
+  });
+};

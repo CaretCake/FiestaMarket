@@ -163,7 +163,7 @@ export class SellOrderForm extends React.Component {
                             name={statName}
                             className='number-field'
                           />
-                        </div>
+                        </div>;
                       })}
                     </div>
                     <button
@@ -176,6 +176,6 @@ export class SellOrderForm extends React.Component {
               }}
             />
       </div>
-    )
+    );
   }
 }

@@ -56,7 +56,7 @@ export  class MainApp extends React.Component {
               <div className='search-dropdown'>
                 <ul>
                   {this.state.results.map(item => (
-                    <li key={item.ItemId} unselectable="on" className="unselectable" onClick={() => { this.handleItemClick(item.ItemId, item.ItemName)}}>{item.ItemName}</li>
+                    <li key={item.ItemId} unselectable="on" className="unselectable" onClick={() => { this.handleItemClick(item.ItemId, item.ItemName); }}>{item.ItemName}</li>
                   ))}
                 </ul>
               </div>

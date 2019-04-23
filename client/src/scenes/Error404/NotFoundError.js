@@ -7,4 +7,4 @@ export const NotFoundError = () =>
       <h2>Page not found</h2>
       <p>That's not right.</p>
     </div>
-  </div>
+  </div>;

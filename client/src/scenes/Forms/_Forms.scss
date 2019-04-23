@@ -19,7 +19,7 @@
       padding: 0 11px;
     }
 
-    .textbox {
+    .text-box {
       min-width: 250px;
       height: 40px;
     }
@@ -30,7 +30,7 @@
       min-height: 80px;
     }
 
-    .textbox, .textarea, .number-field, .selection {
+    .text-box, .textarea, .number-field, .selection {
       padding: 11px 11px;
       border: 1px solid $navy;
       letter-spacing: 1px;
@@ -39,7 +39,7 @@
       align-items: center;
       overflow: hidden;
       color: $grey-dark;
-      box-shadow: 0 0 15px 0px $grey-extralight;
+      box-shadow: 0 0 15px 0 $grey-extra-light;
     }
 
     .field-container {

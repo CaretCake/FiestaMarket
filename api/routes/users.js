@@ -76,7 +76,7 @@ router.post('/login', function(req,res,next) {
         delete user.pass;
         delete user.createdAt;
         delete user.updatedAt;
-        return res.status(200).json({message: 'success', user });;
+        return res.status(200).json({message: 'success', user });
       });
     })(req,res,next);
   }

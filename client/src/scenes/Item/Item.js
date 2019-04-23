@@ -38,19 +38,19 @@ export class Item extends Component {
   toggleSellOrderForm() {
     this.setState({
       sellOrderFormVisibility: !this.state.sellOrderFormVisibility
-    })
+    });
     this.setState({
       buyOrderFormVisibility: false
-    })
+    });
   }
 
   toggleBuyOrderForm() {
     this.setState({
       buyOrderFormVisibility: !this.state.buyOrderFormVisibility
-    })
+    });
     this.setState({
       sellOrderFormVisibility: false
-    })
+    });
   }
 
   render() {

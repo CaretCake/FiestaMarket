@@ -40,6 +40,6 @@ export class AdminPage extends React.Component {
           { userListArray }
         </ul>
       </div>
-    )
+    );
   }
 }

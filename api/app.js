@@ -11,8 +11,6 @@ const { sequelize } = require('./config/database');
 
 const app = express();
 
-const { User, BuyOrder, Item, ItemOffer, SellOrder, UserReview, Alias } = require('./config/database');
-
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');

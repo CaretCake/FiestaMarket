@@ -1,5 +1,5 @@
-var express = require('express');
-var router = express.Router();
+const express = require('express');
+const router = express.Router();
 const { Alias } = require('../config/database');
 
 //Add a alias
@@ -10,7 +10,7 @@ router.get('/add', (req, res) => {
     Server: 'password',
     Preferred: '23456',
     UserUserId: 'in-game'
-  }
+  };
 
   let { AliasName, Type, Server, Preferred, UserUserId } = data;
 

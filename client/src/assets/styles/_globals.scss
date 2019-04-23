@@ -39,32 +39,31 @@ body #root > div{
 .unselectable {
   -webkit-touch-callout: none; /* iOS Safari */
   -webkit-user-select: none; /* Safari */
-  -khtml-user-select: none; /* Konqueror HTML */
   -moz-user-select: none; /* Firefox */
   -ms-user-select: none; /* Internet Explorer/Edge */
   user-select: none; /* Non-prefixed version, currently supported by Chrome and Opera */
 }
 
 .white-item-rarity {
-  color: $white-itemrarity;
+  color: $white-item-rarity;
 }
 .green-item-rarity {
-  color: $green-itemrarity;
+  color: $green-item-rarity;
 }
 .blue-item-rarity {
-  color: $blue-itemrarity;
+  color: $blue-item-rarity;
 }
-.setblue-item-rarity {
-  color: $setblue-itemrarity;
+.set-blue-item-rarity {
+  color: $set-blue-item-rarity;
 }
 .yellow-item-rarity {
-  color: $yellow-itemrarity;
+  color: $yellow-item-rarity;
 }
 .orange-item-rarity {
-  color: $orange-itemrarity;
+  color: $orange-item-rarity;
 }
 .pink-item-rarity {
-  color: $pink-itemrarity;
+  color: $pink-item-rarity;
 }
 
 .flex-row-container {

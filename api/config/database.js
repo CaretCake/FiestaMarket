@@ -49,8 +49,8 @@ SellOrder.belongsTo(Item, { as: 'PostedItem' });
 
 sequelize.sync({ })
   .then(() => {
-    console.log(`Database & tables created!`)
-  })
+    console.log(`Database & tables created!`);
+  });
 
 module.exports = {
   sequelize,
@@ -61,4 +61,4 @@ module.exports = {
   SellOrder,
   UserReview,
   Alias
-}
+};

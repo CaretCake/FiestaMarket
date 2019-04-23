@@ -50,12 +50,12 @@ router.post('/add', isAuthenticated, (req, res) => {
 router.get('/:sellOrderId?', (req, res) => {
   let query;
   if(req.params.sellOrderId) {
-    query = BuyOrder.findAll(
-      { where: { BuyOrderId: req.params.sellOrderId }})
+    query = SellOrder.findAll(
+      { where: { BuyOrderId: req.params.sellOrderId }});
   } else {
-    query = SellOrder.findAll({ include: [ SellOrder ]})
+    query = SellOrder.findAll({ include: [ SellOrder ]});
   }
-  return query.then(sellOrders => res.json(sellOrders))
+  return query.then(sellOrders => res.json(sellOrders));
 });
 
 module.exports = router;

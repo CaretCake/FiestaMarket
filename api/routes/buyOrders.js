@@ -1,5 +1,5 @@
-var express = require('express');
-var router = express.Router();
+const express = require('express');
+const router = express.Router();
 const { BuyOrder } = require('../config/database');
 const isAuthenticated = require('../config/middleware/isAuthenticated');
 
@@ -50,11 +50,11 @@ router.get('/:buyOrderId?', (req, res) => {
   let query;
   if(req.params.buyOrderId) {
     query = BuyOrder.findAll(
-      { where: { BuyOrderId: req.params.buyOrderId }})
+      { where: { BuyOrderId: req.params.buyOrderId }});
   } else {
-    query = BuyOrder.findAll({ include: [ BuyOrder ]})
+    query = BuyOrder.findAll({ include: [ BuyOrder ]});
   }
-  return query.then(buyOrders => res.json(buyOrders))
+  return query.then(buyOrders => res.json(buyOrders));
 });
 
 module.exports = router;

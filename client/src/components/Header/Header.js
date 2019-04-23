@@ -25,7 +25,8 @@ export class Header extends React.Component {
       this.setState({
         currentUser: x,
         isAdmin: x && x.role === Role.Admin
-      })});
+      });
+    });
   }
 
   componentWillUnmount() {
@@ -56,7 +57,7 @@ export class Header extends React.Component {
         <li><button onClick={() => this.routeChange('/profile/' + (currentUser !== null ? currentUser.userId : ''))} className="nav">{ currentUser !== null ? currentUser.userName : 'Profile'}</button></li>
         { isAdmin && <li><button onClick={() => this.routeChange('/admin')} className="nav">Admin</button></li> }
         <li><button onClick={() => this.logoutUser()} className="nav"><FontAwesomeIcon icon={faSignOutAlt} /> Sign Out</button></li>
-      </React.Fragment>
+      </React.Fragment>;
     };
     const loggedOutNav = () => {
       return <li><button onClick={() => this.routeChange('/login')} className="nav">Sign In</button></li>;

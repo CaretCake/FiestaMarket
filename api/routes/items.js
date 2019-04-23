@@ -1,5 +1,5 @@
-var express = require('express');
-var router = express.Router();
+const express = require('express');
+const router = express.Router();
 const { Item, ItemOffer, SellOrder, BuyOrder, User } = require('../config/database');
 const Sequelize = require('sequelize');
 const Op = Sequelize.Op;
@@ -72,7 +72,7 @@ router.get('/:itemId?', (req, res) => {
       console.log(item);
       item !== null ? resStatus = 200 : resStatus = 404;
       res.status(resStatus).json(item);
-    })
+    });
   }
 });
 
@@ -86,7 +86,7 @@ router.get('/:itemId?/sellOrders', (req, res) => {
         console.log(items);
         items !== null ? resStatus = 200 : resStatus = 404;
         res.status(resStatus).json(items);
-      })
+      });
   }
 });
 
@@ -100,7 +100,7 @@ router.get('/:itemId?/buyOrders', (req, res) => {
         console.log(items);
         items !== null ? resStatus = 200 : resStatus = 404;
         res.status(resStatus).json(items);
-      })
+      });
   }
 });
 

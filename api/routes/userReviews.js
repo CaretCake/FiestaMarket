@@ -1,5 +1,5 @@
-var express = require('express');
-var router = express.Router();
+const express = require('express');
+const router = express.Router();
 const { UserReview } = require('../config/database');
 
 //Add a user review
@@ -8,7 +8,7 @@ router.get('/add', (req, res) => {
     ReviewText: 'TestUser4',
     reviewedUserId: 'email4@me.com',
     reviewingUserId: 'password'
-  }
+  };
 
   let { ReviewText, reviewedUserId, reviewingUserId } = data;
 

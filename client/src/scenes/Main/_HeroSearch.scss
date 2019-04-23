@@ -40,11 +40,11 @@
           color: $grey-light;
 
           &:hover {
-            background-color: $grey-extradark;
+            background-color: $grey-extra-dark;
           }
 
           &:active {
-            box-shadow:0 5px 15px 0px $navy;
+            box-shadow:0 5px 15px 0 $navy;
             background-color: $navy;
           }
         }
@@ -62,7 +62,7 @@
         background: $white;
         left: 0;
         width: 100%;
-        box-shadow:0 5px 15px -5px $grey-extralight;
+        box-shadow:0 5px 15px -5px $grey-extra-light;
         -moz-box-sizing:content-box;
         box-sizing:content-box;
         z-index:1000;
@@ -80,7 +80,7 @@
           &:hover {
             background-color: $grey-light;
             color: $navy;
-            box-shadow: 0 0px 15px 0 $grey-extralight;
+            box-shadow: 0 0 15px 0 $grey-extra-light;
           }
 
           &:active {

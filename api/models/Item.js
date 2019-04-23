@@ -103,5 +103,5 @@ module.exports = (sequelize, type) => {
         isIn: [['normal', 'prestige']]
       }
     }
-  })
-}
+  });
+};

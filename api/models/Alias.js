@@ -41,5 +41,5 @@ module.exports = (sequelize, type) => {
       type: type.BOOLEAN,
       allowNull: false
     }
-  })
-}
+  });
+};

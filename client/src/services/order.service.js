@@ -6,7 +6,12 @@ export const orderService = {
   postBuyOrder
 };
 
+// noinspection SpellCheckingInspection
+// noinspection SpellCheckingInspection
 function postSellOrder(price, openToOffers, server, enhancement, end, dex, int, str, spr, hp, sp, dmg, mdmg, def, mdef, aim, eva, itemId, userId) {
+  // noinspection SpellCheckingInspection
+  // noinspection SpellCheckingInspection
+  // noinspection SpellCheckingInspection
   return axios.post(process.env.REACT_APP_API_URL + '/sellorders/add', {
     price: price,
     openToOffers: openToOffers,
@@ -33,7 +38,12 @@ function postSellOrder(price, openToOffers, server, enhancement, end, dex, int, 
     }).catch(error => handleResponse(error.response));
 }
 
+// noinspection SpellCheckingInspection
+// noinspection SpellCheckingInspection
 function postBuyOrder(priceMin, priceMax, server, enhancement, end, dex, int, str, spr, hp, sp, dmg, mdmg, def, mdef, aim, eva, itemId, userId) {
+  // noinspection SpellCheckingInspection
+  // noinspection SpellCheckingInspection
+  // noinspection SpellCheckingInspection
   return axios.post(process.env.REACT_APP_API_URL + '/buyorders/add', {
     priceMin: priceMin,
     priceMax: priceMax,
