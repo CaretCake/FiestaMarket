@@ -1,15 +1,16 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import {authenticationService, itemService} from '../../services/export';
+import { itemService } from '../../services/export';
 import { handleResponse } from "../../helpers/handle-response";
-import {SellOrderForm} from "../Forms/SellOrderForm";
+import { SellOrderForm, BuyOrderForm } from "../export";
 
 export class Item extends Component {
   constructor(props) {
     super(props);
     this.state = {
       item: {},
-      orderFormVisibility: false
+      sellOrderFormVisibility: false,
+      buyOrderFormVisibility: false
     };
   }
 
@@ -34,9 +35,21 @@ export class Item extends Component {
       .catch(err => {}/*console.log('item err: ' + JSON.stringify(err))*/);
   }
 
-  toggleOrderForm() {
+  toggleSellOrderForm() {
     this.setState({
-      orderFormVisibility: !this.state.orderFormVisibility
+      sellOrderFormVisibility: !this.state.sellOrderFormVisibility
+    })
+    this.setState({
+      buyOrderFormVisibility: false
+    })
+  }
+
+  toggleBuyOrderForm() {
+    this.setState({
+      buyOrderFormVisibility: !this.state.buyOrderFormVisibility
+    })
+    this.setState({
+      sellOrderFormVisibility: false
     })
   }
 
@@ -79,10 +92,12 @@ export class Item extends Component {
             </ul> }
             <p>Type: { this.state.item.Type }</p>
             <p>Class: { this.state.item.Class }</p>
-            <button onClick={this.toggleOrderForm.bind(this)}>Sell Item</button>
+            <button onClick={this.toggleSellOrderForm.bind(this)}>Sell Item</button>
+            <button onClick={this.toggleBuyOrderForm.bind(this)}>Buy Item</button>
           </div>
           <div className='form-section'>
-            { this.state.orderFormVisibility && < SellOrderForm item={this.state.item} /> }
+            { this.state.sellOrderFormVisibility && < SellOrderForm item={this.state.item} /> }
+            { this.state.buyOrderFormVisibility && < BuyOrderForm item={this.state.item} /> }
           </div>
           <div className='orders-section'>
             <div>

@@ -46,6 +46,7 @@ export class SellOrderForm extends React.Component {
 
     return (
       <div className='form-container order-form'>
+        <h2>Want to Sell</h2>
             <Formik
               initialValues={{
                 server: 'Isya',

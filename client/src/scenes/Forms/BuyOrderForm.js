@@ -1,9 +1,9 @@
 import React from 'react';
-import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
-import { ErrorMessage, Field, Form, Formik, FieldArray, getIn } from "formik";
+import { ErrorMessage, Field, Form, Formik } from "formik";
 import { orderService, authenticationService } from '../../services/export';
-import { sellOrderSchema, buyOrderSchema } from "./formSchema";
-import "react-tabs/style/react-tabs.css";
+import { buyOrderSchema } from "./formSchema";
+import {Stats} from "../../helpers/stats";
+import history from "../../helpers/history";
 
 
 export class BuyOrderForm extends React.Component {
@@ -13,10 +13,10 @@ export class BuyOrderForm extends React.Component {
 
     this.state = {
       serverValidationErrorMessage: null
-    }
+    };
 
     if (!authenticationService.currentUserValue) {
-      this.props.history.push('/');
+      history.push('/login');
     }
   }
 
@@ -26,13 +26,15 @@ export class BuyOrderForm extends React.Component {
     setFieldError
   }) => {
 
-    registrationService.register(values.username, values.email, values.password)
+    let priceMin = parseFloat(values.gemPriceMin + '.' + values.goldPriceMin);
+    let priceMax = parseFloat(values.gemPriceMax + '.' + values.goldPriceMax);
+
+    orderService.postBuyOrder(priceMin, priceMax, values.server, values.enhancement, values.end, values.dex, values.int, values.str, values.spr, values.hp, values.sp, values.dmg, values.mdmg, values.def, values.mdef, values.aim, values.eva, this.props.item.ItemId, authenticationService.currentUserValue.userId)
       .then(
         result => {
-          this.props.history.push('/');
+          history.push('/items/' + this.props.item.ItemId);
         },
         error => {
-          setFieldError(error.field.toLowerCase(), error.message);
           //console.log(error);
         }
       );
@@ -41,35 +43,38 @@ export class BuyOrderForm extends React.Component {
   };
 
   render() {
-
+    let stats = this.props.item.StatType === 'normal' ? Stats.normalStats : Stats.prestigeStats;
 
     return (
-      <div className='form-container'>
+      <div className='form-container order-form'>
+        <h2>Want to Buy</h2>
             <Formik
               initialValues={{
-                openOffers: '',
-                server: '',
-                gemPrice: '',
-                goldPrice: '',
-                enhancement: '',
-                stats: stats
+                gemPriceMin: 0,
+                goldPriceMin: 0,
+                gemPriceMax: 0,
+                goldPriceMax: 0,
+                server: 'Isya',
+                enhancement: 0,
+                end: 'N/A',
+                dex: 'N/A',
+                int: 'N/A',
+                str: 'N/A',
+                spr: 'N/A',
+                hp: 'N/A',
+                sp: 'N/A',
+                dmg: 'N/A',
+                mdmg: 'N/A',
+                def: 'N/A',
+                mdef: 'N/A',
+                aim: 'N/A',
+                eva: 'N/A'
               }}
-              validationSchema={sellOrderSchema}
-              onSubmit={this.handleSellOrderSubmit}
+              validationSchema={buyOrderSchema}
+              onSubmit={this.handleBuyOrderSubmit}
               render={formProps => {
                 return(
                   <Form>
-                    <div className='field-container'>
-                      <div className='field-label-container'>
-                        <label>Open to Offers</label>
-                        <span><ErrorMessage name='openOffers'/></span>
-                      </div>
-                      <Field
-                        type='checkbox'
-                        name='openOffers'
-                        className='checkbox'
-                      />
-                    </div>
                     <div className='field-container'>
                       <div className='field-label-container'>
                         <label>Server</label>
@@ -86,151 +91,118 @@ export class BuyOrderForm extends React.Component {
                         <option value='Enid'>Enid</option>
                       </Field>
                     </div>
-                    <div className='field-container'>
-                      <div className='field-label-container'>
-                        <label>Gems</label>
-                        <span><ErrorMessage name='gemPrice'/></span>
+                    <div className='price-field-container'>
+                      <label>Min Price</label>
+                      <div className='field-container'>
+                        <div className='field-label-container'>
+                          <label>Gems</label>
+                          <span><ErrorMessage name='gemPriceMin'/></span>
+                        </div>
+                        <div className='icon-field-container'>
+                          <Field
+                            type='number'
+                            name='gemPriceMin'
+                            className='number-field'
+                          />
+                          <span className='gem-icon'/>
+                        </div>
                       </div>
-                      <Field
-                        type='number'
-                        name='gemPrice'
-                        className='textbox'
-                      />
+                      <div className='field-container'>
+                        <div className='field-label-container'>
+                          <label>Gold</label>
+                          <span><ErrorMessage name='goldPriceMin'/></span>
+                        </div>
+                        <div className='icon-field-container'>
+                          <Field
+                            type='number'
+                            name='goldPriceMin'
+                            className='number-field'
+                          />
+                          <span className='gold-icon'/>
+                        </div>
+                      </div>
                     </div>
-                    <div className='field-container'>
-                      <div className='field-label-container'>
-                        <label>Gold</label>
-                        <span><ErrorMessage name='goldPrice'/></span>
+                    <div className='price-field-container'>
+                      <label>Max Price</label>
+                      <div className='field-container'>
+                        <div className='field-label-container'>
+                          <label>Gems</label>
+                          <span><ErrorMessage name='gemPriceMax'/></span>
+                        </div>
+                        <div className='icon-field-container'>
+                          <Field
+                            type='number'
+                            name='gemPriceMax'
+                            className='number-field'
+                          />
+                          <span className='gem-icon'/>
+                        </div>
                       </div>
-                      <Field
-                        type='number'
-                        name='goldPrice'
-                        className='textbox'
-                      />
+                      <div className='field-container'>
+                        <div className='field-label-container'>
+                          <label>Gold</label>
+                          <span><ErrorMessage name='goldPriceMax'/></span>
+                        </div>
+                        <div className='icon-field-container'>
+                          <Field
+                            type='number'
+                            name='goldPriceMax'
+                            className='number-field'
+                          />
+                          <span className='gold-icon'/>
+                        </div>
+                      </div>
                     </div>
                     <div className='field-container'>
                       <div className='field-label-container'>
                         <label>Enhancement</label>
                         <span><ErrorMessage name='enhancement'/></span>
                       </div>
-                      <Field
-                        type='number'
-                        name='enhancement'
-                        className='textbox'
-                      />
+                      <div className='icon-field-container'>
+                        <Field
+                          type='number'
+                          name='enhancement'
+                          className='number-field'
+                        />
+                        <span className='plus-icon'>+</span>
+                      </div>
                     </div>
                     <div className='field-container'>
                       <div className='field-label-container'>
                         <label>Stats</label>
-                        <span><ErrorMessage name='stats'/></span>
                       </div>
+                    </div>
 
-                      {/*<FieldArray
-                        name='stats'
-                        render={arrayHelpers => (
-
-                          //const StatArrayErrors = errors => typeof errors.stats === 'string' ? <div>{errors.stats}</div> : null};
-
-
-                          //loop through myList / any object to define our form.
-                          <div>
-                            {formProps.values.stats.map((stat, index) => (
-                              <div key={index} className='stat-list-item field-label-container'>
-                                <label>{  stat.stat }</label>
-                                <span><ErrorMessage name={`stats.${index}.value`} />;</span>
-                                <Field
-                                  name={`stats.${index}.value`}
-                                  type='number'
-                                  className='textbox'
-                                />
-                              </div>
-                            ))}
+                    <div className='stat-field-container'>
+                      {stats.map((statName) => {
+                        return <div className='field-container' key={statName}>
+                          <div className='field-label-container'>
+                            <label>{statName}</label>
+                            <span><ErrorMessage name={statName}/></span>
                           </div>
-                        )}
-                      />*/}
+                          <Field
+                            component='select'
+                            name={statName}
+                            className='selection'
+                          >
+                            <option value='N/A'>N/A</option>
+                            <option value='medium'>Medium</option>
+                            <option value='high'>High</option>
+                            <option value='godly'>Godly</option>
+                          </Field>
+                        </div>
+                      })}
                     </div>
 
                     <button
                       type='submit'
                       disabled={formProps.isSubmitting}>
-                      Post Item
+                      Post Buy Order
                     </button>
                   </Form>
                 );
               }}
             />
-          {/* <TabPanel>
-            <Formik
-              initialValues={{
-                username: '',
-                email: '',
-                password: '',
-                confirmPassword: ''
-              }}
-              validationSchema={buyOrderSchema}
-              onSubmit={this.handleBuyOrderSubmit}
-              render={formProps => {
-                return(
-                  <Form>
-                    { this.state.serverValidationErrorMessage  && <ErrorMessage name='server'></ErrorMessage>}
-                    <div class='field-container'>
-                      <div className='field-label-container'>
-                        <label>Username</label>
-                        <span><ErrorMessage name='username' /></span>
-                      </div>
-                      <Field
-                        type='text'
-                        name='username'
-                        placeholder='Username'
-                        className='textbox'
-                      />
-                    </div>
-                    <div className='field-container'>
-                      <div className='field-label-container'>
-                        <label>Email Address</label>
-                        <span><ErrorMessage name='email'/></span>
-                      </div>
-                      <Field
-                        type='text'
-                        name='email'
-                        placeholder='Email Address'
-                        className='textbox'
-                      />
-                    </div>
-                    <div className='field-container'>
-                      <div className='field-label-container'>
-                        <label>Password</label>
-                        <span><ErrorMessage name='password' /></span>
-                      </div>
-                      <Field
-                        type='password'
-                        name='password'
-                        placeholder='Password'
-                        className='textbox'
-                      />
-                    </div>
-                    <div className='field-container'>
-                      <div className='field-label-container'>
-                        <label>Confirm Password</label>
-                        <span><ErrorMessage name='confirmPassword' /></span>
-                      </div>
-                      <Field
-                        type='password'
-                        name='confirmPassword'
-                        placeholder='Password'
-                        className='textbox'
-                      />
-                    </div>
-                    <button
-                      type='submit'
-                      disabled={formProps.isSubmitting}>
-                      Register
-                    </button>
-                  </Form>
-                );
-              }}
-            />
-          </TabPanel> */}
       </div>
     )
   }

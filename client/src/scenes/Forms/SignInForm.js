@@ -79,7 +79,7 @@ export class SignInForm extends React.Component {
               render={formProps => {
                 return(
                   <Form>
-                    <div class='field-container'>
+                    <div className='field-container'>
                       <div className='field-label-container'>
                         <label>Email Address</label>
                         <span><ErrorMessage name='email' /></span>
@@ -127,7 +127,7 @@ export class SignInForm extends React.Component {
                 return(
                   <Form>
                     { this.state.serverValidationErrorMessage  && <ErrorMessage name='server'></ErrorMessage>}
-                    <div class='field-container'>
+                    <div className='field-container'>
                       <div className='field-label-container'>
                         <label>Username</label>
                         <span><ErrorMessage name='username' /></span>

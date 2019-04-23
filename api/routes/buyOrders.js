@@ -1,92 +1,47 @@
 var express = require('express');
 var router = express.Router();
 const { BuyOrder } = require('../config/database');
-
-//Get BuyOrder list
-router.get('/', (req, res) => {
-  BuyOrder.findAll()
-    .then(buyOrders => {
-      res.sendStatus(200);
-    })
-    .catch(err => {});
-});
+const isAuthenticated = require('../config/middleware/isAuthenticated');
 
 //Add a BuyOrder
-router.get('/add', (req, res) => {
-  const data = {
-    PriceMin: '',
-    PriceMax: '',
-    OrderStatus: '',
-    Server: '',
-    DesiredEnhancement: '',
-    DesiredEnd: '',
-    DesiredDex: '',
-    DesiredInt: '',
-    DesiredStr: '',
-    DesiredSpr: '',
-    DesiredHp: '',
-    DesiredSp: '',
-    DesiredDmg: '',
-    DesiredMdmg: '',
-    DesiredDef: '',
-    DesiredMdef: '',
-    DesiredAim: '',
-    DesiredEva: '',
-    PostingUserUserId: '',
-    PostedItemItemId: '',
-    ItemItemId: '',
-    UserUserId: ''
-  }
-
-  let { PriceMin,
-    PriceMax,
-    OrderStatus,
-    Server,
-    DesiredEnhancement,
-    DesiredEnd,
-    DesiredDex,
-    DesiredInt,
-    DesiredStr,
-    DesiredSpr,
-    DesiredHp,
-    DesiredSp,
-    DesiredDmg,
-    DesiredMdmg,
-    DesiredDef,
-    DesiredMdef,
-    DesiredAim,
-    DesiredEva,
-    PostingUserUserId,
-    PostedItemItemId,
-    ItemItemId,
-    UserUserId } = data;
+router.post('/add', isAuthenticated, (req, res) => {
+  console.log(JSON.stringify(req.body));
 
   BuyOrder.create({
-    PriceMin,
-    PriceMax,
-    OrderStatus,
-    Server,
-    DesiredEnhancement,
-    DesiredEnd,
-    DesiredDex,
-    DesiredInt,
-    DesiredStr,
-    DesiredSpr,
-    DesiredHp,
-    DesiredSp,
-    DesiredDmg,
-    DesiredMdmg,
-    DesiredDef,
-    DesiredMdef,
-    DesiredAim,
-    DesiredEva,
-    PostingUserUserId,
-    PostedItemItemId,
-    ItemItemId,
-    UserUserId
+    PriceMin: req.body.priceMin,
+    PriceMax: req.body.priceMax,
+    OrderStatus: 'active',
+    Server: req.body.server,
+    DesiredEnhancement: req.body.enhancement,
+    DesiredEnd: req.body.end,
+    DesiredDex: req.body.dex,
+    DesiredInt: req.body.int,
+    DesiredStr: req.body.str,
+    DesiredSpr: req.body.spr,
+    DesiredHp: req.body.hp,
+    DesiredSp: req.body.sp,
+    DesiredDmg: req.body.dmg,
+    DesiredMdmg: req.body.mdmg,
+    DesiredDef: req.body.def,
+    DesiredMdef: req.body.mdef,
+    DesiredAim: req.body.aim,
+    DesiredEva: req.body.eva,
+    PostingUserUserId: req.body.userId,
+    PostedItemItemId: req.body.itemId,
+    ItemItemId: req.body.itemId,
+    UserUserId: req.body.userId
   })
-    .then(buyOrder => res.redirect('/'))
-    .catch(err => {});
+    .then(buyOrder => {
+      if (buyOrder) {
+        return res.status(201).json({ message: 'success' });
+      }
+    })
+    .catch(function (error) {
+      // print the error details
+      console.log('message: ' + JSON.stringify(error));
+      //console.log('type: ' + JSON.stringify(error.errors[0].type));
+      res.status(409).json({ error });
+    });
 });
 
 

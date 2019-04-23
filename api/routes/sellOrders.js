@@ -6,6 +6,7 @@ const isAuthenticated = require('../config/middleware/isAuthenticated');
 
 //Add a SellOrder
 router.post('/add', isAuthenticated, (req, res) => {
+  console.log('price: ' + req.body.price);
 
   SellOrder.create({
     Price: req.body.price,
@@ -40,9 +41,7 @@ router.post('/add', isAuthenticated, (req, res) => {
       // print the error details
       //console.log('message: ' + JSON.stringify(error.errors));
       //console.log('type: ' + JSON.stringify(error.errors[0].type));
-      if (error.errors[0].type === 'unique violation') {
-        res.status(409).json({ message: error.errors[0].message, field: error.errors[0].path });
-      }
+      res.status(409).json({ error });
     });
 });
 
