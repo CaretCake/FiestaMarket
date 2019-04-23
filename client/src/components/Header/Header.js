@@ -5,6 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSignOutAlt, faEnvelope } from '@fortawesome/free-solid-svg-icons';
 import { authenticationService } from '../../services/export';
 import { Role } from "../../helpers/export";
+import { Status } from "../export"
 
 export class Header extends React.Component {
 
@@ -12,11 +13,13 @@ export class Header extends React.Component {
     super(props);
     this.routeChange = this.routeChange.bind(this);
     this.logoutUser = this.logoutUser.bind(this);
+    this.toggleStatus = this.toggleStatus.bind(this);
 
 
     this.state = {
       currentUser: null,
-      isAdmin: false
+      isAdmin: false,
+      statusVisibility: false
     };
   }
 
@@ -46,12 +49,21 @@ export class Header extends React.Component {
     return this.state.currentUser !== null;
   }
 
+  toggleStatus() {
+    this.setState( {
+      statusVisibility: !this.state.statusVisibility
+    });
+  }
+
   render() {
     const { currentUser, isAdmin } = this.state;
 
     const loggedInNav = () => {
       return <React.Fragment>
-        <li><button onClick={this.displayStatusOptions} className="nav">{ currentUser !== null ? currentUser.status : 'Status'}</button></li>
+        <li className='status' onMouseEnter={this.toggleStatus} onMouseLeave={this.toggleStatus}>
+          { this.state.statusVisibility && <Status status={ currentUser.status } userId={ currentUser.userId } /> }
+          <button className={"nav " + currentUser.status }>{ currentUser !== null ? currentUser.status : 'Status'}</button>
+        </li>
         <li><button className="nav"><FontAwesomeIcon icon={faEnvelope}/>Messages</button></li>
         <li><button className="nav">Notifications</button></li>
         <li><button onClick={() => this.routeChange('/profile/' + (currentUser !== null ? currentUser.userId : ''))} className="nav">{ currentUser !== null ? currentUser.userName : 'Profile'}</button></li>

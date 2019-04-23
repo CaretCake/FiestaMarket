@@ -3,7 +3,8 @@ import axios from "axios";
 
 export const userService = {
   getAll,
-  getById
+  getById,
+  updateById
 };
 
 // Get all users (role required)
@@ -28,6 +29,17 @@ function getById(id) {
       }
       //console.log('info: ' + JSON.stringify(userInfo.data));
       return userInfo.data;
+    })
+    .catch(error => handleResponse(error.response));
+}
+
+// Update user by id
+function updateById(id, status) {
+  return axios.put(process.env.REACT_APP_API_URL + `/users/${id}/update`, {
+    status: status
+  })
+    .then(res => {
+      console.log('info: ' + JSON.stringify(res));
     })
     .catch(error => handleResponse(error.response));
 }

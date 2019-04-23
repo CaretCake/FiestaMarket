@@ -146,6 +146,29 @@ router.get('/:userId?', isAuthenticated, (req, res) => {
   }
 });
 
+//Patch user by id
+router.put('/:userId?/update', isAuthenticated, (req, res) => {
+  //setUserStatus(req.body.status, req.user.userId);
+  //console.log(JSON.stringify(req.status));
+  //console.log(JSON.stringify(req.fields));
+  // The equivalent call using update looks like this:
+  /*User.update({ title: 'foooo', description: 'baaaaaar'}, {fields: ['title']})
+    .then(() => {
+    // title will now be 'foooo' but description is the very same as before
+    })
+    .catch(err => res.status(500).send({ error: "Error searching for user" }));*/
+  User.update(
+    { status: req.body.status },
+    { where:
+        { userId: req.user.userId }
+    }
+  ).then(function(rowsUpdated) {
+    return rowsUpdated;
+  }).catch( err => res.status(400).send({ error: 'err' }) );
+});
+
+
+
 //Get user's aliases
 router.get('/:userId?/aliases', (req, res) => {
   Alias.findAll({

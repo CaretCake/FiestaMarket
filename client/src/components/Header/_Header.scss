@@ -45,6 +45,8 @@
     li {
       margin: 0 5px 0 5px;
       height: 100%;
+      border-left: 1px solid $grey-light;
+      min-width: 100px;
 
       button {
         color: $grey-dark;
@@ -56,8 +58,7 @@
         display: flex;
         align-items: center;
         justify-content: space-evenly;
-        border-left: 1px solid $grey-light;
-        padding: 0 0 0 15px;
+        padding: 0 0 0 13px;
         outline: none;
 
 
@@ -70,6 +71,25 @@
           padding-right: 6px;
         }
       }
+
+      .online {
+        color: #01de0c !important;
+      }
+
+      .offline {
+        color: $alert-red !important;
+      }
+
+      .in-game {
+        color: $navy !important;
+      }
+    }
+
+    .status {
+      position: relative;
+      display: flex;
+      justify-content: center;
+      align-items: center;
     }
   }
 }

@@ -27,7 +27,6 @@ export class Item extends Component {
       .then(handleResponse())
       .then(itemInfoFromApi => {
         if (!itemInfoFromApi) {
-          //console.log('no info: ' + itemInfoFromApi);
           this.props.history.push('/404/Error');
         }
         this.setState({item: itemInfoFromApi.data});
@@ -57,8 +56,6 @@ export class Item extends Component {
     if(this.state.item === {}) {
       return null;
     }
-
-    //console.log(JSON.stringify(this.state.item));
 
     let buyOrderArray = [];
     let sellOrderArray = [];
