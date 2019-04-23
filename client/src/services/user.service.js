@@ -4,7 +4,7 @@ import axios from "axios";
 export const userService = {
   getAll,
   getById,
-  updateById
+  updateById: updateStatusById
 };
 
 // Get all users (role required)
@@ -33,9 +33,9 @@ function getById(id) {
     .catch(error => handleResponse(error.response));
 }
 
-// Update user by id
-function updateById(id, status) {
-  return axios.put(process.env.REACT_APP_API_URL + `/users/${id}/update`, {
+// Update user status by id
+function updateStatusById(id, status) {
+  return axios.put(process.env.REACT_APP_API_URL + `/users/${id}/update/status`, {
     status: status
   })
     .then(res => {
