@@ -19,9 +19,6 @@ router.get('/search', (req, res) => {
   const term  = req.query.term;
   Item.findAll({
     where: { ItemName: { [Op.like]: '%' + term + '%' } },
-    order: [
-      ['ItemName', 'ASC']
-    ],
     limit: 8
   })
     .then(items => res.json(items))
