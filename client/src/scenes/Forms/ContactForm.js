@@ -1,6 +1,6 @@
 import React from 'react';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
-import { contactSchema } from "./formSchema";
+import { contactSchema } from "./_FormSchema";
 
 export class ContactForm extends React.Component {
 

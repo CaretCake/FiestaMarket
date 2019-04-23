@@ -1,7 +1,7 @@
 import React from 'react';
 import { ErrorMessage, Field, Form, Formik } from "formik";
 import { orderService, authenticationService } from '../../services/export';
-import { sellOrderSchema } from "./formSchema";
+import { sellOrderSchema } from "./_FormSchema";
 import { Stats} from "../../helpers/export";
 import history from "../../helpers/history";
 
