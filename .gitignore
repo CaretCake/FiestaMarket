@@ -7,12 +7,17 @@
 /.pnp
 .pnp.js
 .idea/dictionaries/
+.env
+/client/.env.production
+/server/.env.development
 
 
 # testing
+/client/coverage
 /coverage
 
 # production
+/client/build
 /build
 
 # misc
@@ -21,6 +26,9 @@
 .env.development.local
 .env.test.local
 .env.production.local
+.env.development
+.env.test
+client/.env.production
 .idea/workspace.xml
 
 npm-debug.log*

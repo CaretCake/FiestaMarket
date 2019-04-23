@@ -94,13 +94,13 @@ module.exports = (sequelize, type) => {
       }
     },
     StatType: {
-      type: type.ENUM('normal', 'prestige'),
+      type: type.ENUM('normal', 'prestige', 'none'),
       allowNull: false,
       validate: {
         notNull: true,
         notEmpty: true,
         isDate: true,
-        isIn: [['normal', 'prestige']]
+        isIn: [['normal', 'prestige', 'none']]
       }
     }
   });
