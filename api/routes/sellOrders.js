@@ -28,8 +28,8 @@ router.post('/add', isAuthenticated, (req, res) => {
     Aim: req.body.aim,
     Eva: req.body.eva,
     ItemItemId: req.body.itemId,
-    UserUserId: req.body.userId,
-    PostingUserUserId: req.body.userId,
+    UserUserId: req.user.userId,
+    PostingUserUserId: req.user.userId,
     PostedItemItemId: req.body.itemId
   })
     .then(sellOrder => {

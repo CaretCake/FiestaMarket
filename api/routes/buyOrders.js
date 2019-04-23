@@ -5,7 +5,8 @@ const isAuthenticated = require('../config/middleware/isAuthenticated');
 
 //Add a BuyOrder
 router.post('/add', isAuthenticated, (req, res) => {
-  console.log(JSON.stringify(req.body));
+  console.log('yo' + JSON.stringify(req.body));
+  console.log('yoyo' + JSON.stringify(req.user));
 
   BuyOrder.create({
     PriceMin: req.body.priceMin,
@@ -26,10 +27,10 @@ router.post('/add', isAuthenticated, (req, res) => {
     DesiredMdef: req.body.mdef,
     DesiredAim: req.body.aim,
     DesiredEva: req.body.eva,
-    PostingUserUserId: req.body.userId,
+    PostingUserUserId: req.user.userId,
     PostedItemItemId: req.body.itemId,
     ItemItemId: req.body.itemId,
-    UserUserId: req.body.userId
+    UserUserId: req.user.userId
   })
     .then(buyOrder => {
       if (buyOrder) {

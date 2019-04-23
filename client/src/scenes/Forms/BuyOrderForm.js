@@ -28,7 +28,7 @@ export class BuyOrderForm extends React.Component {
     let priceMin = parseFloat(values.gemPriceMin + '.' + values.goldPriceMin);
     let priceMax = parseFloat(values.gemPriceMax + '.' + values.goldPriceMax);
 
-    orderService.postBuyOrder(priceMin, priceMax, values.server, values.enhancement, values.end, values.dex, values.int, values.str, values.spr, values.hp, values.sp, values.dmg, values.mdmg, values.def, values.mdef, values.aim, values.eva, this.props.item.ItemId, authenticationService.currentUserValue.userId)
+    orderService.postBuyOrder(priceMin, priceMax, values.server, values.enhancement, values.end, values.dex, values.int, values.str, values.spr, values.hp, values.sp, values.dmg, values.mdmg, values.def, values.mdef, values.aim, values.eva, this.props.item.ItemId)
       .then(
         result => {
           history.push('/items/' + this.props.item.ItemId);

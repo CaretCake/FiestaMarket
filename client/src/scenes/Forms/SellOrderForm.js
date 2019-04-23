@@ -27,7 +27,7 @@ export class SellOrderForm extends React.Component {
 
     let price = parseFloat(values.gemPrice + '.' + values.goldPrice);
 
-    orderService.postSellOrder(price, values.openOffers, values.server, values.enhancement, values.end, values.dex, values.int, values.str, values.spr, values.hp, values.sp, values.dmg, values.mdmg, values.def, values.mdef, values.aim, values.eva, this.props.item.ItemId, authenticationService.currentUserValue.userId)
+    orderService.postSellOrder(price, values.openOffers, values.server, values.enhancement, values.end, values.dex, values.int, values.str, values.spr, values.hp, values.sp, values.dmg, values.mdmg, values.def, values.mdef, values.aim, values.eva, this.props.item.ItemId)
       .then(
         order => {
           //console.log(order);
