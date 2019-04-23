@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const { BuyOrder } = require('../config/database');
+const { BuyOrder, User, Alias, Item } = require('../config/database');
 const isAuthenticated = require('../config/middleware/isAuthenticated');
 const Sequelize = require('sequelize');
 const Op = Sequelize.Op;
@@ -9,6 +9,23 @@ const Op = Sequelize.Op;
 router.get('/', (req, res) => {
   BuyOrder.findAll({
     where: { OrderStatus: { [Op.notIn]: ['bought', 'expired'] } },
+    include: [
+      { model: User,
+        as: 'PostingUser',
+        attributes: { exclude: ['pass', 'updatedAt', 'createdAt', 'email', 'role'] },
+        include: [
+          {
+            model: Alias,
+            as: 'Aliases',
+            attributes: { exclude: ['createdAt', 'updatedAt'] }
+          }]
+      },
+      {
+        model: Item,
+        as: 'PostedItem',
+        attributes: { exclude: ['createdAt', 'updatedAt'] }
+      }
+    ],
     order: [ ['updatedAt', 'DESC'] ]
   })
     .then(orders => {

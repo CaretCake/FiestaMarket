@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const { SellOrder } = require('../config/database');
+const { SellOrder, User, Alias, Item, ItemOffer } = require('../config/database');
 const isAuthenticated = require('../config/middleware/isAuthenticated');
 const Sequelize = require('sequelize');
 const Op = Sequelize.Op;
@@ -9,7 +9,37 @@ const Op = Sequelize.Op;
 router.get('/', (req, res) => {
   SellOrder.findAll({
     where: { SaleStatus: { [Op.notIn]: ['sold', 'expired'] } },
-    order: [ ['updatedAt', 'DESC'] ]
+    include: [
+      { model: User,
+        as: 'PostingUser',
+        attributes: { exclude: ['pass', 'updatedAt', 'createdAt', 'email', 'role'] },
+        include: [
+          {
+            model: Alias,
+            as: 'Aliases',
+            attributes: { exclude: ['createdAt', 'updatedAt'] }
+          }]
+      },
+      {
+        model: Item,
+        as: 'PostedItem',
+        attributes: { exclude: ['createdAt', 'updatedAt'] }
+      },
+      { model: ItemOffer,
+        as: 'Offers',
+        attributes: { exclude: ['createdAt', 'updatedAt'] },
+        include: [
+          {
+            model: User,
+            as: 'OfferingUser',
+            attributes: { exclude: ['pass', 'updatedAt', 'createdAt', 'email', 'role'] }
+          }]
+      }
+    ],
+    order: [
+      ['updatedAt', 'DESC'],
+      [ { model: User, as: 'PostingUser' }, { model: Alias, as: 'Aliases' }, 'Preferred', 'DESC' ]
+    ]
   })
     .then(orders => {
       let resStatus;
