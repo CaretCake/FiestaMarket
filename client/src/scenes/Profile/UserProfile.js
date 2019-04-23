@@ -49,7 +49,7 @@ export class UserProfile extends Component {
         <ul>
           { aliasesArray }
         </ul>
-        <div class="orders-section">
+        <div className="orders-section">
           <h3>Want to Buy</h3>
           <ul>
             { buyOrderArray }

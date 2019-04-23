@@ -6,6 +6,7 @@ export const userService = {
   getById
 };
 
+// Get all users (role required)
 function getAll() {
   return axios.get(process.env.REACT_APP_API_URL + '/users')
     .then(users => {
@@ -18,6 +19,7 @@ function getAll() {
     .catch(error => handleResponse(error.response));
 }
 
+// Get user by id
 function getById(id) {
   return axios.get(process.env.REACT_APP_API_URL + `/users/${id}`)
     .then(userInfo => {
