@@ -23,7 +23,7 @@ passport.use('local', new LocalStrategy(
       // If there is a user with the given username, but the password is incorrect
       else {
         bcrypt.compare(password, dbUser.pass, function (err, result) {
-          if (result == true) {
+          if (result === true) {
             //console.log('login success for user ' + username.toLowerCase());
             // If none of the above, return the user
             return done(null, dbUser);
@@ -43,12 +43,12 @@ passport.use('local', new LocalStrategy(
 // In order to help keep authentication state across HTTP requests,
 // Sequelize needs to serialize and deserialize the user
 passport.serializeUser(function(user, done) {
-  //console.log('serializeUser called on: ' + JSON.stringify(user));
+  console.log('serializeUser called on: ' + JSON.stringify(user));
   done(null, user.userId);
 });
 
 passport.deserializeUser(function(id, done) {
-  //console.log('deserializeUser called on: ' + id);
+  console.log('deserializeUser called on: ' + id);
 
   User.findByPk(id)
     .then(user => {

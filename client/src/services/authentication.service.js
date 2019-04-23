@@ -30,7 +30,10 @@ function login(username, password) {
 
 function logout() {
   // remove user from local storage to log user out
-  axios.get(process.env.REACT_APP_API_URL + '/users/logout')
+  axios.post(process.env.REACT_APP_API_URL + '/users/logout', {
+    userId: this.currentUserValue.userId
+  })
+    .then(handleResponse)
     .then(user => {
     })
     .catch(err => {}/*console.log(err)*/);

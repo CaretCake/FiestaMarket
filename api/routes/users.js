@@ -5,6 +5,7 @@ const saltRounds = 15;
 const passport = require('../config/passport');
 const isAuthenticated = require('../config/middleware/isAuthenticated');
 const isAdmin = require('../config/middleware/isAdmin');
+const setUserStatus = require('../helpers/setUserStatus');
 
 const { User } = require('../config/database');
 const { Alias } = require('../config/database');
@@ -55,7 +56,7 @@ router.post('/add', (req, res) => {
 //Sign in user
 router.post('/login', function(req,res,next) {
     console.log("reached auth endpoint");
-    console.log(req.body);
+
     passport.authenticate("local", function(err, user, info) {
       if (err) {
         console.log("Error: " + err);
@@ -67,6 +68,11 @@ router.post('/login', function(req,res,next) {
       req.logIn(user, function(err) {
         if (err) { return next(err); }
         console.log('logged in user: ' + JSON.stringify(user));
+
+        // Set user status to online
+        setUserStatus('online', user.userId);
+        user.status = 'online';
+
         delete user.pass;
         delete user.createdAt;
         delete user.updatedAt;
@@ -77,8 +83,11 @@ router.post('/login', function(req,res,next) {
 );
 
 //Sign out user
-router.get("/logout", function(req, res) {
-  console.log(req.sessionID);
+router.post("/logout", function(req, res) {
+  // Set user status to offline
+  setUserStatus('offline', req.body.userId);
+
+  // Handle passport session logout and clear sid
   req.logout();
   req.session.destroy((err) => {
     res.status(204).clearCookie('connect.sid');
