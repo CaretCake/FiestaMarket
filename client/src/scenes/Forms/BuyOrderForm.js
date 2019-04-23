@@ -2,7 +2,7 @@ import React from 'react';
 import { ErrorMessage, Field, Form, Formik } from "formik";
 import { orderService, authenticationService } from '../../services/export';
 import { buyOrderSchema } from "./_FormSchema";
-import {Stats} from "../../helpers/stats";
+import { getStatArray } from "../../helpers/stats";
 import history from "../../helpers/history";
 
 
@@ -42,7 +42,7 @@ export class BuyOrderForm extends React.Component {
   };
 
   render() {
-    let stats = this.props.item.StatType === 'normal' ? Stats.normalStats : Stats.prestigeStats;
+    let stats = getStatArray(this.props.item.StatType);
 
     return (
       <div className='form-container order-form'>
