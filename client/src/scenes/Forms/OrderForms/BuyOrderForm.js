@@ -42,7 +42,7 @@ export class BuyOrderForm extends React.Component {
   };
 
   render() {
-    let stats = getStatArray(this.props.item.StatType);
+    let stats = getStatArray(this.props.item.StatType, 'lower');
 
     return (
       <div className='form-container order-form'>

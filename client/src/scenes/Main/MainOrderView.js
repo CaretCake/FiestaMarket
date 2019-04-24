@@ -23,7 +23,6 @@ export class MainOrderView extends React.Component {
       .then(orderInfoFromApi => {
         this.setState({sellOrders: orderInfoFromApi[0].data});
         this.setState({buyOrders: orderInfoFromApi[1].data});
-        console.log(this.state.buyOrders);
       })
       .catch(err => { console.log('err: ' + err); });
   }
@@ -33,11 +32,19 @@ export class MainOrderView extends React.Component {
       return null;
 
     return (
-      <div className='order-view-section'>
-        <div>
-          <OrderList orderType={'sell'} orderList={this.state.sellOrders} />
-          <OrderList orderType={'buy'} orderList={this.state.buyOrders} />
+      <div className='order-view-section flex-row-container'>
+        <div className='flex-left'/>
+        <div className='flex-center list-container'>
+          <div>
+            <h2>Sell</h2>
+            <OrderList orderType={'sell'} orderList={this.state.sellOrders} />
+          </div>
+          <div>
+            <h2>Buy</h2>
+            <OrderList orderType={'buy'} orderList={this.state.buyOrders} />
+          </div>
         </div>
+        <div className='flex-right'/>
       </div>
     );
   }

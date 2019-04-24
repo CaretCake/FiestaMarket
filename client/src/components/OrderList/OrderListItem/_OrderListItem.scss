@@ -1,0 +1,101 @@
+.order-view-list-item {
+  height: 160px;
+  padding: 15px 10px;
+
+  h3 {
+    margin: 0 10px 0 0;
+    width: unset;
+    color: $navy;
+    display: inline-block;
+    font-weight: 500;
+    letter-spacing: 0.3px;
+    &:hover {
+      color: $navy-light;
+    }
+  }
+
+  .order-item-left {
+    width: 15%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: $grey-dark;
+    svg {
+      width: 30px;
+      height: 30px;
+    }
+  }
+
+  .order-item-center {
+    display: flex;
+    width: 75%;
+    flex-direction: column;
+    justify-content: space-between;
+
+    .user-link {
+      color: $navy-light;
+      letter-spacing: 1px;
+
+      &:hover {
+        color: $alert-red;
+      }
+    }
+
+
+    .stat-list ul {
+      display: flex;
+      flex-flow: row wrap;
+      align-content: flex-start;
+      align-items: flex-start;
+      justify-content: left;
+      width: 100%;
+      height: 40px;
+
+      li {
+        text-align: left;
+        border-right: solid 2px $navy-light;
+        padding-right: 10px;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        padding-left: 8px;
+        text-transform: uppercase;
+        letter-spacing: 0.2px;
+        font-size: .96em;
+        align-items: center;
+
+        :first-child {
+          padding-right: 4px;
+        }
+      }
+
+      >:first-child {
+        border-left: solid 2px $navy-light;
+      }
+    }
+  }
+  .order-item-right {
+    width: 10%;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+
+    .bottom-button {
+      margin-top: 10px;
+    }
+
+    button {
+      width: 40px;
+      height: 35px;
+      box-shadow: 0 0 10px 0 $grey-extra-light;
+      color: $navy;
+
+      &:active {
+        background-color: $navy-light;
+        color: $white;
+      }
+    }
+
+  }
+}
