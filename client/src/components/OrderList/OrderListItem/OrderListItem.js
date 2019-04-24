@@ -27,6 +27,9 @@ export class OrderListItem extends React.Component {
               <span>+{ this.props.order.Enhancement }</span>
               <div className='price-section'>
                 <div>
+                  <span>Level: { parseFloat(this.props.order.PostedItem.Level) }</span>
+                </div>
+                <div>
                   <span>{ parseFloat(this.props.order.Price) }</span>
                   <span>G</span>
                 </div>
@@ -65,6 +68,9 @@ export class OrderListItem extends React.Component {
               <Link to={'/users/' + this.props.order.PostedItem.ItemId}><h3>{ this.props.order.PostedItem.ItemName }</h3></Link>
               <span>+{ this.props.order.DesiredEnhancement }</span>
               <div className='price-section'>
+                <div>
+                  <span>Level: { parseFloat(this.props.order.PostedItem.Level) }</span>
+                </div>
                 <div>
                   <span>{ parseFloat(this.props.order.PriceMin) }</span>
                    -
