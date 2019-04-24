@@ -31,11 +31,13 @@ export class OrderListItem extends React.Component {
             <div className='stat-list flex-row-container'>
               <ul>
                 {stats.map((statName) => {
-                  if (this.props.order[statName] > 0) {
+                  //if (this.props.order[statName] > 0) {
                     return <li className='stat' key={statName}>
                       <div>{this.props.order[statName]}</div><div>{statName}</div>
                     </li>;
-                  }
+                  //} else {
+                    //return null;
+                  //}
                 })}
               </ul>
             </div>
@@ -61,11 +63,13 @@ export class OrderListItem extends React.Component {
             <div className='order-name-section'>
               <Link to={'/users/' + this.props.order.PostedItem.ItemId}><h3>{ this.props.order.PostedItem.ItemName }</h3></Link>
               <span>+{ this.props.order.DesiredEnhancement }</span>
-              <div>
-                <span>{ parseFloat(this.props.order.PriceMin) }</span>
-                 -
-                <span>{ parseFloat(this.props.order.PriceMax) }</span>
-                <span>G</span>
+              <div className='price-section'>
+                <div>
+                  <span>{ parseFloat(this.props.order.PriceMin) }</span>
+                   -
+                  <span>{ parseFloat(this.props.order.PriceMax) }</span>
+                  <span>G</span>
+                </div>
                 <span>{ this.props.order.Server }</span>
               </div>
             </div>
