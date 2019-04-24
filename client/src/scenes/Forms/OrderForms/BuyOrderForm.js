@@ -90,7 +90,7 @@ export class BuyOrderForm extends React.Component {
                         <option value='Enid'>Enid</option>
                       </Field>
                     </div>
-                    <div className='price-field-container'>
+                    <div className='related-field-container'>
                       <label>Min Price</label>
                       <div className='field-container'>
                         <div className='field-label-container'>
@@ -121,7 +121,7 @@ export class BuyOrderForm extends React.Component {
                         </div>
                       </div>
                     </div>
-                    <div className='price-field-container'>
+                    <div className='related-field-container'>
                       <label>Max Price</label>
                       <div className='field-container'>
                         <div className='field-label-container'>

@@ -1,0 +1,26 @@
+.filter-section {
+  padding: 0;
+  form {
+    width: 1140px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+
+    .checkbox-group {
+      .checkbox-options {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        width: 200px;
+
+        & > div {
+          width: 50%;
+        }
+      }
+    }
+
+    .field-container {
+      margin: 0 20px;
+    }
+  }
+}

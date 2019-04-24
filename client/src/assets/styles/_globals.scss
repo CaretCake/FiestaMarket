@@ -49,6 +49,27 @@ a {
   user-select: none; /* Non-prefixed version, currently supported by Chrome and Opera */
 }
 
+.gem-icon {
+  background-image: url('../images/Gem.png');
+  display: flex;
+  align-self: center;
+  width: 18px;
+  height: 18px;
+  background-repeat: no-repeat;
+  background-size: cover;
+  margin: 0 5px 0 0;
+}
+.gold-icon {
+  background-image: url('../images/Gold.png');
+  display: flex;
+  align-self: center;
+  width: 18px;
+  height: 18px;
+  background-repeat: no-repeat;
+  background-size: cover;
+  margin: 0 5px 0 0;
+}
+
 .white-item-rarity {
   color: $white-item-rarity;
 }

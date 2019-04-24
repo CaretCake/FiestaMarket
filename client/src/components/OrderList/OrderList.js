@@ -5,7 +5,9 @@ export class OrderList extends React.Component {
 
   render() {
     if (!this.props.orderType || !this.props.orderList)
-      return null;
+      return <div className='order-view-list'>
+        No items found
+      </div>;
 
     return (
       <div className='order-view-list'>

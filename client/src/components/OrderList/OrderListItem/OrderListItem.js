@@ -7,8 +7,11 @@ import { getStatArray } from "../../../helpers/stats";
 export class OrderListItem extends React.Component {
 
   render() {
-    if (!this.props.orderType || !this.props.order)
-      return null;
+    if (!this.props.orderType || !this.props.order) {
+      return <div className='order-view-list-item flex-row-container'>
+              <OrderListItem/>
+             </div>;
+    }
 
     let stats = getStatArray(this.props.order.PostedItem.StatType, 'upper');
 
@@ -20,24 +23,22 @@ export class OrderListItem extends React.Component {
           </div>
           <div className='order-item-center'>
             <div className='order-name-section'>
-              <Link to={'/users/' + this.props.order.PostedItem.ItemId}><h3>{ this.props.order.PostedItem.ItemName }</h3></Link>
+              <Link to={'/items/' + this.props.order.PostedItem.ItemId}><h3>{ this.props.order.PostedItem.ItemName }</h3></Link>
               <span>+{ this.props.order.Enhancement }</span>
-              <div>
-                <span>{ parseFloat(this.props.order.Price) }</span>
-                <span>G</span>
+              <div className='price-section'>
+                <div>
+                  <span>{ parseFloat(this.props.order.Price) }</span>
+                  <span>G</span>
+                </div>
                 <span>{ this.props.order.Server }</span>
               </div>
             </div>
             <div className='stat-list flex-row-container'>
               <ul>
                 {stats.map((statName) => {
-                  //if (this.props.order[statName] > 0) {
-                    return <li className='stat' key={statName}>
-                      <div>{this.props.order[statName]}</div><div>{statName}</div>
-                    </li>;
-                  //} else {
-                    //return null;
-                  //}
+                  return <li className='stat' key={statName}>
+                    <div>{this.props.order[statName]}</div><div>{statName}</div>
+                  </li>;
                 })}
               </ul>
             </div>

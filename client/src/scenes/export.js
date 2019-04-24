@@ -5,6 +5,7 @@ export * from './Forms/OrderForms/SellOrderForm';
 export * from './Forms/OrderForms/BuyOrderForm';
 export * from './Main/MainApp';
 export * from './Main/MainOrderView';
+export * from './Main/FilterSection';
 export * from './Header/Header';
 export * from './Footer/Footer';
 export * from './Profile/UserProfile';

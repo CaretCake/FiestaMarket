@@ -23,23 +23,6 @@
       display: flex;
       flex-direction: row-reverse;
       justify-content: flex-end;
-
-      span  {
-        display: flex;
-        align-self: center;
-        width: 18px;
-        height: 18px;
-        background-repeat: no-repeat;
-        background-size: cover;
-        margin: 0 5px 0 0;
-      }
-
-      .gem-icon {
-        background-image: url('../images/Gem.png');
-      }
-      .gold-icon {
-        background-image: url('../images/Gold.png');
-      }
     }
 
     .number-field {
@@ -47,7 +30,7 @@
     }
   }
 
-  .price-field-container {
+  .related-field-container {
     display: flex;
     flex-direction: row;
     justify-content: flex-start;

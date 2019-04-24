@@ -64,6 +64,8 @@
 
         &:hover {
           color: $navy;
+          transition: color .5s ease-in,background .5s ease-out;
+          -webkit-transition: color .5s ease-in,background .5s ease-out;
         }
 
         svg {
