@@ -40,28 +40,29 @@ export class FilterSection extends React.Component {
   filter() {
     console.log(this.state.filters);
     let tempFilteredData = this.props.savedSellOrders.filter((value, index, arr) => {
-      if (this.state.filters.levelMin > this.state.filters.levelMax || this.state.filters.priceMin > this.state.filters.priceMax) {
+      console.log(value.Price);
+      if (parseFloat(this.state.filters.levelMin) > parseFloat(this.state.filters.levelMax) || parseFloat(this.state.filters.priceMin) > parseFloat(this.state.filters.priceMax)) {
         return false;
       }
       // if minlevel set and < min level, false
-      else if (this.state.filters.levelMin !== 0 && value.PostedItem.Level < this.state.filters.levelMin) {
+      else if (parseFloat(this.state.filters.levelMin) !== 0 && parseFloat(value.PostedItem.Level) < parseFloat(this.state.filters.levelMin)) {
         return false;
       }
       // if maxlevel set and > max level, false
-      else if (this.state.filters.levelMax !== 0 && value.PostedItem.Level > this.state.filters.levelMax) {
+      else if (parseFloat(this.state.filters.levelMax) !== 0 && parseFloat(value.PostedItem.Level) > parseFloat(this.state.filters.levelMax)) {
         return false;
       }
       // if minprice set and < min price, false
-      else if (this.state.filters.priceMin !== 0 && value.Price < this.state.filters.priceMin) {
+      else if (parseFloat(this.state.filters.priceMin) !== 0 && parseFloat(value.Price) < parseFloat(this.state.filters.priceMin)) {
         return false;
       }
       // if maxprice set and > max price, false
-      else if (this.state.filters.priceMax !== 0 && value.Price > this.state.filters.priceMax) {
+      else if (parseFloat(this.state.filters.priceMax) !== 0 && parseFloat(value.Price) > parseFloat(this.state.filters.priceMax)) {
         return false;
       }
       return true;
     });
-    console.log(JSON.stringify(tempFilteredData));
+    //console.log(JSON.stringify(tempFilteredData));
     this.props.handleFilter(tempFilteredData);
   };
 
