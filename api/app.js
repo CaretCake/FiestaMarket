@@ -46,6 +46,8 @@ app.use(function(req, res, next) {
   next();
 });
 
+app.set('json spaces', 2);
+
 // Routes
 const aliasRouter = require('./routes/aliases');
 const buyOrderRouter = require('./routes/buyOrders');
