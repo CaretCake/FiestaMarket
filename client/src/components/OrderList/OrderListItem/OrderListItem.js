@@ -65,7 +65,7 @@ export class OrderListItem extends React.Component {
           </div>
           <div className='order-item-center'>
             <div className='order-name-section'>
-              <Link to={'/users/' + this.props.order.PostedItem.ItemId}><h3>{ this.props.order.PostedItem.ItemName }</h3></Link>
+              <Link to={'/items/' + this.props.order.PostedItem.ItemId}><h3>{ this.props.order.PostedItem.ItemName }</h3></Link>
               <span>+{ this.props.order.DesiredEnhancement }</span>
               <div className='price-section'>
                 <div>
