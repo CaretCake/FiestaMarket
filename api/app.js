@@ -51,16 +51,18 @@ app.set('json spaces', 2);
 // Routes
 const aliasRouter = require('./routes/aliases');
 const buyOrderRouter = require('./routes/buyOrders');
+const contactFormRouter = require('./routes/contactForm');
 const itemRouter = require('./routes/items');
 const sellOrderRouter = require('./routes/sellOrders');
 const userRouter = require('./routes/users');
 
 
-app.use('/aliases', aliasRouter);
-app.use('/buyorders', buyOrderRouter);
-app.use('/items', itemRouter);
-app.use('/sellorders', sellOrderRouter);
-app.use('/users', userRouter);
+app.use('/v1/aliases', aliasRouter);
+app.use('/v1/buyorders', buyOrderRouter);
+app.use('/v1/contactformsubmissions', contactFormRouter);
+app.use('/v1/items', itemRouter);
+app.use('/v1/sellorders', sellOrderRouter);
+app.use('/v1/users', userRouter);
 
 
 // catch 404 and forward to error handler

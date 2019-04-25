@@ -1,5 +1,6 @@
 const Sequelize = require('sequelize');
 
+require('dotenv').config();
 const aliasModel = require('../models/Alias.js');
 const buyOrderModel = require('../models/BuyOrder.js');
 const itemModel = require('../models/Item.js');
@@ -8,7 +9,6 @@ const sellOrderModel = require('../models/SellOrder.js');
 const userModel = require('../models/User.js');
 const userReviewModel = require('../models/UserReview.js');
 const contactFormSubmissionModel = require('../models/ContactFormSubmission.js');
-require('dotenv').config();
 
 const sequelize = new Sequelize(process.env.DB_NAME, process.env.DB_USER, process.env.DB_PASS, {
   host      : process.env.DB_CONN,
