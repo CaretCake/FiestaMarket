@@ -6,14 +6,7 @@ const passport = require('../config/passport');
 const isAuthenticated = require('../config/middleware/isAuthenticated');
 const isAdmin = require('../config/middleware/isAdmin');
 const setUserStatus = require('../helpers/setUserStatus');
-
-const { User } = require('../config/database');
-const { Alias } = require('../config/database');
-const { UserReview } = require('../config/database');
-const { BuyOrder } = require('../config/database');
-const { SellOrder } = require('../config/database');
-const { ItemOffer } = require('../config/database');
-const { Item } = require('../config/database');
+const { Alias, BuyOrder, Item, ItemOffer, SellOrder, User, UserReview } = require('../config/database');
 
 //Get user list
 router.get('', isAuthenticated, isAdmin, (req, res) => {
@@ -21,7 +14,6 @@ router.get('', isAuthenticated, isAdmin, (req, res) => {
     { attributes: { exclude: ['pass'] }
     })
     .then(users => {
-      console.log(users);
       res.status(200).json(users);;
     })
     .catch(err => console.log(err));
@@ -29,7 +21,6 @@ router.get('', isAuthenticated, isAdmin, (req, res) => {
 
 //Add a user
 router.post('/add', (req, res) => {
-  console.log(req.body);
   bcrypt.hash(req.body.pass, saltRounds, function (err, hash){
     User.create({
       userName: req.body.username,
@@ -39,15 +30,14 @@ router.post('/add', (req, res) => {
     })
     .then(function(data) {
       if (data) {
-        return res.status(201).json({ message: 'success' });
+        return res.status(201).json(data);
       }
     })
     .catch(function (error) {
-      // print the error details
-      console.log('message: ' + JSON.stringify(error.errors));
-      console.log('type: ' + JSON.stringify(error.errors[0].type));
-      if (error.errors[0].type === 'unique violation') {
-        res.status(409).json({ message: error.errors[0].message, field: error.errors[0].path });
+      if (error.errors) { // is SequelizeValidationError
+        res.status(422).json({ message: error.errors[0].message, field: error.errors[0].path.toLowerCase() });
+      } else {
+        res.status(400).json({ message: error });
       }
     });
   });
@@ -55,15 +45,13 @@ router.post('/add', (req, res) => {
 
 //Sign in user
 router.post('/login', function(req,res,next) {
-    console.log("reached auth endpoint");
-
     passport.authenticate("local", function(err, user, info) {
       if (err) {
         console.log("Error: " + err);
         return next(err);
       }
       if (!user) {
-        console.log("No user");
+        return res.status(401).json({message: info.message, user });
       }
       req.logIn(user, function(err) {
         if (err) { return next(err); }
@@ -90,18 +78,16 @@ router.post("/logout", function(req, res) {
   // Handle passport session logout and clear sid
   req.logout();
   req.session.destroy((err) => {
-    res.status(204).clearCookie('connect.sid');
-    res.send('Logged out');
+    res.status(204).clearCookie('connect.sid').json('Logged out');
   });
 });
 
 //Get user by id
-router.get('/:userId?', isAuthenticated, (req, res) => {
-  console.log('made it here');
+router.get('/:userId?', (req, res) => {
   if(req.params.userId) {
     User.findOne(
       { where: { userId: req.params.userId },
-        attributes: { exclude: ['pass'] },
+        attributes: { exclude: ['pass', 'email'] },
         include: [
           { model: Alias,
             as: 'Aliases',
@@ -125,6 +111,38 @@ router.get('/:userId?', isAuthenticated, (req, res) => {
                 model: Item,
                 as: 'PostedItem',
                 attributes: { exclude: ['createdAt', 'updatedAt'] }
+              },
+              {
+                model: ItemOffer,
+                as: 'Offers',
+                attributes: { exclude: ['updatedAt'] }
+              }]
+          },
+          {
+            model: ItemOffer,
+            as: 'Offers',
+            attributes: { exclude: ['updatedAt'] },
+            include: [
+              {
+                model: SellOrder,
+                as: 'SellOrder',
+                attributes: { exclude: ['createdAt'] },
+                include: [
+                  {
+                    model: Item,
+                    as: 'PostedItem',
+                    attributes: { exclude: ['createdAt', 'updatedAt'] }
+                  },
+                  {
+                    model: User,
+                    as: 'PostingUser',
+                    attributes: { exclude: ['pass', 'email'] },
+                    include: [
+                      { model: Alias,
+                        as: 'Aliases',
+                        attributes: { exclude: ['createdAt', 'updatedAt'] }
+                      }]
+                  }]
               }]
           }
         ],
@@ -138,103 +156,43 @@ router.get('/:userId?', isAuthenticated, (req, res) => {
         if (user === null) {
           res.status(404);
         }
-        res.json(user);
+        res.status(200).json({ user });
       })
-      .catch(err => res.status(500).send({ error: "Error searching for user" }));
+      .catch(err => res.status(500).send({ error: "error searching for user" }));
   } else {
     res.status(400).send({ error: 'no user provided' });
   }
 });
 
-//Patch user by id
-router.put('/:userId?/update/status', isAuthenticated, (req, res) => {
-  //setUserStatus(req.body.status, req.user.userId);
-  //console.log(JSON.stringify(req.status));
-  //console.log(JSON.stringify(req.fields));
-  // The equivalent call using update looks like this:
-  /*User.update({ title: 'foooo', description: 'baaaaaar'}, {fields: ['title']})
-    .then(() => {
-    // title will now be 'foooo' but description is the very same as before
+// Update user
+router.put('/:userId?/update', isAuthenticated, (req, res) => {
+  if (parseInt(req.user.userId) !== parseInt(req.params.userId)) {
+    res.status(409).json({ error: "user ids do not match" });
+  } else {
+    User.findByPk(req.user.userId,
+      {
+        attributes: { exclude: ['pass', 'email', 'createdAt', 'updatedAt'] }
+      }).then(user => {
+      if (!user) {
+        res.status(404).json({error: "issue finding user after update"});
+      }
+      User.update(
+          {
+            status: req.body.status || user.status,
+            userName: req.body.username || user.userName
+          },
+          { where: { userId: req.user.userId } }
+        )
+        .then(() => {
+          user.userName = req.body.username || user.userName;
+          user.status = req.body.status || user.status;
+          res.status(200).send(user);
+        })
+        .catch((error) => res.status(400).send(error));
     })
-    .catch(err => res.status(500).send({ error: "Error searching for user" }));*/
-  User.update(
-    { status: req.body.status },
-    { where:
-        { userId: req.user.userId }
-    }
-  ).then(function(rowsUpdated) {
-    return res.status(204).send({ message: 'success' });
-  }).catch( err => res.status(400).send({ error: 'err' }) );
+      .catch((error) => res.status(400).send(error));
+  }
 });
-
-
-
-//Get user's aliases
-router.get('/:userId?/aliases', (req, res) => {
-  Alias.findAll({
-    where: { UserUserId: req.params.userId } })
-    .then(alias => {
-      let resStatus;
-      alias !== null ? resStatus = 200 : resStatus = 404;
-      res.status(resStatus).json(alias);
-    });
-});
-
-//Get user's received reviews
-router.get('/:userId?/receivedreviews', (req, res) => {
-  UserReview.findAll({
-    where: { reviewedUserId: req.params.userId } })
-    .then(userReview => {
-      let resStatus;
-      userReview !== null ? resStatus = 200 : resStatus = 404;
-      res.status(resStatus).json(userReview);
-    });
-});
-
-//Get user's written reviews
-router.get('/:userId?/writtenreviews', (req, res) => {
-  UserReview.findAll({
-    where: { reviewingUserId: req.params.userId } })
-    .then(userReview => {
-      let resStatus;
-      userReview !== null ? resStatus = 200 : resStatus = 404;
-      res.status(resStatus).json(userReview);
-    });
-});
-
-//Get user's sell orders
-router.get('/:userId?/sellorders', (req, res) => {
-  SellOrder.findAll({
-    where: { PostingUserUserId: req.params.userId } })
-    .then(sellOrder => {
-      let resStatus;
-      sellOrder !== null ? resStatus = 200 : resStatus = 404;
-      res.status(resStatus).json(sellOrder);
-    });
-});
-
-//Get user's buy orders
-router.get('/:userId?/buyorders', (req, res) => {
-  BuyOrder.findAll({
-    where: { PostingUserUserId: req.params.userId } })
-    .then(buyOrder => {
-      let resStatus;
-      buyOrder !== null ? resStatus = 200 : resStatus = 404;
-      res.status(resStatus).json(buyOrder);
-    });
-});
-
-//Get user's item offers
-router.get('/:userId?/itemoffers', (req, res) => {
-  ItemOffer.findAll({
-    where: { OfferingUserUserId: req.params.userId } })
-    .then(itemOffer => {
-      let resStatus;
-      itemOffer !== null ? resStatus = 200 : resStatus = 404;
-      res.status(resStatus).json(itemOffer);
-    });
-});
-
 
 
 module.exports = router;
