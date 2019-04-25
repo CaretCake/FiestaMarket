@@ -51,8 +51,6 @@ router.get('/', (req, res) => {
 
 //Add a SellOrder
 router.post('/add', isAuthenticated, (req, res) => {
-  console.log('price: ' + req.body.price);
-
   SellOrder.create({
     Price: req.body.price,
     OpenToOffers: req.body.openToOffers,

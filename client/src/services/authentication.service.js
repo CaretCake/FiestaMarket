@@ -19,13 +19,11 @@ function login(username, password) {
   })
     .then(handleResponse)
     .then(response => {
-      //console.log('response: ' + JSON.stringify(response));
       // store user details and token in local storage to keep user logged in between page refreshes
-      //.log('user: ' + JSON.stringify(response.data.user));
       localStorage.setItem('currentUser', JSON.stringify(response.data.user));
       currentUserSubject.next(response.data.user);
       return response;
-    }).catch(err => {}/*console.log(err)*/);
+    }).catch(err => {});
 }
 
 function logout() {

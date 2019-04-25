@@ -5,7 +5,7 @@ module.exports = function(req, res, next) {
   if (req.user) {
     return next();
   }
-  // If the user isn't logged in, redirect them to the login page
-  //console.log('not logged in ' + req.user);
-  res.status(401).send({ error: 'unauthorized user' });
+
+  // User is not login, send error
+  res.status(401).json({ error: 'user not authenticated' });
 };
