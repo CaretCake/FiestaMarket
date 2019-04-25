@@ -21,8 +21,9 @@ export class MainOrderView extends React.Component {
     this.getOrderLists();
   }
 
-  handleFilter(filteredSellOrders) {
+  handleFilter(filteredSellOrders, filteredBuyOrders) {
     this.setState({ sellOrders: filteredSellOrders });
+    this.setState({ buyOrders: filteredBuyOrders });
   };
 
   getOrderLists() {
@@ -86,17 +87,30 @@ export class MainOrderView extends React.Component {
 
     return (
       <div>
-        <FilterSection sellOrders={this.state.sellOrders} handleFilter={this.handleFilter.bind(this)} savedSellOrders={this.state.savedSellOrders} onFormSubmit={(values) => {this.setState({values: values}); this.sort(); }} />
+        <FilterSection
+          buyOrders={this.state.buyOrders}
+          sellOrders={this.state.sellOrders}
+          handleFilter={this.handleFilter.bind(this)}
+          savedBuyOrders={this.state.savedBuyOrders}
+          savedSellOrders={this.state.savedSellOrders}
+          onFormSubmit={(values) => {this.setState({values: values}); this.sort(); }}
+        />
         <div className='order-view-section flex-row-container'>
           <div className='flex-left'/>
           <div className='flex-center list-container'>
             <div>
               <h2>Sell</h2>
-              <OrderList orderType={'sell'} orderList={this.state.sellOrders} />
+              <OrderList
+                orderType={'sell'}
+                orderList={this.state.sellOrders}
+              />
             </div>
             <div>
               <h2>Buy</h2>
-              <OrderList orderType={'buy'} orderList={this.state.buyOrders} />
+              <OrderList
+                orderType={'buy'}
+                orderList={this.state.buyOrders}
+              />
             </div>
           </div>
           <div className='flex-right'/>
