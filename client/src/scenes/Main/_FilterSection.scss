@@ -1,7 +1,7 @@
 .filter-section {
   padding: 0;
   min-height: 300px;
-  box-shadow: 0 0 15px $grey-extra-lightest;
+  box-shadow: 0 7px 15px $grey-extra-lightest;
   margin-bottom: 30px;
 
   .flex-center {
@@ -14,13 +14,15 @@
 
   header {
     width: 100%;
-    bottom-border: 1px solid $grey-extra-lightest;
+    padding-bottom: 15px;
+    border-bottom: 1px solid $grey-extra-light;
     h1 {
       width: 100%;
       text-align: center;
       font-weight: 400;
       text-transform: uppercase;
       letter-spacing: 2px;
+      margin: 20px 0 0 0;
     }
   }
 
