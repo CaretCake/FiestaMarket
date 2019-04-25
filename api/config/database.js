@@ -7,6 +7,7 @@ const itemOfferModel = require('../models/ItemOffer.js');
 const sellOrderModel = require('../models/SellOrder.js');
 const userModel = require('../models/User.js');
 const userReviewModel = require('../models/UserReview.js');
+const contactFormSubmissionModel = require('../models/ContactFormSubmission.js');
 require('dotenv').config();
 
 const sequelize = new Sequelize(process.env.DB_NAME, process.env.DB_USER, process.env.DB_PASS, {
@@ -23,6 +24,7 @@ const sequelize = new Sequelize(process.env.DB_NAME, process.env.DB_USER, proces
 
 const Alias = aliasModel(sequelize, Sequelize);
 const BuyOrder = buyOrderModel(sequelize, Sequelize);
+const ContactFormSubmission = contactFormSubmissionModel(sequelize, Sequelize);
 const Item = itemModel(sequelize, Sequelize);
 const ItemOffer = itemOfferModel(sequelize, Sequelize);
 const SellOrder = sellOrderModel(sequelize, Sequelize);
@@ -55,11 +57,12 @@ sequelize.sync({ })
 
 module.exports = {
   sequelize,
-  User,
+  Alias,
   BuyOrder,
+  ContactFormSubmission,
   Item,
   ItemOffer,
   SellOrder,
   UserReview,
-  Alias
+  User
 };
