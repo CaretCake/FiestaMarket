@@ -1,6 +1,7 @@
 import React from 'react';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import { contactSchema } from "./_FormSchema";
+import { contactFormService } from '../../services/export';
 
 export class ContactForm extends React.Component {
 
@@ -10,6 +11,11 @@ export class ContactForm extends React.Component {
     }) => {
 
     //TODO: process form submission here
+    contactFormService.postContactForm(values.contactType, values.email, values.message)
+      .then( form => {
+        console.log(form);
+        }
+      );
 
     setSubmitting(false);
   };
@@ -19,6 +25,7 @@ export class ContactForm extends React.Component {
       <div class='form-container'>
         <Formik
           initialValues={{
+            contactType: 'feedback',
             email: '',
             message: ''
           }}

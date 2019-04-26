@@ -32,8 +32,7 @@ export const registerSchema = Yup.object().shape({
 
 export const contactSchema = Yup.object().shape({
   email: Yup.string()
-    .email('Invalid email')
-    .required('*'),
+    .email('Invalid email'),
   message: Yup.string()
     .min(2, '')
     .max(250, '250 character limit hit')
