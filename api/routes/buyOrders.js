@@ -2,11 +2,12 @@ const express = require('express');
 const router = express.Router();
 const { BuyOrder, User, Alias, Item } = require('../config/database');
 const isAuthenticated = require('../config/middleware/isAuthenticated');
+const isAdmin = require('../config/middleware/isAdmin');
 const Sequelize = require('sequelize');
 const Op = Sequelize.Op;
 
-//Get buy order list
-router.get('/', (req, res) => {
+// Get buy order list
+router.get('', (req, res) => {
   BuyOrder.findAll({
     where: { OrderStatus: { [Op.notIn]: ['bought', 'expired'] } },
     include: [
@@ -33,14 +34,11 @@ router.get('/', (req, res) => {
       orders !== null ? resStatus = 200 : resStatus = 404;
       res.status(resStatus).json(orders);
     })
-    .catch(err => console.log(err));
+    .catch(err => res.status(500).json({ message: "Server error" }));
 });
 
-//Add a BuyOrder
-router.post('/add', isAuthenticated, (req, res) => {
-  console.log('yo' + JSON.stringify(req.body));
-  console.log('yoyo' + JSON.stringify(req.user));
-
+// Create a BuyOrder
+router.post('', isAuthenticated, (req, res) => {
   BuyOrder.create({
     PriceMin: req.body.priceMin,
     PriceMax: req.body.priceMax,
@@ -78,7 +76,7 @@ router.post('/add', isAuthenticated, (req, res) => {
     });
 });
 
-//Get BuyOrder by id
+// Get BuyOrder by id
 router.get('/:buyOrderId?', (req, res) => {
   let query;
   if(req.params.buyOrderId) {
@@ -88,6 +86,23 @@ router.get('/:buyOrderId?', (req, res) => {
     query = BuyOrder.findAll({ include: [ BuyOrder ]});
   }
   return query.then(buyOrders => res.json(buyOrders));
+});
+
+// Delete a buy order
+router.delete('/:id', isAuthenticated, isAdmin, (req, res) => {
+  BuyOrder.findByPk(req.params.id)
+    .then(buyOrder => {
+      if (!buyOrder) {
+        return res.status(404).json({
+          message: 'buy order not found',
+        });
+      }
+      return buyOrder
+        .destroy()
+        .then(() => res.status(204).json())
+        .catch((error) => res.status(400).json(error));
+    })
+    .catch((error) => res.status(400).json(error));
 });
 
 module.exports = router;

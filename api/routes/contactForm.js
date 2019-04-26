@@ -2,20 +2,19 @@ const express = require('express');
 const router = express.Router();
 const isAuthenticated = require('../config/middleware/isAuthenticated');
 const isAdmin = require('../config/middleware/isAdmin');
-const Sequelize = require('sequelize');
 const { ContactFormSubmission, User } = require('../config/database');
 
-//Get contact form submission list
-router.get('', isAuthenticated, isAdmin, (req, res) => {
+// Get contact form submission list
+router.get('/', isAuthenticated, isAdmin, (req, res) => {
   ContactFormSubmission.findAll()
     .then(cFormSubmissions => {
       res.status(200).json(cFormSubmissions);;
     })
-    .catch(err => console.log(err));
+    .catch(err => res.status(500).json({ message: "Server error" }));
 });
 
-//Add a contact form submission
-router.post('/add', (req, res) => {
+// Create a contact form submission
+router.post('/', (req, res) => {
   ContactFormSubmission.create({
     reasonForMessage: req.body.reasonForMessage,
     email: req.body.email || null,
@@ -35,9 +34,9 @@ router.post('/add', (req, res) => {
     });
 });
 
-//Add a contact form submission
-router.delete('/delete/:id', isAuthenticated, isAdmin, (req, res) => {
-  ContactFormSubmission.findByPk(req.params.id)
+// Delete a contact form submission
+router.delete('/:formId', isAuthenticated, isAdmin, (req, res) => {
+  ContactFormSubmission.findByPk(req.params.formId)
     .then(cFormSubmission => {
       if (!cFormSubmission) {
         return res.status(400).json({

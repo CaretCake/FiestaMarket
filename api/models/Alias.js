@@ -29,13 +29,7 @@ module.exports = (sequelize, type) => {
       }
     },
     Server: {
-      type: type.ENUM('Isya', 'Pagel', 'Jenira', 'Enid'),
-      validate: {
-        isIn: {
-          args: [['Isya', 'Pagel', 'Jenira', 'Enid']],
-          msg: "Server must be Isya, Pagel, Jenira, or Enid"
-        }
-      }
+      type: type.ENUM('Isya', 'Pagel', 'Jenira', 'Enid')
     },
     Preferred: {
       type: type.BOOLEAN,

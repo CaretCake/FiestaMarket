@@ -58,10 +58,10 @@ const userRouter = require('./routes/users');
 
 
 app.use('/v1/aliases', aliasRouter);
-app.use('/v1/buyorders', buyOrderRouter);
-app.use('/v1/contactformsubmissions', contactFormRouter);
+app.use('/v1/buy-orders', buyOrderRouter);
+app.use('/v1/contact-form-submissions', contactFormRouter);
 app.use('/v1/items', itemRouter);
-app.use('/v1/sellorders', sellOrderRouter);
+app.use('/v1/sell-orders', sellOrderRouter);
 app.use('/v1/users', userRouter);
 
 
