@@ -21,7 +21,7 @@ function getAll() {
 }
 
 function postSellOrder(price, openToOffers, server, enhancement, end, dex, int, str, spr, hp, sp, dmg, mdmg, def, mdef, aim, eva, itemId, userId) {
-  return axios.post(process.env.REACT_APP_API_URL + '/sell-orders', {
+  return axios.post(process.env.REACT_APP_API_URL + `/items/${itemId}/sell-orders`, {
     price: price,
     openToOffers: openToOffers,
     server: server,

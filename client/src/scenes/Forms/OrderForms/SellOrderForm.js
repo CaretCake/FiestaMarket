@@ -42,7 +42,7 @@ export class SellOrderForm extends React.Component {
   };
 
   render() {
-    let stats = this.props.item.StatType === 'normal' ? Stats.uNormalStats : Stats.uPrestigeStats;
+    let stats = this.props.item.StatType === 'normal' ? Stats.lNormalStats : Stats.lPrestigeStats;
 
     return (
       <div className='form-container order-form'>

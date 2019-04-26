@@ -17,7 +17,7 @@ export class UserProfile extends Component {
         if (!userInfoFromApi) {
           this.props.history.push('/404/Error');
         }
-        this.setState({user: userInfoFromApi});
+        this.setState({user: userInfoFromApi.user });
       })
       .catch(err => {}/*console.log('profile err: ' + JSON.stringify(err))*/);
   }
@@ -26,6 +26,7 @@ export class UserProfile extends Component {
     if(!this.state.user)
       return null;
 
+    console.log(JSON.stringify(this.state.user));
     let aliasesArray = this.state.user.Aliases.map((alias) => {
       return (
         <li key={ alias.id }> { alias.AliasName } </li>
