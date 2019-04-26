@@ -32,7 +32,7 @@ function getById(query) {
 }
 
 function getSellOrders(query) {
-  return axios.get(process.env.REACT_APP_API_URL + `/items/${query}/sellOrders`)
+  return axios.get(process.env.REACT_APP_API_URL + `/items/${query}/sell-orders`)
     .then(handleResponse)
     .then(data => {
       return data;
@@ -43,7 +43,7 @@ function getSellOrders(query) {
 }
 
 function getBuyOrders(query) {
-  return axios.get(process.env.REACT_APP_API_URL + `/items/${query}/buyOrders`)
+  return axios.get(process.env.REACT_APP_API_URL + `/items/${query}/buy-orders`)
     .then(handleResponse)
     .then(data => {
       return data;

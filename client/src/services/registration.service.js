@@ -11,7 +11,7 @@ export const registrationService = {
 function register(username, email, password) {
 
   //console.log('submitting: ' + username + ', ' + email + ', ' + password);
-  return axios.post(process.env.REACT_APP_API_URL + '/users/add', {
+  return axios.post(process.env.REACT_APP_API_URL + '/users', {
     username: username,
     email: email,
     pass: password

@@ -35,7 +35,7 @@ function getById(id) {
 
 // Update user status by id
 function updateStatusById(id, status) {
-  return axios.put(process.env.REACT_APP_API_URL + `/users/${id}/update/status`, {
+  return axios.put(process.env.REACT_APP_API_URL + `/users/${id}`, {
     status: status
   })
     .then(res => {

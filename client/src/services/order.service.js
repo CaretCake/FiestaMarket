@@ -10,8 +10,8 @@ export const orderService = {
 // Get all orders
 function getAll() {
   return Promise.all([
-    axios.get(process.env.REACT_APP_API_URL + '/sellorders'),
-    axios.get(process.env.REACT_APP_API_URL + '/buyorders')
+    axios.get(process.env.REACT_APP_API_URL + '/sell-orders'),
+    axios.get(process.env.REACT_APP_API_URL + '/buy-orders')
   ])
     .then(values => {
       //console.log('data: ' + JSON.stringify(values[0]));
@@ -21,7 +21,7 @@ function getAll() {
 }
 
 function postSellOrder(price, openToOffers, server, enhancement, end, dex, int, str, spr, hp, sp, dmg, mdmg, def, mdef, aim, eva, itemId, userId) {
-  return axios.post(process.env.REACT_APP_API_URL + '/sellorders/add', {
+  return axios.post(process.env.REACT_APP_API_URL + '/sell-orders', {
     price: price,
     openToOffers: openToOffers,
     server: server,
@@ -48,7 +48,7 @@ function postSellOrder(price, openToOffers, server, enhancement, end, dex, int, 
 }
 
 function postBuyOrder(priceMin, priceMax, server, enhancement, end, dex, int, str, spr, hp, sp, dmg, mdmg, def, mdef, aim, eva, itemId, userId) {
-  return axios.post(process.env.REACT_APP_API_URL + '/buyorders/add', {
+  return axios.post(process.env.REACT_APP_API_URL + '/buy-orders', {
     priceMin: priceMin,
     priceMax: priceMax,
     server: server,

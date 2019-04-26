@@ -147,9 +147,8 @@ router.get('/:itemId?/buy-orders', (req, res) => {
   }
 });
 
-
-// Create buy order of user
-router.post('/:userId?/buy-orders', isAuthenticated, (req, res) => {
+// Create buy order of item
+router.post('/:itemId?/buy-orders', isAuthenticated, (req, res) => {
   BuyOrder.create({
     PriceMin: req.body.priceMin,
     PriceMax: req.body.priceMax,
@@ -187,5 +186,60 @@ router.post('/:userId?/buy-orders', isAuthenticated, (req, res) => {
       }
     });
 });
+
+
+router.get('/:itemId?/sell-orders/average', (req, res) => {
+  if(!req.params.itemId) {
+    res.status(422).json({ message: 'no item provided' });
+  } else {
+    SellOrder.findAll({
+      where: {
+        PostedItemItemId: req.params.itemId
+      },
+      attributes: [[Sequelize.fn('AVG', Sequelize.col('Price')), 'average']]
+    })
+      .then(average => {
+        if (average) {
+          return res.status(201).json({ average });
+        }
+      })
+      .catch(function (error) {
+        if (error.errors) { // is SequelizeValidationError
+          res.status(422).json({ message: error.errors[0].message, field: error.errors[0].path.toLowerCase() });
+        } else {
+          res.status(400).json({ message: error });
+        }
+      });
+  }
+});
+
+router.get('/:itemId?/buy-orders/average', (req, res) => {
+  if(!req.params.itemId) {
+    res.status(422).json({ message: 'no item provided' });
+  } else {
+    BuyOrder.findAll({
+      where: {
+        PostedItemItemId: req.params.itemId
+      },
+      attributes: [
+        [Sequelize.fn('AVG', Sequelize.col('PriceMin')), 'minAverage'],
+        [Sequelize.fn('AVG', Sequelize.col('PriceMax')), 'maxAverage']
+      ]
+    })
+      .then(average => {
+        if (average) {
+          return res.status(201).json({ average });
+        }
+      })
+      .catch(function (error) {
+        if (error.errors) { // is SequelizeValidationError
+          res.status(422).json({ message: error.errors[0].message, field: error.errors[0].path.toLowerCase() });
+        } else {
+          res.status(400).json({ message: error });
+        }
+      });
+  }
+});
+
 
 module.exports = router;
