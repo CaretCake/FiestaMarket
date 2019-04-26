@@ -43,6 +43,11 @@ router.get('/:userId?', (req, res) => {
               model: Item,
               as: 'PostedItem',
               attributes: { exclude: ['createdAt', 'updatedAt'] }
+            },
+            {
+              model: User,
+              as: 'PostingUser',
+              attributes: { exclude: ['createdAt', 'updatedAt', 'pass', 'email']}
             }]
         },
         { model: SellOrder,
@@ -58,6 +63,11 @@ router.get('/:userId?', (req, res) => {
               model: ItemOffer,
               as: 'Offers',
               attributes: { exclude: ['updatedAt'] }
+            },
+            {
+              model: User,
+              as: 'PostingUser',
+              attributes: { exclude: ['createdAt', 'updatedAt', 'pass', 'email']}
             }]
         },
         {

@@ -13,6 +13,8 @@ export class OrderListItem extends React.Component {
              </div>;
     }
 
+    console.log(this.props.order);
+
     let stats = getStatArray(this.props.order.PostedItem.StatType, 'upper');
 
     if(this.props.orderType === 'sell') {

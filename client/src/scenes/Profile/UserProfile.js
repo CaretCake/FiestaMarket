@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { userService } from '../../services/export';
 import { handleResponse } from "../../helpers/handle-response";
+import {OrderList} from "../../components/OrderList/OrderList";
 
 export class UserProfile extends Component {
   constructor(props) {
@@ -26,20 +27,10 @@ export class UserProfile extends Component {
     if(!this.state.user)
       return null;
 
-    console.log(JSON.stringify(this.state.user));
+    console.log(JSON.stringify(this.state.user.BuyOrders));
     let aliasesArray = this.state.user.Aliases.map((alias) => {
       return (
         <li key={ alias.id }> { alias.AliasName } </li>
-      );
-    });
-    let buyOrderArray = this.state.user.BuyOrders.map((buyOrder) => {
-      return (
-        <li key={ buyOrder.BuyOrderId }> { buyOrder.PostedItem.ItemName } </li>
-      );
-    });
-    let sellOrderArray = this.state.user.SellOrders.map((sellOrder) => {
-      return (
-        <li key={ sellOrder.SellOrderId }> { sellOrder.PostedItem.ItemName } </li>
       );
     });
 
@@ -53,11 +44,17 @@ export class UserProfile extends Component {
         <div className="orders-section">
           <h3>Want to Buy</h3>
           <ul>
-            { buyOrderArray }
+            <OrderList
+              orderType={'buy'}
+              orderList={this.state.user.BuyOrders}
+            />
           </ul>
           <h3>Want to Sell</h3>
           <ul>
-            { sellOrderArray }
+            <OrderList
+              orderType={'sell'}
+              orderList={this.state.user.SellOrders}
+            />
           </ul>
         </div>
       </div>
