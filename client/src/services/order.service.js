@@ -48,7 +48,7 @@ function postSellOrder(price, openToOffers, server, enhancement, end, dex, int, 
 }
 
 function postBuyOrder(priceMin, priceMax, server, enhancement, end, dex, int, str, spr, hp, sp, dmg, mdmg, def, mdef, aim, eva, itemId, userId) {
-  return axios.post(process.env.REACT_APP_API_URL + '/buy-orders', {
+  return axios.post(process.env.REACT_APP_API_URL + `/items/${itemId}/buy-orders`, {
     priceMin: priceMin,
     priceMax: priceMax,
     server: server,
