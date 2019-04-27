@@ -1,5 +1,5 @@
 import React from 'react';
-import { OrderListItemEdited } from './OrderListItem';
+import { OrderListItem } from './OrderListItem';
 
 export class OrderList extends React.Component {
 
@@ -12,9 +12,7 @@ export class OrderList extends React.Component {
     return (
       <div className='order-view-list'>
         {this.props.orderList.map((order, index) => {
-          console.log(order);
-          console.log(this.props.orderType);
-          return <OrderListItemEdited order={order} orderType={this.props.orderType} view={this.props.view} key={index} />;
+          return <OrderListItem order={order} orderType={this.props.orderType} view={this.props.view} key={index} />;
         })}
       </div>
     );

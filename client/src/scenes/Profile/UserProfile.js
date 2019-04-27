@@ -48,7 +48,7 @@ export class UserProfile extends Component {
             <OrderList
               orderType={'buy'}
               orderList={this.state.user.BuyOrders}
-              view={ authenticationService.currentUserValue.userId === this.props.userId ?
+              view={ parseFloat(authenticationService.currentUserValue.userId) === parseFloat(this.props.userId) ?
                 'manage' : 'main'}
             />
           </ul>
@@ -57,7 +57,7 @@ export class UserProfile extends Component {
             <OrderList
               orderType={'sell'}
               orderList={this.state.user.SellOrders}
-              view={ authenticationService.currentUserValue.userId === this.props.userId ?
+              view={ parseFloat(authenticationService.currentUserValue.userId) === parseFloat(this.props.userId) ?
                 'manage' : 'main'}
             />
           </ul>
