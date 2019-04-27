@@ -22,8 +22,10 @@ function login(username, password) {
       // store user details and token in local storage to keep user logged in between page refreshes
       localStorage.setItem('currentUser', JSON.stringify(response.data.user));
       currentUserSubject.next(response.data.user);
-      return response;
-    }).catch(err => {});
+      return response.data;
+    }).catch(err => {
+      return err.response.data;
+    });
 }
 
 function logout() {

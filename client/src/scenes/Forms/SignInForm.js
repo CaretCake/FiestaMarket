@@ -10,10 +10,6 @@ export class SignInForm extends React.Component {
   constructor(props) {
     super(props);
 
-    this.state = {
-      serverValidationErrorMessage: null
-    };
-
     if (authenticationService.currentUserValue) {
       this.props.history.push('/');
     }
@@ -21,19 +17,21 @@ export class SignInForm extends React.Component {
 
   handleSignInSubmit = (values, {
       props = this.props,
-      setSubmitting
+      setSubmitting,
+      setFieldError
     }) => {
 
     authenticationService.login(values.email, values.password)
       .then(
         user => {
-          const { from } = this.props.location.state || { from: { pathname: "/" } };
-          this.props.history.push(from);
-        },
-        error => {
-          //console.log(error);
-        }
-      );
+          if (user.message !== 'success') {
+            setFieldError('email', user.message);
+          } else {
+            const {from} = this.props.location.state || {from: {pathname: "/"}};
+            this.props.history.push(from);
+          }
+        })
+      .catch( err => {});
 
     setSubmitting(false);
   };
@@ -51,7 +49,6 @@ export class SignInForm extends React.Component {
         },
         error => {
           setFieldError(error.field.toLowerCase(), error.message);
-          //console.log(error);
         }
       );
 
@@ -125,7 +122,6 @@ export class SignInForm extends React.Component {
               render={formProps => {
                 return(
                   <Form>
-                    { this.state.serverValidationErrorMessage  && <ErrorMessage name='server'/>}
                     <div className='field-container'>
                       <div className='field-label-container'>
                         <label>Username</label>
