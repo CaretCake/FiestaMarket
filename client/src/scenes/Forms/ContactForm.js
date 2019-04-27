@@ -7,17 +7,20 @@ export class ContactForm extends React.Component {
 
   handleSubmit = (values, {
       props = this.props,
-      setSubmitting
+      setSubmitting,
+      resetForm
     }) => {
 
-    //TODO: process form submission here
+    setSubmitting(true);
+
     contactFormService.postContactForm(values.contactType, values.email, values.message)
       .then( form => {
         console.log(form);
+        setSubmitting(false);
+        resetForm();
         }
       );
 
-    setSubmitting(false);
   };
 
   render() {

@@ -5,8 +5,23 @@ button, input[type=submit] {
   border-radius: 3px;
   padding: 8px 8px 8px 8px;
   text-transform: lowercase;
-  &:focus {outline:0;}
   letter-spacing: 1px;
+
+  &:focus {
+    outline:0;
+  }
+  &:hover {
+
+  }
+  &:active {
+    background-color: $navy-light;
+    color: $white;
+  }
+}
+
+button:disabled {
+  background-color: $grey-extra-lightest;
+  color: $grey-extra-lightest;
 }
 
 form {
