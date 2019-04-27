@@ -1,5 +1,5 @@
 import React from 'react';
-import { OrderListItem, OrderListItemEdited } from './OrderListItem';
+import { OrderListItemEdited } from './OrderListItem';
 
 export class OrderList extends React.Component {
 

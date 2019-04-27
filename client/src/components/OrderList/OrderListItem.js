@@ -70,25 +70,25 @@ export const OrderListItemEdited = ({ order, orderType, view, key }) => (
       <div className={view === 'manage' ? 'wide-buttons order-item-right' : 'order-item-right'}>
       {orderType === 'sell' ?
           <React.Fragment>
-            <button onClick={ (e) => orderService.deleteSellOrderById(order.SellOrderId, authenticationService.currentUserValue.userId) }><FontAwesomeIcon icon={faTrashAlt} /></button>
+            <button onClick={ (e) => orderService.deleteSellOrderById(order.SellOrderId, order.PostingUserUserId) }><FontAwesomeIcon icon={faTrashAlt} /></button>
             { order.SaleStatus === 'active' || order.SaleStatus === 'pending' ?
-              <button onClick={ (e) => orderService.updateSellOrderById(order.SellOrderId, null, 'expired', null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, authenticationService.currentUserValue.userId) }><FontAwesomeIcon icon={faEye} />  Visible</button>
+              <button onClick={ (e) => orderService.updateSellOrderById(order.SellOrderId, null, 'expired', null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, order.PostingUserUserId) }><FontAwesomeIcon icon={faEye} />  Visible</button>
                 :
-              <button onClick={ (e) => orderService.updateSellOrderById(order.SellOrderId, null, 'active', null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, authenticationService.currentUserValue.userId) }><FontAwesomeIcon icon={faEyeSlash} /> Invisible</button>
+              <button onClick={ (e) => orderService.updateSellOrderById(order.SellOrderId, null, 'active', null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, order.PostingUserUserId) }><FontAwesomeIcon icon={faEyeSlash} /> Invisible</button>
             }
-            <button onClick={ (e) => orderService.updateSellOrderById(order.SellOrderId, null, 'pending', null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, authenticationService.currentUserValue.userId) }><FontAwesomeIcon icon={faClock} /> Pending</button>
-            <button onClick={ (e) => orderService.updateSellOrderById(order.SellOrderId, null, 'sold', null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, authenticationService.currentUserValue.userId) }><FontAwesomeIcon icon={faCheck} /> Sold</button>
+            <button onClick={ (e) => orderService.updateSellOrderById(order.SellOrderId, null, 'pending', null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, order.PostingUserUserId) }><FontAwesomeIcon icon={faClock} /> Pending</button>
+            <button onClick={ (e) => orderService.updateSellOrderById(order.SellOrderId, null, 'sold', null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, order.PostingUserUserId) }><FontAwesomeIcon icon={faCheck} /> Sold</button>
             <button><FontAwesomeIcon icon={faEdit} /> Edit</button>
           </React.Fragment>
         :
           <React.Fragment>
-            <button onClick={ (e) => orderService.deleteBuyOrderById(order.BuyOrderId, authenticationService.currentUserValue.userId) }><FontAwesomeIcon icon={faTrashAlt} /></button>
+            <button onClick={ (e) => orderService.deleteBuyOrderById(order.BuyOrderId, order.PostingUserUserId) }><FontAwesomeIcon icon={faTrashAlt} /></button>
             { order.OrderStatus === 'active' ?
-              <button onClick={ (e) => orderService.updateBuyOrderById(order.BuyOrderId, null, null, 'expired', null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, authenticationService.currentUserValue.userId) }><FontAwesomeIcon icon={faEye} />  Visible</button>
+              <button onClick={ (e) => orderService.updateBuyOrderById(order.BuyOrderId, null, null, 'expired', null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, order.PostingUserUserId) }><FontAwesomeIcon icon={faEye} />  Visible</button>
               :
-              <button onClick={ (e) => orderService.updateBuyOrderById(order.BuyOrderId, null, null, 'active', null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, authenticationService.currentUserValue.userId) }><FontAwesomeIcon icon={faEyeSlash} /> Invisible</button>
+              <button onClick={ (e) => orderService.updateBuyOrderById(order.BuyOrderId, null, null, 'active', null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, order.PostingUserUserId) }><FontAwesomeIcon icon={faEyeSlash} /> Invisible</button>
             }
-            <button onClick={ (e) => orderService.updateBuyOrderById(order.BuyOrderId, null, null, 'bought', null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, authenticationService.currentUserValue.userId) }><FontAwesomeIcon icon={faCheck} /> Bought</button>
+            <button onClick={ (e) => orderService.updateBuyOrderById(order.BuyOrderId, null, null, 'bought', null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, order.PostingUserUserId) }><FontAwesomeIcon icon={faCheck} /> Bought</button>
             <button><FontAwesomeIcon icon={faEdit} /> Edit</button>
           </React.Fragment>
       }

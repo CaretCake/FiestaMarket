@@ -29,7 +29,9 @@ const routing = (
         <Route path='/contact' component={ContactForm} />
         <Route path='/login' component={SignInForm} />
         <Route path='/order' component={SellOrderForm} />
-        <Route path='/profile/:userId' component={UserProfile} />
+        <Route path='/profile/:userId' render={(props) => (
+          <UserProfile key={props.match.params.userId} userId={props.match.params.userId} />
+        )} />
         <Route path='*' exact={true} component={NotFoundError} />
       </Switch>
 

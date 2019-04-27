@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
-import { userService } from '../../services/export';
+import { userService, authenticationService } from '../../services/export';
 import { handleResponse } from "../../helpers/handle-response";
 import { OrderList } from "../../components/OrderList/OrderList";
-import {OrderListItem} from "../../components/OrderList/OrderListItem";
 
 export class UserProfile extends Component {
   constructor(props) {
@@ -13,7 +12,8 @@ export class UserProfile extends Component {
   }
 
   componentDidMount() {
-    userService.getById(this.props.match.params.userId)
+    console.log(this.props);
+    userService.getById(this.props.userId)
       .then(handleResponse())
       .then(userInfoFromApi => {
         if (!userInfoFromApi) {
@@ -48,7 +48,8 @@ export class UserProfile extends Component {
             <OrderList
               orderType={'buy'}
               orderList={this.state.user.BuyOrders}
-              view={'manage'}
+              view={ authenticationService.currentUserValue.userId === this.props.userId ?
+                'manage' : 'main'}
             />
           </ul>
           <h3>Want to Sell</h3>
@@ -56,7 +57,8 @@ export class UserProfile extends Component {
             <OrderList
               orderType={'sell'}
               orderList={this.state.user.SellOrders}
-              view={'manage'}
+              view={ authenticationService.currentUserValue.userId === this.props.userId ?
+                'manage' : 'main'}
             />
           </ul>
         </div>
