@@ -7,7 +7,8 @@ export const orderService = {
   postBuyOrder,
   deleteBuyOrderById,
   deleteSellOrderById,
-  updateBuyOrderById
+  updateBuyOrderById,
+  updateSellOrderById
 };
 
 // Get all orders
@@ -77,9 +78,9 @@ function postBuyOrder(priceMin, priceMax, server, enhancement, end, dex, int, st
     }).catch(error => handleResponse(error.response));
 }
 
-// Delete buy order by id (role required)
-function deleteBuyOrderById(id) {
-  return axios.delete(process.env.REACT_APP_API_URL + `/buy-orders/${id}`)
+// Delete buy order by id
+function deleteBuyOrderById(id, userId) {
+  return axios.delete(process.env.REACT_APP_API_URL + `/users/${userId}/buy-orders/${id}`)
     .then(res => {
       if (res.status === 404) {
         return null;
@@ -90,9 +91,9 @@ function deleteBuyOrderById(id) {
     .catch(error => handleResponse(error.response));
 }
 
-// Delete sell order by id (role required)
-function deleteSellOrderById(id) {
-  return axios.delete(process.env.REACT_APP_API_URL + `/sell-orders/${id}`)
+// Delete sell order by id
+function deleteSellOrderById(id, userId) {
+  return axios.delete(process.env.REACT_APP_API_URL + `/users/${userId}/sell-orders/${id}`)
     .then(res => {
       if (res.status === 404) {
         return null;
@@ -108,6 +109,33 @@ function updateBuyOrderById(id, priceMin, priceMax, status, server, enhancement,
   return axios.put(process.env.REACT_APP_API_URL + `/users/${userId}/buy-orders/${id}`, {
     priceMin,
     priceMax,
+    status,
+    server,
+    enhancement,
+    end,
+    dex,
+    int,
+    str,
+    spr,
+    hp,
+    sp,
+    dmg,
+    mdmg,
+    def,
+    mdef,
+    aim,
+    eva
+  })
+    .then(res => {
+      console.log('info: ' + JSON.stringify(res));
+    })
+    .catch(error => handleResponse(error.response));
+}
+
+// Update sell order by id
+function updateSellOrderById(id, price, status, server, enhancement, end, dex, int, str, spr, hp, sp, dmg, mdmg, def, mdef, aim, eva, userId) {
+  return axios.put(process.env.REACT_APP_API_URL + `/users/${userId}/sell-orders/${id}`, {
+    price,
     status,
     server,
     enhancement,

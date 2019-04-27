@@ -1,5 +1,5 @@
 import React from 'react';
-import { OrderList } from '../../components/export';
+import {OrderList, OrderListItem} from '../../components/export';
 import { orderService } from '../../services/export';
 import { handleResponse } from '../../helpers/export';
 import { FilterSection } from "../export";
@@ -60,6 +60,7 @@ export class MainOrderView extends React.Component {
               <OrderList
                 orderType={'sell'}
                 orderList={this.state.sellOrders}
+                view={'main'}
               />
             </div>
             <div>
@@ -67,6 +68,7 @@ export class MainOrderView extends React.Component {
               <OrderList
                 orderType={'buy'}
                 orderList={this.state.buyOrders}
+                view={'main'}
               />
             </div>
           </div>

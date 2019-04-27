@@ -507,7 +507,7 @@ router.post('/:userId?/buy-orders', isAuthenticated, isSameUser, (req, res) => {
 });
 
 // Update buy order of user by order id
-router.put('/:userId?/buy-orders/:buyOrderId?', isAuthenticated, (req, res) => {
+router.put('/:userId?/buy-orders/:buyOrderId?', isAuthenticated, isSameUser, (req, res) => {
   console.log('req: ' + req);
   if(!req.params.buyOrderId) {
     res.status(422).json({ message: 'no order provided' });
@@ -568,6 +568,23 @@ router.put('/:userId?/buy-orders/:buyOrderId?', isAuthenticated, (req, res) => {
     }
 });
 
+// Delete a buy order
+router.delete('/:userId?/buy-orders/:buyOrderId', isAuthenticated, isSameUser, (req, res) => {
+  console.log('id: ' + req.params.buyOrderId);
+  BuyOrder.findByPk(req.params.buyOrderId)
+    .then(buyOrder => {
+      if (!buyOrder) {
+        res.status(404).json({
+          message: 'buy order not found',
+        });
+      }
+      buyOrder
+        .destroy({ where: { BuyOrderId: req.params.buyOrderId } })
+        .then(() => res.status(204).json())
+        .catch((error) => res.status(400).json(error));
+    })
+    .catch((error) => res.status(400).json(error));
+});
 
 /*---User Sell Order Routes---*/
 // Get user's sell orders
@@ -700,6 +717,25 @@ router.put('/:userId?/sell-orders/:sellOrderId?', isAuthenticated, isSameUser, (
       })
       .catch((error) => res.status(400).json(error));
   }
+});
+
+// Delete a sell order
+router.delete('/:userId?/sell-orders/:sellOrderId', isAuthenticated, isSameUser, (req, res) => {
+  console.log('id: ' + req.params.sellOrderId);
+  SellOrder.findByPk(req.params.sellOrderId)
+    .then(sellOrder => {
+      if (!sellOrder) {
+        res.status(404).json({
+          message: 'sell order not found',
+        });
+      } else {
+        sellOrder
+          .destroy({where: {BuyOrderId: req.params.sellOrderId}})
+          .then(() => res.status(204).json())
+          .catch((error) => res.status(400).json(error));
+      }
+    })
+    .catch((error) => res.status(400).json(error));
 });
 
 
