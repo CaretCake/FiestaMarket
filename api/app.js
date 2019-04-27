@@ -29,7 +29,7 @@ app.use(session({
     db: sequelize
   }),
   cookie: {
-    maxAge: 1800000,
+    maxAge: 3600000,
     httpOnly: true
   },
   resave: false,

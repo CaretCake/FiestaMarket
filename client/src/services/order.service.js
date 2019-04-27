@@ -6,7 +6,8 @@ export const orderService = {
   postSellOrder,
   postBuyOrder,
   deleteBuyOrderById,
-  deleteSellOrderById
+  deleteSellOrderById,
+  updateBuyOrderById
 };
 
 // Get all orders
@@ -98,6 +99,34 @@ function deleteSellOrderById(id) {
       }
       //console.log('info: ' + JSON.stringify(users.data));
       return res.data;
+    })
+    .catch(error => handleResponse(error.response));
+}
+
+// Update buy order by id
+function updateBuyOrderById(id, priceMin, priceMax, status, server, enhancement, end, dex, int, str, spr, hp, sp, dmg, mdmg, def, mdef, aim, eva, userId) {
+  return axios.put(process.env.REACT_APP_API_URL + `/users/${userId}/buy-orders/${id}`, {
+    priceMin,
+    priceMax,
+    status,
+    server,
+    enhancement,
+    end,
+    dex,
+    int,
+    str,
+    spr,
+    hp,
+    sp,
+    dmg,
+    mdmg,
+    def,
+    mdef,
+    aim,
+    eva
+  })
+    .then(res => {
+      console.log('info: ' + JSON.stringify(res));
     })
     .catch(error => handleResponse(error.response));
 }

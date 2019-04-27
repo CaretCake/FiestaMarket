@@ -9,7 +9,6 @@ const Op = Sequelize.Op;
 // Get buy order list
 router.get('', (req, res) => {
   BuyOrder.findAll({
-    where: { OrderStatus: { [Op.notIn]: ['bought', 'expired'] } },
     include: [
       { model: User,
         as: 'PostingUser',

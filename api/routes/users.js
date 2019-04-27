@@ -507,7 +507,8 @@ router.post('/:userId?/buy-orders', isAuthenticated, isSameUser, (req, res) => {
 });
 
 // Update buy order of user by order id
-router.put('/:userId?/buy-orders/:buyOrderId?', isAuthenticated, isSameUser, (req, res) => {
+router.put('/:userId?/buy-orders/:buyOrderId?', isAuthenticated, (req, res) => {
+  console.log('req: ' + req);
   if(!req.params.buyOrderId) {
     res.status(422).json({ message: 'no order provided' });
   } else {
@@ -536,9 +537,11 @@ router.put('/:userId?/buy-orders/:buyOrderId?', isAuthenticated, isSameUser, (re
               DesiredAim: req.body.aim || order.DesiredAim,
               DesiredEva: req.body.eva || order.DesiredEva
             },
-            { where: { BuyOrderId: req.params.buyOrderId } }
+            { where: {
+              BuyOrderId: req.params.buyOrderId } }
           )
-            .then(() => {
+            .then((e) => {
+              console.log('e: ' + e);
               order.PriceMin = req.body.priceMin || order.priceMin;
               order.PriceMax = req.body.priceMax || order.priceMax;
               order.OrderStatus = req.body.status || order.OrderStatus;

@@ -1,7 +1,7 @@
 import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faUserMinus, faTrashAlt, faChevronDown, faCircle } from '@fortawesome/free-solid-svg-icons';
-import { orderService, contactFormService, userService } from '../../services/export';
+import { faUserMinus, faTrashAlt, faChevronDown, faEye, faEyeSlash, faCheck, faEdit, faClock } from '@fortawesome/free-solid-svg-icons';
+import { orderService, contactFormService, userService, authenticationService } from '../../services/export';
 
 export const UserList = ({ itemList }) => (
   <ul>
@@ -33,7 +33,7 @@ export const ContactList = ({ itemList }) => (
           <div className='message'>{ contactSubmission.message }</div>
         </div>
         <div className='buttons'>
-          <button onClick={ (e) => contactFormService.deleteContactFormSubmissionById(contactSubmission.id) }><FontAwesomeIcon icon={faTrashAlt} /> Delete Submission</button>
+          <button onClick={ (e) => contactFormService.deleteContactFormSubmissionById(contactSubmission.id) }><FontAwesomeIcon icon={faTrashAlt} /></button>
           <button><FontAwesomeIcon icon={faChevronDown} /> Show Info</button>
         </div>
       </li>;
@@ -59,9 +59,13 @@ export const SellOrderList = ({ itemList }) => (
           </ul>
         </div>
         <div className='buttons'>
-          <button onClick={ (e) => orderService.deleteSellOrderById(sellOrder.SellOrderId) }> Delete Order<FontAwesomeIcon icon={faTrashAlt} /></button>
-          <button><FontAwesomeIcon icon={faCircle} />Set Order Status</button>
-          <button><FontAwesomeIcon icon={faChevronDown} /> Show Info</button>
+          <button onClick={ (e) => orderService.deleteSellOrderById(sellOrder.SellOrderId) }><FontAwesomeIcon icon={faTrashAlt} /></button>
+          { sellOrder.SaleStatus === 'active' || sellOrder.SaleStatus === 'pending' ?
+            <button onClick={ (e) => orderService.updateSellOrderById(sellOrder.SellOrderId, null, null, 'expired', null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, authenticationService.currentUser.userId) }><FontAwesomeIcon icon={faEye} />  Visible</button> :
+            <button onClick={ (e) => orderService.updateSellOrderById(sellOrder.SellOrderId, null, null, 'active', null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, authenticationService.currentUser.userId) }><FontAwesomeIcon icon={faEyeSlash} /> Invisible</button> }
+          <button onClick={ (e) => orderService.updateSellOrderById(sellOrder.SellOrderId, null, null, 'pending', null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, authenticationService.currentUser.userId) }><FontAwesomeIcon icon={faClock} /> Pending</button>
+          <button onClick={ (e) => orderService.updateSellOrderById(sellOrder.SellOrderId, null, null, 'sold', null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, authenticationService.currentUser.userId) }><FontAwesomeIcon icon={faCheck} /> Sold</button>
+          <button><FontAwesomeIcon icon={faEdit} /> Edit</button>
         </div>
       </li>;
     })}
@@ -85,9 +89,12 @@ export const BuyOrderList = ({ itemList }) => (
           </ul>
         </div>
         <div className='buttons'>
-          <button onClick={ (e) => orderService.deleteBuyOrderById(buyOrder.BuyOrderId) }><FontAwesomeIcon icon={faTrashAlt} /> Delete Order</button>
-          <button><FontAwesomeIcon icon={faCircle} /> Set Order Status</button>
-          <button><FontAwesomeIcon icon={faChevronDown} /> Show Info</button>
+          <button onClick={ (e) => orderService.deleteBuyOrderById(buyOrder.BuyOrderId) }><FontAwesomeIcon icon={faTrashAlt} /></button>
+          { buyOrder.OrderStatus === 'active' ?
+            <button onClick={ (e) => orderService.updateBuyOrderById(buyOrder.BuyOrderId, null, null, 'expired', null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, authenticationService.currentUser.userId) }><FontAwesomeIcon icon={faEye} />  Visible</button> :
+            <button onClick={ (e) => orderService.updateBuyOrderById(buyOrder.BuyOrderId, null, null, 'active', null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, authenticationService.currentUser.userId) }><FontAwesomeIcon icon={faEyeSlash} /> Invisible</button> }
+          <button onClick={ (e) => orderService.updateBuyOrderById(buyOrder.BuyOrderId, null, null, 'bought', null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, authenticationService.currentUser.userId) }><FontAwesomeIcon icon={faCheck} /> Bought</button>
+          <button><FontAwesomeIcon icon={faEdit} /> Edit</button>
         </div>
       </li>;
     })}
