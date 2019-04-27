@@ -4,7 +4,8 @@ import axios from "axios";
 export const userService = {
   getAll,
   getById,
-  updateById: updateStatusById
+  updateById,
+  deleteUserById
 };
 
 // Get all users (role required)
@@ -34,12 +35,25 @@ function getById(id) {
 }
 
 // Update user status by id
-function updateStatusById(id, status) {
+function updateById(id, status) {
   return axios.put(process.env.REACT_APP_API_URL + `/users/${id}`, {
     status: status
   })
     .then(res => {
       console.log('info: ' + JSON.stringify(res));
+    })
+    .catch(error => handleResponse(error.response));
+}
+
+// Delete user by id (role required)
+function deleteUserById(id) {
+  return axios.delete(process.env.REACT_APP_API_URL + `/users/${id}`)
+    .then(res => {
+      if (res.status === 404) {
+        return null;
+      }
+      //console.log('info: ' + JSON.stringify(users.data));
+      return res.data;
     })
     .catch(error => handleResponse(error.response));
 }

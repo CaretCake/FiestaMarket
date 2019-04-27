@@ -4,7 +4,9 @@ import axios from "axios";
 export const orderService = {
   getAll,
   postSellOrder,
-  postBuyOrder
+  postBuyOrder,
+  deleteBuyOrderById,
+  deleteSellOrderById
 };
 
 // Get all orders
@@ -72,4 +74,30 @@ function postBuyOrder(priceMin, priceMax, server, enhancement, end, dex, int, st
     .then(order => {
       return 'Order posted';
     }).catch(error => handleResponse(error.response));
+}
+
+// Delete buy order by id (role required)
+function deleteBuyOrderById(id) {
+  return axios.delete(process.env.REACT_APP_API_URL + `/buy-orders/${id}`)
+    .then(res => {
+      if (res.status === 404) {
+        return null;
+      }
+      //console.log('info: ' + JSON.stringify(users.data));
+      return res.data;
+    })
+    .catch(error => handleResponse(error.response));
+}
+
+// Delete sell order by id (role required)
+function deleteSellOrderById(id) {
+  return axios.delete(process.env.REACT_APP_API_URL + `/sell-orders/${id}`)
+    .then(res => {
+      if (res.status === 404) {
+        return null;
+      }
+      //console.log('info: ' + JSON.stringify(users.data));
+      return res.data;
+    })
+    .catch(error => handleResponse(error.response));
 }

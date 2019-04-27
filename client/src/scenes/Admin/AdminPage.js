@@ -24,7 +24,6 @@ export class AdminPage extends React.Component {
           //console.log('that is a problem');
         }
         this.setState({userList: userListFromApi});
-        console.log(this.state.userList);
       })
       .catch(err => {}/*console.log('profile err: ' + JSON.stringify(err))*/);
 
@@ -35,7 +34,6 @@ export class AdminPage extends React.Component {
           //console.log('that is a problem');
         }
         this.setState({contactList: contactListFromApi});
-        console.log(this.state.contactList);
       })
       .catch(err => {}/*console.log('profile err: ' + JSON.stringify(err))*/);
 

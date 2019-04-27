@@ -13,7 +13,7 @@ export class ContactForm extends React.Component {
 
     setSubmitting(true);
 
-    contactFormService.postContactForm(values.contactType, values.email, values.message)
+    contactFormService.postContactFormSubmission(values.contactType, values.email, values.message)
       .then( form => {
         console.log(form);
         setSubmitting(false);

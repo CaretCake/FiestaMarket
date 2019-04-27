@@ -1,18 +1,19 @@
 import React from 'react';
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faUserMinus, faTrashAlt, faChevronDown} from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faUserMinus, faTrashAlt, faChevronDown, faCircle } from '@fortawesome/free-solid-svg-icons';
+import { orderService, contactFormService, userService } from '../../services/export';
 
 export const UserList = ({ itemList }) => (
   <ul>
     {itemList.map((user, index) => {
       return <li className='user-list-item' key={index}>
         <div className='list-icon user-status'>{user.status}</div>
-        <div class='user-info'>
+        <div className='user-info'>
           <h4>{user.userName}</h4>
           <div>Role: {user.role}</div>
         </div>
         <div className='buttons'>
-          <button><FontAwesomeIcon icon={faUserMinus} /></button>
+          <button onClick={ (e) => userService.deleteUserById(user.userId) }><FontAwesomeIcon icon={faUserMinus} /> Delete User</button>
         </div>
       </li>;
     })}
@@ -23,7 +24,7 @@ export const ContactList = ({ itemList }) => (
   <ul>
     {itemList.map((contactSubmission, index) => {
       return <li className='contact-list-item' key={index}>
-        <div class='contact-info'>
+        <div className='contact-info'>
           <h4>{contactSubmission.id }: { contactSubmission.reasonForMessage }</h4>
           <span>{ contactSubmission.createdAt }</span>
         </div>
@@ -32,8 +33,8 @@ export const ContactList = ({ itemList }) => (
           <div className='message'>{ contactSubmission.message }</div>
         </div>
         <div className='buttons'>
-          <button><FontAwesomeIcon icon={faTrashAlt} /></button>
-          <button><FontAwesomeIcon icon={faChevronDown} /></button>
+          <button onClick={ (e) => contactFormService.deleteContactFormSubmissionById(contactSubmission.id) }><FontAwesomeIcon icon={faTrashAlt} /> Delete Submission</button>
+          <button><FontAwesomeIcon icon={faChevronDown} /> Show Info</button>
         </div>
       </li>;
     })}
@@ -45,7 +46,7 @@ export const SellOrderList = ({ itemList }) => (
     {itemList.map((sellOrder, index) => {
       return <li className='sell-order-list-item' key={index}>
         <div className='list-icon sell-status'>{sellOrder.SaleStatus}</div>
-        <div class='sell-info'>
+        <div className='sell-info'>
           <h4>{sellOrder.SellOrderId }: { sellOrder.PostedItem.ItemName }</h4>
           <span>Posted by: { sellOrder.PostingUser.userName }</span>
           <span>{ sellOrder.createdAt }</span>
@@ -58,8 +59,9 @@ export const SellOrderList = ({ itemList }) => (
           </ul>
         </div>
         <div className='buttons'>
-          <button><FontAwesomeIcon icon={faTrashAlt} /></button>
-          <button><FontAwesomeIcon icon={faChevronDown} /></button>
+          <button onClick={ (e) => orderService.deleteSellOrderById(sellOrder.SellOrderId) }> Delete Order<FontAwesomeIcon icon={faTrashAlt} /></button>
+          <button><FontAwesomeIcon icon={faCircle} />Set Order Status</button>
+          <button><FontAwesomeIcon icon={faChevronDown} /> Show Info</button>
         </div>
       </li>;
     })}
@@ -71,7 +73,7 @@ export const BuyOrderList = ({ itemList }) => (
     {itemList.map((buyOrder, index) => {
       return <li className='buy-order-list-item' key={index}>
         <div className='list-icon buy-status'>{buyOrder.OrderStatus}</div>
-        <div class='buy-info'>
+        <div className='buy-info'>
           <h4>{buyOrder.BuyOrderId }: { buyOrder.PostedItem.ItemName }</h4>
           <span>Posted by: { buyOrder.PostingUser.userName }</span>
           <span>{ buyOrder.createdAt }</span>
@@ -83,8 +85,9 @@ export const BuyOrderList = ({ itemList }) => (
           </ul>
         </div>
         <div className='buttons'>
-          <button><FontAwesomeIcon icon={faTrashAlt} /></button>
-          <button><FontAwesomeIcon icon={faChevronDown} /></button>
+          <button onClick={ (e) => orderService.deleteBuyOrderById(buyOrder.BuyOrderId) }><FontAwesomeIcon icon={faTrashAlt} /> Delete Order</button>
+          <button><FontAwesomeIcon icon={faCircle} /> Set Order Status</button>
+          <button><FontAwesomeIcon icon={faChevronDown} /> Show Info</button>
         </div>
       </li>;
     })}
@@ -100,8 +103,6 @@ export class AdminList extends React.Component {
     if (!this.props.itemList) {
       return null;
     }
-
-    console.log(this.props.itemList);
 
     return (
       <div className='admin-list'>

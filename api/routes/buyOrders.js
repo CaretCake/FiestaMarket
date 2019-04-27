@@ -93,12 +93,12 @@ router.delete('/:id', isAuthenticated, isAdmin, (req, res) => {
   BuyOrder.findByPk(req.params.id)
     .then(buyOrder => {
       if (!buyOrder) {
-        return res.status(404).json({
+        res.status(404).json({
           message: 'buy order not found',
         });
       }
-      return buyOrder
-        .destroy()
+      buyOrder
+        .destroy({ where: { BuyOrderId: req.params.id } })
         .then(() => res.status(204).json())
         .catch((error) => res.status(400).json(error));
     })

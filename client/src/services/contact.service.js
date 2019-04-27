@@ -3,8 +3,8 @@ import axios from "axios";
 
 export const contactFormService = {
   getAll,
-  postContactForm,
-  deleteSubmission
+  postContactFormSubmission,
+  deleteContactFormSubmissionById
 };
 
 function getAll() {
@@ -18,7 +18,7 @@ function getAll() {
     .catch(error => handleResponse(error.response));
 }
 
-function postContactForm(reasonForMessage, email, message) {
+function postContactFormSubmission(reasonForMessage, email, message) {
   return axios.post(process.env.REACT_APP_API_URL + '/contact-form-submissions', {
     reasonForMessage: reasonForMessage,
     email: email,
@@ -29,6 +29,15 @@ function postContactForm(reasonForMessage, email, message) {
     }).catch(error => handleResponse(error.response));
 }
 
-function deleteSubmission() {
-
+// Delete contact form submission by id (role required)
+function deleteContactFormSubmissionById(id) {
+  return axios.delete(process.env.REACT_APP_API_URL + `/contact-form-submissions/${id}`)
+    .then(res => {
+      if (res.status === 404) {
+        return null;
+      }
+      //console.log('info: ' + JSON.stringify(users.data));
+      return res.data;
+    })
+    .catch(error => handleResponse(error.response));
 }
