@@ -14,12 +14,15 @@ export class Item extends Component {
     };
   }
 
-  componentWillMount() {
+  componentDidMount() {
     this.getItemInfo(this.props.match.params.itemId);
   }
 
-  componentWillReceiveProps(nextProps) {
-    this.getItemInfo(nextProps.match.params.itemId);
+  componentDidUpdate(prevProps) {
+    if(this.props.match.params.itemId !== prevProps.match.params.itemId) {
+      console.log('change');
+      this.getItemInfo(this.props.match.params.itemId);
+    }
   }
 
   getItemInfo(id) {
@@ -53,7 +56,7 @@ export class Item extends Component {
   }
 
   render() {
-    if(this.state.item === {}) {
+    if(this.state.item === {} || this.state.item === null) {
       return null;
     }
 

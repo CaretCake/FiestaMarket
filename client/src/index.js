@@ -10,8 +10,9 @@ import * as serviceWorker from './serviceWorker';
 import history from './helpers/history';
 import { Role } from './helpers/export';
 import { PrivateRoute } from './components/export';
-import {NotFoundError, Header, Footer, MainApp, MainOrderView, SignInForm, ContactForm, UserProfile, AdminPage, SellOrderForm, Item } from './scenes/export';
+import { NotFoundError, Header, Footer, MainApp, MainOrderView, SignInForm, ContactForm, UserProfile, AdminPage, SellOrderForm, Item } from './scenes/export';
 import './assets/styles/index.scss';
+import { authenticationService } from './services/export';
 
 axios.defaults.withCredentials = true;
 
@@ -19,6 +20,8 @@ const routing = (
   <Router history={history}>
     <div>
       <Route path='/' component={Header} />
+      <Route path='/' render={() => {
+        authenticationService.isSessionValid(); }}/>
 
       <Switch>
         <Route exact path={['/', '/items/:itemId']} component={MainApp} />

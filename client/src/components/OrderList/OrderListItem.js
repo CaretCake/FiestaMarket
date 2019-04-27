@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCommentDollar, faComment, faImage } from '@fortawesome/free-solid-svg-icons';
-import { getStatArray } from "../../../helpers/stats";
+import { getStatArray } from "../../helpers/stats";
 
 export class OrderListItem extends React.Component {
 
@@ -12,8 +12,6 @@ export class OrderListItem extends React.Component {
               <OrderListItem/>
              </div>;
     }
-
-    console.log(this.props.order);
 
     let stats = getStatArray(this.props.order.PostedItem.StatType, 'upper');
 

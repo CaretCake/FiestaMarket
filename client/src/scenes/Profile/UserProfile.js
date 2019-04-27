@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { userService } from '../../services/export';
 import { handleResponse } from "../../helpers/handle-response";
-import {OrderList} from "../../components/OrderList/OrderList";
+import { OrderList } from "../../components/OrderList/OrderList";
 
 export class UserProfile extends Component {
   constructor(props) {
@@ -11,7 +11,7 @@ export class UserProfile extends Component {
     };
   }
 
-  componentWillMount() {
+  componentDidMount() {
     userService.getById(this.props.match.params.userId)
       .then(handleResponse())
       .then(userInfoFromApi => {

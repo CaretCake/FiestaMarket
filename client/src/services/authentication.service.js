@@ -1,5 +1,4 @@
 import { BehaviorSubject } from 'rxjs';
-
 import { handleResponse } from '../helpers/export';
 import axios from 'axios';
 
@@ -8,6 +7,7 @@ const currentUserSubject = new BehaviorSubject(JSON.parse(localStorage.getItem('
 export const authenticationService = {
   login,
   logout,
+  isSessionValid,
   currentUser: currentUserSubject.asObservable(),
   get currentUserValue () { return currentUserSubject.value; }
 };
@@ -38,4 +38,19 @@ function logout() {
   localStorage.removeItem('currentUser');
   currentUserSubject.next(null);
 
+}
+
+function isSessionValid() {
+  if (this.currentUserValue) { // If browser thinks user is logged in, verify session validity
+    axios.get(process.env.REACT_APP_API_URL + `/users/${this.currentUserValue.userId}/sessions`, {
+      userId: this.currentUserValue.userId
+    })
+      .then((res) => {
+        // session is valid, do nothing
+      }).catch(err => {
+        // session is invalid, remove user from local storage
+        localStorage.removeItem('currentUser');
+        currentUserSubject.next(null);
+      });
+  }
 }

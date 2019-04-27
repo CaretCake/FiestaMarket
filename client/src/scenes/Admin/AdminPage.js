@@ -11,7 +11,7 @@ export class AdminPage extends React.Component {
     };
   }
 
-  componentWillMount() {
+  componentDidMount() {
     userService.getAll()
       .then(handleResponse())
       .then(userListFromApi => {
