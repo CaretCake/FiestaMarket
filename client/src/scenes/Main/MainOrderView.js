@@ -1,5 +1,5 @@
 import React from 'react';
-import { OrderList } from '../../components/OrderList/OrderList';
+import { OrderList } from '../../components/export';
 import { orderService } from '../../services/export';
 import { handleResponse } from '../../helpers/export';
 import { FilterSection } from "../export";

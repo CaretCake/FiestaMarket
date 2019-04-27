@@ -10,4 +10,5 @@ export * from './Header/Header';
 export * from './Footer/Footer';
 export * from './Profile/UserProfile';
 export * from './Admin/AdminPage';
+export * from './Admin/AdminList';
 export * from './Item/Item';

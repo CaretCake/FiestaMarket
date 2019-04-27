@@ -14,7 +14,8 @@ const { Alias, BuyOrder, Item, ItemOffer, SellOrder, User, UserReview } = requir
 // Get full user list - ADMIN ONLY
 router.get('/', isAuthenticated, isAdmin, (req, res) => {
   User.findAll(
-    { attributes: { exclude: ['pass'] }
+    { where: { role: 'user' },
+      attributes: { exclude: ['pass'] }
     })
     .then(users => {
       res.status(200).json(users);

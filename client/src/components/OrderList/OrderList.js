@@ -14,7 +14,6 @@ export class OrderList extends React.Component {
         {this.props.orderList.map((order, index) => {
           return <OrderListItem order={order} orderType={this.props.orderType} key={index} />;
         })}
-
       </div>
     );
   }

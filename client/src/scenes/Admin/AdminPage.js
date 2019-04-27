@@ -1,13 +1,18 @@
 import React from 'react';
-import "react-tabs/style/react-tabs.css";
-import {userService} from "../../services/user.service";
-import {handleResponse} from "../../helpers/handle-response";
+import { userService } from "../../services/user.service";
+import { contactFormService } from "../../services/contact.service";
+import { orderService } from '../../services/order.service';
+import { handleResponse } from "../../helpers/handle-response";
+import { AdminList } from "../../scenes/export";
 
 export class AdminPage extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      userList: null
+      userList: null,
+      contactList: null,
+      buyOrders: null,
+      sellOrders: null
     };
   }
 
@@ -19,26 +24,40 @@ export class AdminPage extends React.Component {
           //console.log('that is a problem');
         }
         this.setState({userList: userListFromApi});
+        console.log(this.state.userList);
       })
       .catch(err => {}/*console.log('profile err: ' + JSON.stringify(err))*/);
+
+    contactFormService.getAll()
+      .then(handleResponse())
+      .then(contactListFromApi => {
+        if (!contactListFromApi) {
+          //console.log('that is a problem');
+        }
+        this.setState({contactList: contactListFromApi});
+        console.log(this.state.contactList);
+      })
+      .catch(err => {}/*console.log('profile err: ' + JSON.stringify(err))*/);
+
+    orderService.getAll()
+      .then(handleResponse())
+      .then(orderInfoFromApi => {
+        this.setState({sellOrders: orderInfoFromApi[0].data});
+        this.setState({buyOrders: orderInfoFromApi[1].data});
+      })
+      .catch(err => { /*console.log('err: ' + err);*/ });
   }
 
   render() {
-    if(!this.state.userList)
-      return null;
-
-    let userListArray = this.state.userList.map((user) => {
-      return (
-        <li key={ user.userId }> { user.userName } </li>
-      );
-    });
-
     return (
       <div>
-        Admin page! This is safe.
-        <ul>
-          { userListArray }
-        </ul>
+        <h1>Administrate</h1>
+
+        <AdminList type={'user'} itemList={this.state.userList} />
+        <AdminList type={'contact'}  itemList={this.state.contactList} />
+        <AdminList type={'sell'}  itemList={this.state.sellOrders} />
+        <AdminList type={'buy'}  itemList={this.state.buyOrders} />
+
       </div>
     );
   }

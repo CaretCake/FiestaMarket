@@ -1,4 +1,5 @@
 import React from 'react';
+import "react-tabs/style/react-tabs.css";
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import { ErrorMessage, Field, Form, Formik } from "formik";
 import { authenticationService, registrationService } from '../../services/export';

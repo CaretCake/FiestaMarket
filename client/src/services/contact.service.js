@@ -8,7 +8,14 @@ export const contactFormService = {
 };
 
 function getAll() {
-
+  return axios.get(process.env.REACT_APP_API_URL + '/contact-form-submissions')
+    .then(formSubmissions => {
+      if (formSubmissions.status === 404) {
+        return null;
+      }
+      return formSubmissions.data;
+    })
+    .catch(error => handleResponse(error.response));
 }
 
 function postContactForm(reasonForMessage, email, message) {
