@@ -56,7 +56,7 @@ export class MainOrderView extends React.Component {
           <div className='flex-left'/>
           <div className='flex-center list-container'>
             <div>
-              <h2>Sell</h2>
+              <h2>Want to Sell</h2>
               <OrderList
                 orderType={'sell'}
                 orderList={this.state.sellOrders}
@@ -64,7 +64,7 @@ export class MainOrderView extends React.Component {
               />
             </div>
             <div>
-              <h2>Buy</h2>
+              <h2>Want to Buy</h2>
               <OrderList
                 orderType={'buy'}
                 orderList={this.state.buyOrders}

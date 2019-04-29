@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { itemService } from '../../services/export';
 import { handleResponse } from '../../helpers/export';
 import { SellOrderForm, BuyOrderForm } from "../export";
+import { OrderList } from "../../components/export";
 
 export class Item extends Component {
   constructor(props) {
@@ -46,9 +47,7 @@ export class Item extends Component {
         let tempBuyMax = itemInfoFromApi[2].data.average[0].maxAverage ? parseFloat(itemInfoFromApi[2].data.average[0].maxAverage) : 'Insufficient history';
 
         this.setState({averageSellPrice: tempSell});
-        console.log(this.state.averageSellPrice);
         this.setState({averageBuyPrice: tempBuyMin + ' - ' + tempBuyMax});
-        console.log(this.state.item);
       })
       .catch(err => {}/*console.log('item err: ' + JSON.stringify(err))*/);
   }
@@ -76,29 +75,14 @@ export class Item extends Component {
       return null;
     }
 
-    let buyOrderArray = [];
-    let sellOrderArray = [];
-    if (this.state.item.BuyOrders) {
-      buyOrderArray = this.state.item.BuyOrders.map((buyOrder) => {
-        return (
-          <li key={buyOrder.BuyOrderId}> {this.state.item.ItemName} from {buyOrder.PostingUser.userName} </li>
-        );
-      });
-    }
-    if (this.state.item.SellOrders) {
-      sellOrderArray = this.state.item.SellOrders.map((sellOrder) => {
-        return (
-          <li key={sellOrder.SellOrderId}> {this.state.item.ItemName} - <Link to={'/profile/' + sellOrder.PostingUser.userId}>{sellOrder.PostingUser.userName}</Link> </li>
-        );
-      });
-    }
-
     return (
       <div className='item-view flex-row-container'>
         <div className='flex-left'/>
         <div className='flex-center'>
           <div className='item-info-section'>
             <h1 className={ this.state.item.ItemRarity + '-item-rarity' }>{ this.state.item.ItemName }</h1>
+            <span>Avg. Sell Price: { this.state.averageSellPrice ? this.state.averageSellPrice : 'insufficient sale history' }</span>
+            <span>Avg. Buy Price: { this.state.averageBuyPrice ? this.state.averageBuyPrice : 'insufficient sale history' }</span>
             <h4>Level { this.state.item.Level }</h4>
             { this.state.item.TwoSetEffect && <ul>
               { this.state.item.TwoSetEffect && <li><span>Two Set Effect</span> { this.state.item.TwoSetEffect }</li> }
@@ -115,19 +99,27 @@ export class Item extends Component {
             { this.state.sellOrderFormVisibility && < SellOrderForm item={this.state.item} /> }
             { this.state.buyOrderFormVisibility && < BuyOrderForm item={this.state.item} /> }
           </div>
-          <div className='orders-section'>
-            <div>
-              <h3>Want to Buy</h3>
-              <ul>
-                { buyOrderArray }
-              </ul>
+          <div className='order-view-section flex-row-container'>
+            <div className='flex-left'/>
+            <div className='flex-center list-container'>
+              <div>
+                <h2>Want to Sell</h2>
+                  <OrderList
+                    orderType={'sell'}
+                    orderList={this.state.item.SellOrders}
+                    view={'viewing'}
+                  />
+              </div>
+              <div>
+                <h2>Want to Buy</h2>
+                  <OrderList
+                    orderType={'buy'}
+                    orderList={this.state.item.BuyOrders}
+                    view={'viewing'}
+                  />
+              </div>
             </div>
-            <div>
-              <h3>Want to Sell</h3>
-              <ul>
-                { sellOrderArray }
-              </ul>
-            </div>
+            <div className='flex-right'/>
           </div>
         </div>
         <div className='flex-right'/>

@@ -13,20 +13,17 @@ import {
 import { getStatArray } from "../../helpers/stats";
 import { orderService } from "../../services/export";
 
-export const OrderListItem = ({ order, orderType, view }) => (
+export const OrderListItem = ({ order, orderType, view, show }) => (
   <li className='order-view-list-item flex-row-container'>
     <div  className='order-item-left'>
       <FontAwesomeIcon icon={faImage} />
+      <span>lvl. { parseFloat(order.PostedItem.Level) }</span>
     </div>
     <div className='order-item-center'>
       <div className='order-name-section'>
         <Link to={'/items/' + order.PostedItem.ItemId}><h3>{ order.PostedItem.ItemName }</h3></Link>
         <span>+{ orderType === 'sell' ? order.Enhancement : order.DesiredEnhancement }</span>
         <div className='price-section'>
-          <div>
-            <span>Level: { parseFloat(order.PostedItem.Level) }</span>
-          </div>
-
             { orderType === 'sell' ?
               <div>
                 <span>{ parseFloat(order.Price) }</span>
@@ -39,7 +36,6 @@ export const OrderListItem = ({ order, orderType, view }) => (
                 <span>G</span>
               </div>
             }
-
           <span>{ order.Server }</span>
         </div>
       </div>
@@ -62,7 +58,7 @@ export const OrderListItem = ({ order, orderType, view }) => (
     </div>
     {view === 'viewing' ?
       <div className='order-item-right'>
-        <button><FontAwesomeIcon icon={faComment}/></button>
+        <button onClick={ (e) => { /* TODO */ }}><FontAwesomeIcon icon={faComment}/></button>
         {orderType === 'sell' && order.OpenToOffers === true &&
         <button className='bottom-button'><FontAwesomeIcon icon={faCommentDollar}/></button>
         }
@@ -93,8 +89,6 @@ export const OrderListItem = ({ order, orderType, view }) => (
           </React.Fragment>
       }
       </div>
-
-
     }
   </li>
 );
