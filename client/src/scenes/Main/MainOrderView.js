@@ -60,7 +60,7 @@ export class MainOrderView extends React.Component {
               <OrderList
                 orderType={'sell'}
                 orderList={this.state.sellOrders}
-                view={'main'}
+                view={'viewing'}
               />
             </div>
             <div>
