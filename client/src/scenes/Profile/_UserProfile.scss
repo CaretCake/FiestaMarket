@@ -1,0 +1,57 @@
+.user-profile {
+
+  .alias-section {
+
+    .alias-title {
+      display: flex;
+      flex-direction: row;
+
+      h3 {
+        margin: 0;
+      }
+    }
+
+    .alias-list {
+      width: 400px;
+      box-shadow: 0 0 15px 0 $grey-extra-light;
+
+      .alias-list-item {
+        color: $grey-dark;
+        height: 80px;
+        padding: 15px 10px;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+
+        h3 {
+          margin: 0;
+          width: unset;
+          color: $navy;
+          display: inline-block;
+          font-weight: 500;
+          letter-spacing: 0.3px;
+          cursor: pointer;
+
+          &:hover {
+            color: $navy-light;
+          }
+        }
+
+        .alias-info {
+          display: flex;
+          flex-direction: column;
+
+          svg {
+            padding-bottom: 3px;
+          }
+        }
+
+
+      }
+
+      & > :nth-child(2n) {
+        background: $grey-extra-lightest;
+      }
+    }
+  }
+}

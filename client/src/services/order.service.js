@@ -79,8 +79,8 @@ function postBuyOrder(priceMin, priceMax, server, enhancement, end, dex, int, st
 }
 
 // Delete buy order by id
-function deleteBuyOrderById(id, userId) {
-  return axios.delete(process.env.REACT_APP_API_URL + `/users/${userId}/buy-orders/${id}`)
+function deleteBuyOrderById(buyOrderId, userId) {
+  return axios.delete(process.env.REACT_APP_API_URL + `/users/${userId}/buy-orders/${buyOrderId}`)
     .then(res => {
       if (res.status === 404) {
         return null;
@@ -92,8 +92,8 @@ function deleteBuyOrderById(id, userId) {
 }
 
 // Delete sell order by id
-function deleteSellOrderById(id, userId) {
-  return axios.delete(process.env.REACT_APP_API_URL + `/users/${userId}/sell-orders/${id}`)
+function deleteSellOrderById(sellOrderId, userId) {
+  return axios.delete(process.env.REACT_APP_API_URL + `/users/${userId}/sell-orders/${sellOrderId}`)
     .then(res => {
       if (res.status === 404) {
         return null;
@@ -105,8 +105,8 @@ function deleteSellOrderById(id, userId) {
 }
 
 // Update buy order by id
-function updateBuyOrderById(id, priceMin, priceMax, status, server, enhancement, end, dex, int, str, spr, hp, sp, dmg, mdmg, def, mdef, aim, eva, userId) {
-  return axios.put(process.env.REACT_APP_API_URL + `/users/${userId}/buy-orders/${id}`, {
+function updateBuyOrderById(buyOrderId, priceMin, priceMax, status, server, enhancement, end, dex, int, str, spr, hp, sp, dmg, mdmg, def, mdef, aim, eva, userId) {
+  return axios.put(process.env.REACT_APP_API_URL + `/users/${userId}/buy-orders/${buyOrderId}`, {
     priceMin,
     priceMax,
     status,
@@ -133,8 +133,8 @@ function updateBuyOrderById(id, priceMin, priceMax, status, server, enhancement,
 }
 
 // Update sell order by id
-function updateSellOrderById(id, price, status, server, enhancement, end, dex, int, str, spr, hp, sp, dmg, mdmg, def, mdef, aim, eva, userId) {
-  return axios.put(process.env.REACT_APP_API_URL + `/users/${userId}/sell-orders/${id}`, {
+function updateSellOrderById(sellOrderId, price, status, server, enhancement, end, dex, int, str, spr, hp, sp, dmg, mdmg, def, mdef, aim, eva, userId) {
+  return axios.put(process.env.REACT_APP_API_URL + `/users/${userId}/sell-orders/${sellOrderId}`, {
     price,
     status,
     server,

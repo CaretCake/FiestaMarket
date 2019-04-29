@@ -93,7 +93,6 @@ router.get('/:itemId?/sell-orders', (req, res) => {
 
 // Create sell order of item
 router.post('/:itemId?/sell-orders', isAuthenticated, (req, res) => {
-  console.log(JSON.stringify(req.body));
   SellOrder.create({
     Price: req.body.price,
     OpenToOffers: req.body.openToOffers,

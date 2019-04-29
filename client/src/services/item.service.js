@@ -8,8 +8,8 @@ export const itemService = {
   getBuyOrders
 };
 
-function getByFilters(query) {
-  return axios.get(process.env.REACT_APP_API_URL + `/items/search?&term=${query}`)
+function getByFilters(id) {
+  return axios.get(process.env.REACT_APP_API_URL + `/items/search?&term=${id}`)
     .then(handleResponse)
     .then(data => {
       //console.log('data:' + data);
@@ -20,8 +20,20 @@ function getByFilters(query) {
     });
 }
 
-function getById(query) {
-  return axios.get(process.env.REACT_APP_API_URL + `/items/${query}`)
+function getById(id) {
+  return Promise.all([
+    axios.get(process.env.REACT_APP_API_URL + `/items/${id}`),
+    axios.get(process.env.REACT_APP_API_URL + `/items/${id}/sell-orders/average`),
+    axios.get(process.env.REACT_APP_API_URL + `/items/${id}/buy-orders/average`),
+  ])
+    .then(values => {
+      return values;
+    })
+    .catch(error => handleResponse(error.response));
+}
+
+function getSellOrders(id) {
+  return axios.get(process.env.REACT_APP_API_URL + `/items/${id}/sell-orders`)
     .then(handleResponse)
     .then(data => {
       return data;
@@ -31,19 +43,8 @@ function getById(query) {
     });
 }
 
-function getSellOrders(query) {
-  return axios.get(process.env.REACT_APP_API_URL + `/items/${query}/sell-orders`)
-    .then(handleResponse)
-    .then(data => {
-      return data;
-    })
-    .catch(error => {
-      //console.log('error: ' + error);
-    });
-}
-
-function getBuyOrders(query) {
-  return axios.get(process.env.REACT_APP_API_URL + `/items/${query}/buy-orders`)
+function getBuyOrders(id) {
+  return axios.get(process.env.REACT_APP_API_URL + `/items/${id}/buy-orders`)
     .then(handleResponse)
     .then(data => {
       return data;

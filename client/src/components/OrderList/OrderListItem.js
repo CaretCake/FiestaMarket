@@ -60,14 +60,14 @@ export const OrderListItem = ({ order, orderType, view }) => (
         <Link to={'/profile/' + order.PostingUserUserId} className='user-link'>{ order.PostingUser.userName }</Link>
       </div>
     </div>
-    {view === 'main' ?
+    {view === 'viewing' ?
       <div className='order-item-right'>
         <button><FontAwesomeIcon icon={faComment}/></button>
         {orderType === 'sell' && order.OpenToOffers === true &&
         <button className='bottom-button'><FontAwesomeIcon icon={faCommentDollar}/></button>
         }
       </div> :
-      <div className={view === 'manage' ? 'wide-buttons order-item-right' : 'order-item-right'}>
+      <div className={view === 'managing' ? 'wide-buttons order-item-right' : 'order-item-right'}>
       {orderType === 'sell' ?
           <React.Fragment>
             <button onClick={ (e) => orderService.deleteSellOrderById(order.SellOrderId, order.PostingUserUserId) }><FontAwesomeIcon icon={faTrashAlt} /></button>

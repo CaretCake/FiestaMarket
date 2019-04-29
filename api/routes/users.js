@@ -290,7 +290,7 @@ router.put('/:userId?/aliases/:aliasId?', isAuthenticated, isSameUser, (req, res
               AliasName: req.body.aliasName || alias.AliasName,
               Type: req.body.type || alias.Type,
               Server: req.body.server || alias.Server,
-              Preferred: req.body.preferred || alias.Preferred
+              Preferred: req.body.preferred !== null? req.body.preferred : alias.Preferred
             },
             { where: {
               userUserId: req.user.userId,

@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import { userService, authenticationService } from '../../services/export';
 import { handleResponse } from "../../helpers/handle-response";
-import { OrderList } from "../../components/OrderList/OrderList";
+import { AliasList, OrderList } from "../../components/export";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {faPlus} from "@fortawesome/free-solid-svg-icons";
 
 export class UserProfile extends Component {
   constructor(props) {
@@ -28,20 +30,25 @@ export class UserProfile extends Component {
     if(!this.state.user)
       return null;
 
-    console.log(JSON.stringify(this.state.user.BuyOrders));
-    let aliasesArray = this.state.user.Aliases.map((alias) => {
-      return (
-        <li key={ alias.id }> { alias.AliasName } </li>
-      );
-    });
-
     return (
-      <div>
+      <div className='user-profile'>
         <h1>{ this.state.user.userName }</h1>
         <h4>{ this.state.user.status }</h4>
-        <ul>
-          { aliasesArray }
-        </ul>
+        <span className='alias-section'>
+          <div className='alias-title'>
+            <h3>Aliases</h3>
+            { parseFloat(authenticationService.currentUserValue.userId) === parseFloat(this.props.userId) &&
+              <button onClick={{}}><FontAwesomeIcon icon={faPlus}/></button>
+            }
+          </div>
+          <ul className='alias-list'>
+            <AliasList
+              aliasList={this.state.user.Aliases}
+              view={ parseFloat(authenticationService.currentUserValue.userId) === parseFloat(this.props.userId) ?
+                'managing' : 'viewing'}
+            />
+          </ul>
+        </span>
         <div className="orders-section">
           <h3>Want to Buy</h3>
           <ul>
@@ -49,7 +56,7 @@ export class UserProfile extends Component {
               orderType={'buy'}
               orderList={this.state.user.BuyOrders}
               view={ parseFloat(authenticationService.currentUserValue.userId) === parseFloat(this.props.userId) ?
-                'manage' : 'main'}
+                'managing' : 'viewing'}
             />
           </ul>
           <h3>Want to Sell</h3>
@@ -58,7 +65,7 @@ export class UserProfile extends Component {
               orderType={'sell'}
               orderList={this.state.user.SellOrders}
               view={ parseFloat(authenticationService.currentUserValue.userId) === parseFloat(this.props.userId) ?
-                'manage' : 'main'}
+                'managing' : 'viewing'}
             />
           </ul>
         </div>

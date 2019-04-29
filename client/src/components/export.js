@@ -5,3 +5,4 @@ export * from './CheckboxGroup/CheckboxGroup.js';
 export * from './CheckboxGroup/Checkbox.js';
 export * from './OrderList/OrderList';
 export * from './OrderList/OrderListItem';
+export * from './AliasList/AliasList';

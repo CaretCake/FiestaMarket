@@ -9,6 +9,8 @@ export class Item extends Component {
     super(props);
     this.state = {
       item: {},
+      averageSellPrice: null,
+      averageBuyPrice: null,
       sellOrderFormVisibility: false,
       buyOrderFormVisibility: false
     };
@@ -32,7 +34,21 @@ export class Item extends Component {
         if (!itemInfoFromApi) {
           this.props.history.push('/404/Error');
         }
-        this.setState({item: itemInfoFromApi.data});
+
+        // Handle item info
+        this.setState({item: itemInfoFromApi[0].data});
+
+        // Handle average pricing info
+        console.log('average sell: ' + JSON.stringify(itemInfoFromApi[1]));
+        console.log('average buy: ' + JSON.stringify(itemInfoFromApi[2]));
+        let tempSell = parseFloat(itemInfoFromApi[1].data.average[0].average);
+        let tempBuyMin = itemInfoFromApi[2].data.average[0].minAverage ? parseFloat(itemInfoFromApi[2].data.average[0].minAverage) : 'Insufficient history';
+        let tempBuyMax = itemInfoFromApi[2].data.average[0].maxAverage ? parseFloat(itemInfoFromApi[2].data.average[0].maxAverage) : 'Insufficient history';
+
+        this.setState({averageSellPrice: tempSell});
+        console.log(this.state.averageSellPrice);
+        this.setState({averageBuyPrice: tempBuyMin + ' - ' + tempBuyMax});
+        console.log(this.state.item);
       })
       .catch(err => {}/*console.log('item err: ' + JSON.stringify(err))*/);
   }

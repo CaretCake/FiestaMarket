@@ -5,7 +5,9 @@ export const userService = {
   getAll,
   getById,
   updateById,
-  deleteUserById
+  deleteUserById,
+  deleteUserAliasById,
+  updateUserAliasById
 };
 
 // Get all users (role required)
@@ -54,6 +56,32 @@ function deleteUserById(id) {
       }
       //console.log('info: ' + JSON.stringify(users.data));
       return res.data;
+    })
+    .catch(error => handleResponse(error.response));
+}
+
+// Delete user alias by id
+function deleteUserAliasById(aliasId, userId) {
+  return axios.delete(process.env.REACT_APP_API_URL + `/users/${userId}/aliases/${aliasId}`)
+    .then(res => {
+      if (res.status === 404) {
+        return null;
+      }
+      //console.log('info: ' + JSON.stringify(users.data));
+      return res.data;
+    })
+    .catch(error => handleResponse(error.response));
+}
+
+// Update user alias by id
+function updateUserAliasById(aliasId, userId, aliasName, preferred) {
+  console.log(preferred);
+  return axios.put(process.env.REACT_APP_API_URL + `/users/${userId}/aliases/${aliasId}`, {
+      aliasName,
+      preferred
+    })
+    .then(res => {
+      console.log('info: ' + JSON.stringify(res));
     })
     .catch(error => handleResponse(error.response));
 }
