@@ -9,7 +9,6 @@ export * from './Main/FilterSection';
 export * from './Header/Header';
 export * from './Footer/Footer';
 export * from './Profile/UserProfile';
-export * from './Profile/OrdersSection';
 export * from './Profile/AliasSection';
 export * from './Admin/AdminPage';
 export * from './Admin/AdminList';

@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
 import { itemService } from '../../services/export';
 import { handleResponse } from '../../helpers/export';
-import {SellOrderForm, BuyOrderForm, OrdersSection} from "../export";
-import { OrderList } from "../../components/export";
+import { SellOrderForm, BuyOrderForm } from "../export";
+import { OrderSection } from '../../components/export';
 
 export class Item extends Component {
   constructor(props) {
@@ -102,7 +101,7 @@ export class Item extends Component {
           <div className='order-view-section flex-row-container'>
             <div className='flex-left'/>
             <div className='flex-center list-container'>
-              <OrdersSection
+              <OrderSection
                 buyOrders={this.state.item.BuyOrders}
                 sellOrders={this.state.item.SellOrders}
                 view={'viewing'}

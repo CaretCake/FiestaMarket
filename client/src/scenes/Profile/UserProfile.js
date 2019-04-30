@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { userService } from '../../services/export';
 import { handleResponse } from '../../helpers/handle-response';
-import { OrdersSection, AliasSection } from '../export';
+import { AliasSection } from '../export';
+import { OrderSection } from '../../components/export';
 
 export class UserProfile extends Component {
   constructor(props) {
@@ -38,7 +39,7 @@ export class UserProfile extends Component {
             userId={this.props.userId}
           />
         </div>
-        <OrdersSection
+        <OrderSection
           buyOrders={this.state.user.BuyOrders}
           sellOrders={this.state.user.SellOrders}
           userId={this.props.userId}

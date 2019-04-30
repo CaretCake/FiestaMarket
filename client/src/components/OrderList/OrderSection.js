@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import { authenticationService } from '../../services/export';
-import { OrderList } from '../../components/export';
+import { OrderList } from '../export';
 
-export class OrdersSection extends Component {
+export class OrderSection extends Component {
   render() {
     return (
-        <div className="orders-section">
+        <div className="order-section">
           <div>
             <h2>Sell</h2>
             <ul>
