@@ -11,7 +11,7 @@ import {
   faClock, faCheck, faEdit
 } from '@fortawesome/free-solid-svg-icons';
 import { getStatArray } from '../../helpers/stats';
-import { orderService } from '../../services/export';
+import {authenticationService, orderService} from '../../services/export';
 import { Clipboard, Offer } from './OrderCovers';
 import { Loading } from '../../components/export';
 
@@ -96,13 +96,18 @@ export class OrderListItem extends React.Component {
             <Link to={'/profile/' + this.props.order.PostingUserUserId} className='user-link'>{this.props.order.PostingUser.userName}</Link>
           </div>
         </div>
-        {this.props.view === 'viewing' ?
-          <div className='order-item-right'>
-            <button onClick={(e) => this.toggleClipboard(true) }><FontAwesomeIcon icon={faComment}/></button>
-            {this.props.orderType === 'sell' && this.props.order.OpenToOffers === true &&
-            <button onClick={(e) => this.toggleOffer(true)} className='bottom-button'><FontAwesomeIcon icon={faCommentDollar}/></button>
-            }
-          </div> :
+        {this.props.view === 'viewing' && authenticationService.currentUserValue.userId !== this.props.order.PostingUserUserId ?
+            <div className='order-item-right'>
+              <button onClick={(e) => this.toggleClipboard(true)}><FontAwesomeIcon icon={faComment}/></button>
+              {this.props.orderType === 'sell' && this.props.order.OpenToOffers === true &&
+              <button onClick={(e) => this.toggleOffer(true)} className='bottom-button'><FontAwesomeIcon
+                icon={faCommentDollar}/></button>
+              }
+            </div>
+          :
+            <div className='order-item-right'/>
+        }
+        {this.props.view ==='managing' && authenticationService.currentUserValue.userId === this.props.order.PostingUserUserId &&
           <div className={this.props.view === 'managing' ? 'wide-buttons order-item-right' : 'order-item-right'}>
             {this.props.orderType === 'sell' ?
               <React.Fragment>
