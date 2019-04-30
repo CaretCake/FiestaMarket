@@ -7,7 +7,8 @@ export const userService = {
   updateById,
   deleteUserById,
   deleteUserAliasById,
-  updateUserAliasById
+  updateUserAliasById,
+  createUserAliasById
 };
 
 // Get all users (role required)
@@ -84,4 +85,17 @@ function updateUserAliasById(aliasId, userId, aliasName, preferred) {
       console.log('info: ' + JSON.stringify(res));
     })
     .catch(error => handleResponse(error.response));
+}
+
+// Create user alias by id
+function createUserAliasById(aliasName, type, server, preferred, userId) {
+  return axios.post(process.env.REACT_APP_API_URL + `/users/${userId}/aliases`, {
+    aliasName,
+    type,
+    server,
+    preferred
+  })
+    .then(alias => {
+      return alias.data;
+    }).catch(error => handleResponse(error.response));
 }

@@ -1,7 +1,7 @@
 import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAsterisk, faEdit, faBan, faTrash } from '@fortawesome/free-solid-svg-icons';
-import { userService, authenticationService, orderService } from '../../services/export';
+import { userService, authenticationService } from '../../services/export';
 
 export const AliasListItem = ({ alias, view }) => (
   <li className='alias-list-item'>
@@ -11,7 +11,7 @@ export const AliasListItem = ({ alias, view }) => (
         { alias.Preferred && <FontAwesomeIcon icon={ faAsterisk } size='xs' /> }
       </span>
       <span>
-        { alias.Type === 'in-game' ? alias.Server : alias.Type }
+        { (alias.Type.toLowerCase) === 'in-game' ? alias.Server : alias.Type }
       </span>
     </div>
     { view === 'managing' &&

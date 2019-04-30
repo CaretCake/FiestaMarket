@@ -88,33 +88,6 @@ router.get('/:userId?', (req, res) => {
                   }
                 }]
             }]
-        },
-        {
-          model: ItemOffer,
-          as: 'Offers',
-          attributes: { exclude: ['updatedAt'] },
-          include: [
-            {
-              model: SellOrder,
-              as: 'SellOrder',
-              attributes: { exclude: ['createdAt'] },
-              include: [
-                {
-                  model: Item,
-                  as: 'PostedItem',
-                  attributes: { exclude: ['createdAt', 'updatedAt'] }
-                },
-                {
-                  model: User,
-                  as: 'PostingUser',
-                  attributes: { exclude: ['pass', 'email'] },
-                  include: [
-                    { model: Alias,
-                      as: 'Aliases',
-                      attributes: { exclude: ['createdAt', 'updatedAt'] }
-                    }]
-                }]
-            }]
         }
       ],
       order: [
@@ -276,7 +249,7 @@ router.post('/:userId?/aliases', isAuthenticated, isSameUser, (req, res) => {
   Alias.create({
     AliasName: req.body.aliasName,
     Type: req.body.type,
-    Server: req.body.server || null,
+    Server: req.body.type === 'discord' ? req.body.server : null,
     Preferred: req.body.preferred,
     UserUserId: req.user.userId
   })

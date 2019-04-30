@@ -52,7 +52,6 @@ export class OrderListItem extends React.Component {
   }
 
   render() {
-    console.log(this.props);
     return (
       <li className='order-view-list-item flex-row-container'>
         <div  className='order-item-left'>

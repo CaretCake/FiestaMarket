@@ -157,3 +157,8 @@ export const sellOrderSchema = Yup.object().shape({
   eva: Yup.number()
     .min(0, 'Stat value must be > 0')
 });
+
+export const aliasSchema = Yup.object().shape({
+  name: Yup.string()
+    .matches(/^.[a-zA-Z0-9_#]+$/, 'Only alphanumeric, #, & underscores allowed')
+});
