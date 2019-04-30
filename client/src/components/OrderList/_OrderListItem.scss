@@ -152,3 +152,12 @@
     }
   }
 }
+
+.empty-list-item {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  h3 {
+    color: $grey-light;
+  }
+}

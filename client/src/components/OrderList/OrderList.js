@@ -4,9 +4,11 @@ import { OrderListItem } from './OrderListItem';
 export class OrderList extends React.Component {
 
   render() {
-    if (!this.props.orderType || !this.props.orderList)
+    if (!this.props.orderType || !this.props.orderList || this.props.orderList.length === 0)
       return <ul className='order-view-list'>
-        <li>No items found</li>
+        <li className='order-view-list-item empty-list-item'>
+          <h3>no orders found</h3>
+        </li>
       </ul>;
 
     return (
