@@ -47,7 +47,6 @@ export class OrderListItem extends React.Component {
     this.setState({ showOffer: false });
     orderService.postOfferOnSellOrder(offerAmount, this.props.order.SellOrderId)
       .then( res => {
-        setTimeout(function(){},2000);
         this.setState({ loading: false });
       });
   }

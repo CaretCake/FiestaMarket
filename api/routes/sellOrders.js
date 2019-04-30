@@ -134,7 +134,22 @@ router.post('/:sellOrderId?/item-offers', isAuthenticated, (req, res) => {
       }})
       .then((offer, created) => {
         if (offer) {
-          return res.status(201).json({ offer });
+          console.log("updating");
+          ItemOffer.update(
+            {
+              OfferAmount: req.body.offerAmount || offer.OfferAmount
+            },
+            {
+              where: {
+                OfferingUserUserId: req.user.userId,
+                SellOrderSellOrderId: req.params.sellOrderId }
+            }
+          ).then(() => {
+            offer.OfferAmount = req.body.offerAmount;
+            return res.status(201).json({ offer });
+          });
+        } else {
+          return res.status(201).json({ created });
         }
       })
       .catch(function (error) {
