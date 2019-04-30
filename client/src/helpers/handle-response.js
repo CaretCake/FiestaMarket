@@ -7,7 +7,9 @@ export function handleResponse(response) {
     if (response.statusText !== 'OK') {
       if (response.status === 401 || response.status === 403) {
         // auto logout if 401 Unauthorized or 403 Forbidden response returned from api
-        authenticationService.logout();
+        if (authenticationService.currentUserValue) {
+          authenticationService.logout();
+        }
         history.push('/login');
       }
 

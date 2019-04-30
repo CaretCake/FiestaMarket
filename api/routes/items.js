@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const { Item, ItemOffer, SellOrder, BuyOrder, User } = require('../config/database');
+const { Item, ItemOffer, SellOrder, BuyOrder, User, Alias } = require('../config/database');
 const isAuthenticated = require('../config/middleware/isAuthenticated');
 const Sequelize = require('sequelize');
 const Op = Sequelize.Op;
@@ -42,7 +42,16 @@ router.get('/:itemId?', (req, res) => {
               {
                 model: User,
                 as: 'PostingUser',
-                attributes: { exclude: ['createdAt', 'updatedAt'] }
+                attributes: { exclude: ['createdAt', 'updatedAt', 'pass', 'email']},
+                include: [
+                  {
+                    model: Alias,
+                    as: 'Aliases',
+                    attributes: {
+                      where: { Type: 'in-game' },
+                      exclude: ['createdAt', 'updatedAt']
+                    }
+                  }]
               },
               {
                 model: Item,
@@ -59,7 +68,16 @@ router.get('/:itemId?', (req, res) => {
               {
                 model: User,
                 as: 'PostingUser',
-                attributes: { exclude: ['pass', 'email', 'role', 'createdAt', 'updatedAt'] }
+                attributes: { exclude: ['createdAt', 'updatedAt', 'pass', 'email']},
+                include: [
+                  {
+                    model: Alias,
+                    as: 'Aliases',
+                    attributes: {
+                      where: { Type: 'in-game' },
+                      exclude: ['createdAt', 'updatedAt']
+                    }
+                  }]
               },
               {
                 model: ItemOffer,

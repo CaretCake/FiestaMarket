@@ -2,8 +2,10 @@
   width: 550px;
   box-shadow: 0 0 15px 0 $grey-extra-light;
 
-
-&>:nth-child(2n) {
-  background: $grey-extra-lightest;
+  > li {
+    background: $white;
+  }
+  &>:nth-child(2n) {
+    background: $grey-extra-lightest;
   }
 }

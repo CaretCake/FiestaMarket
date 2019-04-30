@@ -1,6 +1,7 @@
 .order-view-list-item {
   height: 160px;
   padding: 15px 10px;
+  position: relative;
 
   h3 {
     margin: 0 10px 0 0;
@@ -111,5 +112,43 @@
       }
     }
 
+  }
+
+  .cover-order {
+    width: 100%;
+    height: 100%;
+    z-index: 500;
+    position: absolute;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    background-color: inherit;
+    top: 0;
+    left: 0;
+  }
+
+  .offer {
+
+    .number-field {
+      padding: 11px 11px;
+      border: 1px solid $navy;
+      letter-spacing: 1px;
+      font-size: 14px;
+      display: flex;
+      align-items: center;
+      overflow: hidden;
+      color: $grey-dark;
+      box-shadow: 0 0 15px 0 $grey-extra-light;
+      width: 100px;
+      margin-right: 10px;
+    }
+  }
+
+  .clipboard {
+    input {
+      margin-right: 10px;
+      width: 60%;
+    }
   }
 }

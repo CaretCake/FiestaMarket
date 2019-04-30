@@ -1,5 +1,6 @@
 import { BehaviorSubject } from 'rxjs';
 import { handleResponse } from '../helpers/export';
+import history from '../helpers/history';
 import axios from 'axios';
 
 const currentUserSubject = new BehaviorSubject(JSON.parse(localStorage.getItem('currentUser')));
@@ -54,5 +55,11 @@ function isSessionValid() {
         localStorage.removeItem('currentUser');
         currentUserSubject.next(null);
       });
+  }
+}
+
+function isLoggedIn() {
+  if (!this.currentUserValue) {
+    history.push('/login');
   }
 }

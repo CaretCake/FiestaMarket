@@ -48,7 +48,16 @@ router.get('/:userId?', (req, res) => {
             {
               model: User,
               as: 'PostingUser',
-              attributes: { exclude: ['createdAt', 'updatedAt', 'pass', 'email']}
+              attributes: { exclude: ['createdAt', 'updatedAt', 'pass', 'email']},
+              include: [
+                {
+                  model: Alias,
+                  as: 'Aliases',
+                  attributes: {
+                    where: { Type: 'in-game' },
+                    exclude: ['createdAt', 'updatedAt']
+                  }
+                }]
             }]
         },
         { model: SellOrder,
@@ -68,7 +77,16 @@ router.get('/:userId?', (req, res) => {
             {
               model: User,
               as: 'PostingUser',
-              attributes: { exclude: ['createdAt', 'updatedAt', 'pass', 'email']}
+              attributes: { exclude: ['createdAt', 'updatedAt', 'pass', 'email']},
+              include: [
+                {
+                  model: Alias,
+                  as: 'Aliases',
+                  attributes: {
+                    where: { Type: 'in-game' },
+                    exclude: ['createdAt', 'updatedAt']
+                  }
+                }]
             }]
         },
         {
@@ -102,8 +120,9 @@ router.get('/:userId?', (req, res) => {
       order: [
         [ { model: Alias, as: 'Aliases' }, 'Preferred', 'DESC'],
         [ { model: SellOrder, as: 'SellOrders' }, 'updatedAt', 'DESC'],
-        [ { model: BuyOrder, as: 'BuyOrders' }, 'updatedAt', 'DESC']
-      ]
+        [ { model: BuyOrder, as: 'BuyOrders' }, 'updatedAt', 'DESC'],
+        [ { model: SellOrder, as: 'SellOrders' }, { model: User, as: 'PostingUser'}, { model: Alias, as: 'Aliases' }, 'Preferred', 'DESC' ],
+        [ { model: BuyOrder, as: 'BuyOrders' }, { model: User, as: 'PostingUser'}, { model: Alias, as: 'Aliases' }, 'Preferred', 'DESC' ]]
     })
     .then(user => {
       if (user === null) {

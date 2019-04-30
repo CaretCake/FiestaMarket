@@ -6,3 +6,4 @@ export * from './CheckboxGroup/Checkbox.js';
 export * from './OrderList/OrderList';
 export * from './OrderList/OrderListItem';
 export * from './AliasList/AliasList';
+export * from './LoadingIndicator/Loading';

@@ -121,7 +121,7 @@ export class FilterSection extends React.Component {
         <div className='flex-left'/>
         <div className='flex-center'>
           <header>
-            <h1>Recent Orders</h1>
+            <h2>Recent Orders</h2>
           </header>
           <div className='number-row-container'>
             <div className='related-field-container'>

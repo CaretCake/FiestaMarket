@@ -8,7 +8,8 @@ export const orderService = {
   deleteBuyOrderById,
   deleteSellOrderById,
   updateBuyOrderById,
-  updateSellOrderById
+  updateSellOrderById,
+  postOfferOnSellOrder
 };
 
 // Get all orders
@@ -157,4 +158,15 @@ function updateSellOrderById(sellOrderId, price, status, server, enhancement, en
       console.log('info: ' + JSON.stringify(res));
     })
     .catch(error => handleResponse(error.response));
+}
+
+// Offer on order
+function postOfferOnSellOrder(offerAmount, orderId) {
+  return axios.post(process.env.REACT_APP_API_URL + `/sell-orders/${orderId}/item-offers`, {
+    offerAmount
+  })
+    .then(offer => {
+      console.log('offer: ' + JSON.stringify(offer));
+      return 'Offer posted';
+    }).catch(error => handleResponse(error.response));
 }
