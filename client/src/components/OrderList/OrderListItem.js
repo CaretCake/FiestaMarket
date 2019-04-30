@@ -52,6 +52,7 @@ export class OrderListItem extends React.Component {
   }
 
   render() {
+    console.log(this.props);
     return (
       <li className='order-view-list-item flex-row-container'>
         <div  className='order-item-left'>
@@ -96,7 +97,7 @@ export class OrderListItem extends React.Component {
             <Link to={'/profile/' + this.props.order.PostingUserUserId} className='user-link'>{this.props.order.PostingUser.userName}</Link>
           </div>
         </div>
-        {this.props.view === 'viewing' && authenticationService.currentUserValue.userId !== this.props.order.PostingUserUserId ?
+        {this.props.view === 'viewing' &&  authenticationService.currentUserValue && authenticationService.currentUserValue.userId !== this.props.order.PostingUserUserId ?
             <div className='order-item-right'>
               <button onClick={(e) => this.toggleClipboard(true)}><FontAwesomeIcon icon={faComment}/></button>
               {this.props.orderType === 'sell' && this.props.order.OpenToOffers === true &&
@@ -107,7 +108,7 @@ export class OrderListItem extends React.Component {
           :
             <div className='order-item-right'/>
         }
-        {this.props.view ==='managing' && authenticationService.currentUserValue.userId === this.props.order.PostingUserUserId &&
+        {this.props.view ==='managing' &&  authenticationService.currentUserValue && authenticationService.currentUserValue.userId === this.props.order.PostingUserUserId &&
           <div className={this.props.view === 'managing' ? 'wide-buttons order-item-right' : 'order-item-right'}>
             {this.props.orderType === 'sell' ?
               <React.Fragment>

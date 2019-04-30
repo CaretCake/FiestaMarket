@@ -1,9 +1,7 @@
 import React, { Component } from 'react';
-import { userService, authenticationService } from '../../services/export';
-import { handleResponse } from "../../helpers/handle-response";
-import { AliasList, OrderList } from "../../components/export";
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faPlus} from "@fortawesome/free-solid-svg-icons";
+import { userService } from '../../services/export';
+import { handleResponse } from '../../helpers/handle-response';
+import { OrdersSection, AliasSection } from '../export';
 
 export class UserProfile extends Component {
   constructor(props) {
@@ -32,43 +30,20 @@ export class UserProfile extends Component {
 
     return (
       <div className='user-profile'>
-        <h1>{ this.state.user.userName }</h1>
-        <h4>{ this.state.user.status }</h4>
-        <span className='alias-section'>
-          <div className='alias-title'>
-            <h3>Aliases</h3>
-            { parseFloat(authenticationService.currentUserValue.userId) === parseFloat(this.props.userId) &&
-              <button onClick={{}}><FontAwesomeIcon icon={faPlus}/></button>
-            }
-          </div>
-          <ul className='alias-list'>
-            <AliasList
-              aliasList={this.state.user.Aliases}
-              view={ parseFloat(authenticationService.currentUserValue.userId) === parseFloat(this.props.userId) ?
-                'managing' : 'viewing'}
-            />
-          </ul>
-        </span>
-        <div className="orders-section">
-          <h3>Want to Buy</h3>
-          <ul>
-            <OrderList
-              orderType={'buy'}
-              orderList={this.state.user.BuyOrders}
-              view={ parseFloat(authenticationService.currentUserValue.userId) === parseFloat(this.props.userId) ?
-                'managing' : 'viewing'}
-            />
-          </ul>
-          <h3>Want to Sell</h3>
-          <ul>
-            <OrderList
-              orderType={'sell'}
-              orderList={this.state.user.SellOrders}
-              view={ parseFloat(authenticationService.currentUserValue.userId) === parseFloat(this.props.userId) ?
-                'managing' : 'viewing'}
-            />
-          </ul>
+          <div className='user-info-section'>
+          <h1>{ this.state.user.userName }</h1>
+          <h4>{ this.state.user.status }</h4>
+          <AliasSection
+            aliases={this.state.user.Aliases}
+            userId={this.props.userId}
+          />
         </div>
+        <OrdersSection
+          buyOrders={this.state.user.BuyOrders}
+          sellOrders={this.state.user.SellOrders}
+          userId={this.props.userId}
+          user={this.props.user}
+        />
       </div>
     );
   }

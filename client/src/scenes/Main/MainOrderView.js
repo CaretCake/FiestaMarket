@@ -2,7 +2,7 @@ import React from 'react';
 import {OrderList, OrderListItem} from '../../components/export';
 import { orderService } from '../../services/export';
 import { handleResponse } from '../../helpers/export';
-import { FilterSection } from "../export";
+import {FilterSection, OrdersSection} from "../export";
 
 export class MainOrderView extends React.Component {
   constructor(props) {
@@ -55,22 +55,11 @@ export class MainOrderView extends React.Component {
         <div className='order-view-section flex-row-container'>
           <div className='flex-left'/>
           <div className='flex-center list-container'>
-            <div>
-              <h2>Want to Sell</h2>
-              <OrderList
-                orderType={'sell'}
-                orderList={this.state.sellOrders}
-                view={'viewing'}
-              />
-            </div>
-            <div>
-              <h2>Want to Buy</h2>
-              <OrderList
-                orderType={'buy'}
-                orderList={this.state.buyOrders}
-                view={'viewing'}
-              />
-            </div>
+            <OrdersSection
+              buyOrders={this.state.buyOrders}
+              sellOrders={this.state.sellOrders}
+              view={'viewing'}
+            />
           </div>
           <div className='flex-right'/>
         </div>
