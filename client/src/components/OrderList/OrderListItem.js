@@ -52,6 +52,12 @@ export class OrderListItem extends React.Component {
   }
 
   render() {
+    let status = this.props.order.SaleStatus ? this.props.order.SaleStatus : this.props.order.OrderStatus;
+    if (this.props.view === 'viewing' && status !== 'active' && status !== 'pending') {
+      return null;
+    }
+
+
     return (
       <li className='order-view-list-item flex-row-container'>
         <div  className='order-item-left'>
