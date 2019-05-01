@@ -42,8 +42,8 @@ export class Item extends Component {
         console.log('average sell: ' + JSON.stringify(itemInfoFromApi[1]));
         console.log('average buy: ' + JSON.stringify(itemInfoFromApi[2]));
         let tempSell = parseFloat(itemInfoFromApi[1].data.average[0].average);
-        let tempBuyMin = itemInfoFromApi[2].data.average[0].minAverage ? parseFloat(itemInfoFromApi[2].data.average[0].minAverage) : 'Insufficient history';
-        let tempBuyMax = itemInfoFromApi[2].data.average[0].maxAverage ? parseFloat(itemInfoFromApi[2].data.average[0].maxAverage) : 'Insufficient history';
+        let tempBuyMin = itemInfoFromApi[2].data.average[0].minAverage ? parseFloat(itemInfoFromApi[2].data.average[0].minAverage) : 'N/A';
+        let tempBuyMax = itemInfoFromApi[2].data.average[0].maxAverage ? parseFloat(itemInfoFromApi[2].data.average[0].maxAverage) : 'N/A';
 
         this.setState({averageSellPrice: tempSell});
         this.setState({averageBuyPrice: tempBuyMin + ' - ' + tempBuyMax});
@@ -80,8 +80,8 @@ export class Item extends Component {
         <div className='flex-center'>
           <div className='item-info-section'>
             <h1 className={ this.state.item.ItemRarity + '-item-rarity' }>{ this.state.item.ItemName }</h1>
-            <span>Avg. Sell Price: { this.state.averageSellPrice ? this.state.averageSellPrice : 'insufficient sale history' }</span>
-            <span>Avg. Buy Price: { this.state.averageBuyPrice ? this.state.averageBuyPrice : 'insufficient sale history' }</span>
+            <span>Avg. Sell Price: { this.state.averageSellPrice ? this.state.averageSellPrice : 'N/A' }</span>
+            <span>Avg. Buy Price: { this.state.averageBuyPrice ? this.state.averageBuyPrice : 'N/A' }</span>
             <h4>Level { this.state.item.Level }</h4>
             { this.state.item.TwoSetEffect && <ul>
               { this.state.item.TwoSetEffect && <li><span>Two Set Effect</span> { this.state.item.TwoSetEffect }</li> }
@@ -95,8 +95,8 @@ export class Item extends Component {
             <button onClick={this.toggleBuyOrderForm.bind(this)}>Buy Item</button>
           </div>
           <div className='form-section'>
-            { this.state.sellOrderFormVisibility && < SellOrderForm item={this.state.item} /> }
-            { this.state.buyOrderFormVisibility && < BuyOrderForm item={this.state.item} /> }
+            { this.state.sellOrderFormVisibility && < SellOrderForm item={this.state.item} suggestedPrice={ this.state.averageSellPrice ? this.state.averageSellPrice : 'N/A' } /> }
+            { this.state.buyOrderFormVisibility && < BuyOrderForm item={this.state.item} suggestedPrice={ this.state.averageBuyPrice ? this.state.averageBuyPrice : 'N/A' } /> }
           </div>
           <div className='order-view-section flex-row-container'>
             <div className='flex-left'/>

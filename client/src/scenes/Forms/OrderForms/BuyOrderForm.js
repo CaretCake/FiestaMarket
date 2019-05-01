@@ -120,6 +120,10 @@ export class BuyOrderForm extends React.Component {
                           <span className='gold-icon'/>
                         </div>
                       </div>
+                      <div className='price-suggestion-container'>
+                        Suggested Price: { this.props.suggestedPrice }
+                        <span className='gem-icon'/>
+                      </div>
                     </div>
                     <div className='related-field-container'>
                       <label>Max Price</label>

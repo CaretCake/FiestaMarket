@@ -162,7 +162,7 @@ export class OrderListItem extends React.Component {
         }
         {this.state.showClipboard ?
           <Clipboard
-            userInfo={this.props.order.PostingUser.Aliases[0]}
+            userInfo={this.props.order.PostingUser.Aliases[0] || this.props.order.PostingUser.userName}
             type={this.props.orderType === 'sell' ? 'sell' : 'buy'}
             itemName={this.props.order.PostedItem.ItemName}
             itemPrice={this.props.orderType === 'sell' ? parseFloat(this.props.order.Price) : parseFloat(this.props.order.PriceMin) + ' - ' + parseFloat(this.props.order.PriceMax)}
