@@ -2,17 +2,22 @@ import React, { Component } from 'react';
 import { userService } from '../../services/export';
 import { handleResponse } from '../../helpers/handle-response';
 import { AliasSection } from '../export';
-import { AliasList, OrderSection } from '../../components/export';
+import { OrderSection } from '../../components/export';
 import { AliasForm } from "../Forms/AliasForm";
 
 export class UserProfile extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      user: null
+      user: null,
+      aliasList:  null,
+      buyOrderList: null,
+      sellOrderList: null
     };
 
     this.addNewAlias = this.addNewAlias.bind(this);
+    this.deleteAlias = this.deleteAlias.bind(this);
+    this.updateAlias = this.updateAlias.bind(this);
   }
 
   componentDidMount() {
@@ -25,15 +30,38 @@ export class UserProfile extends Component {
         }
         console.log(userInfoFromApi);
         this.setState({user: userInfoFromApi.user });
+        this.setState({aliasList: this.state.user.Aliases });
+        this.setState({buyOrderList: this.state.user.BuyOrders });
+        this.setState({sellOrderList: this.state.user.SellOrders });
       })
       .catch(err => {}/*console.log('profile err: ' + JSON.stringify(err))*/);
   }
 
   addNewAlias(alias) {
     console.log('adding: ' + alias);
-    let temp = this.state.user;
-    temp.Aliases.push(alias);
-    this.setState({ user: temp });
+    let temp = this.state.aliasList;
+    temp.push(alias);
+    //this.setState({ aliasList: temp });
+    this.setState(prevState => ({ aliasList: temp }));
+  }
+
+  deleteAlias(delId) {
+    this.setState(prevState => ({
+      aliasList: prevState.aliasList.filter((alias) => {
+        return alias.id !== delId;
+      })
+    }));
+  }
+
+  updateAlias(updId, updateValue) {
+    let tempAliasList = [...this.state.aliasList];
+    tempAliasList.forEach(function(alias) {
+      if (alias.id === updId) {
+        alias.Preferred = updateValue;
+      }
+    });
+    this.setState(prevState => ({ aliasList: tempAliasList }));
+    console.log(this.state.aliasList);
   }
 
   render() {
@@ -46,16 +74,18 @@ export class UserProfile extends Component {
           <h1>{ this.state.user.userName }</h1>
           <h4>{ this.state.user.status }</h4>
           <AliasSection
-            aliases={this.state.user.Aliases}
+            aliases={this.state.aliasList}
             userId={this.props.userId}
+            deleteFromAliasList={this.deleteAlias}
+            updateFromAliasList={this.updateAlias}
           />
           <AliasForm
             addToAliasList={this.addNewAlias}
           />
         </div>
         <OrderSection
-          buyOrders={this.state.user.BuyOrders}
-          sellOrders={this.state.user.SellOrders}
+          buyOrders={this.state.buyOrderList}
+          sellOrders={this.state.sellOrderList}
           userId={this.props.userId}
           user={this.props.user}
         />

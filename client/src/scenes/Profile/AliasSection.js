@@ -21,6 +21,8 @@ export class AliasSection extends Component {
         <ul className='alias-list'>
           <AliasList
             aliasList={this.props.aliases}
+            deleteFromAliasList={this.props.deleteFromAliasList}
+            updateFromAliasList={this.props.updateFromAliasList}
             view={ (authenticationService.currentUserValue && parseFloat(authenticationService.currentUserValue.userId) === parseFloat(this.props.userId)) ?
               'managing' : 'viewing'}
           />

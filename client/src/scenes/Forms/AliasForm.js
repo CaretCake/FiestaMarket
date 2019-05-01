@@ -29,8 +29,8 @@ export class AliasForm extends React.Component {
     userService.createUserAliasById(values.name, values.type, server, values.preferred, authenticationService.currentUserValue.userId)
       .then(
         result => {
-          //
-          // this.props.addToAliasList(result);
+          console.log('res: ' + JSON.stringify(result.alias));
+          this.props.addToAliasList(result.alias);
         },
         error => {
           //console.log(error);
