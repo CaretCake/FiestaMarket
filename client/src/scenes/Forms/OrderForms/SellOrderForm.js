@@ -1,9 +1,9 @@
 import React from 'react';
-import { ErrorMessage, Field, Form, Formik } from "formik";
+import { ErrorMessage, Field, Form, Formik } from 'formik';
 import { orderService, authenticationService } from '../../../services/export';
-import { sellOrderSchema } from "../_FormSchema";
-import { getStatArray, Stats } from "../../../helpers/export";
-import history from "../../../helpers/history";
+import { sellOrderSchema } from '../_FormSchema';
+import { getStatArray } from '../../../helpers/export';
+import history from '../../../helpers/history';
 
 
 export class SellOrderForm extends React.Component {

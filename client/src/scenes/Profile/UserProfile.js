@@ -3,7 +3,7 @@ import { userService } from '../../services/export';
 import { handleResponse } from '../../helpers/handle-response';
 import { AliasSection } from '../export';
 import { OrderSection } from '../../components/export';
-import { AliasForm } from "../Forms/AliasForm";
+import { AliasForm } from '../Forms/AliasForm';
 
 export class UserProfile extends Component {
   constructor(props) {

@@ -4,6 +4,7 @@ const { Item, ItemOffer, SellOrder, BuyOrder, User, Alias } = require('../config
 const isAuthenticated = require('../config/middleware/isAuthenticated');
 const Sequelize = require('sequelize');
 const Op = Sequelize.Op;
+const moment = require('moment');
 
 //Get item list
 router.get('/', (req, res) => {
@@ -223,7 +224,10 @@ router.get('/:itemId?/sell-orders/average', (req, res) => {
   } else {
     SellOrder.findAll({
       where: {
-        PostedItemItemId: req.params.itemId
+        PostedItemItemId: req.params.itemId,
+        updatedAt: {
+          [Op.gte]: moment().subtract(60, 'days').toDate()
+        }
       },
       attributes: [[Sequelize.fn('AVG', Sequelize.col('Price')), 'average']]
     })
@@ -248,7 +252,10 @@ router.get('/:itemId?/buy-orders/average', (req, res) => {
   } else {
     BuyOrder.findAll({
       where: {
-        PostedItemItemId: req.params.itemId
+        PostedItemItemId: req.params.itemId,
+        updatedAt: {
+          [Op.gte]: moment().subtract(60, 'days').toDate()
+        }
       },
       attributes: [
         [Sequelize.fn('AVG', Sequelize.col('PriceMin')), 'minAverage'],
