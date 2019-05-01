@@ -1,8 +1,6 @@
 import React from 'react';
 
 export const Clipboard = ({ userInfo, type, itemName, itemPrice, toggle }) => {
-  console.log('u info:' + userInfo);
-
   let messageStr = '/w ' + (userInfo.AliasName || userInfo);
   if (type === 'sell') {
     messageStr += ' I want to buy your ' + itemName + ' for ' + itemPrice + 'G (fiestamarket.app)';

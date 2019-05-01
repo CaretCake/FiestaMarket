@@ -8,7 +8,9 @@ import {
   faTrashAlt,
   faEye,
   faEyeSlash,
-  faClock, faCheck, faEdit
+  faClock,
+  faCheck,
+  faEdit
 } from '@fortawesome/free-solid-svg-icons';
 import { getStatArray } from '../../helpers/stats';
 import {authenticationService, orderService} from '../../services/export';

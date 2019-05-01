@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { userService } from '../../services/export';
 import { handleResponse } from '../../helpers/handle-response';
 import { AliasSection } from '../export';
-import { OrderSection } from '../../components/export';
+import {Loading, OrderList, OrderSection} from '../../components/export';
 import { AliasForm } from '../Forms/AliasForm';
 
 export class UserProfile extends Component {
@@ -12,7 +12,8 @@ export class UserProfile extends Component {
       user: null,
       aliasList:  null,
       buyOrderList: null,
-      sellOrderList: null
+      sellOrderList: null,
+      dataReceived: false
     };
 
     this.addNewAlias = this.addNewAlias.bind(this);
@@ -33,6 +34,7 @@ export class UserProfile extends Component {
         this.setState({aliasList: this.state.user.Aliases });
         this.setState({buyOrderList: this.state.user.BuyOrders });
         this.setState({sellOrderList: this.state.user.SellOrders });
+        this.setState({dataReceived: true});
       })
       .catch(err => {}/*console.log('profile err: ' + JSON.stringify(err))*/);
   }
@@ -65,17 +67,20 @@ export class UserProfile extends Component {
   }
 
   render() {
-    if(!this.state.user)
-      return null;
 
     return (
       <div className='user-profile'>
-          <div className='user-info-section'>
-          <h1>{ this.state.user.userName }</h1>
-          <h4>{ this.state.user.status }</h4>
+        <div className='user-info-section'>
+          {this.state.dataReceived &&
+            <React.Fragment>
+              <h1>{ this.state.user.userName }</h1>
+              <h4>{ this.state.user.status }</h4>
+            </React.Fragment>
+          }
           <AliasSection
             aliases={this.state.aliasList}
             userId={this.props.userId}
+            dataReceived={this.state.dataReceived}
             deleteFromAliasList={this.deleteAlias}
             updateFromAliasList={this.updateAlias}
           />

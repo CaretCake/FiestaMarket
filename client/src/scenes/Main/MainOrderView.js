@@ -39,10 +39,6 @@ export class MainOrderView extends React.Component {
   }
 
   render() {
-    if(!this.state.buyOrders && !this.state.sellOrders)
-      return null;
-
-
     return (
       <div>
         <FilterSection

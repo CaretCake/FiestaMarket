@@ -12,7 +12,8 @@ export class Item extends Component {
       averageSellPrice: null,
       averageBuyPrice: null,
       sellOrderFormVisibility: false,
-      buyOrderFormVisibility: false
+      buyOrderFormVisibility: false,
+      dataReceived: false
     };
   }
 
@@ -45,8 +46,11 @@ export class Item extends Component {
         let tempBuyMin = itemInfoFromApi[2].data.average[0].minAverage ? parseFloat(itemInfoFromApi[2].data.average[0].minAverage) : 'N/A';
         let tempBuyMax = itemInfoFromApi[2].data.average[0].maxAverage ? parseFloat(itemInfoFromApi[2].data.average[0].maxAverage) : 'N/A';
 
+        this.setState({averageSellDays: itemInfoFromApi[1].data.days });
+        this.setState({averageBuyDays: itemInfoFromApi[2].data.days });
         this.setState({averageSellPrice: tempSell});
         this.setState({averageBuyPrice: tempBuyMin + ' - ' + tempBuyMax});
+        this.setState({dataReceived: true});
       })
       .catch(err => {}/*console.log('item err: ' + JSON.stringify(err))*/);
   }
@@ -80,8 +84,28 @@ export class Item extends Component {
         <div className='flex-center'>
           <div className='item-info-section'>
             <h1 className={ this.state.item.ItemRarity + '-item-rarity' }>{ this.state.item.ItemName }</h1>
-            <span>Avg. Sell Price: { this.state.averageSellPrice ? this.state.averageSellPrice : 'N/A' }</span>
-            <span>Avg. Buy Price: { this.state.averageBuyPrice ? this.state.averageBuyPrice : 'N/A' }</span>
+            <span>
+              Avg. Sell:
+              { this.state.averageSellPrice ?
+                <React.Fragment>
+                  { this.state.averageSellPrice }
+                  <span>{ this.state.averageSellDays } day</span>
+                </React.Fragment>
+                :
+                ' N/A'
+              }
+            </span>
+            <span>
+              Avg. Buy:
+              { this.state.averageBuyPrice !== 'N/A - N/A' ?
+                <React.Fragment>
+                  { this.state.averageBuyPrice }
+                  <span>{ this.state.averageBuyDays } day</span>
+                </React.Fragment>
+                :
+                ' N/A'
+              }
+            </span>
             <h4>Level { this.state.item.Level }</h4>
             { this.state.item.TwoSetEffect && <ul>
               { this.state.item.TwoSetEffect && <li><span>Two Set Effect</span> { this.state.item.TwoSetEffect }</li> }
@@ -105,6 +129,7 @@ export class Item extends Component {
                 buyOrders={this.state.item.BuyOrders}
                 sellOrders={this.state.item.SellOrders}
                 view={'viewing'}
+                dataReceived={this.state.dataReceived}
               />
             </div>
             <div className='flex-right'/>

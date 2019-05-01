@@ -222,26 +222,44 @@ router.get('/:itemId?/sell-orders/average', (req, res) => {
   if(!req.params.itemId) {
     res.status(422).json({ message: 'no item provided' });
   } else {
-    SellOrder.findAll({
+    let days = 60;
+
+    SellOrder.count({
       where: {
         PostedItemItemId: req.params.itemId,
         updatedAt: {
-          [Op.gte]: moment().subtract(60, 'days').toDate()
+          [Op.gte]: moment().subtract(days, 'days').toDate()
         }
-      },
-      attributes: [[Sequelize.fn('AVG', Sequelize.col('Price')), 'average']]
+      }
     })
-      .then(average => {
-        if (average) {
-          return res.status(201).json({ average });
+      .then(count => {
+        if (count < 5) { // if number of postings in last 60 days is less than 5
+          days = 160;
         }
+        SellOrder.findAll({
+          where: {
+            PostedItemItemId: req.params.itemId,
+            updatedAt: {
+              [Op.gte]: moment().subtract(60, 'days').toDate()
+            }
+          },
+          attributes: [[Sequelize.fn('AVG', Sequelize.col('Price')), 'average']]
+        })
+          .then(average => {
+            if (average) {
+              return res.status(201).json({ average, days: days });
+            }
+          })
+          .catch(function (error) {
+            if (error.errors) { // is SequelizeValidationError
+              res.status(422).json({ message: error.errors[0].message, field: error.errors[0].path.toLowerCase() });
+            } else {
+              res.status(400).json({ message: error });
+            }
+          });
       })
-      .catch(function (error) {
-        if (error.errors) { // is SequelizeValidationError
-          res.status(422).json({ message: error.errors[0].message, field: error.errors[0].path.toLowerCase() });
-        } else {
-          res.status(400).json({ message: error });
-        }
+      .catch(error => {
+        console.log('err: ' + error);
       });
   }
 });
@@ -250,29 +268,47 @@ router.get('/:itemId?/buy-orders/average', (req, res) => {
   if(!req.params.itemId) {
     res.status(422).json({ message: 'no item provided' });
   } else {
-    BuyOrder.findAll({
+    let days = 60;
+
+    BuyOrder.count({
       where: {
         PostedItemItemId: req.params.itemId,
         updatedAt: {
           [Op.gte]: moment().subtract(60, 'days').toDate()
         }
-      },
-      attributes: [
-        [Sequelize.fn('AVG', Sequelize.col('PriceMin')), 'minAverage'],
-        [Sequelize.fn('AVG', Sequelize.col('PriceMax')), 'maxAverage']
-      ]
+      }
     })
-      .then(average => {
-        if (average) {
-          return res.status(201).json({ average });
+      .then(count => {
+        if (count < 5) { // if number of postings in last 60 days is less than 5
+          days = 160;
         }
+        BuyOrder.findAll({
+          where: {
+            PostedItemItemId: req.params.itemId,
+            updatedAt: {
+              [Op.gte]: moment().subtract(60, 'days').toDate()
+            }
+          },
+          attributes: [
+            [Sequelize.fn('AVG', Sequelize.col('PriceMin')), 'minAverage'],
+            [Sequelize.fn('AVG', Sequelize.col('PriceMax')), 'maxAverage']
+          ]
+        })
+          .then(average => {
+            if (average) {
+              return res.status(201).json({ average, days: days });
+            }
+          })
+          .catch(function (error) {
+            if (error.errors) { // is SequelizeValidationError
+              res.status(422).json({ message: error.errors[0].message, field: error.errors[0].path.toLowerCase() });
+            } else {
+              res.status(400).json({ message: error });
+            }
+          });
       })
-      .catch(function (error) {
-        if (error.errors) { // is SequelizeValidationError
-          res.status(422).json({ message: error.errors[0].message, field: error.errors[0].path.toLowerCase() });
-        } else {
-          res.status(400).json({ message: error });
-        }
+      .catch(error => {
+        console.log('err: ' + error);
       });
   }
 });

@@ -1,13 +1,15 @@
 import React from 'react';
 import { OrderListItem } from './OrderListItem';
+import { Loading } from "../LoadingIndicator/Loading";
 
 export class OrderList extends React.Component {
 
   render() {
+    console.log(this.props.dataReceived);
     if (!this.props.orderType || !this.props.orderList || this.props.orderList.length === 0)
       return <ul className='order-view-list'>
         <li className='order-view-list-item empty-list-item'>
-          <h3>no orders found</h3>
+          { this.props.dataReceived ? <h3>no orders found</h3> : <Loading/> }
         </li>
       </ul>;
 

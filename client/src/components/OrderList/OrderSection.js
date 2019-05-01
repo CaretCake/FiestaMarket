@@ -12,6 +12,7 @@ export class OrderSection extends Component {
               <OrderList
                 orderType={'sell'}
                 orderList={this.props.sellOrders}
+                dataReceived={this.props.dataReceived}
                 view={
                   this.props.view
                   ||
@@ -27,6 +28,7 @@ export class OrderSection extends Component {
               <OrderList
                 orderType={'buy'}
                 orderList={this.props.buyOrders}
+                dataReceived={this.props.dataReceived}
                 view={
                   this.props.view
                   ||
