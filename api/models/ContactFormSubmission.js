@@ -7,8 +7,8 @@ module.exports = (sequelize, type) => {
         notNull: true,
         notEmpty: true,
         isIn: {
-          args: [['feedback', 'bug', 'question']],
-          msg: 'Reason for contact must be either feedback, bug, or question'
+          args: [['feedback', 'bug', 'question', 'reportUser', 'reportItem']],
+          msg: 'Reason for contact must be either feedback, bug, question, or item/user report'
         },
         is: {
           args: /^.[a-zA-Z0-9_]+$/,
