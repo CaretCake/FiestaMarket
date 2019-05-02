@@ -7,12 +7,7 @@
   background-blend-mode: multiply;
   background-size: cover;
   height: 550px;
-  -webkit-touch-callout: none; /* iOS Safari */
-  -webkit-user-select: none;   /* Chrome/Safari/Opera */
-  -moz-user-select: none;      /* Firefox */
-  -ms-user-select: none;       /* Internet Explorer/Edge*/
-  user-select: none;          /* Non-prefixed version, currently
-                                  not supported by any browser */
+  @include user-select();
 
   .flex-center {
     display: flex;
@@ -25,11 +20,11 @@
       margin: 15px;
 
       form {
-        width: 400px;
+        width: 325px;
         height: 50px;
         display: flex;
         flex-direction: row;
-        box-shadow: 0 0 15px 0 $grey-dark;
+        @include box-shadow($grey-dark);
 
         input {
           width: 80%;
@@ -50,7 +45,7 @@
           }
 
           &:active {
-            box-shadow:0 5px 15px 0 $navy;
+            @include box-shadow($navy);
             background-color: $navy;
           }
         }
@@ -59,6 +54,10 @@
           & ~ .search-dropdown {
             visibility: visible;
           }
+        }
+
+        @include sm {
+          width: 400px;
         }
       }
 
@@ -69,9 +68,9 @@
         left: 0;
         width: 100%;
         box-shadow:0 5px 15px -5px $grey-extra-light;
-        -moz-box-sizing:content-box;
-        box-sizing:content-box;
-        z-index:1000;
+        -moz-box-sizing: content-box;
+        box-sizing: content-box;
+        z-index: 1000;
         visibility: hidden;
 
         li {
@@ -84,9 +83,9 @@
           font-size: 0.95em;
 
           &:hover {
+            @include box-shadow($grey-extra-light);
             background-color: $grey-light;
             color: $navy;
-            box-shadow: 0 0 15px 0 $grey-extra-light;
           }
 
           &:active {

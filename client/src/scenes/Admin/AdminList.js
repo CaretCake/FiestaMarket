@@ -102,10 +102,6 @@ export const BuyOrderList = ({ itemList }) => (
 );
 
 export class AdminList extends React.Component {
-  constructor(props) {
-    super(props);
-  }
-
   render() {
     if (!this.props.itemList) {
       return null;

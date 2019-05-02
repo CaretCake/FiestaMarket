@@ -2,7 +2,43 @@
 // BREAK POINTS
 //
 
-@mixin screen-above($screen-size) {
+
+// Small devices
+@mixin sm {
+  @media (min-width: #{$screen-sm-min}) {
+    @content;
+  }
+}
+
+// Medium devices
+@mixin md {
+  @media (min-width: #{$screen-md-min}) {
+    @content;
+  }
+}
+
+// Large devices
+@mixin lg {
+  @media (min-width: #{$screen-lg-min}) {
+    @content;
+  }
+}
+
+// Extra large devices
+@mixin xl {
+  @media (min-width: #{$screen-xl-min}) {
+    @content;
+  }
+}
+
+// Custom devices
+@mixin rwd($screen) {
+  @media (min-width: $screen+'px') {
+    @content;
+  }
+}
+
+/*@mixin screen-above($screen-size) {
   @media screen and (min-width: $screen-size) {
     @content;
   }
@@ -18,4 +54,80 @@
   @media screen and (min-width: $min-screen-size) and (max-width: ($max-screen-size - 1px)) {
     @content;
   }
+}*/
+
+//
+// SMALL STYLING ELEMENTS
+//
+
+@mixin box-shadow($color) {
+  box-shadow: 0 0 15px 0 $color;
+}
+
+
+//
+// TRANSITIONS
+//
+
+@mixin color-transition() {
+  transition: color .5s ease-in,background .5s ease-out;
+  -webkit-transition: color .5s ease-in,background .5s ease-out;
+}
+
+@mixin fadein-animation() {
+  -webkit-animation: fadein 2s; /* Safari, Chrome and Opera > 12.1 */
+  -moz-animation: fadein 2s; /* Firefox < 16 */
+  -ms-animation: fadein 2s; /* Internet Explorer */
+  -o-animation: fadein 2s; /* Opera < 12.1 */
+  animation: fadein 2s;
+
+  @keyframes fadein {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+  }
+
+  /* Firefox < 16 */
+  @-moz-keyframes fadein {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+  }
+
+  /* Safari, Chrome and Opera > 12.1 */
+  @-webkit-keyframes fadein {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+  }
+
+  /* Internet Explorer */
+  @-ms-keyframes fadein {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+  }
+
+  /* Opera < 12.1 */
+  @-o-keyframes fadein {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+  }
+}
+
+//
+// PREVENT INTERACTION
+//
+
+@mixin user-select() {
+  -webkit-touch-callout: none; /* iOS Safari */
+  -webkit-user-select: none;   /* Chrome/Safari/Opera */
+  -moz-user-select: none;      /* Firefox */
+  -ms-user-select: none;       /* Internet Explorer/Edge*/
+  user-select: none;          /* Non-prefixed version, currently
+                                  not supported by any browser */
+}
+
+@mixin user-drag() {
+  -webkit-user-drag: none;
+  -khtml-user-drag: none;
+  -moz-user-drag: none;
+  -o-user-drag: none;
+  user-drag: none;
 }

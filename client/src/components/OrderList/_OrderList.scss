@@ -1,7 +1,12 @@
 .order-view-list {
-  width: 550px;
-  box-shadow: 0 0 15px 0 $grey-extra-light;
-  margin: 0 10px;
+  width: 100%;
+  max-width: 550px;
+  @include box-shadow($grey-extra-light);
+  font-size: smaller;
+
+  @include sm {
+    width: 550px;
+  }
 
   > li {
     background: $white;
@@ -9,4 +14,6 @@
   &>:nth-child(2n) {
     background: $grey-extra-lightest;
   }
+
+
 }

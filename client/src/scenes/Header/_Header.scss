@@ -10,13 +10,9 @@
   position: fixed;
   top: 0;
   z-index: 10000;
-  box-shadow: 0 0 15px 0 $grey-extra-light;
-  -webkit-touch-callout: none; /* iOS Safari */
-  -webkit-user-select: none;   /* Chrome/Safari/Opera */
-  -moz-user-select: none;      /* Firefox */
-  -ms-user-select: none;       /* Internet Explorer/Edge*/
-  user-select: none;          /* Non-prefixed version, currently
-                                  not supported by any browser */
+  overflow: hidden;
+  @include box-shadow($grey-extra-light);
+  @include user-select();
 
   .background {
     display: block;
@@ -30,22 +26,14 @@
   }
 
   .logo {
+    @include user-drag();
     padding: 0 0 0 10px;
     z-index: 2;
-    -webkit-user-drag: none;
-    -khtml-user-drag: none;
-    -moz-user-drag: none;
-    -o-user-drag: none;
-    user-drag: none;
 
     img {
+      @include user-drag();
       max-height: 100%;
       max-width: 300px;
-      -webkit-user-drag: none;
-      -khtml-user-drag: none;
-      -moz-user-drag: none;
-      -o-user-drag: none;
-      user-drag: none;
     }
   }
 
@@ -59,10 +47,12 @@
     z-index: 2;
 
     li {
-      margin: 0 5px 0 5px;
       height: 100%;
       border-left: 1px solid $grey-light;
-      min-width: 100px;
+      min-width: 115px;
+      padding: 0 5px;
+      display: flex;
+      justify-content: center;
 
       button {
         color: $grey-dark;
@@ -74,32 +64,18 @@
         display: flex;
         align-items: center;
         justify-content: space-evenly;
-        padding: 0 0 0 13px;
         outline: none;
 
 
         &:hover {
+          @include color-transition();
           color: $navy;
-          transition: color .5s ease-in,background .5s ease-out;
-          -webkit-transition: color .5s ease-in,background .5s ease-out;
         }
 
         svg {
           font-size: 1.3em;
           padding-right: 6px;
         }
-      }
-
-      .online {
-        color: #01de0c !important;
-      }
-
-      .offline {
-        color: $alert-red !important;
-      }
-
-      .in-game {
-        color: $navy !important;
       }
     }
 

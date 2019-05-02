@@ -9,6 +9,7 @@ export const authenticationService = {
   login,
   logout,
   isSessionValid,
+  isLoggedIn,
   currentUser: currentUserSubject.asObservable(),
   get currentUserValue () { return currentUserSubject.value; }
 };

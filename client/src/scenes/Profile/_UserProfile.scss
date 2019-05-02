@@ -1,10 +1,70 @@
 .user-profile {
+  .user-info {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    background-image: url('../images/Urg2.png');
+    background-clip: border-box;
+    background-position: right;
+    background-repeat: no-repeat;
+    background-color: #a6a6a68f;
+    background-blend-mode: multiply;
+    background-size: cover;
+    @include box-shadow($grey-dark);
+
+    h1, h4 {
+      color: $white;
+    }
+    h1 {
+      margin-bottom: 0;
+    }
+    h4 {
+      margin-top: 0;
+    }
+  }
+
+  .alias-container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+
+    form {
+      width: 200px;
+
+      .text-box, .selection {
+        min-width: unset;
+        width: 160px;
+
+      }
+      .pref-container {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        label {
+          margin: 0;
+        }
+      }
+    }
+    .form-container {
+      padding: 25px 0 25px 0;
+    }
+
+  }
 
   .alias-section {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 
     .alias-title {
       display: flex;
       flex-direction: row;
+      justify-content: center;
 
       h3 {
         margin: 0;
@@ -12,8 +72,8 @@
     }
 
     .alias-list {
+      @include box-shadow($grey-extra-light);
       width: 400px;
-      box-shadow: 0 0 15px 0 $grey-extra-light;
 
       .alias-list-item {
         color: $grey-dark;
@@ -46,11 +106,47 @@
           }
         }
 
+        button {
+          margin: 2px 2px;
+          color: $navy;
 
+          &:active {
+            color: $white;
+          }
+        }
       }
 
       & > :nth-child(2n) {
         background: $grey-extra-lightest;
+      }
+    }
+  }
+
+  .order-section {
+    .order-view-list-item {
+      height: 80px;
+      justify-content: center;
+      align-items: center;
+
+      .stat-list {
+        visibility: hidden;
+        position: absolute;
+      }
+      .order-item-center {
+        width: 50%
+      }
+      .wide-buttons {
+        width: 30%;
+        flex-wrap: wrap;
+        height: 118px;
+        display: inline-block;
+
+        button {
+          margin: 2px 2px;
+        }
+      }
+      .order-item-right button {
+        width: unset;
       }
     }
   }

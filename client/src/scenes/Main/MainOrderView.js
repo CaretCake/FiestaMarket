@@ -14,7 +14,6 @@ export class MainOrderView extends React.Component {
       savedSellOrders: null,
       values: null
     };
-    const handleFilter  = this.handleFilter.bind(this);
   }
 
   componentWillMount() {
@@ -48,16 +47,14 @@ export class MainOrderView extends React.Component {
           savedBuyOrders={this.state.savedBuyOrders}
           savedSellOrders={this.state.savedSellOrders}
         />
-        <div className='order-view-section flex-row-container'>
-          <div className='flex-left'/>
-          <div className='flex-center list-container'>
+        <div className='order-view-section'>
+          <div className='list-container'>
             <OrderSection
               buyOrders={this.state.buyOrders}
               sellOrders={this.state.sellOrders}
               view={'viewing'}
             />
           </div>
-          <div className='flex-right'/>
         </div>
       </div>
     );

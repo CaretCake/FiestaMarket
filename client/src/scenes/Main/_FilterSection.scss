@@ -5,7 +5,7 @@
   margin-bottom: 30px;
 
   .flex-center {
-    width: 1140px;
+    width: 100%;
     display: flex;
     justify-content: space-around;
     align-items: center;
@@ -50,8 +50,11 @@
   }
 
   .number-row-container{
+    height: 80px;
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
   }
   .related-field-container {
     display: flex;
@@ -61,10 +64,14 @@
       display: flex;
       flex-direction: row;
     }
+
+    @include sm {
+      flex-direction: row;
+    }
   }
 
   .class-dropdown {
-    width: 350px;
+    width: 325px;
 
     >div {
       border: 1px solid $navy;

@@ -76,7 +76,7 @@ a {
   height: 18px;
   background-repeat: no-repeat;
   background-size: cover;
-  margin: 0 5px 0 0;
+  margin: 0 6px 0 0;
 }
 .gold-icon {
   background-image: url('../images/Gold.png');
@@ -86,7 +86,7 @@ a {
   height: 18px;
   background-repeat: no-repeat;
   background-size: cover;
-  margin: 0 5px 0 0;
+  margin: 0 6px 0 0;
 }
 
 .white-item-rarity {
@@ -109,6 +109,18 @@ a {
 }
 .pink-item-rarity {
   color: $pink-item-rarity;
+}
+
+.online {
+  color: #01de0c !important;
+}
+
+.offline {
+  color: $alert-red !important;
+}
+
+.in-game {
+  color: $navy !important;
 }
 
 .flex-row-container {

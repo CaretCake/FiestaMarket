@@ -1,5 +1,6 @@
 import React from 'react';
 import { itemService } from "../../services/item.service";
+import history from '../../helpers/history';
 
 export  class MainApp extends React.Component {
 
@@ -35,7 +36,7 @@ export  class MainApp extends React.Component {
   }
 
   routeChange(path) {
-    this.props.history.push(path);
+    history.push(path);
   }
 
   validResult() {

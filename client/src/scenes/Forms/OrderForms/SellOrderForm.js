@@ -3,6 +3,8 @@ import { ErrorMessage, Field, Form, Formik } from 'formik';
 import { orderService, authenticationService } from '../../../services/export';
 import { sellOrderSchema } from '../_FormSchema';
 import { getStatArray } from '../../../helpers/export';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faPlus } from '@fortawesome/free-solid-svg-icons';
 import history from '../../../helpers/history';
 
 
@@ -46,7 +48,7 @@ export class SellOrderForm extends React.Component {
 
     return (
       <div className='form-container order-form'>
-        <h2>Want to Sell</h2>
+        <h2>Sell</h2>
             <Formik
               initialValues={{
                 server: 'Isya',
@@ -101,6 +103,9 @@ export class SellOrderForm extends React.Component {
                         />
                       </div>
                     </div>
+                    <div className='price-suggestion-container'>
+                      Suggested Price: { this.props.suggestedPrice } G
+                    </div>
                     <div className='related-field-container'>
                       <div className='field-container'>
                         <div className='field-label-container'>
@@ -130,10 +135,6 @@ export class SellOrderForm extends React.Component {
                           <span className='gold-icon'/>
                         </div>
                       </div>
-                      <div className='price-suggestion-container'>
-                        Suggested Price: { this.props.suggestedPrice }
-                        <span className='gem-icon'/>
-                      </div>
                     </div>
                     <div className='field-container'>
                       <div className='field-label-container'>
@@ -146,7 +147,7 @@ export class SellOrderForm extends React.Component {
                           name='enhancement'
                           className='number-field'
                         />
-                        <span className='plus-icon'>+</span>
+                        <FontAwesomeIcon icon={faPlus} className={'plus-icon'}/>
                       </div>
                     </div>
                     { this.props.item.StatType !== 'none' &&

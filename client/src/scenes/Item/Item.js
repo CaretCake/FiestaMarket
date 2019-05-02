@@ -3,6 +3,7 @@ import { itemService } from '../../services/export';
 import { handleResponse } from '../../helpers/export';
 import { SellOrderForm, BuyOrderForm } from "../export";
 import { OrderSection } from '../../components/export';
+import history from '../../helpers/history';
 
 export class Item extends Component {
   constructor(props) {
@@ -18,13 +19,18 @@ export class Item extends Component {
   }
 
   componentDidMount() {
-    this.getItemInfo(this.props.match.params.itemId);
+    console.log(this.props.itemId);
+    this.getItemInfo(this.props.itemId);
   }
 
   componentDidUpdate(prevProps) {
-    if(this.props.match.params.itemId !== prevProps.match.params.itemId) {
+    console.log(prevProps.itemId);
+    console.log(this.props.itemId);
+    if(this.props.itemId !== prevProps.itemId) {
       console.log('change');
-      this.getItemInfo(this.props.match.params.itemId);
+      this.setState({buyOrderFormVisibility: false});
+      this.setState({sellOrderFormVisibility: false});
+      this.getItemInfo(this.props.itemId);
     }
   }
 
@@ -33,7 +39,7 @@ export class Item extends Component {
       .then(handleResponse())
       .then(itemInfoFromApi => {
         if (!itemInfoFromApi) {
-          this.props.history.push('/404/Error');
+          history.push('/404/Error');
         }
 
         // Handle item info
@@ -79,52 +85,58 @@ export class Item extends Component {
     }
 
     return (
-      <div className='item-view flex-row-container'>
-        <div className='flex-left'/>
-        <div className='flex-center'>
+      <div className='item-view'>
           <div className='item-info-section'>
-            <h1 className={ this.state.item.ItemRarity + '-item-rarity' }>{ this.state.item.ItemName }</h1>
-            <span>
-              Avg. Sell:
-              { this.state.averageSellPrice ?
-                <React.Fragment>
-                  { this.state.averageSellPrice }
-                  <span>{ this.state.averageSellDays } day</span>
-                </React.Fragment>
-                :
-                ' N/A'
-              }
-            </span>
-            <span>
-              Avg. Buy:
-              { this.state.averageBuyPrice !== 'N/A - N/A' ?
-                <React.Fragment>
-                  { this.state.averageBuyPrice }
-                  <span>{ this.state.averageBuyDays } day</span>
-                </React.Fragment>
-                :
-                ' N/A'
-              }
-            </span>
-            <h4>Level { this.state.item.Level }</h4>
-            { this.state.item.TwoSetEffect && <ul>
-              { this.state.item.TwoSetEffect && <li><span>Two Set Effect</span> { this.state.item.TwoSetEffect }</li> }
-              { this.state.item.ThreeSetEffect && <li><span>Three Set Effect</span> { this.state.item.ThreeSetEffect }</li> }
-              { this.state.item.FourSetEffect && <li><span>Four Set Effect</span> { this.state.item.FourSetEffect }</li> }
-              { this.state.item.FiveSetEffect && <li><span>Five Set Effect</span> { this.state.item.FiveSetEffect }</li> }
-            </ul> }
-            <p>Type: { this.state.item.Type }</p>
-            <p>Class: { this.state.item.Class }</p>
-            <button onClick={this.toggleSellOrderForm.bind(this)}>Sell Item</button>
-            <button onClick={this.toggleBuyOrderForm.bind(this)}>Buy Item</button>
+            <div className='container'>
+              <div className='main-info-section'>
+                <h1>{ this.state.item.ItemName } lvl. { this.state.item.Level }</h1>
+                <h3>{ this.state.item.Type } | { this.state.item.Class }</h3>
+              </div>
+                { this.state.item.TwoSetEffect && <ul className='set-effect-list'>
+                  { this.state.item.TwoSetEffect && <li><span>2 Set Effect</span> <p>{ this.state.item.TwoSetEffect }</p></li> }
+                  { this.state.item.ThreeSetEffect && <li><span>3 Set Effect</span> <p>{ this.state.item.ThreeSetEffect }</p></li> }
+                  { this.state.item.FourSetEffect && <li><span>4 Set Effect</span> <p>{ this.state.item.FourSetEffect }</p></li> }
+                  { this.state.item.FiveSetEffect && <li><span>5 Set Effect</span> <p>{ this.state.item.FiveSetEffect }</p></li> }
+                </ul> }
+
+
+              <div className='average-price-container'>
+                <span>
+                  <span className='title'>Avg. Sell</span>
+                  { this.state.averageSellPrice ?
+                    <React.Fragment>
+                      { this.state.averageSellPrice } G
+                      <span className='days'>{ this.state.averageSellDays } day</span>
+                    </React.Fragment>
+                    :
+                    ' N/A'
+                  }
+                </span>
+                <span>
+                  <span className='title'>Avg. Buy</span>
+                  { this.state.averageBuyPrice !== 'N/A - N/A' ?
+                    <React.Fragment>
+                      { this.state.averageBuyPrice } G
+                      <span className='days'>{ this.state.averageBuyDays } day</span>
+                    </React.Fragment>
+                    :
+                    ' N/A'
+                  }
+                </span>
+              </div>
+
+              <div className='button-container'>
+                <button onClick={this.toggleSellOrderForm.bind(this)}>Sell Item</button>
+                <button onClick={this.toggleBuyOrderForm.bind(this)}>Buy Item</button>
+              </div>
+            </div>
           </div>
           <div className='form-section'>
             { this.state.sellOrderFormVisibility && < SellOrderForm item={this.state.item} suggestedPrice={ this.state.averageSellPrice ? this.state.averageSellPrice : 'N/A' } /> }
             { this.state.buyOrderFormVisibility && < BuyOrderForm item={this.state.item} suggestedPrice={ this.state.averageBuyPrice ? this.state.averageBuyPrice : 'N/A' } /> }
           </div>
-          <div className='order-view-section flex-row-container'>
-            <div className='flex-left'/>
-            <div className='flex-center list-container'>
+          <div className='order-view-section'>
+            <div className='list-container'>
               <OrderSection
                 buyOrders={this.state.item.BuyOrders}
                 sellOrders={this.state.item.SellOrders}
@@ -132,10 +144,7 @@ export class Item extends Component {
                 dataReceived={this.state.dataReceived}
               />
             </div>
-            <div className='flex-right'/>
-          </div>
         </div>
-        <div className='flex-right'/>
       </div>
     );
   }

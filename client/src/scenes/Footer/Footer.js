@@ -1,4 +1,5 @@
 import React from 'react';
+import history from '../../helpers/history';
 
 export class Footer extends React.Component {
 
@@ -9,7 +10,7 @@ export class Footer extends React.Component {
   }
 
   routeChange(path) {
-    this.props.history.push(path);
+    history.push(path);
   }
 
   render() {

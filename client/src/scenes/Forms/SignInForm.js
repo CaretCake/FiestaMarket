@@ -1,9 +1,10 @@
 import React from 'react';
 import "react-tabs/style/react-tabs.css";
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
-import { ErrorMessage, Field, Form, Formik } from "formik";
+import { ErrorMessage, Field, Form, Formik } from 'formik';
 import { authenticationService, registrationService } from '../../services/export';
 import { signInSchema, registerSchema } from './_FormSchema';
+import history from '../../helpers/history';
 
 
 export class SignInForm extends React.Component {
@@ -12,7 +13,7 @@ export class SignInForm extends React.Component {
     super(props);
 
     if (authenticationService.currentUserValue) {
-      this.props.history.push('/');
+      history.push('/');
     }
   }
 
@@ -28,8 +29,7 @@ export class SignInForm extends React.Component {
           if (user.message !== 'success') {
             setFieldError('email', user.message);
           } else {
-            const {from} = this.props.location.state || {from: {pathname: "/"}};
-            this.props.history.push(from);
+            history.goBack();
           }
         })
       .catch( err => {});
@@ -46,7 +46,7 @@ export class SignInForm extends React.Component {
     registrationService.register(values.username, values.email, values.password)
       .then(
         result => {
-          this.props.history.push('/');
+          history.push('/');
         },
         error => {
           setFieldError(error.field.toLowerCase(), error.message);

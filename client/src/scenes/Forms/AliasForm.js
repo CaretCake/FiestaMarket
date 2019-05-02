@@ -101,16 +101,16 @@ export class AliasForm extends React.Component {
                     <option value='Enid'>Enid</option>
                   </Field>
                 </div>
-                <div className='field-container'>
+                <div className='field-container pref-container'>
                   <div className='field-label-container'>
                     <label>Preferred?</label>
                     <span><ErrorMessage name='preferred'/></span>
                   </div>
-                  <div className='icon-field-container'>
+                  <div className='checkbox-field-container'>
                     <Field
                       type='checkbox'
                       name='preferred'
-                      className='selection'
+                      className='checkbox'
                     />
                   </div>
                 </div>

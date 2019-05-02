@@ -10,8 +10,8 @@
     flex-direction: column;
     align-content: space-evenly;
     justify-content: space-evenly;
-    min-width: 30%;
     min-height: 400px;
+    align-items: center;
 
     .selection {
       min-width: 250px;
@@ -30,6 +30,22 @@
       min-height: 80px;
     }
 
+    .checkbox-field-container {
+      display: flex;
+      flex-direction: row-reverse;
+      justify-content: flex-end;
+      align-items: center;
+
+      .checkbox {
+        width: 20px;
+        height: 20px;
+      }
+
+      .field-label-container {
+        margin: 0;
+      }
+    }
+
     .text-box, .textarea, .number-field, .selection {
       padding: 11px 11px;
       border: 1px solid $navy;
@@ -39,7 +55,7 @@
       align-items: center;
       overflow: hidden;
       color: $grey-dark;
-      box-shadow: 0 0 15px 0 $grey-extra-light;
+      @include box-shadow($grey-extra-light);
     }
 
     .field-container {

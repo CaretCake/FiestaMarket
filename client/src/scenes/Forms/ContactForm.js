@@ -3,9 +3,7 @@ import { Formik, Form, Field, ErrorMessage } from 'formik';
 import { contactSchema } from "./_FormSchema";
 import { contactFormService } from '../../services/export';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import {
-  faBug, faQuestion, faCommentDots, faTrashAlt
-} from '@fortawesome/free-solid-svg-icons';
+import { faBug, faQuestion, faCommentDots } from '@fortawesome/free-solid-svg-icons';
 
 export class ContactForm extends React.Component {
 

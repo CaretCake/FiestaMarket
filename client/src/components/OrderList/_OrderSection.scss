@@ -1,5 +1,16 @@
 .order-section {
   display: flex;
+  width: 100%;
   flex-direction: row;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  justify-content: space-around;
 
+
+  >span {
+    margin: 0 25px;
+  }
+  @include lg {
+    justify-content: center;
+  }
 }

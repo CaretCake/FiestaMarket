@@ -2,7 +2,6 @@ import React from 'react';
 import Select from 'react-select';
 import { orderService } from '../../services/export';
 import { handleResponse } from '../../helpers/export';
-import { contactSchema } from "../Forms/_FormSchema";
 import { Classes } from "../../helpers/export";
 
 export class FilterSection extends React.Component {

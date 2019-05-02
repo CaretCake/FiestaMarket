@@ -2,8 +2,9 @@ import React, { Component } from 'react';
 import { userService } from '../../services/export';
 import { handleResponse } from '../../helpers/handle-response';
 import { AliasSection } from '../export';
-import {Loading, OrderList, OrderSection} from '../../components/export';
+import { Loading, OrderSection} from '../../components/export';
 import { AliasForm } from '../Forms/AliasForm';
+import history from '../../helpers/history';
 
 export class UserProfile extends Component {
   constructor(props) {
@@ -22,14 +23,12 @@ export class UserProfile extends Component {
   }
 
   componentDidMount() {
-    console.log(this.props.userId);
     userService.getById(this.props.userId)
       .then(handleResponse())
       .then(userInfoFromApi => {
         if (!userInfoFromApi) {
-          this.props.history.push('/404/Error');
+          history.push('/404/Error');
         }
-        console.log(userInfoFromApi);
         this.setState({user: userInfoFromApi.user });
         this.setState({aliasList: this.state.user.Aliases });
         this.setState({buyOrderList: this.state.user.BuyOrders });
@@ -72,21 +71,29 @@ export class UserProfile extends Component {
       <div className='user-profile'>
         <div className='user-info-section'>
           {this.state.dataReceived &&
-            <React.Fragment>
+            <div className='user-info'>
               <h1>{ this.state.user.userName }</h1>
               <h4>{ this.state.user.status }</h4>
-            </React.Fragment>
+            </div>
           }
-          <AliasSection
-            aliases={this.state.aliasList}
-            userId={this.props.userId}
-            dataReceived={this.state.dataReceived}
-            deleteFromAliasList={this.deleteAlias}
-            updateFromAliasList={this.updateAlias}
-          />
-          <AliasForm
-            addToAliasList={this.addNewAlias}
-          />
+          <div className='alias-container'>
+            {this.state.dataReceived ?
+              <React.Fragment>
+                <AliasSection
+                  aliases={this.state.aliasList}
+                  userId={this.props.userId}
+                  dataReceived={this.state.dataReceived}
+                  deleteFromAliasList={this.deleteAlias}
+                  updateFromAliasList={this.updateAlias}
+                />
+                <AliasForm
+                addToAliasList = {this.addNewAlias}
+                />
+              </React.Fragment>
+              :
+              <Loading/>
+            }
+          </div>
         </div>
         <OrderSection
           buyOrders={this.state.buyOrderList}

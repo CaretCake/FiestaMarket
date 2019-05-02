@@ -2,10 +2,11 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import fiestaMarketLogo from './fiesta-market-logo.png';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faSignOutAlt, faEnvelope } from '@fortawesome/free-solid-svg-icons';
+import { faSignOutAlt } from '@fortawesome/free-solid-svg-icons';
 import { authenticationService } from '../../services/export';
-import { Role } from "../../helpers/export";
-import { Status } from "../../components/export";
+import { Role } from '../../helpers/export';
+import { Status } from '../../components/export';
+import history from '../../helpers/history';
 
 export class Header extends React.Component {
 
@@ -37,12 +38,12 @@ export class Header extends React.Component {
   }
 
   routeChange(path) {
-    this.props.history.push(path);
+    history.push(path);
   }
 
   logoutUser() {
     authenticationService.logout();
-    this.routeChange('/');
+    history.push('/');
   }
 
   isLoggedIn() {
@@ -72,7 +73,7 @@ export class Header extends React.Component {
       </React.Fragment>;
     };
     const loggedOutNav = () => {
-      return <li><button onClick={() => this.routeChange('/login')} className="nav">Sign In</button></li>;
+      return <li><button onClick={() => history.push('/login')} className="nav">Sign In</button></li>;
     };
 
     return (

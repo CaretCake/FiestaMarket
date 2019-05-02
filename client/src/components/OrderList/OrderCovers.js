@@ -42,14 +42,16 @@ export class Offer  extends React.Component {
       <span className='gem-icon'/>
       <input type='number' name='goldPrice' className='number-field' onChange={this.handleChange} min={0} max={99} placeholder={0}/>
       <span className='gold-icon'/>
-      <button onClick={(e) => {
-        this.props.makeOffer(this.state.gemPrice + '.' + this.state.goldPrice);
-      }}>Offer
-      </button>
-      <button onClick={(e) => {
-        this.props.toggle(false);
-      }}>Close
-      </button>
+      <div class='button-section'>
+        <button onClick={(e) => {
+          this.props.makeOffer(this.state.gemPrice + '.' + this.state.goldPrice);
+        }}>Offer
+        </button>
+        <button onClick={(e) => {
+          this.props.toggle(false);
+        }}>Close
+        </button>
+      </div>
     </div>;
   }
 }

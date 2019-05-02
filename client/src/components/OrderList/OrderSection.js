@@ -6,38 +6,34 @@ export class OrderSection extends Component {
   render() {
     return (
         <div className="order-section">
-          <div>
+          <span>
             <h2>Sell</h2>
-            <ul>
-              <OrderList
-                orderType={'sell'}
-                orderList={this.props.sellOrders}
-                dataReceived={this.props.dataReceived}
-                view={
-                  this.props.view
-                  ||
-                  (authenticationService.currentUserValue && parseFloat(authenticationService.currentUserValue.userId) === parseFloat(this.props.userId) ?
-                    'managing' : 'viewing')
-                }
-              />
-            </ul>
-          </div>
-          <div>
-            <h2>Buy</h2>
-            <ul>
-              <OrderList
-                orderType={'buy'}
-                orderList={this.props.buyOrders}
-                dataReceived={this.props.dataReceived}
-                view={
-                  this.props.view
-                  ||
-                  (authenticationService.currentUserValue && parseFloat(authenticationService.currentUserValue.userId) === parseFloat(this.props.userId) ?
+            <OrderList
+              orderType={'sell'}
+              orderList={this.props.sellOrders}
+              dataReceived={this.props.dataReceived}
+              view={
+                this.props.view
+                ||
+                (authenticationService.currentUserValue && parseFloat(authenticationService.currentUserValue.userId) === parseFloat(this.props.userId) ?
                   'managing' : 'viewing')
-                }
-              />
-            </ul>
-          </div>
+              }
+            />
+          </span>
+          <span>
+            <h2>Buy</h2>
+            <OrderList
+              orderType={'buy'}
+              orderList={this.props.buyOrders}
+              dataReceived={this.props.dataReceived}
+              view={
+                this.props.view
+                ||
+                (authenticationService.currentUserValue && parseFloat(authenticationService.currentUserValue.userId) === parseFloat(this.props.userId) ?
+                'managing' : 'viewing')
+              }
+            />
+          </span>
         </div>
     );
   }

@@ -46,7 +46,7 @@ export class BuyOrderForm extends React.Component {
 
     return (
       <div className='form-container order-form'>
-        <h2>Want to Buy</h2>
+        <h2>Buy</h2>
             <Formik
               initialValues={{
                 gemPriceMin: 0,
@@ -90,6 +90,9 @@ export class BuyOrderForm extends React.Component {
                         <option value='Enid'>Enid</option>
                       </Field>
                     </div>
+                    <div className='price-suggestion-container'>
+                      Suggested Price: { this.props.suggestedPrice } G
+                    </div>
                     <div className='related-field-container'>
                       <label>Min Price</label>
                       <div className='field-container'>
@@ -119,10 +122,6 @@ export class BuyOrderForm extends React.Component {
                           />
                           <span className='gold-icon'/>
                         </div>
-                      </div>
-                      <div className='price-suggestion-container'>
-                        Suggested Price: { this.props.suggestedPrice }
-                        <span className='gem-icon'/>
                       </div>
                     </div>
                     <div className='related-field-container'>
