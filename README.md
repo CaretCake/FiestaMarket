@@ -10,3 +10,4 @@ I chose this project because I felt that it would provide a challenge while bein
 
 Ultimately, the goal with this project was to get something as close to full-featured as possible and that relieves some of the biggest pains points of selling and buying items for Fiesta Online.
 
+For an in-depth view into the project and process, you can check out my [project paper](https://github.com/CaretCake/FiestaMarket/blob/master/FiestaMarket-ProjectPaper.pdf) and [presentation](https://github.com/CaretCake/FiestaMarket/blob/master/FiestaMarket-ProjectPresentation.pptx).
