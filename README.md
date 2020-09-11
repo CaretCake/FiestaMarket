@@ -1,6 +1,6 @@
 # Fiesta Market
 
-A website for buying and selling items for the MMORPG Fiesta Online - my senior project.
+A website for buying and selling items for the MMORPG Fiesta Online - my senior project. This project is no longer maintained.
 
 ## Description
 
